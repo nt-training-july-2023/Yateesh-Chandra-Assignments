@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Registration Form</title>
+</head>
+<body>
+  <div class="registration-container">
+    <h1>Registration Form</h1>
+    <form>
+      <div class="input-group">
+        <div class="input-subgroup">
+          <label for="user-name">User Name:</label>
+          <input type="text" id="user-name" name="user-name" required>
+        </div>
+        <div class="input-subgroup">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class = "input-subgroup">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="full-name" required>
+        </div>
+        <div class="input-subgroup">
+        <label for="phone">Mobile:</label>
+        <input type="text" id="phone" name="phone" required>
+        </div>
+      </div>
+    <div class="input-group">
+        <div class = "input-subgroup">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input-subgroup">
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+    </div>
+      <div class="input-group gender-group">
+        <label>Gender:</label>
+        <label for="male"><input type="radio" id="male" name="gender" value="male"> Male</label>
+        <label for="female"><input type="radio" id="female" name="gender" value="female"> Female</label>
+        <label for="prefer-not-to-say"><input type="radio" id="prefer-not-to-say" name="gender" value="prefer-not-to-say"> Prefer Not to Say</label>
+      </div>
+      <button type="submit" class="register-button">Register</button>
+    </form>
+  </div>
+</body>
+</html>
