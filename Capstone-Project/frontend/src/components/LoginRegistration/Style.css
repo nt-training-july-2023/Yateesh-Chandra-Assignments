@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image:url("assessmentLogin.jpg" );
+  background-repeat: no-repeat;
+  background-size:cover;
+  justify-content: center;
+}
+
+.wrapper {
+  position: relative;
+  max-width: 120%; 
+  width: 500px; 
+  background: #030303;
+  padding: 40px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.85;
+}
+
+.wrapper h1 {
+  position: relative;
+  font-size: 35px;
+  font-weight: 600;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: whitesmoke;
+  display: block;
+  text-align: center;
+  background: transparent;
+  border-radius: 10px; 
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  
+}
+
+.wrapper h1::before {
+  /* content: ''; */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 28px;
+  border-radius: 12px;
+  background: #4070f4;
+}
+
+.wrapper form {
+  margin-top: 30px;
+  min-width: 400px;
+}
+
+.wrapper form .input-box {
+  height: 50px;
+  margin: 20px 0;
+  
+}
+
+form .input-box input {
+  height: 90%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+form .input-box small{
+  font-size: 12px;
+  color: rgba(255, 117, 117, 0.74);
+  font-weight: 600;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-color: #4070f4;
+}
+
+form h3 {
+  color: #707070;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.input-box.button input {
+  color: #000000;
+  letter-spacing: 1px;
+  border: none;
+  background: #40bbf4;
+  cursor: pointer;
+}
+
+.input-box.button input:hover {
+  background: #0048ff;
+}
+
+.input-label{
+  color: yellow;
+  font-weight: bolder;
+  font-size: large;
+  text-align: center;
+}
+
+.input-box.button-cont{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.input-box.button-cont input[type = "Submit"] {
+  color: #000000;
+  width: 200px;
+  min-width: 100px;
+  letter-spacing: 1px;
+  border: none;
+  background: green;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.input-box.button-cont input[type = "button"] {
+  color: #000000;
+  width: 200px;
+  min-width: 100px;
+  letter-spacing: 1px;
+  border: none;
+  background: #faa404;
+  cursor: pointer;
+  margin: 5px;
+}
+
+
+.input-box.button-cont input:hover {
+  background: #0048ff;
+}
+
+form .text h3 {
+  color: #ff08f3;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+}
+
+form .input-box-cont input {
+  height: 90%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #752626;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 700px) {
+  .wrapper {
+    padding: 10px;
+    min-width: 400;
+  }
+  
+  .wrapper h1 {
+    font-size: 20px;
+  }
+  
+  form .input-box {
+    margin: 10px 0;
+  }
+  
+  form h3 {
+    font-size: 12px;
+  }
+  
+  .input-box.button input {
+    font-size: 12px;
+  }
+  
+  form .text h3 {
+    font-size: 12px;
+  }
+}

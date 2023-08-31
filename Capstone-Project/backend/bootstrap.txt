@@ -1,0 +1,164 @@
+bootstrap
+
+import axios from "axios";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
+import "./Login.css";
+
+function Register(){
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [emailError, setEmailError] = useState(null);
+    const navigate = useNavigate();
+
+    const togglePasswordVisibility = () => 
+    {
+        setShowPassword(!showPassword);
+        
+    };
+
+    const toggleConfirmPasswordVisibility = () => 
+    {
+            setShowConfirmPassword(!showConfirmPassword);
+    };
+
+    async function save(event){
+        event.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("Passwords did not match..!");
+            console.log("Unmatched passwords");
+            return;
+            
+        }
+        if(!name.trim()){
+            alert("User name can not be empty..!");
+            console.log("Username cannot be null..!");
+            return;
+        }
+        if(password.length<8){
+            alert("Password must be atleast 8 characters");
+            console.log("Password is too short");
+            return;
+        }
+        if (!/^(\d{10})$/.test(phoneNumber)) {
+            alert("Please enter a valid 10-digit phone number");
+            return;
+        }
+
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+            alert("Please enter proper email id");
+            console.log("Email Id is not valid..!");
+            return;
+        }
+        
+        try{
+            await axios.post("http://localhost:8082/api/v1/user/save",{
+                name : name,
+                email : email,
+                password: password,
+                phoneNumber : phoneNumber,
+            });
+
+            alert("User Registration Successful..!");
+            console.log("Congratulations. Now, you are a user.!");
+        }
+        catch(err){
+
+            const msg = "duplicate key value violates unique constraint"
+            if(err.response && err.response.data && err.response.data.message){
+                const errorMessage = err.response.data.message;
+                if(errorMessage.includes(msg)){
+                    alert("You are already a member..! Kindly Login..!");
+                }
+            }
+            else{
+            alert(err);
+        }
+        console.log(err);
+        }
+    }
+
+    return(
+        <div>
+            <div className = "container mt-4">
+                <div className = "card">
+                    <h1>User Registration</h1>
+                    <form>
+                        
+                        <div className = "form-group">
+                            <label>User Name</label>
+                            <input type = "text" className = "form-control" id = "name" placeholder="Enter Name" value={name}
+                            onChange={(event) =>{
+                                setName(event.target.value);
+                            }}/>
+                        </div>
+
+                        <div className = "form-group">
+                            <label>Email</label>
+                            <input type = "email" className = "form-control" id = "email" placeholder="Enter Email" value={email}
+                            onChange={(event) =>{
+                                setEmail(event.target.value);
+                                setEmailError(null);
+                            }}/>
+                            {emailError && <div className="invalid-feedback">{emailError}</div>}
+                        </div>
+
+                        <div className="form-group">
+                            <label>Password</label>
+                            <div className="input-group">
+                                <input type={showPassword ? "text" : "password"} className="form-control" id="password" placeholder="Enter Password" value={password}
+                                onChange={(event) => {
+                                        setPassword(event.target.value);
+                                    }}/>
+                                <div className="input-group-append">
+                                    <button type="button" className="btn btn-outline-secondary"
+                                     onClick={togglePasswordVisibility}> 
+                                     {showPassword ? "Hide" : "Show"} 
+                                     
+                                     </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <div className="input-group">
+                            <input type={showConfirmPassword ? "text" : "password"} className="form-control" id="confirmPassword" placeholder="Confirm Password" value={confirmPassword}                             
+                            onChange={(event) => {
+                                    setConfirmPassword(event.target.value);
+                                }}/>
+                            <div className="input-group-append">
+                                    <button type="button" className="btn btn-outline-secondary"
+                                     onClick={toggleConfirmPasswordVisibility}> 
+                                     {showConfirmPassword ? "Hide" : "Show"} 
+                                     
+                                     </button>
+                                     </div>
+                            </div>
+                        </div>
+
+                        <div className = "form-group">
+                            <label>Phone Number</label>
+                            <input type = "text" className = "form-control" id = "phoneNumber" placeholder="Enter Mobile" value={phoneNumber}
+                            onChange={(event) =>{
+                                setPhoneNumber(event.target.value);
+                            }}/>
+                        </div>
+
+                        <button type = "submit" className = "btn btn-custom-primary mr-4" onClick={save} disabled={!name || !password || !confirmPassword || !phoneNumber}> Save </button>
+                        <button type="button" className = "btn btn-primary" onClick={() => navigate("/")}>Go Home</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Register;

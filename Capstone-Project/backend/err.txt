@@ -1,0 +1,151 @@
+[
+    {
+        "questionId": 1,
+        "questionTitle": "Which is not the primitive Data Type",
+        "option1": "int",
+        "option2": "float",
+        "option3": "list",
+        "option4": "boolean",
+        "correctOption": "option3",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 1,
+            "quizName": "Quiz 1",
+            "quizDescription": "In this quiz, We will look upto Datatypes in java",
+            "numOfQuestions": 10,
+            "category": {
+                "categoryId": 2,
+                "categoryName": "Java",
+                "description": "This contains the java related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 2,
+        "questionTitle": "What is the size of 'boolean' datatype in java",
+        "option1": "1 bit",
+        "option2": "8 bits",
+        "option3": "4 bits",
+        "option4": "16 bits",
+        "correctOption": "option1",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 1,
+            "quizName": "Quiz 1",
+            "quizDescription": "In this quiz, We will look upto Datatypes in java",
+            "numOfQuestions": 10,
+            "category": {
+                "categoryId": 2,
+                "categoryName": "Java",
+                "description": "This contains the java related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 3,
+        "questionTitle": "Which data type is used to represent a single 16-bit Unicode character in Java",
+        "option1": "byte",
+        "option2": "char",
+        "option3": "unicode",
+        "option4": "char",
+        "correctOption": "option2",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 1,
+            "quizName": "Quiz 1",
+            "quizDescription": "In this quiz, We will look upto Datatypes in java",
+            "numOfQuestions": 10,
+            "category": {
+                "categoryId": 2,
+                "categoryName": "Java",
+                "description": "This contains the java related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 4,
+        "questionTitle": "Which data type is used to store decimal numbers with higher precision compared to float",
+        "option1": "double",
+        "option2": "decimal",
+        "option3": "real",
+        "option4": "long",
+        "correctOption": "option1",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 1,
+            "quizName": "Quiz 1",
+            "quizDescription": "In this quiz, We will look upto Datatypes in java",
+            "numOfQuestions": 10,
+            "category": {
+                "categoryId": 2,
+                "categoryName": "Java",
+                "description": "This contains the java related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 5,
+        "questionTitle": "What is a React Hook in React",
+        "option1": "A decorative element in the UI",
+        "option2": "A function that 'hooks' into React State and lifecycle features",
+        "option3": "A type of HTML tag in React syntax",
+        "option4": "A way to create class components in React",
+        "correctOption": "option2",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 4,
+            "quizName": "Quiz Hooks",
+            "quizDescription": "Test your knowledge on Hooks..!",
+            "numOfQuestions": 5,
+            "category": {
+                "categoryId": 3,
+                "categoryName": "React",
+                "description": "This contains React Basics related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 6,
+        "questionTitle": "Which built-in Hook is used to manage component-level state in a functional component",
+        "option1": "useStore",
+        "option2": "useState",
+        "option3": "setState",
+        "option4": "useReducer",
+        "correctOption": "option2",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 4,
+            "quizName": "Quiz Hooks",
+            "quizDescription": "Test your knowledge on Hooks..!",
+            "numOfQuestions": 5,
+            "category": {
+                "categoryId": 3,
+                "categoryName": "React",
+                "description": "This contains React Basics related Quiz"
+            }
+        }
+    },
+    {
+        "questionId": 7,
+        "questionTitle": "Which Hook is used for optimizing performance by avoiding unnecessary re-renders",
+        "option1": "useOptimize",
+        "option2": "useMemo",
+        "option3": "useCallback",
+        "option4": "usePerformance",
+        "correctOption": "option2",
+        "correctAnswer": null,
+        "quiz": {
+            "quizId": 4,
+            "quizName": "Quiz Hooks",
+            "quizDescription": "Test your knowledge on Hooks..!",
+            "numOfQuestions": 5,
+            "category": {
+                "categoryId": 3,
+                "categoryName": "React",
+                "description": "This contains React Basics related Quiz"
+            }
+        }
+    }
+]
+
+should be all in a group..

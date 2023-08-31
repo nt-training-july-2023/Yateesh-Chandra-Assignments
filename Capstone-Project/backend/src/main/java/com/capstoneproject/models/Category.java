@@ -1,3 +1,6 @@
+/**
+ * The package is for the category model.
+ */
 package com.capstoneproject.models;
 
 import java.util.ArrayList;
@@ -17,7 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+/**
+ * This is Category Entity.
+ */
 @Entity
 @Getter
 @Setter
@@ -25,20 +30,27 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "category")
 public class Category {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "category_id")
-	private Long categoryId;
-	
-	@Column(name = "category_name")
-	private String categoryName;
-	
-	@Column(name = "category_description")
-	private String description;
-	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Quiz> quiz = new ArrayList<>();
-	
-}
+  /**
+   * This is the Category ID column that is the primary key.
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "category_id")
+  private Long categoryId;
+  /**
+   * This is the category name Column.
+   */
+  @Column(name = "category_name")
+  private String categoryName;
+  /**
+   * This is the Category Description Column.
+   */
+  @Column(name = "category_description")
+  private String description;
+  /**
+   * This is the List of the Quiz mapped by Category.
+   */
+  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+  @JsonIgnore
+  private List<Quiz> quiz = new ArrayList<>();
+ }
