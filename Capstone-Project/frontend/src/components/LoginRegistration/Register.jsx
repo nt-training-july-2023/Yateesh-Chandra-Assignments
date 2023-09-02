@@ -198,7 +198,7 @@ export default function Signup() {
         </div>
         <div className="text">
           <h3 onClick={redirect}>
-            Already have an account? <Link to="/Login">Login now</Link>
+            Already our Subscriber? <Link to="/Login">Login now</Link>
           </h3>
         </div>
       </form>

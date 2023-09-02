@@ -112,7 +112,7 @@ function Login(){
                 </div>
                             
                 <div className="input-label">
-                    <label>Are you new Subscriber</label>
+                    <label>Are you new Subscriber? Register now.!</label>
                 </div>
 
                 <div className="input-box button">

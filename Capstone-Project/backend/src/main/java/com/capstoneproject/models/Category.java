@@ -47,7 +47,13 @@ public class Category {
    */
   @Column(name = "category_description")
   private String description;
-  /**
+  public Category(Long categoryId, String categoryName, String description) {
+    super();
+    this.categoryId = categoryId;
+    this.categoryName = categoryName;
+    this.description = description;
+}
+/**
    * This is the List of the Quiz mapped by Category.
    */
   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)

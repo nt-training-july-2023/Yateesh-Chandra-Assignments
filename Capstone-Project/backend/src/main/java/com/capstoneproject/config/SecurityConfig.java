@@ -16,7 +16,7 @@ public class SecurityConfig {
      * @return the encrypted password.
      */
     @Bean
-    public final PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
