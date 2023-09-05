@@ -11,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,6 @@ import lombok.ToString;
 @Entity
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "users")
@@ -89,5 +87,26 @@ public class User {
     @Override
     public final int hashCode() {
         return Objects.hash(id, name, email, password, userRole, phoneNumber);
+    }
+
+    /**
+     * This is Single parameter User Constructor.
+     * @param userId is User Id.
+     * @param userName is user name.
+     * @param userEmail is user Email.
+     * @param userPassword is User Password.
+     * @param role is User Role.
+     * @param phone is User Phone.
+     */
+    public User(final long userId,
+            final String userName, final String userEmail,
+            final String userPassword, final String role, final String phone) {
+        super();
+        this.id = userId;
+        this.name = userName;
+        this.email = userEmail;
+        this.password = userPassword;
+        this.userRole = role;
+        this.phoneNumber = phone;
     }
 }

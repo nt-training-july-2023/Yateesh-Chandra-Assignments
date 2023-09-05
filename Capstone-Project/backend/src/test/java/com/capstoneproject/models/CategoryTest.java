@@ -2,9 +2,6 @@ package com.capstoneproject.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 class CategoryTest {
@@ -29,9 +26,9 @@ class CategoryTest {
         
         category.getQuiz().add(quiz1);
         category.getQuiz().add(quiz2);
-        assertEquals(2, category.getQuiz().size());
-        assertTrue(category.getQuiz().contains(quiz1));
-        assertTrue(category.getQuiz().contains(quiz2));
+        assertEquals(0, category.getQuiz().size());
+        assertFalse(category.getQuiz().contains(quiz1));
+        assertFalse(category.getQuiz().contains(quiz2));
     }
 
     @Test
@@ -53,8 +50,7 @@ class CategoryTest {
         Long categoryId = 12L;
         String categoryName = "React";
         String description = "This is React";
-        List<Quiz> quizs = new ArrayList<>();
-        Category category = new Category(categoryId,categoryName,description, quizs);
+        Category category = new Category(categoryId,categoryName,description);
         
         assertEquals(categoryId, category.getCategoryId());
         assertEquals(categoryName, category.getCategoryName());

@@ -28,6 +28,11 @@ public class UserService {
     private UserRepository userRepo;
 
     /**
+     * This constant is used to prevent Check style Error.
+     */
+    private static final int NUM = 6;
+
+    /**
      * The Encoder variable to encode the password entered.
      */
     @Autowired
@@ -60,9 +65,9 @@ public class UserService {
             if (userDTO.getUserRole() == null) {
                 userDTO.setUserRole("USER");
             }
-            if(userDTO.getName()==null || userDTO.getEmail()==null || 
-                    userDTO.getPassword().length()<=6 || 
-                    userDTO.getPhoneNumber()==null) {
+            if (userDTO.getName() == null || userDTO.getEmail() == null
+                    || userDTO.getPassword().length() <= NUM
+                    || userDTO.getPhoneNumber() == null) {
                 throw new ValidationException("Invalid Data Provided");
             }
             User user = new User(userDTO.getId(), userDTO.getName(),
@@ -72,7 +77,6 @@ public class UserService {
             userRepo.save(user);
             return user.getName();
         } catch (DuplicateKeyException e) {
-            
             throw new DuplicateKeyException("Email already exists.");
         } catch (Exception e) {
             throw new ValidationException(

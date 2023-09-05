@@ -89,16 +89,20 @@ class QuizServiceTest {
     }
     
     @Test
-    public void testUpdateQuiz() {
-        Long categoryId = 2L;
-        Quiz updatedQuiz = new Quiz();
-        Quiz existingQuiz = new Quiz();
-        
-        when(quizRepository.findById(categoryId)).thenReturn(Optional.of(existingQuiz));
-        when(quizRepository.save(existingQuiz)).thenReturn(updatedQuiz);
-        
-        Quiz actualQuiz = quizService.updateQuiz(categoryId, updatedQuiz);
-        assertEquals(actualQuiz, updatedQuiz);
+    public void testUpdateQuiz_Success() {
+        Category category = new Category(1L, "CategoryName", "CategoryDescription");
+        Quiz quiz = new Quiz(1L, "QuizName", "QuizDescription", 10);
+        quiz.setCategory(category);
+        Long quizId = 1L;
+        Quiz updatedQuiz = new Quiz(quizId, "UpdatedQuizName", "UpdatedQuizDescription", 15);
+        updatedQuiz.setCategory(category); // Set the same category
+
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
+        when(quizRepository.save(quiz)).thenReturn(updatedQuiz);
+        Quiz result = quizService.updateQuiz(quizId, updatedQuiz);
+        assertEquals(updatedQuiz.getQuizName(), result.getQuizName());
+        assertEquals(updatedQuiz.getQuizDescription(), result.getQuizDescription());
+        assertEquals(updatedQuiz.getNumOfQuestions(), result.getNumOfQuestions());
     }
     
     @Test

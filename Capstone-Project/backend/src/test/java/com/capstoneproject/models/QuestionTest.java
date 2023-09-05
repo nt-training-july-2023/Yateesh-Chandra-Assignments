@@ -102,9 +102,7 @@ class QuestionTest {
         String option3 = "2bit";
         String option4 = "1bit";
         String correctOption = "option4";
-        String correctAnswer = "1bit";
-        Quiz quiz = new Quiz();
-        Question question = new Question(questionId, questionTitle, option1, option2, option3, option4,correctOption, correctAnswer, quiz);
+        Question question = new Question(questionId, questionTitle, option1, option2, option3, option4,correctOption);
         
         assertEquals(questionId, question.getQuestionId());
         assertEquals(questionTitle, question.getQuestionTitle());
@@ -113,7 +111,5 @@ class QuestionTest {
         assertEquals(option3, question.getOption3());
         assertEquals(option4, question.getOption4());
         assertEquals(correctOption, question.getCorrectOption());
-        assertEquals(correctAnswer, question.getCorrectAnswer());
-        assertEquals(quiz, question.getQuiz());
     }
 }
