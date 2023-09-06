@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../LoginRegistration/Style.css"
+import "../LoginRegistration/LoginRegistration.css"
+import { useState } from "react";
 import axios from "axios";
 
-export default function Signup() {
+export default function Registration() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +16,6 @@ export default function Signup() {
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const navigate = useNavigate();
-  const redirect = () => {
-    navigate("/Login");
-  };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -44,7 +41,7 @@ export default function Signup() {
     setPassword(e.target.value);
     if (!password) {
       setPasswordError("Password is required ");
-    } else if (password.length < 6) {
+    } else if (password.length < 5) {
       setPasswordError("Password must be at least 6 characters");
     } else {
       setPasswordError("");
@@ -71,9 +68,7 @@ export default function Signup() {
     setPhoneNumber(numericInput);
     if (numericInput.length < 10) {
       setPhoneNumberError("Phone number must be 10 digits");
-    } else if (numericInput.length > 10) {
-      setPhoneNumberError("Phone number must be 10 digits");
-    }
+    } 
     else{
       setPhoneNumberError("");
       console.log('phone number criteria satisfied');
@@ -91,7 +86,11 @@ export default function Signup() {
     
     if (!email) {
       setEmailError("Email is required");
-      isValid = false;
+      isValid=false;
+    } else if (!email.endsWith("@nucleusteq.com")) {
+      isValid=false;
+      setEmailError("Email must be in the form of @nucleusteq.com domain");
+      console.log('unable to register enter valid mail');
     } else {
       setEmailError("");
     }
@@ -110,7 +109,14 @@ export default function Signup() {
     if (!phoneNumber) {
       setPhoneNumberError("Phone Number is required");
       isValid = false;
-    } else {
+    }
+    else if(phoneNumber.length<10){
+      setPhoneNumberError ("Phone number is less than 10 digits.")
+      isValid=false;
+      console.log("The number should be of 10 digits");
+    }
+    
+    else {
       setPhoneNumberError("");
     }
     return isValid;
@@ -137,72 +143,74 @@ export default function Signup() {
     navigate("/Login");
   };
 
-  return (
-    <div>
-    <div className="wrapper">
-      <h1>SIGN UP</h1>
-      <form class-name = "form-control" onSubmit={handleFormSubmit}>
-        <div className="input-box">
+  return(
+    <div className="registration-form">
+      <h2>Signup</h2>
+      <form onSubmit={handleFormSubmit}>
+        
+        <div className="form-group">
           <input
             type="text"
-            placeholder="Enter User Name"
-            onChange={handleNameChange}
+            name="name"
+            placeholder="Enter your Name"
             value={name}
+            onChange={handleNameChange}
           />
-          {nameError && <small>{nameError}</small>}
+          {nameError && <div className="error">{nameError}</div>}
         </div>
         
-        <div className="input-box">
+        <div className="form-group">
           <input
             type="email"
-            placeholder="Email"
-            onChange={handleEmailChange}
+            name="email"
+            placeholder="Enter your Email"
             value={email}
+            onChange={handleEmailChange}
           />
-          {emailError && <small>{emailError}</small>}
+          {emailError && <div className="error">{emailError}</div>}
         </div>
-        <div className="input-box">
+
+        <div className="form-group">
           <input
             type="password"
-            placeholder="Password"
-            onChange={handlePasswordChange}
+            name="password"
+            placeholder="Enter your Password"
             value={password}
+            onChange={handlePasswordChange}
           />
-          {passwordError && <small>{passwordError}</small>}
+          {passwordError && <div className="error">{passwordError}</div>}
         </div>
-        <div className="input-box">
+
+        <div className="form-group">
           <input
             type="password"
-            placeholder="Confirm password"
-            onChange={handleConfirmPasswordChange}
+            name="confirmPassword"
+            placeholder="Enter Password to confirm"
             value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
           />
-          {confirmPasswordError && (
-            <small>{confirmPasswordError}</small>
-          )}
+          {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
         </div>
-        <div className="input-box">
+
+        <div className="form-group">
           <input
             type="phone"
-            placeholder="Phone Number"
+            name="phoneNumber"
             pattern="[0-9]*"
-            onChange={handlephoneChange}
+            placeholder="Enter Phone Number"
             value={phoneNumber}
+            onChange={handlephoneChange}
           />
-          {phoneNumberError && (
-            <small>{phoneNumberError}</small>
-          )}
+          {phoneNumberError && <div className="error">{phoneNumberError}</div>}
         </div>
-        <div className="input-box button">
-          <input type="Submit" value="Register Now" />
-        </div>
-        <div className="text">
-          <h3 onClick={redirect}>
-            Already our Subscriber? <Link to="/Login">Login now</Link>
-          </h3>
-        </div>
+            <input type="Submit" value="Register Now" />
+            <div className="text">
+            <h3>
+                Already our Subscriber? <Link to="/Login">Login now</Link> 
+            </h3>
+            </div>
       </form>
-    </div>
     </div>
   );
 }
+

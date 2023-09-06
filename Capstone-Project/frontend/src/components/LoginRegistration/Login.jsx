@@ -1,13 +1,18 @@
+import { Link, useNavigate } from "react-router-dom";
+import "./LoginRegistration.css";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function Login(){
+function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
+
+    const redirect = () => {
+        navigate('/');
+    }
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -17,7 +22,6 @@ function Login(){
         }
         else{
             setEmailError("")
-            console.log("Email is entered.!");
         }
     };
 
@@ -29,7 +33,6 @@ function Login(){
         }
         else{
             setPasswordError("")
-            console.log("Password is entered..!");
         }
     };
 
@@ -61,8 +64,9 @@ function Login(){
             email,
             password,
           });
-      
+
           console.log(response.data);
+          localStorage.setItem("role", response.data.userRole);
       
           if (response.data.message === "Email does not exist.!") {
             setEmailError("Email not exists..!");
@@ -70,11 +74,12 @@ function Login(){
           } else if (response.data.message === "Login Successful..!") {
             const userRole = response.data.userRole;
             console.log("User Role", userRole);
-      
+
             if (userRole === "USER") {
               navigate("/user");
               console.log("You are navigated to User dashboard..!");
             } else if (userRole === "ADMIN") {
+               console.log(userRole);
               navigate("/admin");
               console.log("You are navigated to Admin dashboard..!");
             } else {
@@ -82,46 +87,54 @@ function Login(){
               console.log("You have no access to the website");
             }
           } else {
-            setEmailError("Incorrect email or Password");
+            setEmailError("Incorrect credentials");
             console.log("Detected mistake in the email ID or Password..!");
           }
+         
         } catch (err) {
           setEmailError("An error occurred during login.");
           console.log(err);
         }
       };
-      
 
-    return(
-        <div className = "wrapper">
-            <h1>Login</h1>
-            <form onSubmit={handleFormSubmit}>
-                <div className = "input-box">
-                    <input type = "email" id = "email" placeholder="Enter Email" value = {email} onChange={handleEmailChange}/>
-                    {emailError && <small>{emailError}</small>}
-                </div>
-                            
-                <div className = "input-box">
-                    <input type = "password" id = "password" placeholder="Enter Password" value = {password} onChange={handlePasswordChange}/>
-                    {passwordError && <small>{passwordError}</small>}
-                </div>
-
-                <div className="input-box button-cont">
-                    <input type="Submit" value="Login" />
-                    <input type="button" value="Home" onClick={() => navigate("/")}/>
-                </div>
-                            
-                <div className="input-label">
-                    <label>Are you new Subscriber? Register now.!</label>
-                </div>
-
-                <div className="input-box button">
-                    <input type="button" value="New User" onClick={() => navigate("/register")}/>
-                </div>                                                       
-            </form>
+      return(
+        <div className="registration-form">
+      <h2>Login</h2>
+      <form onSubmit={handleFormSubmit}>
+        
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          {emailError && <div className="error">{emailError}</div>}
         </div>
-                
-    );
+
+        <div className="form-group">
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your Password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          {passwordError && <div className="error">{passwordError}</div>}
+        </div>
+        <div className="button-container">
+            <input type="Submit" value="Login" />
+            <input type="button" value="Home" onClick={redirect}/>
+        </div>
+        <h3>
+            New to our Platform? <Link to="/register">Register now</Link>
+        </h3>
+        
+    </form>
+    </div>
+      )
+
 }
 
 export default Login;
