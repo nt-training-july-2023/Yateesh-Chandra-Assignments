@@ -65,10 +65,10 @@ const AddOrUpdateCategory = () =>{
     }
 
     if (!description) {
+      setCategoryDescriptionError("Add some description ot proceed");
       console.log("Add some Description to proceed");
       isValid = false;
     } else {
-      console.log("The description is Valid");
       setCategoryDescriptionError("");
     }
     return isValid;

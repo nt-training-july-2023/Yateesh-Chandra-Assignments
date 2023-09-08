@@ -1,6 +1,9 @@
 package com.capstoneproject.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.capstoneproject.models.Category;
@@ -10,4 +13,6 @@ import com.capstoneproject.models.Category;
  */
 @EnableJpaRepositories
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+    @Query("select categ from Category as categ where categ.categoryName = :categoryName")
+    Optional<Category> getCategoryByName(String categoryName);
 }

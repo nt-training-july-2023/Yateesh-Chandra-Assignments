@@ -3,21 +3,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import AdminNavBar from "../AdminNavBar";
 import "../Categories/Categories.css";
 import axios from "axios";
+import {useLocation} from 'react-router-dom'
 
 const AddOrUpdateQuiz = () => {
   const { quizId } = useParams();
-  
+  const location = useLocation();
   const navigate = useNavigate();
-
-  const isUpdating = quizId !== undefined;
-
+  const categoryId = location?.state?.categoryId ||{
+    categoryId:""
+  }
+//   const isUpdating = quizId !== undefined;
+const categoryid = location?.state?.categoryId || null;
+const [categoryDetails, setCategoryDetails] = useState([]);
   const [quizName, setQuizName] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
   const [numOfQuestions, setNumOfQuestions] = useState(0);
   const [quizNameError, setQuizNameError] = useState("");
   const [quizDescriptionError, setQuizDescriptionError] = useState("");
   const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
-
+  const isUpdating=quizId;
   const fetchQuizData = () => {
     if (!isUpdating) {
       return;
@@ -35,11 +39,18 @@ const AddOrUpdateQuiz = () => {
       });
   };
 
+  const fetchCategoriesData = async() => {
+    await axios.get(`http://localhost:8082/api/v1/category/${categoryid}`)
+    .then((response) => {
+        setCategoryDetails(response?.data)
+    }).catch(error=>{
+        console.log(error)
+    })
+  }
+
   useEffect(() => {
-    if (isUpdating) {
-      fetchQuizData();
-    }
-  }, [isUpdating]);
+      fetchCategoriesData();
+  }, []);
 
   const handleQuizNameChange = (e) => {
     const validName = e.target.value;
@@ -96,7 +107,7 @@ const AddOrUpdateQuiz = () => {
 
     return isValid;
   };
-  const categoryId  = 2;
+
   const handleAddOrUpdateQuiz = async (e) => {
     e.preventDefault();
 
@@ -104,18 +115,22 @@ const AddOrUpdateQuiz = () => {
       return;
     }
 
-    console.log("category-id", categoryId);
-
+    console.log(categoryId);
     const quizData = {
       quizName,
       quizDescription,
       numOfQuestions,
+      categoryDetails
     };
 
+    // const 
+
+    console.log(quizData);
     try {
       if (isUpdating) {
         await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
         console.log("Quiz Updated Successfully");
+        fetchQuizData()
       } else {
         await axios.post(`http://localhost:8082/api/v1/quiz/byCategory/${categoryId}`, quizData);
         console.log("New Quiz is added successfully.");

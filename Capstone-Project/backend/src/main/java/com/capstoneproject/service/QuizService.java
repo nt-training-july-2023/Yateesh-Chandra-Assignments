@@ -1,15 +1,23 @@
 package com.capstoneproject.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capstoneproject.dto.QuizDTO;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ElementNotExistsException;
+import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
+import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
 
 /**
  * This class works like Service.
@@ -23,13 +31,27 @@ public class QuizService {
     @Autowired
     private QuizRepository quizRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     /**
      * This method gets all the quiz.
      *
      * @return the List of Quiz.
      */
-    public final List<Quiz> getAllQuiz() {
-        return quizRepository.findAll();
+    public final List<QuizDTO> getAllQuiz() {
+        List<Quiz> quizzes = quizRepository.findAll();
+        return quizzes.stream().map(this::convertModelToDTO).collect(Collectors.toList());
+    }
+
+    public QuizDTO convertModelToDTO(final Quiz quiz) {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(quiz.getQuizId());
+        quizDto.setQuizName(quiz.getQuizName());
+        quizDto.setQuizDescription(quiz.getQuizDescription());
+        quizDto.setNumOfQuestions(quiz.getNumOfQuestions());
+        quizDto.setCategoryId(quiz.getCategory().getCategoryId());
+        return quizDto;
     }
 
     /**
@@ -38,8 +60,15 @@ public class QuizService {
      * @param category - of Category Type.
      * @return the List of Quiz by mentioned Category.
      */
-    public final List<Quiz> getQuizByCategoryId(final Category category) {
-        return quizRepository.findByCategory(category);
+    public final List<QuizDTO> getQuizByCategoryId(final Long categoryId) {
+        Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
+        if(existingCategory == null) {
+            throw new ElementNotExistsException();
+        }
+        else {
+            List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
+            return quizzes.stream().map(this::convertModelToDTO).collect(Collectors.toList());
+        }
     }
 
     /**
@@ -48,9 +77,15 @@ public class QuizService {
      * @param quizId - of Long Data type.
      * @return the quiz by the specific ID.
      */
-    public final Quiz getQuizById(final Long quizId) {
-        Quiz existingQuiz = quizRepository.findById(quizId).get();
-        return existingQuiz;
+    public final QuizDTO getQuizById(final Long quizId) {
+        Quiz existingQuiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new ElementNotExistsException("No quiz with the Id"));
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(existingQuiz.getQuizId());
+        quizDto.setQuizName(existingQuiz.getQuizName());
+        quizDto.setQuizDescription(existingQuiz.getQuizDescription());
+        quizDto.setCategoryId(existingQuiz.getCategory().getCategoryId());
+        return quizDto;
     }
 
     /**
@@ -59,8 +94,27 @@ public class QuizService {
      * @param quiz - of Quiz Type.
      * @return the quiz being added.
      */
-    public final Quiz addQuiz(final Quiz quiz) {
-        return quizRepository.save(quiz);
+    public final QuizDTO addQuiz(final QuizDTO quizDto) {
+        if(quizDto.getQuizName().isEmpty() || quizDto.getCategoryId()==0) {
+            throw new NoInputException();
+        }
+
+        else {
+            Optional<Quiz> existingQuiz = quizRepository.getQuizByName(quizDto.getQuizName());
+            if(existingQuiz.isPresent()) {
+                throw new AlreadyExistsException();
+            }
+            else {
+                Quiz newQuiz = new Quiz();
+                newQuiz.setQuizId(quizDto.getQuizId());
+                newQuiz.setQuizName(quizDto.getQuizName());
+                newQuiz.setQuizDescription(quizDto.getQuizDescription());
+                Category category = categoryRepository.findById(quizDto.getCategoryId()).orElseThrow(() -> new ElementNotExistsException("Category not found."));
+                newQuiz.setCategory(category);
+                quizRepository.save(newQuiz);
+                return quizDto;
+            }
+        }
     }
 
     /**
@@ -69,7 +123,13 @@ public class QuizService {
      * @param quizId - of Long Type.
      */
     public final void deleteQuiz(final Long quizId) {
-        quizRepository.deleteById(quizId);
+        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
+        if(existingQuiz == null) {
+            throw new ElementNotExistsException();
+        }
+        else {
+            quizRepository.deleteById(quizId);
+        }
     }
 
     /**
@@ -79,13 +139,24 @@ public class QuizService {
      * @param updatedQuiz - of Quiz Type.
      * @return status of the updated quiz.
      */
-    public final Quiz updateQuiz(final Long quizId, final Quiz updatedQuiz) {
+    public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz Not Found.!"));
-        existingQuiz.setQuizName(updatedQuiz.getQuizName());
-        existingQuiz.setQuizDescription(updatedQuiz.getQuizDescription());
-        existingQuiz.setNumOfQuestions(updatedQuiz.getNumOfQuestions());
-        existingQuiz.setCategory(updatedQuiz.getCategory());
-        return quizRepository.save(existingQuiz);
+        if(existingQuiz != null) {
+            existingQuiz.setQuizId(quizDto.getQuizId());
+            existingQuiz.setQuizName(quizDto.getQuizName());
+            existingQuiz.setQuizDescription(quizDto.getQuizDescription());
+            existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
+            if(existingQuiz.getQuizName().isEmpty()) {
+                throw new NoInputException();
+            }
+            else {
+                quizRepository.save(existingQuiz);
+                return quizDto;
+            }
+        }
+        else {
+            throw new ElementNotExistsException();
+        }
     }
 }

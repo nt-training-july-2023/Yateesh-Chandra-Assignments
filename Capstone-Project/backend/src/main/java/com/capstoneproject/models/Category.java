@@ -85,14 +85,4 @@ public class Category {
         this.quiz = new ArrayList<>(q);
     }
 
-    /**
-     * Single parameter.
-     * @param otherCategory type.
-     */
-    public Category(final Category otherCategory) {
-        this.categoryId = otherCategory.getCategoryId();
-        this.categoryName = otherCategory.getCategoryName();
-        this.description = otherCategory.getDescription();
-    }
-
 }
