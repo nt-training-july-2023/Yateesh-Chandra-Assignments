@@ -9,14 +9,14 @@ const AddOrUpdateCategory = () =>{
   const { categoryId } = useParams();
   const navigate = useNavigate();
 
-  const isUpdating = categoryId !== undefined; // Check if categoryId exists for update mode
+  const isUpdating = categoryId !== undefined;
 
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
   const [categoryNameError, setCategoryNameError] = useState("");
   const [categoryDescriptionError, setCategoryDescriptionError] = useState("");
 
-  // Function to fetch category data if in update mode
+
   const fetchCategoryData = () => {
     axios.get(`http://localhost:8082/api/v1/category/${categoryId}`)
       .then((response) => {
@@ -109,7 +109,7 @@ const AddOrUpdateCategory = () =>{
       <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
       <form onSubmit={handleAddOrUpdateCategory}>
         <div className="form-group">
-          <label>Category Name:</label>
+          <label>Category Title:</label>
           <input
             type="text"
             value={categoryName}

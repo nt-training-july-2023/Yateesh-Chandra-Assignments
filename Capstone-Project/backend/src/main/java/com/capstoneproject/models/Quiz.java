@@ -87,15 +87,17 @@ public class Quiz {
      * @return category that was set.
      */
     public final Category getCategory() {
-        return new Category(category);
+        return category;
     }
 
     /**
      * Sets the category.
      * @param cat is final
      */
-    public final void setCategory(final Category cat) {
-        this.category = new Category(cat);
+    public final void setCategory(final Category cate) {
+        this.category = new Category(cate.getCategoryId(),
+                cate.getCategoryName(),
+                cate.getDescription());
     }
 
     /**

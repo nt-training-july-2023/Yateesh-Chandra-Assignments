@@ -66,7 +66,7 @@ const ManageCategory = () => {
                   <button className="blue-button" onClick={() => handleEditClick(category.categoryId)}>Update</button>
                   <button className="red-button" onClick={() => handleDeleteCategory(category.categoryId)}>Delete</button>
                   
-                  <button className="green-button" onClick={() => {/* Handle 'Open' action here */}}>Open</button>
+                  <button className="green-button" onClick={() => navigate(`/manage-quiz/${category.categoryId}`)}>Open</button>
                 </td>
                 )}
               </tr>

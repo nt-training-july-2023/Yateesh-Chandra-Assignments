@@ -57,7 +57,7 @@ public class Category {
      */
     public Category(final Long catId, final String catName,
             final String desc) {
-        super();
+//        super();
         this.categoryId = catId;
         this.categoryName = catName;
         this.description = desc;

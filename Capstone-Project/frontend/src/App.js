@@ -7,6 +7,8 @@ import Login from './components/LoginRegistration/Login';
 import UserDashBoard from './components/DashBoard/UserDashBoard';
 import ManageCategory from './components/Categories/ManageCategory';
 import AddOrUpdateCategory from './components/Categories/AddOrUpdateCategory';
+import ManageQuiz from './components/Quiz/ManageQuiz';
+import AddOrUpdateQuiz from './components/Quiz/AddOrUpdateQuiz';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path = "/manage-category" element = {<ManageCategory/>} />
         <Route path = "/add-category" element = {<AddOrUpdateCategory/>} />
         <Route path = "/add-category/:categoryId" element = {<AddOrUpdateCategory/>} />
+        <Route path = "/manage-quiz/:categoryId" element = {<ManageQuiz/>} />
+        <Route path = "/add-quiz" element = {<AddOrUpdateQuiz/>}/>
         <Route path = "/user" element = {<UserDashBoard/>}/>
         </Routes>
       </BrowserRouter>
