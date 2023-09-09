@@ -119,4 +119,14 @@ public class Quiz {
         this.quizDescription = quizDesc;
         this.numOfQuestions = numOfQue;
     }
+    
+    public Quiz(final Long id,
+            final String quizname, final String quizDesc,
+            final int numOfQue, Category categ) {
+        this.quizId = id;
+        this.quizName = quizname;
+        this.quizDescription = quizDesc;
+        this.numOfQuestions = numOfQue;
+        this.category = categ;
+    }
 }

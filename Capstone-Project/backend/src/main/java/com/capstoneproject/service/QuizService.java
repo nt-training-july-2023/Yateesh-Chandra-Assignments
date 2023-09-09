@@ -17,7 +17,6 @@ import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceContext;
 
 /**
  * This class works like Service.

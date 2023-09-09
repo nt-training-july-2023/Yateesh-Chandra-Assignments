@@ -1,14 +1,9 @@
 package com.capstoneproject.controller;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.capstoneproject.dto.QuizDTO;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ElementNotExistsException;
+import com.capstoneproject.exceptions.EntityNotFoundException;
+import com.capstoneproject.service.QuizService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,99 +12,107 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.capstoneproject.models.Category;
-import com.capstoneproject.models.Quiz;
-import com.capstoneproject.service.CategoryService;
-import com.capstoneproject.service.QuizService;
+import java.util.ArrayList;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-class QuizControllerTest {
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+public class QuizControllerTest {
     @Mock
     private QuizService quizService;
-
-    @Mock
-    private CategoryService categoryService;
 
     @InjectMocks
     private QuizController quizController;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testGetAllQuiz() {
-        List<Quiz> quiz = new ArrayList<>();
-        quiz.add(new Quiz());
-        quiz.add(new Quiz());
-        
-        when(quizService.getAllQuiz()).thenReturn(quiz);
-        ResponseEntity<List<Quiz>> response = quizController.getAllQuiz();
-        
-        verify(quizService, times(1)).getAllQuiz();
-        assert(response.getStatusCode()==HttpStatus.OK);
+    public void testGetAllQuiz() {
+        List<QuizDTO> quizzes = new ArrayList<>();
+        quizzes.add(new QuizDTO(1L, "Quiz1", "Description1", 5, 1L));
+        quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 2L));
+        when(quizService.getAllQuiz()).thenReturn(quizzes);
+        ResponseEntity<Object> response = quizController.getAllQuiz();
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        @SuppressWarnings("unchecked")
+        List<QuizDTO> responseQuizzes = (List<QuizDTO>) response.getBody();
+        assertNotNull(responseQuizzes);
+        assertEquals(2, responseQuizzes.size());
+        assertEquals("Quiz1", responseQuizzes.get(0).getQuizName());
     }
 
     @Test
-    void testGetQuizById() {
-        Long quizId = 12L;
-        Quiz quiz = new Quiz();
-        when(quizService.getQuizById(quizId)).thenReturn(quiz);
-        ResponseEntity<Quiz> response = quizController.getQuizById(quizId);
-        verify(quizService, times(1)).getQuizById(quizId);
-        assert(response.getStatusCode()==HttpStatus.OK);
-        assert(response.getBody()!=null);
-    }
-    
-    @Test
-    void testAddQuiz() {
-        Quiz quiz = new Quiz();
-        when(quizService.addQuiz(quiz)).thenReturn(quiz);
-        ResponseEntity<Quiz> response = quizController.addQuiz(quiz);
-        verify(quizService, times(1)).addQuiz(quiz);
-        assert(response.getStatusCode()==HttpStatus.OK);
-        assert(response.getBody()!= null);
+    public void testGetQuizById() {
+        Long quizId = 1L;
+        QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 1L);
+        when(quizService.getQuizById(quizId)).thenReturn(quizDTO);
+        ResponseEntity<Object> response = quizController.getQuizById(quizId);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        QuizDTO responseQuiz = (QuizDTO) response.getBody();
+        assertNotNull(responseQuiz);
+        assertEquals(quizId, responseQuiz.getQuizId());
+        assertEquals("Quiz1", responseQuiz.getQuizName());
     }
 
     @Test
-    void testDeleteQuiz() {
-        Long quizId = 12L;
-        doNothing().when(quizService).deleteQuiz(quizId);
-        ResponseEntity<Void> response = quizController.deleteQuiz(quizId);
-        verify(quizService,times(1)).deleteQuiz(quizId);
-        assert(response.getStatusCode()==HttpStatus.NO_CONTENT);
+    public void testAddQuiz() {
+        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 1L);
+        when(quizService.addQuiz(quizDTO)).thenReturn(quizDTO);
+        ResponseEntity<Object> response = quizController.addQuiz(quizDTO);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        QuizDTO addedQuiz = (QuizDTO) response.getBody();
+        assertNotNull(addedQuiz);
+        assertEquals("New Quiz", addedQuiz.getQuizName());
     }
 
     @Test
-    void testGetQuizByCategoryId() {
-        Long categoryId = 12L;
-        Category category = new Category();
-        when(categoryService.getCategoryById(categoryId)).thenReturn(category);
-        List<Quiz> quizList = new ArrayList<>();
-        when(quizService.getQuizByCategoryId(category)).thenReturn(quizList);
-        ResponseEntity<List<Quiz>> response = quizController.getQuizByCategoryId(categoryId);
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals(quizList, response.getBody());
+    public void testAddQuizAlreadyExists() {
+        QuizDTO quizDTO = new QuizDTO(null, "Existing Quiz", "Description", 10, 1L);
+        when(quizService.addQuiz(quizDTO)).thenThrow(new AlreadyExistsException());
+        assertThrows(AlreadyExistsException.class, () -> quizController.addQuiz(quizDTO));
     }
-    
-    
+
     @Test
-    void testUpdateQuiz() {
-        Long quizId = 12L;
-        Quiz quiz = new Quiz();
-        when(quizService.updateQuiz(quizId, quiz)).thenReturn(quiz);
-        ResponseEntity<Quiz> response = quizController.updateQuiz(quizId, quiz);
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals(quiz, response.getBody());
+    public void testDeleteQuiz() {
+        Long quizId = 1L;
+        ResponseEntity<Object> response = quizController.deleteQuiz(quizId);
+        assertNotNull(response);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
-    
+
     @Test
-    void testGetQuizByCategoryIdNotFound() {
-        Long categoryId = 1L;
-        when(categoryService.getCategoryById(categoryId)).thenReturn(null);
-        ResponseEntity<List<Quiz>> response = quizController.getQuizByCategoryId(categoryId);
-        assertEquals(404, response.getStatusCodeValue());
+    public void testDeleteQuizNotFound() {
+        Long quizId = 1L;
+        doThrow(new ElementNotExistsException()).when(quizService).deleteQuiz(quizId);
+        assertThrows(ElementNotExistsException.class, () -> quizController.deleteQuiz(quizId));
+    }
+
+    @Test
+    public void testUpdateQuiz() {
+        Long quizId = 1L;
+        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
+        when(quizService.updateQuiz(quizId, updatedQuizDTO)).thenReturn(updatedQuizDTO);
+        ResponseEntity<Object> response = quizController.updateQuiz(quizId, updatedQuizDTO);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        QuizDTO updatedQuiz = (QuizDTO) response.getBody();
+        assertNotNull(updatedQuiz);
+        assertEquals("Updated Quiz", updatedQuiz.getQuizName());
+    }
+
+    @Test
+    public void testUpdateQuizNotFound() {
+        Long quizId = 1L;
+        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
+        when(quizService.updateQuiz(quizId, updatedQuizDTO)).thenThrow(new EntityNotFoundException("Entity not found"));
+        assertThrows(EntityNotFoundException.class, () -> quizController.updateQuiz(quizId, updatedQuizDTO));
     }
 }

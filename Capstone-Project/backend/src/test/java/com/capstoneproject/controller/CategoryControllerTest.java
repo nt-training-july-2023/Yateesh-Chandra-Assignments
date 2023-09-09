@@ -1,5 +1,7 @@
 package com.capstoneproject.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.capstoneproject.dto.CategoryDTO;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.service.CategoryService;
 
@@ -34,58 +37,69 @@ class CategoryControllerTest {
     
     @Test
     public void testGetAllCategories() {
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category());
-        categories.add(new Category());
+        List<CategoryDTO> categories = new ArrayList<>();
+        categories.add(new CategoryDTO(1L, "Category1", "Category Description 1"));
+        categories.add(new CategoryDTO(2L, "Category2", "Category Description 2"));
         when(categoryService.getAllCategories()).thenReturn(categories);
-        ResponseEntity<List<Category>> response = categoryController.getAllCategories();
+        ResponseEntity<Object> response = categoryController.getAllCategories();
         
-        verify(categoryService, times(1)).getAllCategories();
-        assert response.getStatusCode()==HttpStatus.OK;
-        assert response.getBody() != null && response.getBody().size()==2;
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        List<CategoryDTO> responseCategories = (List<CategoryDTO>) response.getBody();
+        assertNotNull(responseCategories);
+        assertEquals(2, responseCategories.size());
+        assertEquals("Category1", responseCategories.get(0).getCategoryName());
+        assertEquals("Category Description 2", responseCategories.get(1).getDescription());
     }
-    
+
     @Test
     public void testAddCategory() {
-        Category category = new Category();
+        CategoryDTO category = new CategoryDTO(null, "New Category", "New Description");
         when(categoryService.addCategory(category)).thenReturn(category);
-        
-        ResponseEntity<Category> response = categoryController.addCategory(category);
-        verify(categoryService, times(1)).addCategory(category);
-        assert response.getStatusCode()==HttpStatus.OK;
-        assert response.getBody()!= null;
-        
+        ResponseEntity<Object> response = categoryController.addCategory(category);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        CategoryDTO responseCategory = (CategoryDTO) response.getBody();
+        assertNotNull(responseCategory);
+        assertEquals("New Category", responseCategory.getCategoryName());
+        assertEquals("New Description", responseCategory.getDescription());
     }
 
     @Test
     public void testGetCategoryById() {
         Long categoryId = 4L;
-        Category category = new Category();
+        CategoryDTO category = new CategoryDTO(categoryId, "Category1", "Description1");
+        
         when(categoryService.getCategoryById(categoryId)).thenReturn(category);
         
-        ResponseEntity<Category> response = categoryController.getCategoryById(categoryId);
-        verify(categoryService, times(1)).getCategoryById(categoryId);
-        assert response.getStatusCode()==HttpStatus.OK;
-        assert response.getBody()!=null;
+        ResponseEntity<Object> response = categoryController.getCategoryById(categoryId);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        CategoryDTO responseCategory = (CategoryDTO) response.getBody();
+        assertNotNull(responseCategory);
+        assertEquals(categoryId, responseCategory.getCategoryId());
+        assertEquals("Category1", responseCategory.getCategoryName());
+        assertEquals("Description1", responseCategory.getDescription());
     }
-    
+
     @Test
     public void testDeleteCategory() {
         Long categoryId = 5L;
-        doNothing().when(categoryService).deleteCategory(categoryId);
-        ResponseEntity<Void> response = categoryController.deleteCategory(categoryId);
+        ResponseEntity<Object> response = categoryController.deleteCategory(categoryId);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(categoryService, times(1)).deleteCategory(categoryId);
-        assert response.getStatusCode()==HttpStatus.NO_CONTENT;
     }
-    
+
     @Test
     public void testUpdateCategory() {
         Long categoryId = 4L;
-        Category updatedCategory = new Category();
+        
+        CategoryDTO updatedCategory = new CategoryDTO(categoryId, "Updated Category", "Updated Description");
         when(categoryService.updateCategory(categoryId, updatedCategory)).thenReturn(updatedCategory);
-        ResponseEntity<Category> response = categoryController.updateCategory(categoryId, updatedCategory);
-        verify(categoryService, times(1)).updateCategory(categoryId, updatedCategory);
-        assert response.getStatusCode() == HttpStatus.OK;
-        assert response.getBody()!=null;
+        
+        ResponseEntity<Object> response = categoryController.updateCategory(categoryId, updatedCategory);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        CategoryDTO responseCategory = (CategoryDTO) response.getBody();
+        assertNotNull(responseCategory);
+        assertEquals(categoryId, responseCategory.getCategoryId());
+        assertEquals("Updated Category", responseCategory.getCategoryName());
+        assertEquals("Updated Description", responseCategory.getDescription());
     }
 }
