@@ -30,20 +30,28 @@ public class QuizService {
     @Autowired
     private QuizRepository quizRepository;
 
+    /**
+     * Category Repository is autowired.
+     */
     @Autowired
     private CategoryRepository categoryRepository;
 
     /**
      * This method gets all the quiz.
-     *
      * @return the List of Quiz.
      */
     public final List<QuizDTO> getAllQuiz() {
         List<Quiz> quizzes = quizRepository.findAll();
-        return quizzes.stream().map(this::convertModelToDTO).collect(Collectors.toList());
+        return quizzes.stream().map(this::convertModelToDTO)
+                .collect(Collectors.toList());
     }
 
-    public QuizDTO convertModelToDTO(final Quiz quiz) {
+    /**
+     * This is used to convert the Entity to DTO.
+     * @param quiz of Quiz type.
+     * @return the Quiz DTO.
+     */
+    public final QuizDTO convertModelToDTO(final Quiz quiz) {
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(quiz.getQuizId());
         quizDto.setQuizName(quiz.getQuizName());
@@ -55,30 +63,29 @@ public class QuizService {
 
     /**
      * Gets the quiz based on the Category Id.
-     *
-     * @param category - of Category Type.
+     * @param categoryId - of Category Type.
      * @return the List of Quiz by mentioned Category.
      */
     public final List<QuizDTO> getQuizByCategoryId(final Long categoryId) {
-        Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
-        if(existingCategory == null) {
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElse(null);
+        if (existingCategory == null) {
             throw new ElementNotExistsException();
-        }
-        else {
+        } else {
             List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
-            return quizzes.stream().map(this::convertModelToDTO).collect(Collectors.toList());
+            return quizzes.stream().map(this::convertModelToDTO)
+                    .collect(Collectors.toList());
         }
     }
 
     /**
      * Finds the Quiz.
-     *
      * @param quizId - of Long Data type.
      * @return the quiz by the specific ID.
      */
     public final QuizDTO getQuizById(final Long quizId) {
-        Quiz existingQuiz = quizRepository.findById(quizId)
-                .orElseThrow(() -> new ElementNotExistsException("No quiz with the Id"));
+        Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
+                () -> new ElementNotExistsException("No quiz with the Id"));
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(existingQuiz.getQuizId());
         quizDto.setQuizName(existingQuiz.getQuizName());
@@ -89,26 +96,26 @@ public class QuizService {
 
     /**
      * adds the quiz.
-     *
-     * @param quiz - of Quiz Type.
+     * @param quizDto - of QuizDTO Type.
      * @return the quiz being added.
      */
     public final QuizDTO addQuiz(final QuizDTO quizDto) {
-        if(quizDto.getQuizName().isEmpty() || quizDto.getCategoryId()==0) {
+        if (quizDto.getQuizName().isEmpty() || quizDto.getCategoryId() == 0) {
             throw new NoInputException();
-        }
-
-        else {
-            Optional<Quiz> existingQuiz = quizRepository.getQuizByName(quizDto.getQuizName());
-            if(existingQuiz.isPresent()) {
+        } else {
+            Optional<Quiz> existingQuiz = quizRepository
+                    .getQuizByName(quizDto.getQuizName());
+            if (existingQuiz.isPresent()) {
                 throw new AlreadyExistsException();
-            }
-            else {
+            } else {
                 Quiz newQuiz = new Quiz();
                 newQuiz.setQuizId(quizDto.getQuizId());
                 newQuiz.setQuizName(quizDto.getQuizName());
                 newQuiz.setQuizDescription(quizDto.getQuizDescription());
-                Category category = categoryRepository.findById(quizDto.getCategoryId()).orElseThrow(() -> new ElementNotExistsException("Category not found."));
+                Category category = categoryRepository
+                        .findById(quizDto.getCategoryId())
+                        .orElseThrow(() -> new ElementNotExistsException(
+                                "Category not found."));
                 newQuiz.setCategory(category);
                 quizRepository.save(newQuiz);
                 return quizDto;
@@ -123,10 +130,9 @@ public class QuizService {
      */
     public final void deleteQuiz(final Long quizId) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
-        if(existingQuiz == null) {
+        if (existingQuiz == null) {
             throw new ElementNotExistsException();
-        }
-        else {
+        } else {
             quizRepository.deleteById(quizId);
         }
     }
@@ -135,26 +141,24 @@ public class QuizService {
      * updates the quiz based on the Id.
      *
      * @param quizId      - Of Long Type.
-     * @param updatedQuiz - of Quiz Type.
+     * @param quizDto  - of Quiz Type.
      * @return status of the updated quiz.
      */
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz Not Found.!"));
-        if(existingQuiz != null) {
+        if (existingQuiz != null) {
             existingQuiz.setQuizId(quizDto.getQuizId());
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
-            if(existingQuiz.getQuizName().isEmpty()) {
+            if (existingQuiz.getQuizName().isEmpty()) {
                 throw new NoInputException();
-            }
-            else {
+            } else {
                 quizRepository.save(existingQuiz);
                 return quizDto;
             }
-        }
-        else {
+        } else {
             throw new ElementNotExistsException();
         }
     }

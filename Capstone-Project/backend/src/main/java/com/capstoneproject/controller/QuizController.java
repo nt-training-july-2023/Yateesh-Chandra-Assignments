@@ -42,7 +42,6 @@ public class QuizController {
 
     /**
      * Get the quiz based on ID.
-     *
      * @param quizId of Long type as path variable.
      * @return the status whether the quiz exist or not.
      */
@@ -55,11 +54,12 @@ public class QuizController {
 
     /**
      * add quiz to the Repository.
-     * @param quiz of Quiz type is requested.
+     * @param quizDto of Quiz type is requested.
      * @return newQuiz.
      */
     @PostMapping
-    public final ResponseEntity<Object> addQuiz(@RequestBody final QuizDTO quizDto) {
+    public final ResponseEntity<Object> addQuiz(
+            @RequestBody final QuizDTO quizDto) {
         QuizDTO newQuiz = quizService.addQuiz(quizDto);
         return ResponseEntity.ok(newQuiz);
     }
@@ -78,8 +78,7 @@ public class QuizController {
 
     /**
      * Updates the quiz based on the id entered.
-     *
-     * @param quizId      of Long is considered to update that Quiz.
+     * @param quizId of Long is considered to update that Quiz.
      * @param updatedQuiz to be updated.
      * @return the updated quiz.
      */
@@ -93,7 +92,6 @@ public class QuizController {
 
     /**
      * Gets quiz based on the entered categoryId.
-     *
      * @param categoryId is to be entered to get the quiz associated.
      * @return the quiz of that Category Id if found.
      */
@@ -103,5 +101,4 @@ public class QuizController {
         List<QuizDTO> quizDto = quizService.getQuizByCategoryId(categoryId);
         return ResponseEntity.ok(quizDto);
     }
-
 }

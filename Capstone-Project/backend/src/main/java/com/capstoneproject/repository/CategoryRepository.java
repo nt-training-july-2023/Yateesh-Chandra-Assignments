@@ -13,6 +13,12 @@ import com.capstoneproject.models.Category;
  */
 @EnableJpaRepositories
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    @Query("select categ from Category as categ where categ.categoryName = :categoryName")
+    /**
+     * This gets the Category by Name.
+     * @param categoryName .
+     * @return Category based on the name.
+     */
+    @Query("select categ from Category as categ where "
+            + "categ.categoryName = :categoryName")
     Optional<Category> getCategoryByName(String categoryName);
 }

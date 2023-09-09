@@ -48,13 +48,14 @@ public class CategoryController {
     @GetMapping("/{categoryId}")
     public final ResponseEntity<Object> getCategoryById(
             @PathVariable final Long categoryId) {
-        CategoryDTO newCategoryDto = categoryService.getCategoryById(categoryId);
+        CategoryDTO newCategoryDto = categoryService
+                .getCategoryById(categoryId);
         return ResponseEntity.ok(newCategoryDto);
     }
 
     /**
      * Add the category.
-     * @param category of Category type is requested to add into it.
+     * @param categoryDto of Category type is requested to add into it.
      * @return the success status when added.
      */
     @PostMapping
@@ -79,13 +80,13 @@ public class CategoryController {
     /**
      * Updates the category .
      * @param categoryId of Long Type.
-     * @param updatedCategory the updated content.
+     * @param updatedCategoryDto the updated content.
      * @return the updated category status.
      */
     @PutMapping("/{categoryId}")
     public final ResponseEntity<Object> updateCategory(
             @PathVariable final Long categoryId,
-            @RequestBody final  CategoryDTO updatedCategoryDto) {
+            @RequestBody final CategoryDTO updatedCategoryDto) {
         CategoryDTO newCategory = categoryService.updateCategory(categoryId,
                 updatedCategoryDto);
         return ResponseEntity.ok(newCategory);
