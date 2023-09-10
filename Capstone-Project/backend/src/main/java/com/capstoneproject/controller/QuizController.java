@@ -3,6 +3,7 @@ package com.capstoneproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,7 +62,7 @@ public class QuizController {
     public final ResponseEntity<Object> addQuiz(
             @RequestBody final QuizDTO quizDto) {
         QuizDTO newQuiz = quizService.addQuiz(quizDto);
-        return ResponseEntity.ok(newQuiz);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newQuiz);
     }
 
     /**

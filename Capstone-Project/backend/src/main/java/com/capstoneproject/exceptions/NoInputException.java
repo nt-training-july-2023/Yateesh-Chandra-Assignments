@@ -11,7 +11,7 @@ public class NoInputException extends RuntimeException {
 
     /**
      * This is constructor.
-     * @param message
+     * @param message .
      */
     public NoInputException(final String message) {
         super(message);

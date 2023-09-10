@@ -3,6 +3,9 @@
  */
 package com.capstoneproject.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +24,8 @@ public class CategoryDTO {
   /**
    * This is category Id field for Category class.
    */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long categoryId;
   /**
    * This is Category Title Name field.

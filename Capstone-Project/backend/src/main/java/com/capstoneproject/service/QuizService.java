@@ -57,7 +57,13 @@ public class QuizService {
         quizDto.setQuizName(quiz.getQuizName());
         quizDto.setQuizDescription(quiz.getQuizDescription());
         quizDto.setNumOfQuestions(quiz.getNumOfQuestions());
-        quizDto.setCategoryId(quiz.getCategory().getCategoryId());
+        System.out.println("Quiz ID: " + quiz.getQuizId());
+        System.out.println("Num of Questions (from Entity): " + quiz.getNumOfQuestions());
+        if(quiz.getCategory() != null) {
+            quizDto.setCategoryId(quiz.getCategory().getCategoryId());
+        } else {
+            quizDto.setCategoryId(null);
+        }
         return quizDto;
     }
 
@@ -90,6 +96,7 @@ public class QuizService {
         quizDto.setQuizId(existingQuiz.getQuizId());
         quizDto.setQuizName(existingQuiz.getQuizName());
         quizDto.setQuizDescription(existingQuiz.getQuizDescription());
+        quizDto.setNumOfQuestions(existingQuiz.getNumOfQuestions());
         quizDto.setCategoryId(existingQuiz.getCategory().getCategoryId());
         return quizDto;
     }
@@ -112,6 +119,7 @@ public class QuizService {
                 newQuiz.setQuizId(quizDto.getQuizId());
                 newQuiz.setQuizName(quizDto.getQuizName());
                 newQuiz.setQuizDescription(quizDto.getQuizDescription());
+                newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
                 Category category = categoryRepository
                         .findById(quizDto.getCategoryId())
                         .orElseThrow(() -> new ElementNotExistsException(

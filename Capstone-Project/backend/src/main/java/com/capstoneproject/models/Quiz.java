@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,6 +57,7 @@ public class Quiz {
      * This column contains the number of questions of integer type.
      */
     @Column(name = "num_of_questions")
+    @Basic(fetch = FetchType.EAGER)
     private int numOfQuestions;
 
     /**
@@ -101,8 +103,13 @@ public class Quiz {
      * @param cate is final.
      */
     public final void setCategory(final Category cate) {
-        this.category = new Category(cate.getCategoryId(),
-                cate.getCategoryName(), cate.getDescription());
+        if (cate != null) {
+            this.category = new Category(cate.getCategoryId(),
+                    cate.getCategoryName(), cate.getDescription());
+        } else {
+            this.category = null;
+        }
+        
     }
 
     /**

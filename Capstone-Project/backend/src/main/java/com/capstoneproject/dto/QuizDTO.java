@@ -1,5 +1,8 @@
 package com.capstoneproject.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +15,8 @@ public class QuizDTO {
     /**
      * This is quizId variable.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long quizId;
     /**
      * This is quizName variable.
