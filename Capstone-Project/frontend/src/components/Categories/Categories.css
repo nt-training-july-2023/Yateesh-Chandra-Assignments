@@ -130,7 +130,7 @@ label {
   }
   
 input[type="text"],
-input[type="number"]
+input[type="number"],
 textarea {
     width: 90%;
     padding: 10px;

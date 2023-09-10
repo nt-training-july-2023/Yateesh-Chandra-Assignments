@@ -56,6 +56,10 @@ public class QuizDTO {
         this.quizName = quizname;
         this.quizDescription = quizdescription;
         this.numOfQuestions = numOfquestions;
-        this.categoryId = categoryid;
+        this.categoryId = categoryid != null ? categoryid : -1L;
+    }
+
+    public Long getCategoryId() {
+        return categoryId != null ? categoryId : -1L;
     }
 }

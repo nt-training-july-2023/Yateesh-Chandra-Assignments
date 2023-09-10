@@ -156,7 +156,6 @@ public class QuizService {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz Not Found.!"));
         if (existingQuiz != null) {
-            existingQuiz.setQuizId(quizDto.getQuizId());
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());

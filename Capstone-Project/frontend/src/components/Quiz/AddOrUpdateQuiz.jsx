@@ -7,29 +7,27 @@ import {useLocation} from 'react-router-dom'
 
 const AddOrUpdateQuiz = () => {
   const { quizId } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
-  const categoryId = location?.state?.categoryId ||{
-    categoryId:""
-  }
-//   const isUpdating = quizId !== undefined;
-const categoryid = location?.state?.categoryId || null;
-const [categoryDetails, setCategoryDetails] = useState([]);
+  const location = useLocation();
+  const categoryId = location.state?.categoryId;
+  console.log("categoryId recieved : ", categoryId);
+
+  const isUpdating = quizId !== undefined;
+
   const [quizName, setQuizName] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
   const [numOfQuestions, setNumOfQuestions] = useState(0);
   const [quizNameError, setQuizNameError] = useState("");
   const [quizDescriptionError, setQuizDescriptionError] = useState("");
   const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
-  const isUpdating=quizId;
+
+
   const fetchQuizData = () => {
-    if (!isUpdating) {
-      return;
-    }
+
     axios
       .get(`http://localhost:8082/api/v1/quiz/${quizId}`)
       .then((response) => {
-        const { quizName, quizDescription, numOfQuestions } = response.data;
+        const { quizName, quizDescription, numOfQuestions} = response.data;
         setQuizName(quizName);
         setQuizDescription(quizDescription);
         setNumOfQuestions(numOfQuestions);
@@ -39,18 +37,11 @@ const [categoryDetails, setCategoryDetails] = useState([]);
       });
   };
 
-  const fetchCategoriesData = async() => {
-    await axios.get(`http://localhost:8082/api/v1/category/${categoryid}`)
-    .then((response) => {
-        setCategoryDetails(response?.data)
-    }).catch(error=>{
-        console.log(error)
-    })
-  }
-
   useEffect(() => {
-      fetchCategoriesData();
-  }, []);
+    if(isUpdating){
+      fetchQuizData();
+    }
+  }, [isUpdating]);
 
   const handleQuizNameChange = (e) => {
     const validName = e.target.value;
@@ -115,15 +106,12 @@ const [categoryDetails, setCategoryDetails] = useState([]);
       return;
     }
 
-    console.log(categoryId);
     const quizData = {
       quizName,
       quizDescription,
       numOfQuestions,
-      categoryDetails
+      categoryId,
     };
-
-    // const 
 
     console.log(quizData);
     try {
@@ -132,7 +120,7 @@ const [categoryDetails, setCategoryDetails] = useState([]);
         console.log("Quiz Updated Successfully");
         fetchQuizData()
       } else {
-        await axios.post(`http://localhost:8082/api/v1/quiz/byCategory/${categoryId}`, quizData);
+        await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);
         console.log("New Quiz is added successfully.");
       }
       navigate(`/manage-category`);

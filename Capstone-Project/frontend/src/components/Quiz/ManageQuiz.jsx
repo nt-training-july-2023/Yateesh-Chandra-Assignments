@@ -8,9 +8,9 @@ import AddOrUpdateQuiz from "./AddOrUpdateQuiz";
 
 const ManageQuiz = () => {
   const { categoryId } = useParams();
-  const {categoryName} = useParams();
   const [quizzes, setQuizzes] = useState([]);
   const navigate = useNavigate();
+  const userRole = localStorage.getItem("role");
 
   useEffect(() => {
     fetchQuizzes();
@@ -35,11 +35,16 @@ const ManageQuiz = () => {
             console.log("Quiz deleted : ", quizId);
             fetchQuizzes();
         })
-        .catch((error) => console.log("Error deleting Categories", error));
+        .catch((error) => console.log("Error deleting Quiz", error));
   }
 
   const handleEditClick = (quizId) => {
         navigate(`/add-quiz/${quizId}`);
+  };
+
+  const handleAddClick = (categoryId) => {
+    console.log('categoryId before passing : ', categoryId);
+    navigate('/add-quiz', { state: { categoryId: categoryId.toString() } });
   };
 
   return (
@@ -47,13 +52,15 @@ const ManageQuiz = () => {
         <AdminNavBar />
     <div className="manage-quiz-container">
       <div className="quiz-list-container">
-        <h1>Quizzes Available in {categoryName}</h1>
+        <h1>Quizzes Available</h1>
+        {userRole === "ADMIN" && (
         <button
           className="add-quiz-button"
-          onClick={() => navigate(`/add-quiz`,{state:{categoryId:categoryId}})}
+          onClick={() => handleAddClick(categoryId)}
         >
           Add Quiz
         </button>
+        )}
         <div className="quiz-grid">
           {quizzes.map((quiz) => (
             <div className="quiz-card" key={quiz.quizId}>
@@ -61,8 +68,12 @@ const ManageQuiz = () => {
               <p>{quiz.quizDescription}</p>
               <p>Total No of Questions : <b>{quiz.numOfQuestions}</b></p>
               <div className="open-quiz">
+                {userRole === "ADMIN" && (
                 <button className="edit-button" onClick={() => handleEditClick(quiz.quizId)}>Edit</button>
+                )}
+                {userRole === "ADMIN" &&(
                 <button className="delete-button" onClick ={() => handleDeleteQuiz(quiz.quizId)} >Delete</button>
+                )}
                 <button className="open-button">Open</button>
               </div>
             </div>

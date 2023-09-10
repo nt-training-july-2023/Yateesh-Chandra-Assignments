@@ -50,9 +50,7 @@ const ManageCategory = () => {
             <tr>
               <th>Category Name</th>
               <th>Description</th>
-             {userRole === "ADMIN" &&
               <th>Action</th>
-              }
             </tr>
           </thead>
           <tbody>
@@ -60,15 +58,17 @@ const ManageCategory = () => {
               <tr key={category.categoryId}>
                 <td>{category.categoryName}</td>
                 <td>{category.description}</td>
-                {userRole === "ADMIN" && (
+                
                 <td>
-                  
+                  {userRole === "ADMIN" && (    
                   <button className="blue-button" onClick={() => handleEditClick(category.categoryId)}>Update</button>
+                  )}    
+                  {userRole === "ADMIN" && (    
                   <button className="red-button" onClick={() => handleDeleteCategory(category.categoryId)}>Delete</button>
-                  
+                  )}    
                   <button className="green-button" onClick={() => navigate(`/manage-quiz/${category.categoryId}`)}>Open</button>
                 </td>
-                )}
+                
               </tr>
             ))}
           </tbody>
