@@ -97,7 +97,6 @@ public class CategoryService {
         Category existingCategory = categoryRepository.findById(categoryId)
                 .orElse(null);
         if (existingCategory != null) {
-            existingCategory.setCategoryId(updatedCategory.getCategoryId());
             existingCategory.setCategoryName(updatedCategory.getCategoryName());
             existingCategory.setDescription(updatedCategory.getDescription());
 

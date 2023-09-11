@@ -3,6 +3,7 @@ import "./Categories.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import AdminNavBar from "../AdminNavBar";
+import Swal from "sweetalert2";
 
 const AddOrUpdateCategory = () =>{
 
@@ -16,6 +17,21 @@ const AddOrUpdateCategory = () =>{
   const [categoryNameError, setCategoryNameError] = useState("");
   const [categoryDescriptionError, setCategoryDescriptionError] = useState("");
 
+  const updateAlert = () => {
+    Swal.fire({
+      title : "Updated Successfully",
+      icon : "success",
+      timer : 2000
+    })
+  }
+
+  const addAlert = () => {
+    Swal.fire({
+      title : "Added Successfully",
+      icon : "success",
+      timer : 2000
+    })
+  }
 
   const fetchCategoryData = () => {
     axios.get(`http://localhost:8082/api/v1/category/${categoryId}`)
@@ -90,10 +106,12 @@ const AddOrUpdateCategory = () =>{
       if (isUpdating) {
         // Update category if in update mode
         await axios.put(`http://localhost:8082/api/v1/category/${categoryId}`, categoryData);
+        updateAlert();
         console.log("Category updated successfully.");
       } else {
         // Add new category if in add mode
         await axios.post('http://localhost:8082/api/v1/category', categoryData);
+        addAlert();
         console.log("Category added successfully.");
       }
       navigate("/manage-category");

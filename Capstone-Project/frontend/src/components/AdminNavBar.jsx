@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function AdminNavBar() {
 
@@ -11,6 +12,23 @@ function AdminNavBar() {
       navigate("/login");
   }
 
+  const signOutSweetAlert = () => {
+    Swal.fire({
+      title : "Are you Sure you want to Sign out?",
+      showConfirmButton : true,
+      confirmButtonText : "Sign out",
+      showCancelButton : true,
+      cancelButtonText : "No",
+      icon : "warning"
+    }).then((result) => {
+      if(result.isConfirmed){
+        handleSignOut();
+        Swal.fire("Logged out", "", "success");
+      } 
+    })
+    
+  };
+
   return (
     <div className="app">
     <header className="sticky">
@@ -21,7 +39,7 @@ function AdminNavBar() {
         <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Profile</Link></li>
         <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
         <li className='sign-out-button'>
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button onClick={signOutSweetAlert}>Sign Out</button>
         </li>
         </ul>
         

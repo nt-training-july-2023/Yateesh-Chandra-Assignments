@@ -109,7 +109,6 @@ public class Quiz {
         } else {
             this.category = null;
         }
-        
     }
 
     /**
@@ -144,3 +143,4 @@ public class Quiz {
         this.category = categ;
     }
 }
+

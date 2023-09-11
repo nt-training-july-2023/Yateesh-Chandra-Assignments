@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -12,6 +13,48 @@ function Login() {
 
     const redirect = () => {
         navigate('/');
+    }
+
+    const loginUserSuccessSwal = () => {
+      let timeInterval
+      Swal.fire({
+        title : "Welcome User .!",
+        text : "You are successfully logged in",
+        timer : 2000,
+        icon : "success",
+        willClose : () => {
+          clearInterval(timeInterval)
+        }
+      })
+    }
+
+    const alertEmailError = () => {
+      Swal.fire({
+        title : "Unregistered Email",
+        text : "No such Email is registered before",
+        icon : "error"
+      })
+    }
+
+    const loginFail = () => {
+      Swal.fire({
+        title : "Unable to Login",
+        text : "Fill the valid details",
+        icon : "error"
+      })
+    }
+
+    const loginAdminSuccessSwal = () => {
+      let timeInterval
+      Swal.fire({
+        title : "Welcome Admin .!",
+        text : "You are successfully Logged in",
+        timer : 2000,
+        icon : "success",
+        willClose : () => {
+          clearInterval(timeInterval)
+        }
+      })
     }
 
     const handleEmailChange = (e) => {
@@ -56,6 +99,7 @@ function Login() {
         event.preventDefault();
       
         if(!validateForm()){
+          loginFail();
             return;
         }
             
@@ -76,10 +120,12 @@ function Login() {
             console.log("User Role", userRole);
 
             if (userRole === "USER") {
+              loginUserSuccessSwal();
               navigate("/user");
               console.log("You are navigated to User dashboard..!");
             } else if (userRole === "ADMIN") {
                console.log(userRole);
+               loginAdminSuccessSwal();
               navigate("/admin");
               console.log("You are navigated to Admin dashboard..!");
             } else {
@@ -87,12 +133,14 @@ function Login() {
               console.log("You have no access to the website");
             }
           } else {
+            loginFail();
             setEmailError("Incorrect credentials");
             console.log("Detected mistake in the email ID or Password..!");
           }
          
         } catch (err) {
-          setEmailError("An error occurred during login.");
+          alertEmailError();
+          setEmailError("No such email exists.");
           console.log(err);
         }
       };

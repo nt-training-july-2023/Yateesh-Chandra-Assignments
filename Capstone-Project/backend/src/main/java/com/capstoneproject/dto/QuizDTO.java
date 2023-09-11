@@ -56,10 +56,22 @@ public class QuizDTO {
         this.quizName = quizname;
         this.quizDescription = quizdescription;
         this.numOfQuestions = numOfquestions;
-        this.categoryId = categoryid != null ? categoryid : -1L;
+        if (categoryid  != null) {
+            this.categoryId = categoryid;
+        } else {
+            this.categoryId = -1L;
+        }
     }
 
-    public Long getCategoryId() {
-        return categoryId != null ? categoryId : -1L;
+    /**
+     * This is getter method for Category Id.
+     * @return category Id if exists.
+     */
+    public final Long getCategoryId() {
+        if (categoryId != null) {
+            return categoryId;
+        } else {
+            return -1L;
+        }
     }
 }

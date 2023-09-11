@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../LoginRegistration/LoginRegistration.css"
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -24,7 +25,34 @@ export default function Registration() {
     }
   };
 
-  
+  const registrationSuccessFireAlert = () => {
+    Swal.fire({
+      title : "Successfully Registered",
+      text : "Hurray, Now you are our subscriber.!",
+      icon : "success"
+    })
+    .then((res) => {
+      
+    })
+    navigate("/login")
+  }
+
+  const registrationFailureFireAlert = () => {
+    Swal.fire({
+      title : "Unable to register",
+      text : "Please Modify all error credentials",
+      icon : "error"
+    })
+  }
+
+  const registrationEmailAlreadyExist = () => {
+    Swal.fire({
+      title : "Cannot proceed",
+      text : "An account is registered previously under this account. Either Login or create with other mail",
+      icon : "error"
+    })
+  }
+
   const handleEmailChange = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
@@ -126,6 +154,7 @@ export default function Registration() {
     e.preventDefault();
 
     if (!validateForm()) {
+      registrationFailureFireAlert();
       return;
     }
 
@@ -136,11 +165,24 @@ export default function Registration() {
         password,
         phoneNumber,
       });
-      console.log("Registration successful!", response.data);
+      if(response?.status === 200){
+        console.log("successful")
+        registrationSuccessFireAlert();      
+      }
     } catch (error) {
-      console.error("Registration failed:", error);
+      console.log(error)
+      if(error?.response?.data?.message === ""){
+        setEmailError("This email already exists")
+        registrationEmailAlreadyExist();
+        console.log("Oops.! The mail entered does not exist.!");
+      }
+      if(error?.response?.data?.message === "Email already Exists"){
+        setEmailError("This email already exists")
+        registrationEmailAlreadyExist();
+        console.log("Oops.! The mail entered does not exist.!");
+      }
     }
-    navigate("/Login");
+    
   };
 
   return(

@@ -3,6 +3,7 @@ package com.capstoneproject.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.capstoneproject.models.User;
@@ -27,5 +28,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param email The email of the user.
      * @return An User containing the user with email if found.
      */
-    User findByEmail(String email);
+    @Query("select s from User s where s.email = :email")
+    Optional<User> findByEmail(String email);
 }

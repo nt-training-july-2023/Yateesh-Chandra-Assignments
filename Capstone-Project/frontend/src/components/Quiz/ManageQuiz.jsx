@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./Quizzes.css"; // Import your CSS file
+import "./Quizzes.css";
 
 import AdminNavBar from "../AdminNavBar";
-import AddOrUpdateQuiz from "./AddOrUpdateQuiz";
+import Swal from "sweetalert2";
 
 const ManageQuiz = () => {
   const { categoryId } = useParams();
@@ -72,9 +72,28 @@ const ManageQuiz = () => {
                 <button className="edit-button" onClick={() => handleEditClick(quiz.quizId)}>Edit</button>
                 )}
                 {userRole === "ADMIN" &&(
-                <button className="delete-button" onClick ={() => handleDeleteQuiz(quiz.quizId)} >Delete</button>
+                <button className="delete-button" onClick ={() => 
+                  Swal.fire({
+                    title : "Delete Quiz?",
+                    text : "Are you sure You want to delete. It cannot be undone",
+                    icon : "warning",
+                    showCancelButton : true,
+                    cancelButtonText : "No",
+                    showConfirmButton : true,
+                    confirmButtonText : "Delete"
+                  }).then((result) => {
+                    if(result.isConfirmed){
+                      handleDeleteQuiz(quiz.quizId)
+                    }
+                  })
+                  } >Delete</button>
                 )}
+                {userRole === "ADMIN" && (
                 <button className="open-button">Open</button>
+                )}
+                {userRole === "USER" && (
+                  <button className="open-button">Take Quiz</button>
+                )}
               </div>
             </div>
           ))}

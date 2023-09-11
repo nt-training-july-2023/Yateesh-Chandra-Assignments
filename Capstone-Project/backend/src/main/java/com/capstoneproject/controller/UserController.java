@@ -1,6 +1,7 @@
 package com.capstoneproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.DuplicateKeyException;
 import com.capstoneproject.exceptions.EntityNotFoundException;
 import com.capstoneproject.exceptions.ValidationException;
+import com.capstoneproject.models.User;
 import com.capstoneproject.models.UserAssessment;
 import com.capstoneproject.service.UserAssessmentService;
 import com.capstoneproject.service.UserService;
@@ -53,8 +55,10 @@ public class UserController {
         try {
             String id = userService.addUser(userDTO);
             return id;
-        } catch (DuplicateKeyException | ValidationException e) {
-            return e.getMessage();
+        } catch (DuplicateKeyException e) {
+            throw new DuplicateKeyException("Email already exists");
+        } catch (ValidationException e) {
+            throw new ValidationException("Invalid data");
         } catch (CustomException e) {
             return "An Error occured..!";
         }

@@ -58,8 +58,9 @@ public class QuizService {
         quizDto.setQuizDescription(quiz.getQuizDescription());
         quizDto.setNumOfQuestions(quiz.getNumOfQuestions());
         System.out.println("Quiz ID: " + quiz.getQuizId());
-        System.out.println("Num of Questions (from Entity): " + quiz.getNumOfQuestions());
-        if(quiz.getCategory() != null) {
+        System.out.println(
+                "Num of Questions (from Entity): " + quiz.getNumOfQuestions());
+        if (quiz.getCategory() != null) {
             quizDto.setCategoryId(quiz.getCategory().getCategoryId());
         } else {
             quizDto.setCategoryId(null);
@@ -148,8 +149,8 @@ public class QuizService {
     /**
      * updates the quiz based on the Id.
      *
-     * @param quizId      - Of Long Type.
-     * @param quizDto  - of Quiz Type.
+     * @param quizId  - Of Long Type.
+     * @param quizDto - of Quiz Type.
      * @return status of the updated quiz.
      */
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {

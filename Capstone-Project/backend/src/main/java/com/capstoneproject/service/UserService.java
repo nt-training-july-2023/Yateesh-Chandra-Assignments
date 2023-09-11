@@ -61,12 +61,15 @@ public class UserService {
      * @return the name of the user.
      */
     public final String addUser(final UserDTO userDTO) {
-        try {
             if (userDTO.getUserRole() == null) {
                 userDTO.setUserRole("USER");
             }
+            if(userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
+                throw new DuplicateKeyException("Email already Exists");
+                
+            }
             if (userDTO.getName() == null || userDTO.getEmail() == null
-                    || userDTO.getPassword().length() <= NUM
+                    || userDTO.getPassword().length() < NUM
                     || userDTO.getPhoneNumber() == null) {
                 throw new ValidationException("Invalid Data Provided");
             }
@@ -76,12 +79,7 @@ public class UserService {
                     userDTO.getUserRole(), userDTO.getPhoneNumber());
             userRepo.save(user);
             return user.getName();
-        } catch (DuplicateKeyException e) {
-            throw new DuplicateKeyException("Email already exists.");
-        } catch (Exception e) {
-            throw new ValidationException(
-                    "An Error occured while processing the request.");
-        }
+         
     }
 
     /**
@@ -94,10 +92,10 @@ public class UserService {
     public final LoginResponse loginUser(final LoginDTO loginDTO) {
         String msg = "";
         try {
-            User user1 = userRepo.findByEmail(loginDTO.getEmail());
+            Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
             if (user1 != null) {
                 String password = loginDTO.getPassword();
-                String encodedPassword = user1.getPassword();
+                String encodedPassword = user1.get().getPassword();
                 Boolean isPwdRight = passwordEncoder.matches(password,
                         encodedPassword);
                 if (isPwdRight) {
@@ -121,4 +119,10 @@ public class UserService {
                     "An error occured whilw processing the request.");
         }
     }
+    
+    public Optional<User> findByEmail(String email){
+        return userRepo.findByEmail(email);
+        
+    }
 }
+

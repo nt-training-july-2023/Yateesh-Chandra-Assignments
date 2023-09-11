@@ -36,7 +36,7 @@ public class User {
     /**
      * This is the name column.
      */
-    @Column(name = "user_name", length = ID_MAX_LENGTH)
+    @Column(name = "user_name", length = ID_MAX_LENGTH, nullable = false)
     private String name;
     /**
      * This is the user_email column.

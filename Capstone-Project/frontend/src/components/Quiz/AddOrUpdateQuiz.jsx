@@ -4,6 +4,7 @@ import AdminNavBar from "../AdminNavBar";
 import "../Categories/Categories.css";
 import axios from "axios";
 import {useLocation} from 'react-router-dom'
+import Swal from "sweetalert2";
 
 const AddOrUpdateQuiz = () => {
   const { quizId } = useParams();
@@ -21,6 +22,21 @@ const AddOrUpdateQuiz = () => {
   const [quizDescriptionError, setQuizDescriptionError] = useState("");
   const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
 
+  const updateAlert = () => {
+    Swal.fire({
+      title : "Updated Successfully",
+      icon : "success",
+      timer : 2000
+    })
+  }
+
+  const addAlert = () => {
+    Swal.fire({
+      title : "Added Successfully",
+      icon : "success",
+      timer : 2000
+    })
+  }
 
   const fetchQuizData = () => {
 
@@ -36,6 +52,7 @@ const AddOrUpdateQuiz = () => {
         console.error("Error fetching Quiz Data: ", error);
       });
   };
+
 
   useEffect(() => {
     if(isUpdating){
@@ -117,10 +134,12 @@ const AddOrUpdateQuiz = () => {
     try {
       if (isUpdating) {
         await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
+        updateAlert();
         console.log("Quiz Updated Successfully");
         fetchQuizData()
       } else {
         await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);
+        addAlert();
         console.log("New Quiz is added successfully.");
       }
       navigate(`/manage-category`);

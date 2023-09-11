@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './Categories.css';
 import AdminNavBar from '../AdminNavBar';
+import Swal from 'sweetalert2';
 
 const ManageCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -64,7 +65,21 @@ const ManageCategory = () => {
                   <button className="blue-button" onClick={() => handleEditClick(category.categoryId)}>Update</button>
                   )}    
                   {userRole === "ADMIN" && (    
-                  <button className="red-button" onClick={() => handleDeleteCategory(category.categoryId)}>Delete</button>
+                  <button className="red-button" onClick={() => 
+                    Swal.fire({
+                      title : "Delete Category?",
+                      text : "Are you sure You want to delete. It cannot be undone",
+                      icon : "warning",
+                      showCancelButton : true,
+                      cancelButtonText : "No",
+                      showConfirmButton : true,
+                      confirmButtonText : "Delete"
+                    }).then((result) => {
+                      if(result.isConfirmed){
+                        handleDeleteCategory(category.categoryId)    
+                      }
+                    })
+                    }>Delete</button>
                   )}    
                   <button className="green-button" onClick={() => navigate(`/manage-quiz/${category.categoryId}`)}>Open</button>
                 </td>
