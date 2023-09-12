@@ -1,4 +1,6 @@
 /* ManageCategory.css */
+@import '~font-awesome/css/font-awesome.min.css';
+
 .manage-category-container {
     padding: 20px;
     display: flex;
@@ -22,8 +24,8 @@
   }
 
 .category-table-container {
-    max-height: 400px; /* Set a maximum height for the table to enable scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px;
+    overflow-y: auto;
     height: 100%;  
   }
 
@@ -155,6 +157,34 @@ button {
     font-size: 16px;
   }
   
+  .search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+  }
+
+  .search-input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition : border-color 0.2s ease-in-out;
+
+  }
+
+  .search-input:focus {
+    border-color: #007BFF;
+  }
+
+  .search-icon {
+    margin-right: 10px;
+    color: #007BFF;
+    cursor: pointer;
+    font-size: 20px;
+  }
 
 @media (max-width: 768px) {
     .add-category-container {
@@ -162,13 +192,17 @@ button {
       margin: 0;
       padding: 10px;
     }
+
+    .search-bar{
+      max-width: 100%;
+    }
   }
   
 
   .category-table-container::-webkit-scrollbar {
-    width: 2px; /* Width of the scrollbar */
+    width: 2px;
   }
   
   .category-table-container::-webkit-scrollbar-track {
-    background: #8cf74e; /* Track color */
+    background: #8cf74e;
   }

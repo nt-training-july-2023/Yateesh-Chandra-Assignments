@@ -16,6 +16,9 @@ export default function Registration() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleNameChange = (e) => {
@@ -102,6 +105,14 @@ export default function Registration() {
       console.log('phone number criteria satisfied');
     }
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
 
   const validateForm = () => {
     let isValid = true;
@@ -213,24 +224,34 @@ export default function Registration() {
         </div>
 
         <div className="form-group">
+          <div className="password-input-container">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Enter your Password"
             value={password}
             onChange={handlePasswordChange}
           />
+          <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
+            {showPassword ? "Hide" : "Show"}
+          </button>
+          </div>
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
 
         <div className="form-group">
+        <div className="password-input-container">
           <input
-            type="password"
+            type={showConfirmPassword ? "text" :"password"}
             name="confirmPassword"
             placeholder="Enter Password to confirm"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
           />
+          <button type = "button" className = "password-toggle-button" onClick={toggleConfirmPasswordVisibility}>
+            {showConfirmPassword ? "Hide" : "Show"}
+          </button>
+          </div>
           {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
         </div>
 

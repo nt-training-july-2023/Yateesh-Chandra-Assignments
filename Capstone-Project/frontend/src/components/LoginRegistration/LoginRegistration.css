@@ -31,6 +31,10 @@
     border: 1px solid #4c518f;
     border-radius: 5px; 
   }
+
+  input[type="password"] {
+    flex: 1; /* Allow the input to take up available space */
+  }
   
   .error {
     font-size: 11px;
@@ -45,6 +49,28 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  .password-input-container{
+    position: relative;
+  }
+
+  .password-toggle-button{
+    cursor: pointer;
+    position: absolute;
+    font-size: 12px;
+    top: 51%;
+    right: 10px;
+    transform: translateY(-52%) ;
+    background-color : #c4fa00;
+    color : rgb(1, 0, 10);
+    border : None;
+    border-radius: 2px;
+  }
+
+  .password-toggle-button:hover {
+    text-decoration: #063f1c;
+    background-color: #a1cc06;
   }
   
   input[type="Submit"] {

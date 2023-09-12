@@ -11,7 +11,7 @@ const AddOrUpdateQuiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const categoryId = location.state?.categoryId;
-  console.log("categoryId recieved : ", categoryId);
+  // console.log("categoryId recieved : ", categoryId);
 
   const isUpdating = quizId !== undefined;
 
@@ -52,13 +52,6 @@ const AddOrUpdateQuiz = () => {
         console.error("Error fetching Quiz Data: ", error);
       });
   };
-
-
-  useEffect(() => {
-    if(isUpdating){
-      fetchQuizData();
-    }
-  }, [isUpdating]);
 
   const handleQuizNameChange = (e) => {
     const validName = e.target.value;
@@ -129,8 +122,6 @@ const AddOrUpdateQuiz = () => {
       numOfQuestions,
       categoryId,
     };
-
-    console.log(quizData);
     try {
       if (isUpdating) {
         await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
@@ -138,15 +129,37 @@ const AddOrUpdateQuiz = () => {
         console.log("Quiz Updated Successfully");
         fetchQuizData()
       } else {
-        await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);
-        addAlert();
-        console.log("New Quiz is added successfully.");
+        try{
+         const response = await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);
+         
+         if(response?.status === 201){
+          addAlert();
+          console.log("New Quiz is added successfully.", quizData);
+         }
       }
-      navigate(`/manage-category`);
+      catch(error){
+          if(error?.response?.data?.message === "Quiz already Exists"){
+            setQuizNameError("Quiz already exists")
+            Swal.fire({
+              title : "Quiz Already Exists!",
+              text : "Change the Quiz name",
+              icon : "warning"
+            })
+          }
+      console.log(error)  
+    }
+      
+    }
     } catch (error) {
-      console.error("Error: ", error);
+      console.error("Update", error);
     }
   };
+
+  useEffect(() => {
+    if(isUpdating){
+      fetchQuizData();
+    }
+  },[]);
 
   return (
     <div className="App">

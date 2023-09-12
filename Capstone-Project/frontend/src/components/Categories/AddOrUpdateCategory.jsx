@@ -17,11 +17,12 @@ const AddOrUpdateCategory = () =>{
   const [categoryNameError, setCategoryNameError] = useState("");
   const [categoryDescriptionError, setCategoryDescriptionError] = useState("");
 
+  
   const updateAlert = () => {
     Swal.fire({
       title : "Updated Successfully",
       icon : "success",
-      timer : 2000
+      timer : 1500
     })
   }
 
@@ -29,7 +30,7 @@ const AddOrUpdateCategory = () =>{
     Swal.fire({
       title : "Added Successfully",
       icon : "success",
-      timer : 2000
+      timer : 1500
     })
   }
 
@@ -49,7 +50,7 @@ const AddOrUpdateCategory = () =>{
     if (isUpdating) {
       fetchCategoryData();
     }
-  }, [isUpdating]);
+  }, []);
 
   const handleCategoryNameChange = (e) => {
     const validName = e.target.value;
@@ -96,30 +97,41 @@ const AddOrUpdateCategory = () =>{
     if (!validForm()) {
       return;
     }
-
     const categoryData = {
       categoryName,
       description,
     };
-
     try {
       if (isUpdating) {
-        // Update category if in update mode
         await axios.put(`http://localhost:8082/api/v1/category/${categoryId}`, categoryData);
         updateAlert();
         console.log("Category updated successfully.");
       } else {
-        // Add new category if in add mode
-        await axios.post('http://localhost:8082/api/v1/category', categoryData);
-        addAlert();
-        console.log("Category added successfully.");
+        try{
+        const response = await axios.post('http://localhost:8082/api/v1/category', categoryData);
+          if(response.status === 200){
+            addAlert();
+            console.log("Category added successfully.");
+            navigate("/manage-category")
+          }
+          
+        } catch(error){
+            if(error?.response?.data?.message === "Category already exists"){
+              setCategoryNameError("Category already exists")
+              Swal.fire({
+                title : "Category Already Exists!",
+                text : "Change the Category name",
+                icon : "warning"
+              })
+            }
+        }
       }
-      navigate("/manage-category");
+      // navigate("/manage-category");
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
+  console.log(categoryName+"....."+description)
   return (
     <div className="App">
         <AdminNavBar/>

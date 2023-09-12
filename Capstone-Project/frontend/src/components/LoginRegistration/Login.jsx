@@ -9,10 +9,15 @@ function Login() {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const redirect = () => {
         navigate('/');
+    }
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
     }
 
     const loginUserSuccessSwal = () => {
@@ -162,13 +167,18 @@ function Login() {
         </div>
 
         <div className="form-group">
+        <div className="password-input-container">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Enter your Password"
             value={password}
             onChange={handlePasswordChange}
           />
+          <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
+            {showPassword ? "Hide" : "Show"}
+          </button>
+          </div>
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
         <div className="button-container">
