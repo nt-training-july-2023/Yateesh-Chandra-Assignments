@@ -61,7 +61,7 @@ public class CategoryService {
             Optional<Category> category = categoryRepository
                     .getCategoryByName(categoryDto.getCategoryName());
             if (category.isPresent()) {
-                throw new AlreadyExistsException();
+                throw new AlreadyExistsException("Category already exists");
             }
             Category newCategory = new Category();
             newCategory.setCategoryId(categoryDto.getCategoryId());

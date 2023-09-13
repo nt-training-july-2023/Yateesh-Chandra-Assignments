@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.capstoneproject.models.Question;
 import com.capstoneproject.models.UserAssessment;
-import com.capstoneproject.service.QuestionService;
+//import com.capstoneproject.service.QuestionService;
 import com.capstoneproject.service.UserAssessmentService;
 /**
  * This is the Controller class for User assessment.
@@ -31,8 +30,7 @@ public class UserAssessmentController {
   /**
    * The questionService variable is created to operate on QuestionService.
    */
-  @Autowired
-  private QuestionService questionService;
+
   /**
    * This method adds User Assessment.
    * @param userAssessment It is to request body and add.
@@ -62,14 +60,14 @@ public class UserAssessmentController {
    * @param questionId from Question Entity to return the assessments.
    * @return the List of the UserAssessments associated to a QuestionId.
    */
-  @GetMapping("/question/{questionId}")
-  public final ResponseEntity<List<UserAssessment>>
-  getUserAssessmentsByQuestion(@PathVariable final Long questionId) {
-    Question question = questionService.getQuestionById(questionId);
-    List<UserAssessment> userAssessments = userAssessmentService
-    .getUserAssessmentByQuestion(question);
-    return ResponseEntity.ok(userAssessments);
-  }
+//  @GetMapping("/question/{questionId}")
+//  public final ResponseEntity<List<UserAssessment>>
+//  getUserAssessmentsByQuestion(@PathVariable final Long questionId) {
+//    Question question = questionService.getQuestionById(questionId);
+//    List<UserAssessment> userAssessments = userAssessmentService
+//    .getUserAssessmentByQuestion(question);
+//    return ResponseEntity.ok(userAssessments);
+//  }
   /**
    * Get the List of User Assessments by the userAssessmentID.
    * @param userAssessmentId as a path variable to return the assessments.

@@ -64,9 +64,8 @@ public class UserService {
             if (userDTO.getUserRole() == null) {
                 userDTO.setUserRole("USER");
             }
-            if(userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
+            if (userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
                 throw new DuplicateKeyException("Email already Exists");
-                
             }
             if (userDTO.getName() == null || userDTO.getEmail() == null
                     || userDTO.getPassword().length() < NUM
@@ -79,7 +78,6 @@ public class UserService {
                     userDTO.getUserRole(), userDTO.getPhoneNumber());
             userRepo.save(user);
             return user.getName();
-         
     }
 
     /**
@@ -119,10 +117,14 @@ public class UserService {
                     "An error occured whilw processing the request.");
         }
     }
-    
-    public Optional<User> findByEmail(String email){
+
+    /**
+     * This is the method to find by Email.
+     * @param email of String type is taken as input.
+     * @return email by finding in the repository.
+     */
+    public final Optional<User> findByEmail(final String email) {
         return userRepo.findByEmail(email);
-        
     }
 }
 

@@ -16,7 +16,7 @@ import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 
 /**
  * This class works like Service.
@@ -57,14 +57,7 @@ public class QuizService {
         quizDto.setQuizName(quiz.getQuizName());
         quizDto.setQuizDescription(quiz.getQuizDescription());
         quizDto.setNumOfQuestions(quiz.getNumOfQuestions());
-        System.out.println("Quiz ID: " + quiz.getQuizId());
-        System.out.println(
-                "Num of Questions (from Entity): " + quiz.getNumOfQuestions());
-        if (quiz.getCategory() != null) {
-            quizDto.setCategoryId(quiz.getCategory().getCategoryId());
-        } else {
-            quizDto.setCategoryId(null);
-        }
+        quizDto.setCategoryId(quiz.getCategory().getCategoryId());
         return quizDto;
     }
 
@@ -114,7 +107,7 @@ public class QuizService {
             Optional<Quiz> existingQuiz = quizRepository
                     .getQuizByName(quizDto.getQuizName());
             if (existingQuiz.isPresent()) {
-                throw new AlreadyExistsException();
+                throw new AlreadyExistsException("Quiz already Exists");
             } else {
                 Quiz newQuiz = new Quiz();
                 newQuiz.setQuizId(quizDto.getQuizId());
@@ -154,8 +147,7 @@ public class QuizService {
      * @return status of the updated quiz.
      */
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
-        Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
-                () -> new EntityNotFoundException("Quiz Not Found.!"));
+        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
         if (existingQuiz != null) {
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
@@ -167,7 +159,7 @@ public class QuizService {
                 return quizDto;
             }
         } else {
-            throw new ElementNotExistsException();
+            throw new ElementNotExistsException("Quiz Not found");
         }
     }
 }

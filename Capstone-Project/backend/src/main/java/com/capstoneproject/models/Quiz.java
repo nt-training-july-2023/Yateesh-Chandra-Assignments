@@ -76,7 +76,7 @@ public class Quiz {
 
     /**
      * List the questions.
-     * @return the list of questions.
+     *@return the list of questions.
      */
     public final List<Question> getQuestions() {
         return new ArrayList<>(questions);
@@ -95,7 +95,8 @@ public class Quiz {
      * @return category that was set.
      */
     public final Category getCategory() {
-        return category;
+        return new Category(category.getCategoryId(),
+                category.getCategoryName(), category.getDescription());
     }
 
     /**
@@ -143,4 +144,3 @@ public class Quiz {
         this.category = categ;
     }
 }
-

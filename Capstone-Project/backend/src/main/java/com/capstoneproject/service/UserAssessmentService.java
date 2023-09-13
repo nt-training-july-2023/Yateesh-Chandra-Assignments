@@ -49,9 +49,9 @@ public class UserAssessmentService {
      */
     private void processUserAssessment(final UserAssessment userAssessment) {
         Question assessmentQuestion = userAssessment.getQuestion();
-        assessmentQuestion.updateCorrectAnswer();
-        String correctAnswer = assessmentQuestion.getCorrectAnswer();
-        userAssessment.setCorrectAnswer(correctAnswer);
+//        assessmentQuestion.updateCorrectAnswer();
+//        String correctAnswer = assessmentQuestion.getCorrectAnswer();
+//        userAssessment.setCorrectAnswer(correctAnswer);
         if (userAssessment.getChosenOption()
                 .equals(assessmentQuestion.getCorrectOption())) {
             userAssessment.setCorrect(true);
@@ -138,9 +138,9 @@ public class UserAssessmentService {
      */
     public final UserAssessment addUserAssessment(
             final UserAssessment userAssessment) {
-        Question question = userAssessment.getQuestion();
-        String correctAnswer = question.getCorrectAnswer();
-        userAssessment.setCorrectAnswer(correctAnswer);
+//        Question question = userAssessment.getQuestion();
+//        String correctAnswer = question.getCorrectAnswer();
+//        userAssessment.setCorrectAnswer(correctAnswer);
         return userAssessmentRepository.save(userAssessment);
     }
 
@@ -166,9 +166,6 @@ public class UserAssessmentService {
                         "User Assessment not found..!"));
         existingAssessment.setChosenOption(updatedAssessment.getChosenOption());
         existingAssessment.setScore(updatedAssessment.getScore());
-        Question question = existingAssessment.getQuestion();
-        question.updateCorrectAnswer();
-        existingAssessment.setCorrectAnswer(question.getCorrectAnswer());
         return userAssessmentRepository.save(existingAssessment);
     }
 }

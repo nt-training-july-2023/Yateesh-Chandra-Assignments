@@ -1,7 +1,6 @@
 package com.capstoneproject.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,6 @@ import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.DuplicateKeyException;
 import com.capstoneproject.exceptions.EntityNotFoundException;
 import com.capstoneproject.exceptions.ValidationException;
-import com.capstoneproject.models.User;
 import com.capstoneproject.models.UserAssessment;
 import com.capstoneproject.service.UserAssessmentService;
 import com.capstoneproject.service.UserService;

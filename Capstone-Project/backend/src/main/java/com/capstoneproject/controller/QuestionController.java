@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capstoneproject.models.Question;
+import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.service.QuestionService;
 
 /**
@@ -35,8 +35,8 @@ public class QuestionController {
      * @return the List of the questions.
      */
     @GetMapping
-    public final ResponseEntity<List<Question>> getAllQuestions() {
-        List<Question> question = questionService.getAllQuestions();
+    public final ResponseEntity<Object> getAllQuestions() {
+        List<QuestionDTO> question = questionService.getAllQuestions();
         return ResponseEntity.ok(question);
     }
 
@@ -46,21 +46,21 @@ public class QuestionController {
      * @return the Question associated with a specific ID.
      */
     @GetMapping("/{questionId}")
-    public final ResponseEntity<Question> getQuestionById(
+    public final ResponseEntity<Object> getQuestionById(
             @PathVariable final Long questionId) {
-        Question newQuestion = questionService.getQuestionById(questionId);
+        QuestionDTO newQuestion = questionService.getQuestionById(questionId);
         return ResponseEntity.ok(newQuestion);
     }
 
     /**
      * adds the questions.
-     * @param question of Question type to be requested.
+     * @param questionDto of Question type to be requested.
      * @return the success status when added.
      */
     @PostMapping
-    public final ResponseEntity<Question> addQuestion(
-            @RequestBody final Question question) {
-        Question newQuestion = questionService.addQuestion(question);
+    public final ResponseEntity<Object> addQuestion(
+            @RequestBody final QuestionDTO questionDto) {
+        QuestionDTO newQuestion = questionService.addQuestion(questionDto);
         return ResponseEntity.ok(newQuestion);
     }
 
@@ -70,41 +70,38 @@ public class QuestionController {
      * @return the deleted successfully status.
      */
     @DeleteMapping("/{questionId}")
-    public final ResponseEntity<Void> deleteQuestion(
+    public final ResponseEntity<Object> deleteQuestion(
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
         return ResponseEntity.notFound().build();
     }
+
     /**
      * updates the question.
-     * @param questionId is required to update its content.
-     * @param updatedQuestion replace the content.
+     * @param questionId         is required to update its content.
+     * @param updatedQuestionDto replace the content.
      * @return the success status after updating.
      */
     @PutMapping("/{questionId}")
-    public final ResponseEntity<Question> updateQuestion(
+    public final ResponseEntity<Object> updateQuestion(
             @PathVariable final Long questionId,
-            @RequestBody final Question updatedQuestion) {
-        Question newQuestion = questionService.updateQuestion(questionId,
-                updatedQuestion);
+            @RequestBody final QuestionDTO updatedQuestionDto) {
+        QuestionDTO newQuestion = questionService.updateQuestion(questionId,
+                updatedQuestionDto);
         return ResponseEntity.ok(newQuestion);
     }
+
     /**
-     * get correct answer for the question based on the Id.
-     * @param questionId is specified to get its correct answer.
-     * @return updated if found or else not found.
+     * This is used to get Question by Quiz Id.
+     * @param quizId of Quiz.
+     * @return the Response Ok.
      */
-    @GetMapping("/{questionId}/answer")
-    public final ResponseEntity<String> getCorrectAnswerForQuestion(
-            @PathVariable final Long questionId) {
-        System.out.println("Received Quesion Id : " + questionId);
-        String correctAnswer = questionService
-                .getCorrectAnswerForQuestion(questionId);
-        System.out.println("Retrieved Correct answer : " + correctAnswer);
-        if (correctAnswer != null) {
-            return ResponseEntity.ok(correctAnswer);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/byQuiz/{quizId}")
+    public final ResponseEntity<Object> getQuestionByQuizId(
+            @PathVariable final Long quizId) {
+        List<QuestionDTO> questionDto = questionService
+                .getQuestionByQuizId(quizId);
+        return ResponseEntity.ok(questionDto);
     }
+
 }
