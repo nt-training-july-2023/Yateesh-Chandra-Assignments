@@ -1,4 +1,0 @@
-Responsiveness
-Add CSS to category
-JUnit Testing
-Find Bugs

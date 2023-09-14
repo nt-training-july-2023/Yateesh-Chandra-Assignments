@@ -5,8 +5,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,16 +17,12 @@ import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
 import com.capstoneproject.exceptions.AuthenticationException;
 import com.capstoneproject.exceptions.CustomException;
-import com.capstoneproject.exceptions.EntityNotFoundException;
+import com.capstoneproject.exceptions.DuplicateKeyException;
 import com.capstoneproject.exceptions.ValidationException;
-import com.capstoneproject.models.UserAssessment;
-import com.capstoneproject.service.UserAssessmentService;
 import com.capstoneproject.service.UserService;
 
 class UserControllerTest {
 
-    @Mock
-    private UserAssessmentService userAssessmentService;
     
     @Mock
     private UserService userService;
@@ -53,6 +47,21 @@ class UserControllerTest {
     }
 
     @Test
+    public void testDuplicateKeyException() {
+        UserDTO userDto = new UserDTO();
+        userDto.setName("user");
+        when(userService.addUser(userDto)).thenThrow(new DuplicateKeyException("Email Already exists"));
+        
+        try {
+            userController.saveUser(userDto);
+        }
+        catch(DuplicateKeyException e) {
+            assertEquals("Email already exists", e.getMessage());
+        }
+        verify(userService, times(1)).addUser(userDto);
+    }
+
+    @Test
     public void testLoginUser() {
         LoginDTO loginDto = new LoginDTO();
         loginDto.setEmail("test@gmail.com");
@@ -72,22 +81,6 @@ class UserControllerTest {
         assertEquals("An Error occured..!", response);
     }
     
-    @Test
-    public void testGetUserAssessmentsByUserEntityNotFoundException() {
-        Long userId = 123L;
-        when(userAssessmentService.getUserAssessmentsByUser(userId)).thenThrow(new EntityNotFoundException("Entity not found"));
-        ResponseEntity<List<UserAssessment>> response = userController.getUserAssessmentsByUser(userId);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    }
-    
-    @Test
-    public void testGetUserAssessmentsByUser() {
-        Long userId = 123L;
-        when(userAssessmentService.getUserAssessmentsByUser(userId)).thenReturn(List.of(new UserAssessment()));
-        ResponseEntity<List<UserAssessment>> response = userController.getUserAssessmentsByUser(userId);
-        verify(userAssessmentService, times(1)).getUserAssessmentsByUser(userId);
-        assert response.getStatusCode()== HttpStatus.OK;
-    }
     
     @Test
     void testLoginUserAuthenticationException() {

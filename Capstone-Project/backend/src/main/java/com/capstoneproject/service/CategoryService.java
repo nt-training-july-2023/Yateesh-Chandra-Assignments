@@ -97,12 +97,18 @@ public class CategoryService {
         Category existingCategory = categoryRepository.findById(categoryId)
                 .orElse(null);
         if (existingCategory != null) {
+            if (updatedCategory.getCategoryName().isEmpty()) {
+                throw new NoInputException();
+            }
+            Optional<Category> category = categoryRepository
+                    .getCategoryByName(updatedCategory.getCategoryName());
+            if (category.isPresent()
+                    && !category.get().getCategoryId().equals(categoryId)) {
+                throw new AlreadyExistsException("Category already exists");
+            }
             existingCategory.setCategoryName(updatedCategory.getCategoryName());
             existingCategory.setDescription(updatedCategory.getDescription());
 
-            if (existingCategory.getCategoryName().isEmpty()) {
-                throw new NoInputException();
-            }
             Category newCategory = categoryRepository.save(existingCategory);
             CategoryDTO newCategoryDto = new CategoryDTO();
             newCategoryDto.setCategoryId(newCategory.getCategoryId());

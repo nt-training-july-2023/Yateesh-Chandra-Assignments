@@ -2,6 +2,9 @@ package com.capstoneproject.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class CategoryTest {
@@ -58,4 +61,37 @@ class CategoryTest {
         assertNotNull(category.getQuiz());
         assertTrue(category.getQuiz().isEmpty());
     }
+    
+    @Test
+    public void testToString() {
+        Long categoryId = 12L;
+        String categoryName = "React";
+        String description = "This is React";
+        Category category = new Category(categoryId, categoryName, description);
+        String expectedToString = String.format("Category(categoryId=%d, categoryName=%s, description=%s, quiz=[])",
+                category.getCategoryId(), category.getCategoryName(), category.getDescription());
+        assertEquals(expectedToString, category.toString());
+    }
+    
+    @Test
+    public void testSetQuiz() {
+        // Create a list of Quiz objects
+        Category category = new Category();
+        List<Quiz> quizList = new ArrayList<>();
+        quizList.add(new Quiz(1L, "Quiz1", "Description1", 24));
+        quizList.add(new Quiz(2L, "Quiz2", "Description2", 24));
+        category.setQuiz(quizList);
+        List<Quiz> retrievedQuizList = category.getQuiz();
+
+        assertNotNull(retrievedQuizList);
+        assertEquals(quizList.size(), retrievedQuizList.size());
+
+        for (int i = 0; i < quizList.size(); i++) {
+            Quiz expectedQuiz = quizList.get(i);
+            Quiz retrievedQuiz = retrievedQuizList.get(i);
+            assertEquals(expectedQuiz.getQuizId(), retrievedQuiz.getQuizId());
+            assertEquals(expectedQuiz.getQuizName(), retrievedQuiz.getQuizName());
+        }
+    }
+
 }

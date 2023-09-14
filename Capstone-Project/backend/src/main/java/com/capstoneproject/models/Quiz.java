@@ -104,12 +104,8 @@ public class Quiz {
      * @param cate is final.
      */
     public final void setCategory(final Category cate) {
-        if (cate != null) {
             this.category = new Category(cate.getCategoryId(),
                     cate.getCategoryName(), cate.getDescription());
-        } else {
-            this.category = null;
-        }
     }
 
     /**
@@ -127,20 +123,4 @@ public class Quiz {
         this.numOfQuestions = numOfQue;
     }
 
-    /**
-     * This is all arguments constructor.
-     * @param id       Id of Long type.
-     * @param quizname Quiz Name
-     * @param quizDesc Quiz Description
-     * @param numOfQue Number Of Questions
-     * @param categ    This is category.
-     */
-    public Quiz(final Long id, final String quizname, final String quizDesc,
-            final int numOfQue, final Category categ) {
-        this.quizId = id;
-        this.quizName = quizname;
-        this.quizDescription = quizDesc;
-        this.numOfQuestions = numOfQue;
-        this.category = categ;
-    }
 }

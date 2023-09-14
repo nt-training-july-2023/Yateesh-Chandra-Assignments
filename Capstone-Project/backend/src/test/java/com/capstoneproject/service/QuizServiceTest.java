@@ -21,8 +21,6 @@ import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 
-import jakarta.persistence.EntityNotFoundException;
-
 public class QuizServiceTest {
 
     @Mock
@@ -41,9 +39,14 @@ public class QuizServiceTest {
 
     @Test
     public void testGetAllQuiz() {
+        Category category = new Category(5L, "Category 1", "Category Description");
+        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5);
+        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10);
+        q1.setCategory(category);
+        q2.setCategory(category);
         List<Quiz> quizList = new ArrayList<>();
-        quizList.add(new Quiz(1L, "Quiz 1", "Description 1", 5, new Category()));
-        quizList.add(new Quiz(2L, "Quiz 2", "Description 2", 10, new Category()));
+        quizList.add(q1);
+        quizList.add(q2);
         when(quizRepository.findAll()).thenReturn(quizList);
         List<QuizDTO> quizDTOList = quizService.getAllQuiz();
         assertNotNull(quizDTOList);
@@ -56,9 +59,13 @@ public class QuizServiceTest {
     public void testGetQuizByCategoryId() {
         Long categoryId = 1L;
         Category category = new Category(categoryId, "Category 1", "Category Description");
+        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5);
+        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10);
+        q1.setCategory(category);
+        q2.setCategory(category);
         List<Quiz> quizList = new ArrayList<>();
-        quizList.add(new Quiz(1L, "Quiz 1", "Description 1", 5, category));
-        quizList.add(new Quiz(2L, "Quiz 2", "Description 2", 10, category));
+        quizList.add(q1);
+        quizList.add(q2);
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
         when(quizRepository.getQuizByCategoryId(categoryId)).thenReturn(quizList);
         List<QuizDTO> quizDTOList = quizService.getQuizByCategoryId(categoryId);
@@ -79,13 +86,14 @@ public class QuizServiceTest {
     public void testGetQuizById() {
         Long quizId = 1L;
         Category category = new Category(1L, "Category 1", "Category Description");
-        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5, category);
+        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5);
+        quiz.setCategory(category);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
         QuizDTO quizDTO = quizService.getQuizById(quizId);
         assertNotNull(quizDTO);
         assertEquals("Quiz 1", quizDTO.getQuizName());
         assertEquals("Description 1", quizDTO.getQuizDescription());
-        assertEquals(0, quizDTO.getNumOfQuestions());
+        assertEquals(5, quizDTO.getNumOfQuestions());
     }
 
     @Test
@@ -102,7 +110,7 @@ public class QuizServiceTest {
         Category category = new Category(categoryId, "Category 1", "Category Description");
         when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.empty());
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        when(quizRepository.save(any(Quiz.class))).thenReturn(new Quiz(1L, "New Quiz", "New Description", 5, category));
+        when(quizRepository.save(any(Quiz.class))).thenReturn(new Quiz(1L, "New Quiz", "New Description", 5));
         QuizDTO addedQuiz = quizService.addQuiz(quizDTO);
         assertNull(addedQuiz.getQuizId());
         assertEquals("New Quiz", addedQuiz.getQuizName());
@@ -128,6 +136,15 @@ public class QuizServiceTest {
     }
 
     @Test
+    public void testAddQuizCategoryNotFound() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizName("Quiz Mock");
+        quizDto.setCategoryId(1L);
+        when(categoryRepository.findById(quizDto.getCategoryId())).thenReturn(Optional.empty());
+        assertThrows(ElementNotExistsException.class, () -> quizService.addQuiz(quizDto));
+        verify(quizRepository, never()).save(any(Quiz.class));
+    }
+    @Test
     public void testDeleteQuiz() {
         Long quizId = 1L;
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(new Quiz()));
@@ -145,7 +162,7 @@ public class QuizServiceTest {
     public void testUpdateQuiz() {
         Long quizId = 1L;
         QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
-        Quiz existingQuiz = new Quiz(quizId, "Existing Quiz", "Description", 5, new Category());
+        Quiz existingQuiz = new Quiz(quizId, "Existing Quiz", "Description", 5);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(existingQuiz));
         when(quizRepository.save(any(Quiz.class))).thenReturn(existingQuiz);
         QuizDTO updatedQuiz = quizService.updateQuiz(quizId, updatedQuizDTO);
@@ -160,6 +177,23 @@ public class QuizServiceTest {
         Long quizId = 1L;
         QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
         when(quizRepository.findById(quizId)).thenReturn(Optional.empty());
-        assertThrows(EntityNotFoundException.class, () -> quizService.updateQuiz(quizId, updatedQuizDTO));
+        assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, updatedQuizDTO));
+    }
+
+    @Test
+    public void testUpdateQuizWithNoInputException() {
+        Long quizId = 1L;
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizName("");
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of(new Quiz()));
+        assertThrows(NoInputException.class, () -> quizService.updateQuiz(quizId, quizDto));
+    }
+
+    @Test
+    public void testUpdateQuizWithElementNotExistsException() {
+        Long quizId = 11L;
+        QuizDTO quizDto = new QuizDTO();
+        when(quizRepository.findById(quizId)).thenReturn(Optional.empty());
+        assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, quizDto));
     }
 }

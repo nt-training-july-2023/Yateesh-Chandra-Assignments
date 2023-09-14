@@ -49,4 +49,23 @@ class UserDTOTest {
         assertEquals(null, userDto.getUserRole());
         assertEquals(null, userDto.getPhoneNumber());
     }
+    
+    @Test
+    public void testBuilderUserDTO() {
+        UserDTO userDTO = UserDTO.builder()
+                .id(1L)
+                .name("Yateesh Chandra")
+                .email("yateeshchandraduggirala3@gmail.com")
+                .password("password123")
+                .userRole("USER")
+                .phoneNumber("9876543210")
+                .build();
+
+        assertEquals(1L, userDTO.getId());
+        assertEquals("Yateesh Chandra", userDTO.getName());
+        assertEquals("yateeshchandraduggirala3@gmail.com", userDTO.getEmail());
+        assertEquals("password123", userDTO.getPassword());
+        assertEquals("USER", userDTO.getUserRole());
+        assertEquals("9876543210", userDTO.getPhoneNumber());
+    }
 }

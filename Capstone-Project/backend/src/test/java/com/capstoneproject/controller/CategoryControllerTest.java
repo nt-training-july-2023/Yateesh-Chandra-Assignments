@@ -2,7 +2,6 @@ package com.capstoneproject.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.CategoryDTO;
-import com.capstoneproject.models.Category;
 import com.capstoneproject.service.CategoryService;
 
 class CategoryControllerTest {
@@ -44,6 +42,7 @@ class CategoryControllerTest {
         ResponseEntity<Object> response = categoryController.getAllCategories();
         
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        @SuppressWarnings("unchecked")
         List<CategoryDTO> responseCategories = (List<CategoryDTO>) response.getBody();
         assertNotNull(responseCategories);
         assertEquals(2, responseCategories.size());

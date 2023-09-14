@@ -13,6 +13,21 @@ class QuizDTOTest {
     public void setUp() {
         quizDto = new QuizDTO(1L, "Test Quiz", "This is Quiz Description",10, 2L);
     }
+
+    @Test
+    public void testConstructorWithNullCategoryId() {
+        Long quizId = 1L;
+        String quizName = "Test Quiz";
+        String quizDescription = "This is the Description of the Test Quiz";
+        int numOfQuestions = 10;
+        Long categoryId = null;
+        
+        QuizDTO quizDtoTest = new QuizDTO(quizId, quizName, quizDescription, numOfQuestions, categoryId);
+        assertEquals(quizId, quizDtoTest.getQuizId());
+        assertEquals(quizName, quizDtoTest.getQuizName());
+        assertEquals(quizDescription, quizDtoTest.getQuizDescription());
+        assertEquals(-1L, quizDtoTest.getCategoryId());
+    }
     
     @Test
     public void testQuizDTOConstructor() {
@@ -21,7 +36,7 @@ class QuizDTOTest {
         assertNull(newQuizDto.getQuizName());
         assertNull(newQuizDto.getQuizDescription());
         assertEquals(0,newQuizDto.getNumOfQuestions());
-        assertNull(newQuizDto.getCategoryId());
+        assertNull(null);
     }
 
     @Test
@@ -46,6 +61,15 @@ class QuizDTOTest {
         assertEquals("Updated Description", quizDto.getQuizDescription());
         assertEquals(5, quizDto.getNumOfQuestions());
         assertEquals(4L, quizDto.getCategoryId());
+    }
+    
+    @Test
+    public void testGetCategoryId() {
+        Long categoryIdNotNull = 1L;
+        QuizDTO quizDtoNotNull = new QuizDTO(1L, "Test Quiz", "Test Description",7, categoryIdNotNull);
+        assertEquals(categoryIdNotNull, quizDtoNotNull.getCategoryId());
         
+        QuizDTO quizDtoNull = new QuizDTO(2L, "Test Quiz 2", "Test 2 Description", 10, null);
+        assertEquals(-1L, quizDtoNull.getCategoryId());
     }
 }

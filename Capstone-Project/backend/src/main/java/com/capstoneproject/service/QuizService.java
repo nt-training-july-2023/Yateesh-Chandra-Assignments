@@ -16,8 +16,6 @@ import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 
-
-
 /**
  * This class works like Service.
  */
@@ -127,7 +125,6 @@ public class QuizService {
 
     /**
      * deletes the quiz based on the Quiz Id.
-     *
      * @param quizId - of Long Type.
      */
     public final void deleteQuiz(final Long quizId) {
@@ -141,7 +138,6 @@ public class QuizService {
 
     /**
      * updates the quiz based on the Id.
-     *
      * @param quizId  - Of Long Type.
      * @param quizDto - of Quiz Type.
      * @return status of the updated quiz.
@@ -149,15 +145,24 @@ public class QuizService {
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
         if (existingQuiz != null) {
+            if (quizDto.getQuizName().isEmpty()) {
+                throw new NoInputException();
+            }
+            Optional<Quiz> quiz = quizRepository
+                    .getQuizByName(quizDto.getQuizName());
+            if (quiz.isPresent() && !quiz.get().getQuizId().equals(quizId)) {
+                throw new AlreadyExistsException("Quiz already exists");
+            }
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
-            if (existingQuiz.getQuizName().isEmpty()) {
-                throw new NoInputException();
-            } else {
-                quizRepository.save(existingQuiz);
-                return quizDto;
-            }
+            Quiz newQuiz = quizRepository.save(existingQuiz);
+            QuizDTO newQuizDTO = new QuizDTO();
+            newQuizDTO.setQuizId(newQuiz.getQuizId());
+            newQuizDTO.setQuizName(newQuiz.getQuizName());
+            newQuizDTO.setQuizDescription(newQuiz.getQuizDescription());
+            newQuizDTO.setNumOfQuestions(newQuiz.getNumOfQuestions());
+            return newQuizDTO;
         } else {
             throw new ElementNotExistsException("Quiz Not found");
         }

@@ -1,6 +1,0 @@
-navbar
-scrollbar
-user category, quiz
-admin session management
-admin quiz
-responsiveness

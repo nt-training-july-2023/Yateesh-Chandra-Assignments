@@ -1,13 +1,10 @@
 package com.capstoneproject.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +15,7 @@ import com.capstoneproject.dto.UserDTO;
 import com.capstoneproject.exceptions.AuthenticationException;
 import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.DuplicateKeyException;
-import com.capstoneproject.exceptions.EntityNotFoundException;
 import com.capstoneproject.exceptions.ValidationException;
-import com.capstoneproject.models.UserAssessment;
-import com.capstoneproject.service.UserAssessmentService;
 import com.capstoneproject.service.UserService;
 
 /**
@@ -36,12 +30,6 @@ public class UserController {
      */
     @Autowired
     private UserService userService;
-
-    /**
-     * Variable is used to perform operations on UserAssessment Service.
-     */
-    @Autowired
-    private UserAssessmentService userAssessmentService;
 
     /**
      * This method is used for new users to register.
@@ -80,26 +68,6 @@ public class UserController {
         } catch (CustomException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("An error occured while processing the request.");
-        }
-    }
-
-    /**
-     * Get the user Assessment By User Id.
-     *
-     * @param userId of Long Type from User.
-     * @return the userAssessment if exists.
-     */
-    @GetMapping
-    public final ResponseEntity<List<UserAssessment>> getUserAssessmentsByUser(
-            @PathVariable final Long userId) {
-        try {
-            List<UserAssessment> userAssessments = userAssessmentService
-                    .getUserAssessmentsByUser(userId);
-            return ResponseEntity.ok(userAssessments);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } catch (CustomException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 }

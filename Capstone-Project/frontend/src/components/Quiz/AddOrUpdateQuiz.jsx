@@ -124,11 +124,29 @@ const AddOrUpdateQuiz = () => {
     };
     try {
       if (isUpdating) {
-        await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
-        updateAlert();
-        console.log("Quiz Updated Successfully");
-        fetchQuizData()
-      } else {
+        try{
+        const res = await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
+        
+        if(res?.status === 200){
+          updateAlert();
+          console.log("Quiz Updated Successfully");
+          fetchQuizData()
+        }
+      }
+      catch(error){
+          if(error?.response?.data?.message === "Quiz already exists"){
+            setQuizNameError("Quiz already exists");
+            Swal.fire({
+              title : "Quiz Already Exists!",
+              text : "Change the Quiz name",
+              icon : "warning"
+            })
+          }
+      console.log(error)  
+          }
+      }
+        
+      else {
         try{
          const response = await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);
          
@@ -138,7 +156,7 @@ const AddOrUpdateQuiz = () => {
          }
       }
       catch(error){
-          if(error?.response?.data?.message === "Quiz already Exists"){
+          if(error?.response?.data?.message === "Quiz already exists"){
             setQuizNameError("Quiz already exists")
             Swal.fire({
               title : "Quiz Already Exists!",

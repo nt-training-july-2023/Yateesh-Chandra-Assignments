@@ -1,6 +1,0 @@
-Exception 1 : 
-
-"org.springframework.dao.DataIntegrityViolationException: 
-
-could not execute statement [ERROR: insert or update on table \"quiz\" violates foreign key constraint \"fknch74oowga8tveyspfkih9aal\"\n  
-Detail: Key (category_id)=(1) is not present in table \"category\".] [insert into quiz (category_id,num_of_questions,quiz_description,quiz_name) values (?,?,?,?)]; SQL [insert into quiz (category_id,num_of_questions,quiz_description,quiz_name) values (?,?,?,?)]; constraint [fknch74oowga8tveyspfkih9aal]\r\n\tat org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.

@@ -1,6 +1,5 @@
 package com.capstoneproject.service;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -12,8 +11,6 @@ import com.capstoneproject.dto.UserDTO;
 import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.User;
-import com.capstoneproject.models.UserAssessment;
-import com.capstoneproject.repository.UserAssessmentRepository;
 import com.capstoneproject.repository.UserRepository;
 
 /**
@@ -37,22 +34,6 @@ public class UserService {
      */
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    /**
-     * The repository variable is created for User Assessment Operations.
-     */
-    @Autowired
-    private UserAssessmentRepository userAssessmentRepository;
-
-    /**
-     * Get the user assessments for the given user.
-     *
-     * @param user The user to get the assessments for.
-     * @return The list of user assessments.
-     */
-    public final List<UserAssessment> getUserAssessmentByUser(final User user) {
-        return userAssessmentRepository.findByUser(user);
-    }
 
     /**
      * Add the user.

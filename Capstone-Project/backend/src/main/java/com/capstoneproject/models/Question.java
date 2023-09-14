@@ -95,34 +95,17 @@ public class Question {
      * @param opt3        opt3.
      * @param opt4        opt4.
      * @param correctOpt  option that is correct.
-     * @param qui Quiz.
      */
     public Question(final String questionTit, final String opt1,
             final String opt2, final String opt3, final String opt4,
-            final String correctOpt, final Quiz qui) {
+            final String correctOpt) {
         this.questionTitle = questionTit;
         this.option1 = opt1;
         this.option2 = opt2;
         this.option3 = opt3;
         this.option4 = opt4;
         this.correctOption = correctOpt;
-        this.quiz = qui;
+//        this.quiz = qui;
     }
-
-    /**
-     * This is the single parameter Question.
-     * @param otherQuestion is used.
-     */
-    public Question(final Question otherQuestion) {
-        this.questionId = otherQuestion.getQuestionId();
-        this.questionTitle = otherQuestion.getQuestionTitle();
-        this.option1 = otherQuestion.getOption1();
-        this.option2 = otherQuestion.getOption2();
-        this.option3 = otherQuestion.getOption3();
-        this.option4 = otherQuestion.getOption4();
-        this.correctOption = otherQuestion.getCorrectOption();
-        this.quiz = otherQuestion.getQuiz();
-    }
-
 
 }

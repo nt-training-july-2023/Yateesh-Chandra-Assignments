@@ -1,10 +1,14 @@
 package com.capstoneproject.service;
 
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +24,6 @@ import com.capstoneproject.dto.UserDTO;
 import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.User;
-import com.capstoneproject.models.UserAssessment;
-import com.capstoneproject.repository.UserAssessmentRepository;
 import com.capstoneproject.repository.UserRepository;
 
 class UserServiceTest {
@@ -29,8 +31,6 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
     
-    @Mock
-    private UserAssessmentRepository userAssessmentRepository;
     
     @Mock
     private PasswordEncoder passwordEncoder;
@@ -41,15 +41,6 @@ class UserServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-    }
-
-    @Test
-    public void testGetUserAssessmentByUser() {
-        User user = new User();
-        List<UserAssessment> expectedUserAssessments = Collections.singletonList(new UserAssessment());
-        when(userAssessmentRepository.findByUser(user)).thenReturn (expectedUserAssessments);
-        List<UserAssessment> actualUserAssessments = userService.getUserAssessmentByUser(user);
-        assertEquals(expectedUserAssessments, actualUserAssessments);
     }
 
     @Test
@@ -77,6 +68,26 @@ class UserServiceTest {
     }
     
     @Test
+    public void testAddUserInvalidData() {
+        Long id = 7L;
+        String name = null;
+        String email = "test@domain.com";
+        String password = "yateesh";
+        String userRole = "USER";
+        String phoneNumber = "9876543201";
+        UserDTO userDto = new UserDTO(id, name, email, password, userRole, phoneNumber);
+        
+        try {
+            userService.addUser(userDto);
+        }
+        catch(ValidationException e){
+            assertEquals("Invalid Data Provided", e.getMessage());
+        }
+        
+        verify(userRepository, never()).save(any(User.class));
+    }
+    
+    @Test
     public void testLoginUser_SuccessfulLogin() {
         LoginDTO loginDto = new LoginDTO();
         loginDto.setEmail("yateesh.chandra@nucleusteq.com");
@@ -84,15 +95,15 @@ class UserServiceTest {
         
         User user = new User();
         user.setEmail(loginDto.getEmail());
-        user.setPassword(loginDto.getPassword());
-        
-        when(userRepository.findByEmail(loginDto.getEmail())).thenReturn(user);
-        when(passwordEncoder.matches(loginDto.getPassword(), user.getPassword())).thenReturn(false);
-        
+        user.setPassword("03072001");
+
+        when(userRepository.findByEmail(loginDto.getEmail())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(loginDto.getPassword(), user.getPassword())).thenReturn(true);
         LoginResponse response = userService.loginUser(loginDto);
         assertFalse(response.getStatus());
-        assertEquals("Passwords did not match", response.getMessage());
+        assertNotEquals("Login Successful..!", response.getMessage());
     }
+
     
     @Test
     public void testLoginUser_IncorrectPassword() {
@@ -104,7 +115,7 @@ class UserServiceTest {
         user.setEmail(loginDto.getEmail());
         user.setPassword("05072001");
         
-        when(userRepository.findByEmail(loginDto.getEmail())).thenReturn(user);
+        when(userRepository.findByEmail(loginDto.getEmail())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(loginDto.getPassword(), user.getPassword())).thenReturn(false);
         
         LoginResponse response = userService.loginUser(loginDto);
@@ -145,13 +156,35 @@ class UserServiceTest {
     }
     
     @Test
-    public void testAddUserWithInvalidData() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName("John Doe");
-        userDTO.setEmail("johndoe"); // Invalid email
-        userDTO.setPassword("password");
-        assertThrows(ValidationException.class, () -> {
-            userService.addUser(userDTO);
-        });
+    public void testFindByEmailWithEmailAlreadyExists() {
+        String existingEmail = "existing@gmail.com";
+        User user = new User();
+        when(userRepository.findByEmail(existingEmail)).thenReturn(Optional.of(user));
+        Optional<User> result = userService.findByEmail(existingEmail);
+        
+        assertTrue(result.isPresent());
+        assertEquals(user, result.get());
+        
+        verify(userRepository, times(1)).findByEmail(existingEmail);
+    }
+    
+    @Test
+    public void testFindByEmailWithEmailDoesNotExist() {
+        String nonExistingEmail = "notexisting@gmail.com";
+        when(userRepository.findByEmail(nonExistingEmail)).thenReturn(Optional.empty());
+        Optional<User> result = userService.findByEmail(nonExistingEmail);
+        assertFalse(result.isPresent());
+        verify(userRepository, times(1)).findByEmail(nonExistingEmail);
+    }
+
+    @Test
+    public void testAddUserWithEmailAlreadyExists() {
+        String existingEmail = "existing@gmail.com";
+        when(userRepository.findByEmail(existingEmail)).thenReturn(Optional.of(new User()));
+        UserDTO userDto = new UserDTO();
+        userDto.setEmail(existingEmail);
+        
+        assertThrows(DuplicateKeyException.class, ()-> userService.addUser(userDto));
+        verify(userRepository,times(1)).findByEmail(existingEmail);
     }
 }

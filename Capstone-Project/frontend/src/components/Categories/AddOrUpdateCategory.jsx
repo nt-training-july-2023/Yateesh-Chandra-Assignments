@@ -103,9 +103,26 @@ const AddOrUpdateCategory = () =>{
     };
     try {
       if (isUpdating) {
-        await axios.put(`http://localhost:8082/api/v1/category/${categoryId}`, categoryData);
-        updateAlert();
-        console.log("Category updated successfully.");
+        try{
+          const res = await axios.put(`http://localhost:8082/api/v1/category/${categoryId}`, categoryData);
+          if(res?.status === 200){
+            updateAlert();
+            console.log("Category updated successfully.");
+          }
+        }
+
+        catch(error){
+          if(error?.response?.data?.message === "Category already exists"){
+            setCategoryNameError("Category already exists");
+            Swal.fire({
+              title : "Category Already Exists!",
+              text : "Change the Category name",
+              icon : "warning"
+            })
+          }
+      console.log(error)  
+        }
+      
       } else {
         try{
         const response = await axios.post('http://localhost:8082/api/v1/category', categoryData);
@@ -131,7 +148,7 @@ const AddOrUpdateCategory = () =>{
       console.error("Error:", error);
     }
   };
-  console.log(categoryName+"....."+description)
+  
   return (
     <div className="App">
         <AdminNavBar/>
