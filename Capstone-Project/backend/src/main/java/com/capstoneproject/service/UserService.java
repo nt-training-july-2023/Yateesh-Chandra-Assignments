@@ -53,7 +53,7 @@ public class UserService {
                     || userDTO.getPhoneNumber() == null) {
                 throw new ValidationException("Invalid Data Provided");
             }
-            User user = new User(userDTO.getId(), userDTO.getName(),
+            User user = new User(userDTO.getUserId(), userDTO.getName(),
                     userDTO.getEmail(),
                     this.passwordEncoder.encode(userDTO.getPassword()),
                     userDTO.getUserRole(), userDTO.getPhoneNumber());

@@ -20,7 +20,7 @@ public class UserDTO {
   /**
    * This is the Id field to be entered by new User.
    */
-  private long id;
+  private Long userId;
   /**
    * This is the name field to be entered by new User.
    */

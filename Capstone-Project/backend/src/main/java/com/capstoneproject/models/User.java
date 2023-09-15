@@ -3,13 +3,19 @@
  */
 package com.capstoneproject.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +38,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", length = ID_MIN_LENGTH)
-    private long id;
+    private Long userId;
     /**
      * This is the name column.
      */
@@ -77,36 +83,53 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name)
+        return Objects.equals(userId, user.userId) && Objects.equals(name, user.name)
                 && Objects.equals(email, user.email)
                 && Objects.equals(password, user.password)
                 && Objects.equals(userRole, user.userRole)
                 && Objects.equals(phoneNumber, user.phoneNumber);
     }
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<UserResponses> responses = new ArrayList<>();
+
+    public final List<UserResponses> getUserResponses(){
+        return new ArrayList<>(responses);
+    }
+
+    public final void setUserResponses(final List<UserResponses> userResponse) {
+        this.responses = new ArrayList<>(userResponse);
+    }
+
     @Override
     public final int hashCode() {
-        return Objects.hash(id, name, email, password, userRole, phoneNumber);
+        return Objects.hash(userId, name, email, password, userRole, phoneNumber);
     }
 
     /**
      * This is Single parameter User Constructor.
-     * @param userId is User Id.
+     * @param userid is User Id.
      * @param userName is user name.
      * @param userEmail is user Email.
      * @param userPassword is User Password.
      * @param role is User Role.
      * @param phone is User Phone.
      */
-    public User(final long userId,
+    public User(final Long userid,
             final String userName, final String userEmail,
             final String userPassword, final String role, final String phone) {
         super();
-        this.id = userId;
+        this.userId = userid;
         this.name = userName;
         this.email = userEmail;
         this.password = userPassword;
         this.userRole = role;
         this.phoneNumber = phone;
+    }
+
+    public User(Long userid, String userName) {
+        this.userId = userid;
+        this.name = userName;
     }
 }
