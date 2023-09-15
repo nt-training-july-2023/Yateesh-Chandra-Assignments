@@ -49,11 +49,11 @@ public class UserResponses {
     private String timeStamp;
 
     public final User getUsers() {
-        return new User(users.getId(), users.getName());
+        return new User(users.getUserId(), users.getName());
     }
 
     public final void setUsers(final User user) {
-        this.users = new User(user.getId(), user.getName());
+        this.users = new User(user.getUserId(), user.getName());
     }
     
     public final Quiz getQuiz() {
