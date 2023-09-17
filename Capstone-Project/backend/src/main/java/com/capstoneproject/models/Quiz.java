@@ -74,10 +74,12 @@ public class Quiz {
     @JsonIgnore
     private List<Question> questions = new ArrayList<>();
 
+    /**
+     * This joins the column from User Responses.
+     */
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<UserResponses> responses = new ArrayList<>();
-    
     /**
      * List the questions.
      *@return the list of questions.
@@ -112,13 +114,23 @@ public class Quiz {
                     cate.getCategoryName(), cate.getDescription());
     }
 
-    public final List<UserResponses> getUserResponses(){
+    /**
+     * This is the getter method for the User Response.
+     * @return the List of Responses.
+     */
+    public final List<UserResponses> getUserResponses() {
         return new ArrayList<>(responses);
     }
 
-    public final void setUserResponses(List<UserResponses> userResponse){
+    /**
+     * This is the setter method for User Responses.
+     * @param userResponse - User Response.
+     */
+    public final void setUserResponses(
+            final List<UserResponses> userResponse) {
         this.responses = new ArrayList<>(userResponse);
     }
+
     /**
      * Quiz constructor.
      * @param id       id.

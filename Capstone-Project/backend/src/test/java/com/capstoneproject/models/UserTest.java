@@ -11,7 +11,7 @@ class UserTest {
     public void testUserConstructor() {
         User user = new User(1L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com","ramesh","USER","9876543210");
         assertNotNull(user);
-        assertEquals(1L, user.getId());
+        assertEquals(1L, user.getUserId());
         assertEquals("Ramesh Kumar", user.getName());
         assertEquals("ramesh.kumar@nucleusteq.com", user.getEmail());
         assertEquals("ramesh", user.getPassword());
@@ -22,14 +22,14 @@ class UserTest {
     @Test
     public void testGettersAndSetters() {
         User user = new User();
-        user.setId(1L);
+        user.setUserId(1L);
         user.setName("Ramesh Kumar");
         user.setEmail("ramesh.kumar@nucleusteq.com");
         user.setPassword("ramesh");
         user.setPhoneNumber("9876543210");
         user.setUserRole("USER");
 
-        assertEquals(1L, user.getId());
+        assertEquals(1L, user.getUserId());
         assertEquals("Ramesh Kumar", user.getName());
         assertEquals("ramesh.kumar@nucleusteq.com", user.getEmail());
         assertEquals("ramesh", user.getPassword());
@@ -53,8 +53,8 @@ class UserTest {
     @Test
     public void testToString() {
         User user = new User(1L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com", "ramesh", "USER", "9876543210");
-        String expectedToString = String.format("User(id=%d, name=%s, email=%s, password=%s, userRole=%s, phoneNumber=%s)",
-                user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getUserRole(), user.getPhoneNumber());
+        String expectedToString = String.format("User(userId=%d, name=%s, email=%s, password=%s, userRole=%s, phoneNumber=%s)",
+                user.getUserId(), user.getName(), user.getEmail(), user.getPassword(), user.getUserRole(), user.getPhoneNumber());
         assertEquals(expectedToString, user.toString());
     }
 }

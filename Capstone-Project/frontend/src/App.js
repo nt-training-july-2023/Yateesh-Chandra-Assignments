@@ -9,6 +9,7 @@ import ManageCategory from './components/Categories/ManageCategory';
 import AddOrUpdateCategory from './components/Categories/AddOrUpdateCategory';
 import ManageQuiz from './components/Quiz/ManageQuiz';
 import AddOrUpdateQuiz from './components/Quiz/AddOrUpdateQuiz';
+import ManageQuestion from './components/Question/ManageQuestion';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path = "/add-quiz" element = {<AddOrUpdateQuiz/>}/>
         <Route path = "/add-quiz/:quizId" element = {<AddOrUpdateQuiz/>}/>
         <Route path = "/add-quiz/:categoryId" element = {<AddOrUpdateQuiz/>}/>
+        <Route path = "/manage-question/:quizId" element = {<ManageQuestion/>}/>
         <Route path = "/user" element = {<UserDashBoard/>}/>
         </Routes>
       </BrowserRouter>

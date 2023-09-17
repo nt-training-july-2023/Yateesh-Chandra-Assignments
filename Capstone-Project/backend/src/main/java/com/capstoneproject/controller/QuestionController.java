@@ -73,7 +73,7 @@ public class QuestionController {
     public final ResponseEntity<Object> deleteQuestion(
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     /**

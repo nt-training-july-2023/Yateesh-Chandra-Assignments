@@ -46,7 +46,7 @@ class UserServiceTest {
     @Test
     public void testAddUser() {
         UserDTO userDto = new UserDTO();
-        userDto.setId(1L);
+        userDto.setUserId(1L);
         userDto.setName("Yateesh Chandra");
         userDto.setEmail("yateesh.chandra@nucleusteq.com");
         userDto.setPassword("03072001");
@@ -54,7 +54,7 @@ class UserServiceTest {
         userDto.setPhoneNumber("8179074291");
 
         User user = new User();
-        user.setId(userDto.getId());
+        user.setUserId(userDto.getUserId());
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());

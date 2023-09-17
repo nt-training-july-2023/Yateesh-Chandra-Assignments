@@ -20,48 +20,84 @@ import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.repository.UserResponsesRepository;
 
+/**
+ * This is Service class for the UserResponses.
+ */
 @Service
 public class UserResponsesService {
 
+    /**
+     * This autowires the UserResponse Repository.
+     */
     @Autowired
     private UserResponsesRepository responsesRepository;
 
+    /**
+     * This autowires AllResults Repository.
+     */
     @Autowired
     private AllResultsRepository allResultsRepository;
 
+    /**
+     * This autowires the User Repository.
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * This autowires the Category Repository.
+     */
     @Autowired
     private CategoryRepository categoryRepository;
 
+    /**
+     * This autowires the Quiz Repository.
+     */
     @Autowired
     private QuizRepository quizRepository;
 
-    public final UserResponsesDTO addUserResponses(UserResponsesDTO responses) {
-        if(responses.getUserId() == null || responses.getCategoryId() == null || responses.getQuizId() == null || responses.getMarksScored() == 0 || responses.getTotalMarks() == 0 || responses.getNumOfQuestions() == 0 || responses.getNumOfQuestionsAnswered() == 0) {
+    /**
+     * This method is used to add the User Responses.
+     * @param responses of UserResponsesDTO is passed.
+     * @return the added User Response.
+     */
+    public final UserResponsesDTO addUserResponses(
+            final UserResponsesDTO responses) {
+        if (responses.getUserId() == null || responses.getCategoryId() == null
+                || responses.getQuizId() == null
+                || responses.getMarksScored() == 0
+                || responses.getTotalMarks() == 0
+                || responses.getNumOfQuestions() == 0
+                || responses.getNumOfQuestionsAnswered() == 0) {
             throw new NoInputException("No Inputs Detected");
         } else {
-            if(responsesRepository.findResponsesByUsersAndQuiz(responses.getUserId(), responses.getQuizId()) != null) {
+            if (responsesRepository.findResponsesByUsersAndQuiz(
+                    responses.getUserId(), responses.getQuizId()) != null) {
                 throw new AlreadyExistsException("Already exists");
             }
-            User user = userRepository.findById(responses.getUserId()).orElse(null);
-            if(user == null) {
+            User user = userRepository.findById(responses.getUserId())
+                    .orElse(null);
+            if (user == null) {
                 throw new ElementNotExistsException("This element not exists");
             } else {
-                Quiz quiz= quizRepository.findById(responses.getQuizId()).orElse(null);
-                if(quiz != null) {
+                Quiz quiz = quizRepository.findById(responses.getQuizId())
+                        .orElse(null);
+                if (quiz != null) {
                     AllResults results = new AllResults();
                     results.setUserId(responses.getUserId());
-                    Optional<User> users = userRepository.findById(responses.getUserId());
+                    Optional<User> users = userRepository
+                            .findById(responses.getUserId());
                     results.setEmail(users.get().getEmail());
                     results.setUserName(users.get().getName());
-                    Optional<Quiz> quizzes = quizRepository.findById(responses.getQuizId());
-                    Optional<Category> category = categoryRepository.findById(responses.getCategoryId());
+                    Optional<Quiz> quizzes = quizRepository
+                            .findById(responses.getQuizId());
+                    Optional<Category> category = categoryRepository
+                            .findById(responses.getCategoryId());
                     results.setCategoryName(category.get().getCategoryName());
                     results.setQuizName(quizzes.get().getQuizName());
                     results.setNumOfQuestions(responses.getNumOfQuestions());
-                    results.setNumOfQuestionsAnswered(responses.getNumOfQuestionsAnswered());
+                    results.setNumOfQuestionsAnswered(
+                            responses.getNumOfQuestionsAnswered());
                     results.setTotalMarks(responses.getTotalMarks());
                     results.setMarksScored(responses.getMarksScored());
                     results.setTimeStamp(responses.setTimeStampMethod());
@@ -70,26 +106,37 @@ public class UserResponsesService {
                     UserResponses userResponses = new UserResponses();
                     userResponses.setUsers(user);
                     userResponses.setQuiz(quiz);
-                    userResponses.setNumOfQuestions(results.getNumOfQuestions());
-                    userResponses.setNumOfQuestionsAnswered(results.getNumOfQuestionsAnswered());
+                    userResponses
+                            .setNumOfQuestions(results.getNumOfQuestions());
+                    userResponses.setNumOfQuestionsAnswered(
+                            results.getNumOfQuestionsAnswered());
                     userResponses.setTotalMarks(responses.getTotalMarks());
                     userResponses.setMarksScored(responses.getMarksScored());
                     userResponses.setTimeStamp(responses.setTimeStampMethod());
                     responsesRepository.save(userResponses);
                     return responses;
                 } else {
-                    throw new ElementNotExistsException("No such element found");
+                    throw new ElementNotExistsException(
+                            "No such element found");
                 }
             }
         }
     }
-    
-    public final boolean findUserResponsesByUserAndQuiz(Long userId, Long quizId) {
-        if(userId == null || quizId == null) {
+
+    /**
+     * This method is used to find the User Responses.
+     * @param userId UserId of Long Type.
+     * @param quizId from Quiz of Long type.
+     * @return true or false based on its existence in the repository.
+     */
+    public final boolean findUserResponsesByUserAndQuiz(final Long userId,
+            final Long quizId) {
+        if (userId == null || quizId == null) {
             throw new NoInputException("No Input detected");
         }
-        UserResponses userResponses = responsesRepository.findResponsesByUsersAndQuiz(userId, quizId);
-        if(userResponses == null) {
+        UserResponses userResponses = responsesRepository
+                .findResponsesByUsersAndQuiz(userId, quizId);
+        if (userResponses == null) {
             return false;
         }
         return true;

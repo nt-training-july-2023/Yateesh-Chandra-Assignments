@@ -52,7 +52,7 @@ const ManageQuiz = () => {
         <AdminNavBar />
     <div className="manage-quiz-container">
       <div className="quiz-list-container">
-        <h1>Quizzes Available</h1>
+        <h1>{quizzes.length === 0 ? "No Quiz Available" : "Quizzes Available"}</h1>
         {userRole === "ADMIN" && (
         <button
           className="add-quiz-button"
@@ -89,7 +89,7 @@ const ManageQuiz = () => {
                   } >Delete</button>
                 )}
                 {userRole === "ADMIN" && (
-                <button className="open-button">Open</button>
+                <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`)}>Open</button>
                 )}
                 {userRole === "USER" && (
                   <button className="open-button">Take Quiz</button>

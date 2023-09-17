@@ -83,28 +83,44 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(name, user.name)
+        return Objects.equals(userId, user.userId)
+                && Objects.equals(name, user.name)
                 && Objects.equals(email, user.email)
                 && Objects.equals(password, user.password)
                 && Objects.equals(userRole, user.userRole)
                 && Objects.equals(phoneNumber, user.phoneNumber);
     }
 
+    /**
+     * This joins the column in the User Responses Column.
+     */
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<UserResponses> responses = new ArrayList<>();
 
-    public final List<UserResponses> getUserResponses(){
+    /**
+     * This is the getter method for the User Response.
+     * @return the List of User Responses.
+     */
+    public final List<UserResponses> getUserResponses() {
         return new ArrayList<>(responses);
     }
 
+    /**
+     * This is the setter method for User Responses.
+     * @param userResponse - User Response.
+     */
     public final void setUserResponses(final List<UserResponses> userResponse) {
         this.responses = new ArrayList<>(userResponse);
     }
 
+    /**
+     * This is Hash Code.
+     */
     @Override
     public final int hashCode() {
-        return Objects.hash(userId, name, email, password, userRole, phoneNumber);
+        return Objects.hash(
+                userId, name, email, password, userRole, phoneNumber);
     }
 
     /**
@@ -128,7 +144,12 @@ public class User {
         this.phoneNumber = phone;
     }
 
-    public User(Long userid, String userName) {
+    /**
+     * This is the User Constructor with two parameters.
+     * @param userid - Long type.
+     * @param userName - String type.
+     */
+    public User(final Long userid, final String userName) {
         this.userId = userid;
         this.name = userName;
     }
