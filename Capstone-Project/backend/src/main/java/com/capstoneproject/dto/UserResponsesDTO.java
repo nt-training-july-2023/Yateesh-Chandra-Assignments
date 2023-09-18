@@ -25,6 +25,7 @@ import lombok.Setter;
         @UniqueConstraint(columnNames = { "userId", "quizId" }) })
 public class UserResponsesDTO {
 
+
     /**
      * This is the Response Id.
      */
