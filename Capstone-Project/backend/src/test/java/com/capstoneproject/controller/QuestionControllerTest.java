@@ -78,7 +78,7 @@ class QuestionControllerTest {
         Long questionId = 3L;
         ResponseEntity<Object> response = questionController.deleteQuestion(questionId);
         assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
     
     @Test

@@ -132,6 +132,7 @@ const AddOrUpdateQuiz = () => {
           console.log("Quiz Updated Successfully");
           fetchQuizData()
         }
+        navigate(`/manage-quiz/${categoryId}`)
       }
       catch(error){
           if(error?.response?.data?.message === "Quiz already exists"){
@@ -153,7 +154,9 @@ const AddOrUpdateQuiz = () => {
          if(response?.status === 201){
           addAlert();
           console.log("New Quiz is added successfully.", quizData);
+          navigate(`/manage-quiz/${categoryId}`)
          }
+         
       }
       catch(error){
           if(error?.response?.data?.message === "Quiz already exists"){
@@ -218,7 +221,8 @@ const AddOrUpdateQuiz = () => {
               <button
                 type="button"
                 className="red-button"
-                onClick={() => navigate("/manage-category")}
+                onClick={() => navigate(`/manage-quiz/${categoryId}`)}
+                
               >
                 Cancel
               </button>

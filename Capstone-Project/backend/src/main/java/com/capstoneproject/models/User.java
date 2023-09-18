@@ -20,13 +20,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * This is the users Entity.
  */
 @Entity
-@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -96,14 +94,14 @@ public class User {
      */
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserResponses> responses = new ArrayList<>();
+    private List<UserResponses> userResponses = new ArrayList<>();
 
     /**
      * This is the getter method for the User Response.
      * @return the List of User Responses.
      */
     public final List<UserResponses> getUserResponses() {
-        return new ArrayList<>(responses);
+        return new ArrayList<>(userResponses);
     }
 
     /**
@@ -111,7 +109,7 @@ public class User {
      * @param userResponse - User Response.
      */
     public final void setUserResponses(final List<UserResponses> userResponse) {
-        this.responses = new ArrayList<>(userResponse);
+        this.userResponses = new ArrayList<>(userResponse);
     }
 
     /**

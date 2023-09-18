@@ -63,6 +63,13 @@ const ManageQuestion = () => {
       })
       .catch((error) => {
         console.error("Error adding question", error);
+        if(error.response.data.message === "No Inputs detected"){
+          Swal.fire({
+            title : "Can not add Question",
+            text : "Please fill all the fields",
+            icon : "error"
+          })
+        }
       });
   };
 
@@ -76,6 +83,13 @@ const ManageQuestion = () => {
       })
       .catch((error) => {
         console.error("Error updating question", error);
+        if(error.response.data.message === "No Inputs detected"){
+          Swal.fire({
+            title : "Can not add Question",
+            text : "Please fill all the fields",
+            icon : "error"
+          })
+        }
       });
   };
 
@@ -99,7 +113,7 @@ const ManageQuestion = () => {
       <h1>{questions.length === 0 ? "No Questions Available" :"Manage Questions"}</h1>
       {!isAddingQuestion && !isEditingQuestion ? (
         <button
-          className="add-question-button"
+          className="add-category-button"
           onClick={() => setIsAddingQuestion(true)}
         >
           Add Question
@@ -143,13 +157,19 @@ const ManageQuestion = () => {
             value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
             onChange={handleInputChange}
           />
-          <input
-            type="text"
+          <select
             name="correctOption"
             placeholder="Correct Option"
             value={isEditingQuestion ? editedQuestion.correctOption : newQuestion.correctOption}
             onChange={handleInputChange}
-          />
+          >
+          <option value="">Select Correct Option</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option4">Option 4</option>
+          </select>
+
             {isAddingQuestion ? (
               <button className="edit-button" onClick={handleAddQuestion}>Add</button>
             ) : (

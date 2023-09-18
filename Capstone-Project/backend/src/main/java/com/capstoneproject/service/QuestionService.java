@@ -90,6 +90,11 @@ public class QuestionService {
      */
     public final QuestionDTO addQuestion(final QuestionDTO questionDTO) {
         if (questionDTO.getQuestionTitle().isEmpty()
+                || questionDTO.getOption1().isEmpty()
+                || questionDTO.getOption2().isEmpty()
+                || questionDTO.getOption3().isEmpty()
+                || questionDTO.getOption4().isEmpty()
+                || questionDTO.getCorrectOption().isEmpty()
                 || questionDTO.getQuizId() == 0) {
             throw new NoInputException("No Inputs detected");
         } else {
@@ -122,6 +127,14 @@ public class QuestionService {
         Question existingQuestion = questionRepository.findById(questionId)
                 .orElse(null);
         if (existingQuestion != null) {
+            if (updatedQuestionDTO.getQuestionTitle().isEmpty()
+                    || updatedQuestionDTO.getOption1().isEmpty()
+                    || updatedQuestionDTO.getOption2().isEmpty()
+                    || updatedQuestionDTO.getOption3().isEmpty()
+                    || updatedQuestionDTO.getOption4().isEmpty()
+                    || updatedQuestionDTO.getCorrectOption().isEmpty()) {
+                throw new NoInputException("No Inputs detected");
+            }
             existingQuestion
                     .setQuestionTitle(updatedQuestionDTO.getQuestionTitle());
             existingQuestion.setOption1(updatedQuestionDTO.getOption1());

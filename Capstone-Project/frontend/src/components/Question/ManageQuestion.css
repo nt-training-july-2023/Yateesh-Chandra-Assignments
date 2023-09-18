@@ -4,7 +4,7 @@
   margin: auto;
   margin-top: 20px;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: none;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -13,20 +13,6 @@
 .manage-questions-container h1 {
   color: #333;
   font-size: 28px;
-}
-
-.add-question-button {
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.add-question-button:hover {
-  background-color: #2980b9;
 }
 
 .question-form {
@@ -75,6 +61,7 @@
 
 .question-list ul {
   list-style: none;
+  background-color:transparent;
   padding: 0;
   border: 5px;
   width: 100%;
@@ -85,8 +72,9 @@
 }
 
 .question-list li {
-  background-color: #fff;
-  border: 2px solid #ccc;
+  background-color: none;
+
+  border: 1px solid #000000;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px;
@@ -110,10 +98,6 @@
   }
 }
 
-.question-list li:hover {
-  transform: scale(1.02);
-}
-
 .question-title {
   font-weight: bold;
   margin-bottom: 5px;
@@ -125,4 +109,24 @@
 
 .question-actions {
   margin-top: 10px;
+}
+
+.question-form select {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid hsl(246, 69%, 61%);
+  border-radius: 5px;
+}
+
+/* Style the dropdown when an option is selected */
+.question-form select:valid {
+  border-color: rgb(3, 36, 224); /* Change border color when valid option is selected */
+}
+
+/* Media query for responsive design */
+@media (max-width: 600px) {
+  .question-form select {
+    width: 100%;
+  }
 }

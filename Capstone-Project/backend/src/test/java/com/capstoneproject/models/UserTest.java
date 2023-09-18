@@ -50,11 +50,4 @@ class UserTest {
         assertNotEquals(user1.hashCode(), user3.hashCode());
     }
 
-    @Test
-    public void testToString() {
-        User user = new User(1L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com", "ramesh", "USER", "9876543210");
-        String expectedToString = String.format("User(userId=%d, name=%s, email=%s, password=%s, userRole=%s, phoneNumber=%s)",
-                user.getUserId(), user.getName(), user.getEmail(), user.getPassword(), user.getUserRole(), user.getPhoneNumber());
-        assertEquals(expectedToString, user.toString());
-    }
 }

@@ -107,4 +107,26 @@ public class UserResponses {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
                 qui.getQuizDescription(), qui.getNumOfQuestions());
     }
+
+    /**
+     * This is User Responses Constructor.
+     * @param responseid .
+     * @param numOfQuestion .
+     * @param numOfQuestionsAnswer .
+     * @param totalMark .
+     * @param marksScore .
+     * @param timestamp .
+     */
+    public UserResponses(final Long responseid, final int numOfQuestion,
+            final int numOfQuestionsAnswer, final int totalMark,
+            final int marksScore, final String timestamp) {
+        super();
+        this.responseId = responseid;
+        this.numOfQuestions = numOfQuestion;
+        this.numOfQuestionsAnswered = numOfQuestionsAnswer;
+        this.totalMarks = totalMark;
+        this.marksScored = marksScore;
+        this.timeStamp = timestamp;
+    }
+
 }

@@ -143,7 +143,7 @@ const AddOrUpdateCategory = () =>{
             }
         }
       }
-      // navigate("/manage-category");
+      navigate("/manage-category");
     } catch (error) {
       console.error("Error:", error);
     }

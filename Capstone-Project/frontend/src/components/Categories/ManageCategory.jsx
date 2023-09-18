@@ -6,6 +6,7 @@ import axios from 'axios';
 import './Categories.css';
 import AdminNavBar from '../AdminNavBar';
 import Swal from 'sweetalert2';
+import UserNavBar from '../UserNavBar';
 
 const ManageCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -43,7 +44,8 @@ const ManageCategory = () => {
 
   return (
     <div className='App'>
-        <AdminNavBar/>
+        {userRole === "ADMIN" ? <AdminNavBar/> : <UserNavBar/>}
+        
     <div className="manage-category-container">
       <h1>Category List</h1>
       <div className='button-search-container'>

@@ -79,7 +79,7 @@ public class Quiz {
      */
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserResponses> responses = new ArrayList<>();
+    private List<UserResponses> userResponses = new ArrayList<>();
     /**
      * List the questions.
      *@return the list of questions.
@@ -119,7 +119,7 @@ public class Quiz {
      * @return the List of Responses.
      */
     public final List<UserResponses> getUserResponses() {
-        return new ArrayList<>(responses);
+        return new ArrayList<>(userResponses);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Quiz {
      */
     public final void setUserResponses(
             final List<UserResponses> userResponse) {
-        this.responses = new ArrayList<>(userResponse);
+        this.userResponses = new ArrayList<>(userResponse);
     }
 
     /**
