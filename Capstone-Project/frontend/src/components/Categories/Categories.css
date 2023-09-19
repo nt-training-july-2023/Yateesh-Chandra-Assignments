@@ -1,4 +1,3 @@
-/* ManageCategory.css */
 @import '~font-awesome/css/font-awesome.min.css';
 
 .manage-category-container {
@@ -120,7 +119,6 @@
     }
   }
 
-  /* Add the following CSS rules */
 @media (min-width: 769px) {
   .button-search-container {
     display: flex;
@@ -129,16 +127,15 @@
   }
   
   .add-category-button {
-    margin-bottom: 0; /* Remove the margin on large screens */
+    margin-bottom: 0; 
   }
   
   .search-bar {
-    margin-top: 0; /* Remove the margin on large screens */
+    margin-top: 0;
   }
 }
 
 
-/* AddCategory.css */
 .add-category-container {
     padding: 20px;
     max-width: 400px;

@@ -61,6 +61,12 @@ public class Quiz {
     private int numOfQuestions;
 
     /**
+     * This column contains the timer in minutes.
+     */
+    @Column
+    private int timeInMin;
+
+    /**
      * This is Category id column from Category Entity.
      */
     @ManyToOne(fetch = FetchType.EAGER)
@@ -137,13 +143,15 @@ public class Quiz {
      * @param quizname Name of the quiz.
      * @param quizDesc the description.
      * @param numOfQue number of questions.
+     * @param timeInmin timer in minutes.
      */
     public Quiz(final Long id, final String quizname, final String quizDesc,
-            final int numOfQue) {
+            final int numOfQue, final int timeInmin) {
         this.quizId = id;
         this.quizName = quizname;
         this.quizDescription = quizDesc;
         this.numOfQuestions = numOfQue;
+        this.timeInMin = timeInmin;
     }
 
 }

@@ -33,7 +33,7 @@
   }
 
   input[type="password"] {
-    flex: 1; /* Allow the input to take up available space */
+    flex: 1;
   }
   
   .error {
@@ -107,7 +107,7 @@
     input[type="button"],
     input[type="Submit"]{
     width: 40%;
-    margin-right: 10; /* Add space between buttons on narrow screens */
+    margin-right: 10; 
   }
 }
   

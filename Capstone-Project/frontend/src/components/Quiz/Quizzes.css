@@ -1,57 +1,49 @@
-/* Container for the entire page */
 .manage-quiz-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px; /* Add padding for better spacing */
+  padding: 20px;
 }
 
 .quiz-list-scroll-container {
-  max-height: 400px; /* Set a fixed height for the container */
+  max-height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-/* Styles for the quiz list container */
 .quiz-list-container {
   width: 100%;
-  max-width: 100%; /* Set a maximum width of 100% for responsiveness */
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  overflow: auto; /* Add overflow property to create a scrollable container */
+  overflow: auto;
 }
 
-/* Hide scrollbar for webkit-based browsers (Chrome, Safari) */
 .quiz-list-scroll-container::-webkit-scrollbar {
-  width: 0.5rem; /* Set the width to 0 to hide it */
+  width: 0.5rem;
 }
 
-/* Hide scrollbar track for webkit-based browsers */
 .quiz-list-scroll-container::-webkit-scrollbar-track {
-  background: transparent; /* Hide the track */
+  background: transparent;
 }
 
-/* Hide scrollbar thumb for webkit-based browsers */
 .quiz-list-scroll-container::-webkit-scrollbar-thumb {
-  background: transparent; /* Hide the thumb */
+  background: transparent;
 }
 
-/* Hide scrollbar for Firefox */
 .quiz-list-scroll-container {
-  scrollbar-width: thin; /* Hide the scrollbar */
+  scrollbar-width: thin;
 }
 
-/* Title styles */
 .quiz-list-container h1 {
   font-size: 28px;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-/* Styles for the quiz grid */
 .quiz-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Display 4 cards per row on larger screens */
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   justify-items: center;
   margin-top: 20px;
@@ -59,11 +51,11 @@
 
 @media (max-width: 1235px) {
   .quiz-grid {
-    grid-template-columns: repeat(3, 1fr); /* Display 2 cards per row on screens smaller than 943px */
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .quiz-list-scroll-container {
-    max-height: 800px; /* Set a fixed height for the container */
+    max-height: 800px;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -71,14 +63,13 @@
 
 @media (max-width: 943px) {
   .quiz-grid {
-    grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row on screens smaller than 943px */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Responsive styles for screens smaller than 643px */
 @media (max-width: 643px) {
   .quiz-grid {
-    grid-template-columns: 1fr; /* Display 1 card per row on screens smaller than 643px */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -96,9 +87,8 @@
   }
 }
 
-/* Styles for quiz cards */
 .quiz-card {
-  width: 250px; /* Set a fixed width for each quiz card */
+  width: 250px; 
   border: 1px solid ;
   border-radius: 5px;
   padding: 15px;
@@ -107,24 +97,20 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Quiz card title styles */
 .quiz-card h2 {
   font-size: 18px;
   margin-top: 10px;
 }
 
-/* Quiz card description styles */
 .quiz-card p {
   font-size: 14px;
   margin-top: 10px;
 }
 
-/* Button container styles */
 .open-quiz {
   margin-top: 15px;
 }
 
-/* Button styles */
 .edit-button,
 .delete-button,
 .open-button {

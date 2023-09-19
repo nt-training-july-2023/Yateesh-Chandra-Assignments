@@ -1,4 +1,3 @@
-/* ManageQuestion.css */
 .manage-questions-container {
   max-width: 900px;
   margin: auto;
@@ -51,7 +50,6 @@
   min-width: 100px;
 }
 
-
 .question-list-container {
   max-height: 400px;
   overflow-y: auto;
@@ -66,21 +64,20 @@
   border: 5px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap; /* Allow questions to wrap to the next row */
-  gap: 20px; /* Add spacing between questions */
-  justify-content: space-between; /* Distribute questions evenly in a row */
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .question-list li {
   background-color: none;
-
   border: 1px solid #000000;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px;
   text-align: left;
   transition: transform 0.3s;
-  width: calc(50% - 10px); /* Each question takes 50% width minus gap */
+  width: calc(50% - 10px);
 }
 
 @media (max-width: 600px) {
@@ -119,12 +116,10 @@
   border-radius: 5px;
 }
 
-/* Style the dropdown when an option is selected */
 .question-form select:valid {
-  border-color: rgb(3, 36, 224); /* Change border color when valid option is selected */
+  border-color: rgb(3, 36, 224);
 }
 
-/* Media query for responsive design */
 @media (max-width: 600px) {
   .question-form select {
     width: 100%;

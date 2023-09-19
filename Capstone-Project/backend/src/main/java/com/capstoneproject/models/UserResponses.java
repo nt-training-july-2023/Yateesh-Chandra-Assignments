@@ -96,7 +96,8 @@ public class UserResponses {
      */
     public final Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
-                quiz.getQuizDescription(), quiz.getNumOfQuestions());
+                quiz.getQuizDescription(), quiz.getNumOfQuestions(),
+                quiz.getTimeInMin());
     }
 
     /**
@@ -105,17 +106,18 @@ public class UserResponses {
      */
     public final void setQuiz(final Quiz qui) {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
-                qui.getQuizDescription(), qui.getNumOfQuestions());
+                qui.getQuizDescription(), qui.getNumOfQuestions(),
+                qui.getTimeInMin());
     }
 
     /**
      * This is User Responses Constructor.
-     * @param responseid .
-     * @param numOfQuestion .
+     * @param responseid           .
+     * @param numOfQuestion        .
      * @param numOfQuestionsAnswer .
-     * @param totalMark .
-     * @param marksScore .
-     * @param timestamp .
+     * @param totalMark            .
+     * @param marksScore           .
+     * @param timestamp            .
      */
     public UserResponses(final Long responseid, final int numOfQuestion,
             final int numOfQuestionsAnswer, final int totalMark,

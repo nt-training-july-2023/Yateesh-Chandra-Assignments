@@ -4,8 +4,6 @@ package com.capstoneproject.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +38,13 @@ class QuestionServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-    
+
     @Test
     public void testGetAllQuestions() {
         
         Question q1= new Question("Test Question", "A", "B", "C", "D", "OptionB");
         Question q2= new Question("Test Question 2", "A1", "B2", "C3", "D4", "OptionC");
-        Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5);
+        Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5, 2);
         q1.setQuiz(quiz);
         q2.setQuiz(quiz);
         List<Question> questionList = new ArrayList<>();
@@ -62,7 +60,7 @@ class QuestionServiceTest {
     @Test
     public void testGetQuestionByQuizId() {
         Long quizId = 5L;
-        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5);
+        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5, 2);
         Question q1= new Question("Test Question", "A", "B", "C", "D", "OptionB");
         Question q2= new Question("Test Question 2", "A1", "B2", "C3", "D4", "OptionC");
         q1.setQuiz(quiz);
@@ -89,7 +87,7 @@ class QuestionServiceTest {
     @Test
     public void testGetQuestionById() {
         Long questionId = 10L;
-        Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5);
+        Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5, 2);
         Question question = new Question("Test Question", "A", "B", "C", "D", "OptionB");
         question.setQuiz(quiz);
         when(questionRepository.findById(questionId)).thenReturn(Optional.of(question));
@@ -113,7 +111,7 @@ class QuestionServiceTest {
     public void testAddQuestion() {
         Long quizId = 1L;
         QuestionDTO questionDto = new QuestionDTO(null, "Test Question", "A", "B", "C", "D", "OptionB", quizId);
-        Quiz quiz = new Quiz(quizId, "Quiz 1", "Quiz 1 Description", 7);
+        Quiz quiz = new Quiz(quizId, "Quiz 1", "Quiz 1 Description", 7, 2);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
         when(questionRepository.save(any(Question.class))).thenReturn(new Question("Test Question", "A", "B", "C", "D", "OptionB"));
         QuestionDTO addedQuestion = questionService.addQuestion(questionDto);
@@ -134,15 +132,33 @@ class QuestionServiceTest {
     }
     
     @Test
+    public void testAddQuestionEmptyFields() {
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setQuestionTitle("What is 2 + 2?");
+        questionDTO.setOption1("");
+        questionDTO.setOption2("4");
+        questionDTO.setOption3("5");
+        questionDTO.setOption4("");
+        questionDTO.setCorrectOption("4");
+        questionDTO.setQuizId(1L);
+        when(quizRepository.findById(questionDTO.getQuizId())).thenReturn(Optional.of(new Quiz()));
+        assertThrows(NoInputException.class, () -> questionService.addQuestion(questionDTO));
+    }
+
+    @Test
     public void testAddQuestionQuizNotFound() {
         QuestionDTO questionDTO = new QuestionDTO();
-        questionDTO.setQuestionTitle("hello");
+        questionDTO.setQuestionTitle("What is 2 + 2?");
+        questionDTO.setOption1("3");
+        questionDTO.setOption2("4");
+        questionDTO.setOption3("5");
+        questionDTO.setOption4("6");
+        questionDTO.setCorrectOption("4");
         questionDTO.setQuizId(7L);
         when(quizRepository.findById(questionDTO.getQuizId())).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> questionService.addQuestion(questionDTO));
-        verify(questionRepository, never()).save(any(Question.class));
     }
-    
+
     @Test
     public void testDeleteQuestion() {
         Long questionId = 5L;

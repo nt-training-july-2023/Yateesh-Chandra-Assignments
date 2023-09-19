@@ -75,7 +75,8 @@ public class Question {
      */
     public final Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
-                quiz.getQuizDescription(), quiz.getNumOfQuestions());
+                quiz.getQuizDescription(), quiz.getNumOfQuestions(),
+                quiz.getTimeInMin());
     }
 
     /**
@@ -84,7 +85,8 @@ public class Question {
      */
     public final void setQuiz(final Quiz qui) {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
-                qui.getQuizDescription(), qui.getNumOfQuestions());
+                qui.getQuizDescription(), qui.getNumOfQuestions(),
+                qui.getTimeInMin());
     }
 
     /**
@@ -105,7 +107,6 @@ public class Question {
         this.option3 = opt3;
         this.option4 = opt4;
         this.correctOption = correctOpt;
-//        this.quiz = qui;
     }
 
 }

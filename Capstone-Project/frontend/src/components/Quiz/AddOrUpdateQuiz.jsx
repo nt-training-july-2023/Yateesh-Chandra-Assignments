@@ -11,8 +11,6 @@ const AddOrUpdateQuiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const categoryId = location.state?.categoryId;
-  // console.log("categoryId recieved : ", categoryId);
-
   const isUpdating = quizId !== undefined;
 
   const [quizName, setQuizName] = useState("");
