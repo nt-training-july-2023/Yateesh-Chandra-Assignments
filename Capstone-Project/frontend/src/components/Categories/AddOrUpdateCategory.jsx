@@ -82,8 +82,7 @@ const AddOrUpdateCategory = () =>{
     }
 
     if (!description) {
-      setCategoryDescriptionError("Add some description ot proceed");
-      console.log("Add some Description to proceed");
+      setCategoryDescriptionError("Add some description");
       isValid = false;
     } else {
       setCategoryDescriptionError("");
@@ -152,36 +151,38 @@ const AddOrUpdateCategory = () =>{
   return (
     <div className="App">
         <AdminNavBar/>
-    <div className="add-category-container">
-      <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
-      <form onSubmit={handleAddOrUpdateCategory}>
-        <div className="form-group">
-          <label>Category Title:</label>
-          <input
-            type="text"
-            value={categoryName}
-            onChange={handleCategoryNameChange}
-            placeholder="Enter Category Name"
-          />
-          <span className="error-message">{categoryNameError}</span>
-        </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <textarea
-            value={description}
-            onChange={handleCategoryDescriptionChange}
-            placeholder="Enter Category Description"
-          />
-          <span className="error-message">{categoryDescriptionError}</span>
-        </div>
-        <div className="form-group">
-          <div className="button-container-category">
-            <button type="submit">{isUpdating ? 'Update Category' : 'Add Category'}</button>
-            <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
+      <div className="add-category-container">
+        <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
+        <form onSubmit={handleAddOrUpdateCategory}>
+          <div className="form-group">
+            <label>Category Title:</label>
+            <input
+              type="text"
+              value={categoryName}
+              onChange={handleCategoryNameChange}
+              placeholder="Enter Category Name"
+            />
+            {categoryNameError && <div className="error">{categoryNameError}</div>}
           </div>
-        </div>
-      </form>
-    </div>
+          
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              value={description}
+              onChange={handleCategoryDescriptionChange}
+              placeholder="Enter Category Description"
+            />
+            {categoryDescriptionError && <div className="error">{categoryDescriptionError}</div>}
+          </div>
+
+          <div className="form-group">
+            <div className="button-container-category">
+              <button type="submit">{isUpdating ? 'Update Category' : 'Add Category'}</button>
+              <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 

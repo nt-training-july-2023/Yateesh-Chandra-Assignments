@@ -42,23 +42,23 @@ public class UserService {
      * @return the name of the user.
      */
     public final String addUser(final UserDTO userDTO) {
-            if (userDTO.getUserRole() == null) {
-                userDTO.setUserRole("USER");
-            }
-            if (userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
-                throw new DuplicateKeyException("Email already Exists");
-            }
-            if (userDTO.getName() == null || userDTO.getEmail() == null
-                    || userDTO.getPassword().length() < NUM
-                    || userDTO.getPhoneNumber() == null) {
-                throw new ValidationException("Invalid Data Provided");
-            }
-            User user = new User(userDTO.getUserId(), userDTO.getName(),
-                    userDTO.getEmail(),
-                    this.passwordEncoder.encode(userDTO.getPassword()),
-                    userDTO.getUserRole(), userDTO.getPhoneNumber());
-            userRepo.save(user);
-            return user.getName();
+        if (userDTO.getUserRole() == null) {
+            userDTO.setUserRole("USER");
+        }
+        if (userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
+            throw new DuplicateKeyException("Email already Exists");
+        }
+        if (userDTO.getName() == null || userDTO.getEmail() == null
+                || userDTO.getPassword().length() < NUM
+                || userDTO.getPhoneNumber() == null) {
+            throw new ValidationException("Invalid Data Provided");
+        }
+        User user = new User(userDTO.getUserId(), userDTO.getName(),
+                userDTO.getEmail(),
+                this.passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getUserRole(), userDTO.getPhoneNumber());
+        userRepo.save(user);
+        return user.getName();
     }
 
     /**
@@ -82,7 +82,8 @@ public class UserService {
                             loginDTO.getEmail(), encodedPassword);
                     if (user.isPresent()) {
                         return new LoginResponse(msg + "Login Successful..!",
-                                true, user.get().getUserRole());
+                                true, user.get().getUserRole(),
+                                user.get().getUserId());
                     } else {
                         return new LoginResponse(msg + "Login Failed", false);
                     }
@@ -91,11 +92,11 @@ public class UserService {
                             false);
                 }
             } else {
-               return new LoginResponse(msg + "Email does not exist.!", false);
+                return new LoginResponse(msg + "Email does not exist.!", false);
             }
         } catch (CustomException e) {
             throw new CustomException(
-                    "An error occured whilw processing the request.");
+                    "An error occured while processing the request.");
         }
     }
 

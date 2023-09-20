@@ -16,9 +16,11 @@ const AddOrUpdateQuiz = () => {
   const [quizName, setQuizName] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
   const [numOfQuestions, setNumOfQuestions] = useState(0);
+  const [timeInMin, setTimeInMin] = useState(0);
   const [quizNameError, setQuizNameError] = useState("");
   const [quizDescriptionError, setQuizDescriptionError] = useState("");
   const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
+  const [timeInMinError, setTimeInMinError] = useState("");
 
   const updateAlert = () => {
     Swal.fire({
@@ -41,10 +43,11 @@ const AddOrUpdateQuiz = () => {
     axios
       .get(`http://localhost:8082/api/v1/quiz/${quizId}`)
       .then((response) => {
-        const { quizName, quizDescription, numOfQuestions} = response.data;
+        const { quizName, quizDescription, numOfQuestions, timeInMin} = response.data;
         setQuizName(quizName);
         setQuizDescription(quizDescription);
         setNumOfQuestions(numOfQuestions);
+        setTimeInMin(timeInMin);
       })
       .catch((error) => {
         console.error("Error fetching Quiz Data: ", error);
@@ -81,6 +84,19 @@ const AddOrUpdateQuiz = () => {
     }
   };
 
+  const handleQuizDuration = (e) => {
+    const validTimeInMin = parseInt(e.target.value, 10);
+    setTimeInMin(validTimeInMin);
+    if (isNaN(validTimeInMin)) {
+      setTimeInMinError("Enter a valid number for Duration of Minutes");
+    } else if(validTimeInMin < 0){
+      setTimeInMinError("Duration of minutes can not be negative");
+    }
+    else {
+      setNumOfQuestionsError("");
+    }
+  };
+
   const validForm = () => {
     let isValid = true;
     if (!quizName) {
@@ -97,11 +113,27 @@ const AddOrUpdateQuiz = () => {
       setQuizDescriptionError("");
     }
 
-    if (isNaN(numOfQuestions) || numOfQuestions < 0) {
+    if(!numOfQuestions){
+      setNumOfQuestionsError("Enter Number of Questions");
+    }
+    else if (isNaN(numOfQuestions) || numOfQuestions < 0) {
       setNumOfQuestionsError("Enter a valid number of Questions");
       isValid = false;
     } else {
       setNumOfQuestionsError("");
+    }
+
+    if(!timeInMin){
+      setTimeInMinError("Enter Number of Questions");
+    }
+    else if (isNaN(timeInMin)){
+      setTimeInMinError("Enter a valid number for Duration of Minutes");
+      isValid = false;
+    } else if (timeInMin < 0){
+      setTimeInMinError("Duration of minutes cannot be negative")
+      isValid = false;
+    } else {
+      setTimeInMinError("");
     }
 
     return isValid;
@@ -118,6 +150,7 @@ const AddOrUpdateQuiz = () => {
       quizName,
       quizDescription,
       numOfQuestions,
+      timeInMin,
       categoryId,
     };
     try {
@@ -183,7 +216,7 @@ const AddOrUpdateQuiz = () => {
   return (
     <div className="App">
       <AdminNavBar />
-      <div className="add-category-container">
+      <div className="add-quiz-container">
         <h1>{isUpdating ? 'Update Quiz' : 'Add Quiz'}</h1>
         <form onSubmit={handleAddOrUpdateQuiz}>
           <div className="form-group">
@@ -194,7 +227,7 @@ const AddOrUpdateQuiz = () => {
               onChange={handleQuizNameChange}
               placeholder="Enter Quiz Name"
             />
-            <span className="error-message">{quizNameError}</span>
+            {quizNameError && <div className="error">{quizNameError}</div>}
 
             <label>Quiz Description:</label>
             <textarea
@@ -202,7 +235,7 @@ const AddOrUpdateQuiz = () => {
               onChange={handleQuizDescriptionChange}
               placeholder="Enter Quiz Description"
             />
-            <span className="error-message">{quizDescriptionError}</span>
+            {quizDescriptionError && <div className="error">{quizDescriptionError}</div>}
 
             <label>Number of Questions:</label>
             <input
@@ -211,7 +244,17 @@ const AddOrUpdateQuiz = () => {
               onChange={handleQuizNumOfQuestions}
               placeholder="Enter Number of Questions"
             />
-            <span className="error-message">{numOfQuestionsError}</span>
+            {numOfQuestionsError && <div className="error">{numOfQuestionsError}</div>}
+
+            <label>Duration(in Minutes): </label>
+            <input
+            type = "number"
+            value = {timeInMin}
+            onChange = {handleQuizDuration}
+            place Holder = "Enter Duration"
+            />
+            {timeInMinError && <div className="error">{timeInMinError}</div>}
+
           </div>
           <div className="form-group">
             <div className="button-container-category">

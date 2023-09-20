@@ -4,7 +4,6 @@
 package com.capstoneproject.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +14,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class UserDTO {
   /**
    * This is the Id field to be entered by new User.

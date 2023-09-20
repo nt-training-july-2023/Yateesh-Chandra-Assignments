@@ -1,5 +1,6 @@
 .manage-questions-container {
   max-width: 900px;
+  max-height: 500px;
   margin: auto;
   margin-top: 20px;
   padding: 20px;
@@ -51,10 +52,26 @@
 }
 
 .question-list-container {
-  max-height: 400px;
+  max-height: 350px;
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 20px;
+}
+
+.question-list-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.question-list-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.question-list-container::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.question-list-container {
+  scrollbar-width: thin;
 }
 
 .question-list ul {

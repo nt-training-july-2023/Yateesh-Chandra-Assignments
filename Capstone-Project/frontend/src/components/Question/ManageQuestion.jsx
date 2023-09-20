@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ManageQuestion.css";
 import Swal from "sweetalert2";
+import AdminNavBar from "../AdminNavBar";
 
 const ManageQuestion = () => {
   const [questions, setQuestions] = useState([]);
@@ -109,6 +110,8 @@ const ManageQuestion = () => {
   };
 
   return (
+    <div className="App">
+      <AdminNavBar/>
     <div className="manage-questions-container">
       <h1>{questions.length === 0 ? "No Questions Available" :"Manage Questions"}</h1>
       {!isAddingQuestion && !isEditingQuestion ? (
@@ -222,6 +225,7 @@ const ManageQuestion = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

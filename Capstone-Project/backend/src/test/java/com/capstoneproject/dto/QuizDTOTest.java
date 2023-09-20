@@ -69,8 +69,28 @@ class QuizDTOTest {
         Long categoryIdNotNull = 1L;
         QuizDTO quizDtoNotNull = new QuizDTO(1L, "Test Quiz", "Test Description",7, 3, categoryIdNotNull);
         assertEquals(categoryIdNotNull, quizDtoNotNull.getCategoryId());
-        
         QuizDTO quizDtoNull = new QuizDTO(2L, "Test Quiz 2", "Test 2 Description", 10, 4, null);
         assertEquals(-1L, quizDtoNull.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNotNull() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(5L);
+        assertEquals(5L, quizDto.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNull() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(null);
+        assertEquals(-1L, quizDto.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNegative() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(-5L);
+        assertEquals(-5L, quizDto.getCategoryId());
     }
 }

@@ -70,6 +70,7 @@ const ManageQuiz = () => {
                 <h2>{quiz.quizName}</h2>
                 <p>{quiz.quizDescription}</p>
                 <p>Total No of Questions : <b>{quiz.numOfQuestions}</b></p>
+                <p>Duration : <b>{quiz.timeInMin} min</b></p>
                 <div className="open-quiz">
                   {userRole === "ADMIN" && (
                   <button className="edit-button" onClick={() => handleEditClick(quiz.quizId)}>Edit</button>
@@ -95,7 +96,7 @@ const ManageQuiz = () => {
                   <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`)}>Open</button>
                   )}
                   {userRole === "USER" && (
-                    <button className="open-button">Take Quiz</button>
+                    <button className="open-button" onClick={() => navigate(`/test/${quiz.quizId}`)}>Take Quiz</button>
                   )}
                 </div>
               </div>
