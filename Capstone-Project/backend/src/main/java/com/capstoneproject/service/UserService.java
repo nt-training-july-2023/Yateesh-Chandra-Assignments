@@ -83,7 +83,8 @@ public class UserService {
                     if (user.isPresent()) {
                         return new LoginResponse(msg + "Login Successful..!",
                                 true, user.get().getUserRole(),
-                                user.get().getUserId());
+                                user.get().getUserId(), user.get().getName(),
+                                user.get().getEmail());
                     } else {
                         return new LoginResponse(msg + "Login Failed", false);
                     }

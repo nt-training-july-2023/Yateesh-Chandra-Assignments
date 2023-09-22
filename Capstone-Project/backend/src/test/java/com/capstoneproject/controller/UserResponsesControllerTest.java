@@ -36,11 +36,4 @@ class UserResponsesControllerTest {
         assertEquals(userResponsesDto, responseEntity.getBody());
     }
 
-    @Test
-    void testCheckStatus() {
-        when(userResponsesService.findUserResponsesByUserAndQuiz(1L, 3L)).thenReturn(true);
-        ResponseEntity<Object> responseEntity = userResponsesController.checkStatus(1L, 2L);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertFalse((Boolean) responseEntity.getBody());
-    }
 }

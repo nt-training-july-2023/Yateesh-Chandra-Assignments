@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-
 import './Categories.css';
 import AdminNavBar from '../AdminNavBar';
 import Swal from 'sweetalert2';
@@ -37,6 +35,11 @@ const ManageCategory = () => {
   const handleEditClick = (categoryId) => {
     navigate(`/add-category/${categoryId}`);
   };
+
+const handleOpenButton = (categoryId, categoryName) => {
+  {localStorage.setItem("categoryName",categoryName)}
+  navigate(`/manage-quiz/${categoryId}`);
+}
 
   const filterCategory = categories.filter((category) => {
     return category.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
@@ -100,7 +103,7 @@ const ManageCategory = () => {
                     })
                     }>Delete</button>
                   )}    
-                  <button className="green-button" onClick={() => navigate(`/manage-quiz/${category.categoryId}`)}>Open</button>
+                  <button className="green-button" onClick={() => handleOpenButton(category.categoryId, category.categoryName)}>Open</button>
                 </td>
                 
               </tr>

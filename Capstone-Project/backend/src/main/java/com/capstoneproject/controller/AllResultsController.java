@@ -19,7 +19,7 @@ import com.capstoneproject.service.AllResultsService;
  */
 @RestController
 @RequestMapping("/api/v1/allresult")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class AllResultsController {
 
     /**
@@ -55,14 +55,14 @@ public class AllResultsController {
 
     /**
      * This is the Response Entity.
-     * @param email - String.
+     * @param userId - String.
      * @return the Ok status.
      */
-    @GetMapping("/{emailId}")
-    public final ResponseEntity<Object> getResultsByEmail(
-            @PathVariable final String email) {
+    @GetMapping("/{userId}")
+    public final ResponseEntity<Object> getResultsByUserId(
+            @PathVariable final Long userId) {
         List<AllResultsDTO> allResultsDto = allResultsService
-                .getResultsByEmail(email);
+                .getResultsByUserId(userId);
         return ResponseEntity.ok(allResultsDto);
     }
 }

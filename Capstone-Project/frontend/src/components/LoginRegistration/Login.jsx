@@ -117,6 +117,8 @@ function Login() {
           console.log(response.data);
           localStorage.setItem("role", response.data.userRole);
           localStorage.setItem("id", response.data.userId)
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("email", response.data.email);
       
           if (response.data.message === "Email does not exist.!") {
             setEmailError("Email not exists..!");

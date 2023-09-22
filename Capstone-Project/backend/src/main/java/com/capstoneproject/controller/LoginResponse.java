@@ -30,6 +30,14 @@ public class LoginResponse {
      */
     private Long userId;
     /**
+     * This is User Name.
+     */
+    private String name;
+    /**
+     * This is the email
+     */
+    private String email;
+    /**
      * checks the login response.
      * @param messagee of String Type.
      * @param statuss of boolean type is checked.

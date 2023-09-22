@@ -3,8 +3,6 @@ package com.capstoneproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,19 +36,5 @@ public class UserResponsesController {
         UserResponsesDTO responseDto = responseService
                 .addUserResponses(response);
         return ResponseEntity.ok(responseDto);
-    }
-
-    /**
-     * This is the Check Status method.
-     * @param userId - Long type.
-     * @param quizId - Long type.
-     * @return the Ok status.
-     */
-    @GetMapping("/status/{userId}/{quizId}")
-    public final ResponseEntity<Object> checkStatus(
-            @PathVariable final Long userId, @PathVariable final Long quizId) {
-        boolean responses = responseService
-                .findUserResponsesByUserAndQuiz(userId, quizId);
-        return ResponseEntity.ok(responses);
     }
 }

@@ -8,7 +8,7 @@ function UserNavBar() {
   const navigate = useNavigate();
   
   const handleSignOut = () => {
-    localStorage.removeItem("role");
+    localStorage.clear();
     navigate("/login");
   }
 
@@ -37,7 +37,6 @@ function UserNavBar() {
         <li><Link to="/user" className={location.pathname === '/user' ? 'active' : ''}>Home</Link></li>
         <li><Link to="/manage-category" className={location.pathname === '/manage-category' ? 'active' : ''}>Categories</Link></li>
         <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Profile</Link></li>
-        <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
         <li className='sign-out-button'>
           <button onClick={signOutSweetAlert}>Sign Out</button>
         </li>

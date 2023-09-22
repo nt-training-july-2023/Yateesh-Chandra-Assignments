@@ -8,7 +8,7 @@ function AdminNavBar() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-      localStorage.removeItem("role");
+      localStorage.clear();
       navigate("/login");
   }
 
@@ -36,8 +36,7 @@ function AdminNavBar() {
         <ul>
         <li><Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>Home</Link></li>
         <li><Link to="/manage-category" className={location.pathname === '/manage-category' || location.pathname === '/add-category' ? 'active' : ''}>Categories</Link></li>
-        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Profile</Link></li>
-        <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
+        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Activity</Link></li>
         <li className='sign-out-button'>
           <button onClick={signOutSweetAlert}>Sign Out</button>
         </li>

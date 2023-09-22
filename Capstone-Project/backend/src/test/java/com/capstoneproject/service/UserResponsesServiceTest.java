@@ -13,13 +13,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.capstoneproject.dto.UserResponsesDTO;
-import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.models.User;
-import com.capstoneproject.models.UserResponses;
 import com.capstoneproject.repository.AllResultsRepository;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
@@ -68,7 +66,6 @@ class UserResponsesServiceTest {
         when(userRepo.findById(5L)).thenReturn(Optional.of(user));
         when(quizRepo.findById(quiz.getQuizId())).thenReturn(Optional.of(quiz));
         when(categoryRepo.findById(category.getCategoryId())).thenReturn(Optional.of(category));
-        when(userResponsesRepo.findResponsesByUsersAndQuiz(user.getUserId(), quiz.getQuizId())).thenReturn(null);
 
         UserResponsesDTO addedResponses = userResponsesService.addUserResponses(userResponsesDto);
         assertNotNull(addedResponses);
@@ -83,16 +80,6 @@ class UserResponsesServiceTest {
     }
 
     @Test
-    public void testAddUserResponses_AlreadyExistsException() {
-        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
-        userResponsesDto.setUserId(1L);
-        userResponsesDto.setQuizId(3L);
-        UserResponses existingResponses = new UserResponses();
-        when(userResponsesRepo.findResponsesByUsersAndQuiz(1L, 3L)).thenReturn(existingResponses);
-        assertThrows(NoInputException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
-    }
-
-    @Test
     public void testAddUserResponsesWithExistingResponse() {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
         userResponsesDto.setUserId(1L);
@@ -102,8 +89,7 @@ class UserResponsesServiceTest {
         userResponsesDto.setMarksScored(8);
         userResponsesDto.setNumOfQuestions(10);
         userResponsesDto.setNumOfQuestionsAnswered(8);
-        when(userResponsesRepo.findResponsesByUsersAndQuiz(1L, 5L)).thenReturn(new UserResponses());
-        assertThrows(AlreadyExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
+        assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
     }
     
     @Test
@@ -135,23 +121,4 @@ class UserResponsesServiceTest {
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
     }
 
-    @Test
-    public void testFindUserResponsesByUserAndQuiz() {
-        when(userResponsesRepo.findResponsesByUsersAndQuiz(1L, 3L)).thenReturn(new UserResponses());
-        boolean result = userResponsesService.findUserResponsesByUserAndQuiz(1L, 3L);
-        assertTrue(result);
-    }
-    
-    @Test
-    public void testFindUserResponsesByUserAndQuizNoInput() {
-        assertThrows(NoInputException.class, () -> userResponsesService.findUserResponsesByUserAndQuiz(1L, null));
-        assertThrows(NoInputException.class, () -> userResponsesService.findUserResponsesByUserAndQuiz(null, 3L));
-    }
-
-    @Test
-    public void testFindUserResponsesByUserAndQuizNonExistingUser() {
-        when(userResponsesRepo.findResponsesByUsersAndQuiz(1L, 3L)).thenReturn(null);
-        boolean result = userResponsesService.findUserResponsesByUserAndQuiz(1L, 3L);
-        assertFalse(result);
-    }
 }

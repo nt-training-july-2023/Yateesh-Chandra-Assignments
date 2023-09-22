@@ -32,6 +32,6 @@ public interface AllResultsRepository extends JpaRepository<AllResults, Long> {
      * @return the List of All Results.
      */
     @Query("select result from AllResults as result where"
-            + " result.email = :email")
-    List<AllResults> getResultsByEmail(String email);
+            + " result.userId = :userId")
+    List<AllResults> getResultsByUserId(Long userId);
 }

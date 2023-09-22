@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ManageQuestion.css";
 import Swal from "sweetalert2";
-import AdminNavBar from "../AdminNavBar";
 
 const ManageQuestion = () => {
   const [questions, setQuestions] = useState([]);
@@ -110,8 +109,6 @@ const ManageQuestion = () => {
   };
 
   return (
-    <div className="App">
-      <AdminNavBar/>
     <div className="manage-questions-container">
       <h1>{questions.length === 0 ? "No Questions Available" :"Manage Questions"}</h1>
       {!isAddingQuestion && !isEditingQuestion ? (
@@ -125,6 +122,7 @@ const ManageQuestion = () => {
         <>
           <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
             <h2>{isAddingQuestion ? 'Add New Question' : 'Edit Question'}</h2>
+            
             <input
               type="text"
               name="questionTitle"
@@ -132,46 +130,65 @@ const ManageQuestion = () => {
               value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
               onChange={handleInputChange}
             />
+
             <input
             type="text"
             name="option1"
             placeholder="Option 1"
             value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
             onChange={handleInputChange}
-          />
-          <input
+            />
+
+            <input
             type="text"
             name="option2"
             placeholder="Option 2"
             value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
             onChange={handleInputChange}
-          />
-          <input
+            />
+
+            <input
             type="text"
             name="option3"
             placeholder="Option 3"
             value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
             onChange={handleInputChange}
-          />
-          <input
+            />
+
+            <input
             type="text"
             name="option4"
             placeholder="Option 4"
             value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
             onChange={handleInputChange}
-          />
-          <select
+            />
+            
+            <select
             name="correctOption"
             placeholder="Correct Option"
             value={isEditingQuestion ? editedQuestion.correctOption : newQuestion.correctOption}
             onChange={handleInputChange}
-          >
-          <option value="">Select Correct Option</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-          <option value="option4">Option 4</option>
-          </select>
+            >
+              <option value="">Select Correct Option</option>
+              {isEditingQuestion ? (
+                <>
+                  <option value={editedQuestion.option1}>{editedQuestion.option1}</option>
+                  <option value={editedQuestion.option2}>{editedQuestion.option2}</option>
+                  <option value={editedQuestion.option3}>{editedQuestion.option3}</option>
+                  <option value={editedQuestion.option4}>{editedQuestion.option4}</option>
+                </> 
+              ) : (
+                
+                <>
+                  <option value={newQuestion.option1}>{newQuestion.option1}</option>
+                  <option value={newQuestion.option2}>{newQuestion.option2}</option>
+                  <option value={newQuestion.option3}>{newQuestion.option3}</option>
+                  <option value={newQuestion.option4}>{newQuestion.option4}</option>
+                </>
+              )}
+            
+            </select>
+
 
             {isAddingQuestion ? (
               <button className="edit-button" onClick={handleAddQuestion}>Add</button>
@@ -225,7 +242,6 @@ const ManageQuestion = () => {
           </div>
         </div>
       )}
-    </div>
     </div>
   );
 };

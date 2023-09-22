@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.UserResponsesDTO;
-import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.AllResults;
@@ -71,10 +70,6 @@ public class UserResponsesService {
                 || responses.getNumOfQuestionsAnswered() == 0) {
             throw new NoInputException("No Inputs Detected");
         } else {
-            if (responsesRepository.findResponsesByUsersAndQuiz(
-                    responses.getUserId(), responses.getQuizId()) != null) {
-                throw new AlreadyExistsException("Already exists");
-            }
             User user = userRepository.findById(responses.getUserId())
                     .orElse(null);
             if (user == null) {
@@ -121,24 +116,5 @@ public class UserResponsesService {
                 }
             }
         }
-    }
-
-    /**
-     * This method is used to find the User Responses.
-     * @param userId UserId of Long Type.
-     * @param quizId from Quiz of Long type.
-     * @return true or false based on its existence in the repository.
-     */
-    public final boolean findUserResponsesByUserAndQuiz(final Long userId,
-            final Long quizId) {
-        if (userId == null || quizId == null) {
-            throw new NoInputException("No Input detected");
-        }
-        UserResponses userResponses = responsesRepository
-                .findResponsesByUsersAndQuiz(userId, quizId);
-        if (userResponses == null) {
-            return false;
-        }
-        return true;
     }
 }

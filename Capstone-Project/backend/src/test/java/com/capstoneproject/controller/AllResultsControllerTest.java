@@ -51,8 +51,8 @@ class AllResultsControllerTest {
         AllResultsDTO result2 = new AllResultsDTO();
         allResultsDto.add(result1);
         allResultsDto.add(result2);
-        when(allResultsService.getResultsByEmail("test@gmail.com")).thenReturn(allResultsDto);
-        ResponseEntity<Object> responseEntity = allResultsController.getResultsByEmail("test@gmail.com");
+        when(allResultsService.getResultsByUserId(5L)).thenReturn(allResultsDto);
+        ResponseEntity<Object> responseEntity = allResultsController.getResultsByUserId(5L);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(allResultsDto, responseEntity.getBody());
     }

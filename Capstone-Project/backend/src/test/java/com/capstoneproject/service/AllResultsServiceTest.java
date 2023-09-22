@@ -72,8 +72,8 @@ class AllResultsServiceTest {
         allResults2.setResultId(2L);
         allResults.add(allResults1);
         allResults.add(allResults2);
-        when(allResultsRepo.getResultsByEmail("test@gmail.com")).thenReturn(allResults);
-        List<AllResultsDTO> resultsDto = allResultsService.getResultsByEmail("test@gmail.com");
+        when(allResultsRepo.getResultsByUserId(5L)).thenReturn(allResults);
+        List<AllResultsDTO> resultsDto = allResultsService.getResultsByUserId(5L);
         assertEquals(2, resultsDto.size());
     }
 }

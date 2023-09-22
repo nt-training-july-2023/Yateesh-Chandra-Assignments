@@ -48,6 +48,10 @@ const ManageQuiz = () => {
     navigate('/add-quiz', { state: { categoryId: categoryId.toString() } });
   };
 
+  const handleTakeQuizClick = (quizId, timeInMin, quizName, categoryId) => {
+    navigate(`/test/${quizId}`, {state : {timeInMin, quizName, categoryId}});
+  }
+
   return (
     <div>
         {userRole === "ADMIN" ? <AdminNavBar /> : <UserNavBar/>}
@@ -96,7 +100,7 @@ const ManageQuiz = () => {
                   <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`)}>Open</button>
                   )}
                   {userRole === "USER" && (
-                    <button className="open-button" onClick={() => navigate(`/test/${quiz.quizId}`)}>Take Quiz</button>
+                    <button className="open-button" onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)}>Take Quiz</button>
                   )}
                 </div>
               </div>

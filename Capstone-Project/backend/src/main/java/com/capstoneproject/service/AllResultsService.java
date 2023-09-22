@@ -86,9 +86,9 @@ public class AllResultsService {
      * @param email is passed.
      * @return the List of Results for that email.
      */
-    public final List<AllResultsDTO> getResultsByEmail(final String email) {
+    public final List<AllResultsDTO> getResultsByUserId(final Long userId) {
         List<AllResults> allResults = allResultsRepository
-                .getResultsByEmail(email);
+                .getResultsByUserId(userId);
         return allResults.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
