@@ -36,7 +36,7 @@ function AdminNavBar() {
         <ul>
         <li><Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>Home</Link></li>
         <li><Link to="/manage-category" className={location.pathname === '/manage-category' || location.pathname === '/add-category' ? 'active' : ''}>Categories</Link></li>
-        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Activity</Link></li>
+        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>User Activity</Link></li>
         <li className='sign-out-button'>
           <button onClick={signOutSweetAlert}>Sign Out</button>
         </li>

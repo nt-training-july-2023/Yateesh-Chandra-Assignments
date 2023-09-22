@@ -64,10 +64,8 @@ public class UserResponsesService {
             final UserResponsesDTO responses) {
         if (responses.getUserId() == null || responses.getCategoryId() == null
                 || responses.getQuizId() == null
-                || responses.getMarksScored() == 0
                 || responses.getTotalMarks() == 0
-                || responses.getNumOfQuestions() == 0
-                || responses.getNumOfQuestionsAnswered() == 0) {
+                || responses.getNumOfQuestions() == 0) {
             throw new NoInputException("No Inputs Detected");
         } else {
             User user = userRepository.findById(responses.getUserId())

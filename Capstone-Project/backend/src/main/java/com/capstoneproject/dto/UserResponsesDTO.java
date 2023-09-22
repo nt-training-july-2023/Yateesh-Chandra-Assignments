@@ -52,7 +52,6 @@ public class UserResponsesDTO {
     /**
      * This is the number of Questions answered.
      */
-    @Column(nullable = false)
     private int numOfQuestionsAnswered;
 
     /**
@@ -64,7 +63,6 @@ public class UserResponsesDTO {
     /**
      * This is the marks scored field.
      */
-    @Column(nullable = false)
     private int marksScored;
 
     /**

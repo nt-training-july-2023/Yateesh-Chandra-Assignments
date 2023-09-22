@@ -50,7 +50,7 @@ public class UserResponses {
     /**
      * This field tells number of questions answered.
      */
-    @Column(nullable = false)
+    @Column
     private int numOfQuestionsAnswered;
 
     /**
@@ -62,7 +62,7 @@ public class UserResponses {
     /**
      * This is marks scored.
      */
-    @Column(nullable = false)
+    @Column
     private int marksScored;
 
     /**

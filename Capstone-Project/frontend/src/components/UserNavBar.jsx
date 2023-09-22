@@ -36,7 +36,7 @@ function UserNavBar() {
         <ul>
         <li><Link to="/user" className={location.pathname === '/user' ? 'active' : ''}>Home</Link></li>
         <li><Link to="/manage-category" className={location.pathname === '/manage-category' ? 'active' : ''}>Categories</Link></li>
-        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Profile</Link></li>
+        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>Report</Link></li>
         <li className='sign-out-button'>
           <button onClick={signOutSweetAlert}>Sign Out</button>
         </li>
