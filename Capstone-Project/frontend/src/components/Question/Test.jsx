@@ -107,6 +107,10 @@ const Test = () => {
             setAutoSubmitted(true);
             handleSubmit();
             }
+            if(prevTimer < 0){
+                return 0;
+            }
+            return prevTimer
         });
         }, 1000);
 
@@ -143,7 +147,7 @@ const Test = () => {
 
     return (
         <div className="quiz-container">
-            <div className="timer"><FaStopwatch /> Time Left: {formatTime(timer)}</div>
+            <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
             {loading ? (
                 <div>Loading questions...</div>
             ) : questions.length > 0 ? (
