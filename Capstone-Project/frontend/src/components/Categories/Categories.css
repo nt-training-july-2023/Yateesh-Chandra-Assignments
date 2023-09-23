@@ -28,7 +28,8 @@
   }
 
 .category-table-container {
-    max-height: 400px;
+  margin-top: 20px;  
+  max-height: 400px;
     overflow-y: auto;
     height: 100%;  
   }
@@ -36,9 +37,16 @@
 .button-container-category{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     margin-left: 10px;
     margin-right: 10px;
+  }
+
+  .left-buttons {
+      display: flex;
+      gap: 10px;
+      margin-left: 15px;
   }
   
 .category-table {
@@ -107,6 +115,12 @@
     background-color: rgb(11, 95, 25);
   }
 
+  .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
 @media (max-width: 768px) {
     .category-table th,
     .category-table td {
@@ -117,9 +131,22 @@
       margin-right: 0;
       margin-bottom: 5px;
     }
+
+    .left-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-right: 20px;
+      margin-left: 0px;
+      margin-bottom: 20px;
+  }
+  
+    .search-bar {
+      max-width: 10%;
+  }
   }
 
 @media (min-width: 769px) {
+
   .button-search-container {
     display: flex;
     align-items: center;
@@ -133,6 +160,8 @@
   .search-bar {
     margin-top: 0;
   }
+
+
 }
 
 
@@ -141,8 +170,8 @@
     max-width: 400px;
     margin: 0 auto;
     margin-top: 100px;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
+    background-color: none;
+    border: 2px solid #4d4848;
     border-radius: 5px;
   }
   
@@ -162,6 +191,14 @@ label {
     margin-bottom: 10px;
     margin-top: 20px;
     text-align: left;
+  }
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
 input[type="text"],
@@ -185,10 +222,11 @@ button {
   }
   
   .search-bar {
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    max-width: 500px;
+    max-width: 40%;
+    flex-grow: 1;
+    margin-right: 20px;
   }
 
   .search-input{
@@ -256,4 +294,8 @@ button {
   
   .category-table-container::-webkit-scrollbar-track {
     background: #8cf74e;
+  }
+
+  .small-icon{
+    font-size: 10px;
   }

@@ -24,6 +24,7 @@ const AddOrUpdateCategory = () =>{
       icon : "success",
       timer : 1500
     })
+    navigate("/manage-category")
   }
 
   const addAlert = () => {
@@ -32,6 +33,7 @@ const AddOrUpdateCategory = () =>{
       icon : "success",
       timer : 1500
     })
+    navigate("/manage-category")
   }
 
   const fetchCategoryData = () => {
@@ -128,7 +130,6 @@ const AddOrUpdateCategory = () =>{
           if(response.status === 200){
             addAlert();
             console.log("Category added successfully.");
-            navigate("/manage-category")
           }
           
         } catch(error){
@@ -142,7 +143,6 @@ const AddOrUpdateCategory = () =>{
             }
         }
       }
-      navigate("/manage-category");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -177,7 +177,7 @@ const AddOrUpdateCategory = () =>{
 
           <div className="form-group">
             <div className="button-container-category">
-              <button type="submit">{isUpdating ? 'Update Category' : 'Add Category'}</button>
+              <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
               <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
             </div>
           </div>

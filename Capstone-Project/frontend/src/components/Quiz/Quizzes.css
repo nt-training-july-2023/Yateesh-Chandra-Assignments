@@ -92,8 +92,8 @@
   max-width: 400px;
   margin: 0 auto;
   margin-top: 35px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
+  background-color: none;
+  border: 2px solid #332d2d;
   border-radius: 5px;
 }
 
