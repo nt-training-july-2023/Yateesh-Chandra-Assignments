@@ -28,7 +28,7 @@ public interface AllResultsRepository extends JpaRepository<AllResults, Long> {
 
     /**
      * This method gets Results By Email.
-     * @param email - String type.
+     * @param userId - Long type.
      * @return the List of All Results.
      */
     @Query("select result from AllResults as result where"

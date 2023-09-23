@@ -83,7 +83,7 @@ public class AllResultsService {
 
     /**
      * This method gets the Result by Email.
-     * @param email is passed.
+     * @param userId is passed.
      * @return the List of Results for that email.
      */
     public final List<AllResultsDTO> getResultsByUserId(final Long userId) {

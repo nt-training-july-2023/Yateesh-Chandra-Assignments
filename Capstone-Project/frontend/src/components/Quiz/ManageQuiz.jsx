@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const ManageQuiz = () => {
   const { categoryId } = useParams();
+  const [searchQuery, setSearchQuery] = useState('');
   const [quizzes, setQuizzes] = useState([]);
   const navigate = useNavigate();
   const userRole = localStorage.getItem("role");
@@ -52,6 +53,10 @@ const ManageQuiz = () => {
     navigate(`/test/${quizId}`, {state : {timeInMin, quizName, categoryId}});
   }
 
+  const filterQuiz = quizzes.filter((quiz) =>{
+    return quiz.quizName.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
   return (
     <div>
         {userRole === "ADMIN" ? <AdminNavBar /> : <UserNavBar/>}
@@ -59,6 +64,7 @@ const ManageQuiz = () => {
       
       <div className="quiz-list-container">
         <h1>{quizzes.length === 0 ? "No Quiz Available" : "Quizzes Available"}</h1>
+        <div className="button-search-container">
         {userRole === "ADMIN" && (
         <button
           className="add-category-button"
@@ -67,9 +73,18 @@ const ManageQuiz = () => {
           Add Quiz
         </button>
         )}
+       <div className = 'search-bar'>
+          <input
+          type="text"
+          placeholder="Search Quiz"
+          value = {searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          />
+       </div>
+       </div>
         <div className="quiz-list-scroll-container">
           <div className="quiz-grid">
-            {quizzes.map((quiz) => (
+            {filterQuiz.map((quiz) => (
               <div className="quiz-card" key={quiz.quizId}>
                 <h2>{quiz.quizName}</h2>
                 <p>{quiz.quizDescription}</p>

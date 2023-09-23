@@ -34,7 +34,7 @@ public class LoginResponse {
      */
     private String name;
     /**
-     * This is the email
+     * This is the email.
      */
     private String email;
     /**

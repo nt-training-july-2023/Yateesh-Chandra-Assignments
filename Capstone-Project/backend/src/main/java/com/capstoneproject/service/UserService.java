@@ -53,12 +53,15 @@ public class UserService {
                 || userDTO.getPhoneNumber() == null) {
             throw new ValidationException("Invalid Data Provided");
         }
-        User user = new User(userDTO.getUserId(), userDTO.getName(),
-                userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword()),
-                userDTO.getUserRole(), userDTO.getPhoneNumber());
-        userRepo.save(user);
-        return user.getName();
+        if (userDTO.getEmail().matches("^(?!.*@nucleusteq\\.com$).*")) {
+            throw new CustomException("Can not register Email");
+        }
+            User user = new User(userDTO.getUserId(), userDTO.getName(),
+                    userDTO.getEmail(),
+                    this.passwordEncoder.encode(userDTO.getPassword()),
+                    userDTO.getUserRole(), userDTO.getPhoneNumber());
+            userRepo.save(user);
+            return user.getName();
     }
 
     /**
@@ -72,7 +75,7 @@ public class UserService {
         String msg = "";
         try {
             Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
-            if (user1 != null) {
+            if (user1.isPresent()) {
                 String password = loginDTO.getPassword();
                 String encodedPassword = user1.get().getPassword();
                 Boolean isPwdRight = passwordEncoder.matches(password,
