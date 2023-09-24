@@ -59,3 +59,15 @@
   .sign-out-button button:hover {
     background-color: #e62c00;
   }
+
+  @media (max-width : 578px) {
+    h1{
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width : 398px) {
+    h1{
+      font-size: 18px;
+    }
+  }

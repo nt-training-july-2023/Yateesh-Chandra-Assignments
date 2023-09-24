@@ -77,7 +77,7 @@ public class UserResponsesDTO {
     public final String setTimeStampMethod() {
         LocalDateTime currentTimeStamp = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter
-                .ofPattern("yyyy-MM-dd HH:mm:ss");
+                .ofPattern("dd-MM-yyyy HH:mm:ss");
         return currentTimeStamp.format(formatter);
     }
 }

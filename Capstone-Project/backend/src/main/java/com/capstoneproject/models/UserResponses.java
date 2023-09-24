@@ -74,7 +74,7 @@ public class UserResponses {
      * This is getter Method for User.
      * @return the User object.
      */
-    public final User getUsers() {
+    public User getUsers() {
         return new User(users.getUserId(), users.getName());
     }
 
@@ -82,7 +82,7 @@ public class UserResponses {
      * This method sets the users.
      * @param user - User.
      */
-    public final void setUsers(final User user) {
+    public void setUsers(final User user) {
         this.users = new User(user.getUserId(), user.getName());
     }
 
@@ -90,7 +90,7 @@ public class UserResponses {
      * This is getter method for Quiz.
      * @return the new Quiz Object.
      */
-    public final Quiz getQuiz() {
+    public Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
                 quiz.getQuizDescription(), quiz.getNumOfQuestions(),
                 quiz.getTimeInMin());
@@ -100,7 +100,7 @@ public class UserResponses {
      * This is setter method for Quiz.
      * @param qui - Quiz.
      */
-    public final void setQuiz(final Quiz qui) {
+    public void setQuiz(final Quiz qui) {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
                 qui.getQuizDescription(), qui.getNumOfQuestions(),
                 qui.getTimeInMin());

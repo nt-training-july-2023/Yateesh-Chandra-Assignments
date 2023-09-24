@@ -90,7 +90,7 @@ public class Quiz {
      * List the questions.
      *@return the list of questions.
      */
-    public final List<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return new ArrayList<>(questions);
     }
 
@@ -98,7 +98,7 @@ public class Quiz {
      * This is Setter method for the Question Table.
      * @param que contains the list of questions.
      */
-    public final void setQuestions(final List<Question> que) {
+    public void setQuestions(final List<Question> que) {
         this.questions = new ArrayList<>(que);
     }
 
@@ -106,7 +106,7 @@ public class Quiz {
      * Get category.
      * @return category that was set.
      */
-    public final Category getCategory() {
+    public Category getCategory() {
         return new Category(category.getCategoryId(),
                 category.getCategoryName(), category.getDescription());
     }
@@ -115,7 +115,7 @@ public class Quiz {
      * Sets the category.
      * @param cate is final.
      */
-    public final void setCategory(final Category cate) {
+    public void setCategory(final Category cate) {
             this.category = new Category(cate.getCategoryId(),
                     cate.getCategoryName(), cate.getDescription());
     }
@@ -124,7 +124,7 @@ public class Quiz {
      * This is the getter method for the User Response.
      * @return the List of Responses.
      */
-    public final List<UserResponses> getUserResponses() {
+    public List<UserResponses> getUserResponses() {
         return new ArrayList<>(userResponses);
     }
 
@@ -132,7 +132,7 @@ public class Quiz {
      * This is the setter method for User Responses.
      * @param userResponse - User Response.
      */
-    public final void setUserResponses(
+    public void setUserResponses(
             final List<UserResponses> userResponse) {
         this.userResponses = new ArrayList<>(userResponse);
     }

@@ -11,6 +11,7 @@ const ManageQuestion = () => {
     const location = useLocation();
     const userRole = localStorage.getItem("role");
     const categoryId = location.state?.categoryId;
+    const numOfQuestions = location.state ? location.state.numOfQuestions : null;
     const { quizId } = useParams();
     const navigate = useNavigate();
     const [isAddingQuestion, setIsAddingQuestion] = useState(false);
@@ -28,6 +29,8 @@ const ManageQuestion = () => {
 
     useEffect(() => {
         fetchQuestions();
+        console.log("Number of Questions passed : ", numOfQuestions);
+        console.log("Questions.length : ", questions.length);
     }, []);
 
     const fetchQuestions = () => {
@@ -56,33 +59,44 @@ const ManageQuestion = () => {
     };
 
     const handleAddQuestion = () => {
-        axios
-        .post("http://localhost:8082/api/v1/question", newQuestion)
-        .then(() => {
-            fetchQuestions();
-            setNewQuestion({
-                questionTitle: "",
-                option1: "",
-                option2: "",
-                option3: "",
-                option4: "",
-                correctOption: "",
-                quizId,
+            console.log("question length : ", questions.length);
+            console.log("Number of Questions : " , numOfQuestions);
+            axios
+            .post("http://localhost:8082/api/v1/question", newQuestion)
+            .then(() => {
+                fetchQuestions();
+                setNewQuestion({
+                    questionTitle: "",
+                    option1: "",
+                    option2: "",
+                    option3: "",
+                    option4: "",
+                    correctOption: "",
+                    quizId,
+                });
+                console.log("Question added successfully");
+                setIsAddingQuestion(false);
+            })
+            .catch((error) => {
+                console.error("Error adding question", error);
+                if(error.response.data.message === "No Inputs detected"){
+                    Swal.fire({
+                        title : "Can not add Question",
+                        text : "Please fill all the fields",
+                        icon : "error"
+                    })
+                }
             });
-            console.log("Question added successfully");
-            setIsAddingQuestion(false);
-        })
-        .catch((error) => {
-            console.error("Error adding question", error);
-            if(error.response.data.message === "No Inputs detected"){
-                Swal.fire({
-                    title : "Can not add Question",
-                    text : "Please fill all the fields",
-                    icon : "error"
-                })
-            }
-        });
+
     };
+
+    const limitReached = () => {
+        Swal.fire({
+            title : "You have reached the limit",
+            icon : 'warning',
+            timer : 1500
+        })
+    }
 
     const handleEditQuestion = () => {
         axios
@@ -151,7 +165,7 @@ const ManageQuestion = () => {
                    
                     <button
                     className="blue-button"
-                    onClick={() => setIsAddingQuestion(true)}
+                    onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => limitReached()) }
                     >
                        Add Question <FaPlusCircle className="small-icon" />
                     </button>

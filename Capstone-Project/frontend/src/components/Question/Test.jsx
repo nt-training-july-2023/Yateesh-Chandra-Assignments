@@ -4,7 +4,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FaStopwatch } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import clockswal from "../image/clockswal.png"
+import clockswal from "../image/clockswal.png";
+import instructionswal from "../image/instructionswal.png";
+import oopsswal from "../image/oopsswal.png";
 
 const Test = () => {
     const { quizId } = useParams();
@@ -46,6 +48,28 @@ const Test = () => {
         fetchQuestions();
         console.log(timer);
     }, [quizId]);
+
+    const startTimer = () => {
+        const interval = setInterval(() => {
+            setTimer((prevTimer) => {
+                if (prevTimer > 0) {
+                    return prevTimer - 1;
+                } else if(!autoSubmitted){
+                    setAutoSubmitted(true);
+                    handleSubmit();
+                }
+                
+                if(prevTimer < 0){
+                    return 0;
+                }
+                return prevTimer
+            });
+        }, 1000);
+    
+        return () => {
+            clearInterval(interval);
+        };
+    };
 
     const handleOptionSelect = (option, questionIndex) => {
         const updatedSelectedOptions = [...selectedOptions];
@@ -99,26 +123,21 @@ const Test = () => {
     }
 
     useEffect(() => {
-        const interval = setInterval(() => {
-        setTimer((prevTimer) => {
-            if (prevTimer > 0) {
-            return prevTimer - 1;
-            } else if(!autoSubmitted){
-            setAutoSubmitted(true);
-            handleSubmit();
-            }
-            if(prevTimer < 0){
-                return 0;
-            }
-            return prevTimer
-        });
-        }, 1000);
+        if(questions.length === 0){
+            return;
+        }
 
-        return () => {
-        clearInterval(interval);
-        };
-    }, [autoSubmitted, handleSubmit]);
+        
+    }, [autoSubmitted, handleSubmit, questions.length]);
 
+    useEffect(() => {
+        if (questions.length > 0) {
+            instructionForTest();
+        } else {
+            returnFunction();
+        }
+    }, [questions]);
+    
     const handleManualSubmit = () => {
         if(numOfQuestionsAnswered === 0){
             Swal.fire({
@@ -141,16 +160,68 @@ const Test = () => {
                     navigate("/user");
                 }
             });
-        }
-        
-    }
+        }   
+    };
+
+    const instructionForTest = () => {
+        Swal.fire({
+            title : "Instructions for the Test",
+            width : "700px",
+            padding: '3em',
+            color: 'black',
+            backdrop: `
+                rgb(240, 240, 240, 0.8)
+            `,
+            imageUrl : instructionswal,
+            imageWidth : 100,
+            imageWidth : 100,
+            allowOutsideClick : false,
+            showConfirmButton : true,
+            confirmButtonText : "Start",
+            html : `
+            <ol>
+                <li  style = "margin-bottom: 10px;">Each Question carries Two Marks.</li>
+                <li  style = "margin-bottom: 10px;">This is a Timed Test. Look the timer.</li>
+                <li  style = "margin-bottom: 10px;">Questions are of Choose the Correct Answer type.</li>
+                <li  style = "margin-bottom: 10px;">There is no negative marking.</li>
+            </ol>
+
+            `,
+        }).then((result) => {
+            if(result.isConfirmed){
+                startTimer();
+            }
+        });
+    };
+
+    const returnFunction = () => {
+        Swal.fire({
+            title : "No Questions found",
+            text : "Kindly visit another Quiz",
+            imageUrl : oopsswal,
+            imageWidth : 150,
+            imageWidth : 150,
+            allowOutsideClick : false,
+            padding: '3em',
+            color: 'black',
+            backdrop: `
+                rgb(249, 240, 249, 0.9)
+            `,
+            
+        }).then((res) => {
+            if(res.isConfirmed){
+                navigate(`/manage-quiz/${categoryId}`);
+            }
+        });
+    };
 
     return (
         <div className="quiz-container">
-            <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
             {loading ? (
                 <div>Loading questions...</div>
             ) : questions.length > 0 ? (
+                <>
+                    <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
                     <div className="question-container">
                         {questions.map((question, index) => (
                         <div key={index} className="question-content">
@@ -176,11 +247,13 @@ const Test = () => {
                             <button onClick={handleManualSubmit} className='next-button'>
                                 Submit
                             </button>
-                        </div>
+                        </div>  
                     </div>
+                </>
                 ) : (
-                <div>No questions available.</div>
-            )}
+                    <div className=''>No Questions Avaiable.</div>
+                )
+            }
         </div>
     );
 };

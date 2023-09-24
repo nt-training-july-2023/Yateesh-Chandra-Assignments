@@ -115,3 +115,7 @@ body {
         max-width: 100%;
     }
   }
+
+  .list-ordering ol li{
+    margin-bottom: 10px;
+  }

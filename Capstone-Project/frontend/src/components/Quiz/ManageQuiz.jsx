@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Quizzes.css";
-
 import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
 import Swal from "sweetalert2";
@@ -116,7 +115,7 @@ const ManageQuiz = () => {
                             <div className="quiz-card" key={quiz.quizId}>
                                 <h2>{quiz.quizName}</h2>
                                 <p>{quiz.quizDescription}</p>
-                                <p>Total No of Questions : <b>{quiz.numOfQuestions}</b></p>
+                                {userRole === "ADMIN" && (<p>Max No of Questions : <b>{quiz.numOfQuestions}</b></p>)}
                                 <p>Duration : <b>{quiz.timeInMin} min</b></p>
                                 <div className="open-quiz">
                                     {userRole === "ADMIN" && (
@@ -126,7 +125,7 @@ const ManageQuiz = () => {
                                     <button className="delete-button" onClick ={() => deleteButton(quiz.quizId)}> <FaTrash className="small-icon"/> Delete</button>
                                     )}
                                     {userRole === "ADMIN" && (
-                                    <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString()}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
+                                    <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
                                     )}
                     
                                     {userRole === "USER" && (

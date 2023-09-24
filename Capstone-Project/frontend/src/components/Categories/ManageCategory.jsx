@@ -65,8 +65,9 @@ const ManageCategory = () => {
         <div className='App'>
             {userRole === "ADMIN" ? <AdminNavBar/> : <UserNavBar/>}
             <div className="manage-category-container">
-                <h1>Category List</h1>
+                <h1>{filterCategory.length > 0 ? "Category List" : "No Category"}</h1>
                 <div className='button-search-container'>
+
                     {userRole === "ADMIN"&&(
                     <button className="blue-button" onClick={() => navigate('/add-category')}>
                         Add Category <FaPlusCircle className="small-icon" />

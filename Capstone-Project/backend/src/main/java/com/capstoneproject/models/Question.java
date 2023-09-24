@@ -73,7 +73,7 @@ public class Question {
      * This gets Quiz.
      * @return quiz.
      */
-    public final Quiz getQuiz() {
+    public Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
                 quiz.getQuizDescription(), quiz.getNumOfQuestions(),
                 quiz.getTimeInMin());
@@ -83,7 +83,7 @@ public class Question {
      * sets quiz.
      * @param qui is passed.
      */
-    public final void setQuiz(final Quiz qui) {
+    public void setQuiz(final Quiz qui) {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
                 qui.getQuizDescription(), qui.getNumOfQuestions(),
                 qui.getTimeInMin());

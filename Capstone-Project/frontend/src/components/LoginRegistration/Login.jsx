@@ -21,15 +21,14 @@ function Login() {
     }
 
     const loginUserSuccessSwal = () => {
-      let timeInterval
       Swal.fire({
-        title : "Welcome User .!",
-        text : "You are successfully logged in",
-        timer : 2000,
-        icon : "success",
-        willClose : () => {
-          clearInterval(timeInterval)
-        }
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Logged in successfully',
+        showConfirmButton: false,
+        background : "yellow",
+        timer: 2000,
+        timerProgressBar : true
       })
     }
 
@@ -50,15 +49,15 @@ function Login() {
     }
 
     const loginAdminSuccessSwal = () => {
-      let timeInterval
       Swal.fire({
-        title : "Welcome Admin .!",
-        text : "You are successfully Logged in",
-        timer : 2000,
-        icon : "success",
-        willClose : () => {
-          clearInterval(timeInterval)
-        }
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Logged in successfully, admin',
+        showConfirmButton: false,
+        backdrop : false,
+        background : "yellow",
+        timer: 1500,
+        timerProgressBar : true
       })
     }
 

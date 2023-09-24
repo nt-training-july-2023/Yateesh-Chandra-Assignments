@@ -100,7 +100,7 @@ public class User {
      * This is the getter method for the User Response.
      * @return the List of User Responses.
      */
-    public final List<UserResponses> getUserResponses() {
+    public List<UserResponses> getUserResponses() {
         return new ArrayList<>(userResponses);
     }
 
@@ -108,7 +108,7 @@ public class User {
      * This is the setter method for User Responses.
      * @param userResponse - User Response.
      */
-    public final void setUserResponses(final List<UserResponses> userResponse) {
+    public void setUserResponses(final List<UserResponses> userResponse) {
         this.userResponses = new ArrayList<>(userResponse);
     }
 
