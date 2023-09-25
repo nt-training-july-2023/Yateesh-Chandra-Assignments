@@ -62,15 +62,15 @@
     top: 51%;
     right: 10px;
     transform: translateY(-52%) ;
-    background-color : #c4fa00;
+    background-color : #00fff2;
     color : rgb(1, 0, 10);
     border : None;
     border-radius: 2px;
+    transition: all 0.5s;
   }
 
   .password-toggle-button:hover {
-    text-decoration: #063f1c;
-    background-color: #a1cc06;
+    background-color: #098bbe;
   }
   
   input[type="Submit"] {
@@ -111,3 +111,20 @@
   }
 }
   
+  @media (max-width: 400px){
+    .password-toggle-button{
+      right: 7px;
+    }
+  }
+
+  @media (max-width: 327px){
+    .password-toggle-button{
+      right: 3px;
+    }
+  }
+
+  @media (max-width: 284px){
+    .password-toggle-button{
+      right: 1px;
+    }
+  }

@@ -145,12 +145,17 @@ export default function Registration() {
       setConfirmPasswordError("");
     }
 
+    if(password !== confirmPassword){
+      setConfirmPasswordError("Passwords did not match");
+      isValid = false;
+    }
+
     if (!phoneNumber) {
       setPhoneNumberError("Phone Number is required");
       isValid = false;
     }
-    else if(phoneNumber.length<10){
-      setPhoneNumberError ("Phone number is less than 10 digits.")
+    else if(phoneNumber.length<10 || phoneNumber.length>10){
+      setPhoneNumberError ("Phone number must be 10 digits.")
       isValid=false;
       console.log("The number should be of 10 digits");
     }

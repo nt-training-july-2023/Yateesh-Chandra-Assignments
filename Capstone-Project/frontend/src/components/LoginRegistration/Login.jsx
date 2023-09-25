@@ -17,48 +17,49 @@ function Login() {
     }
 
     const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
+        setShowPassword(!showPassword);
     }
 
     const loginUserSuccessSwal = () => {
-      Swal.fire({
-        position: 'bottom-end',
-        icon: 'success',
-        title: 'Logged in successfully',
-        showConfirmButton: false,
-        background : "yellow",
-        timer: 2000,
-        timerProgressBar : true
-      })
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Logged in successfully',
+            showConfirmButton: false,
+            background : "yellow",
+            timer: 2000,
+            backdrop: false,
+            timerProgressBar : true
+        })
     }
 
     const alertEmailError = () => {
-      Swal.fire({
-        title : "Unregistered Email",
-        text : "No such Email is registered before",
-        icon : "error"
-      })
+        Swal.fire({
+            title : "Unregistered Email",
+            text : "No such Email is registered before(run backend)",
+            icon : "error"
+        })
     }
 
     const loginFail = () => {
-      Swal.fire({
-        title : "Unable to Login",
-        text : "Fill the valid details",
-        icon : "error"
-      })
+        Swal.fire({
+            title : "Unable to Login",
+            text : "Fill the valid details",
+            icon : "error"
+        })
     }
 
     const loginAdminSuccessSwal = () => {
-      Swal.fire({
-        position: 'bottom-end',
-        icon: 'success',
-        title: 'Logged in successfully, admin',
-        showConfirmButton: false,
-        backdrop : false,
-        background : "yellow",
-        timer: 1500,
-        timerProgressBar : true
-      })
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Logged in successfully, admin',
+            showConfirmButton: false,
+            backdrop : false,
+            background : "yellow",
+            timer: 1500,
+            timerProgressBar : true
+        })
     }
 
     const handleEmailChange = (e) => {
@@ -98,10 +99,10 @@ function Login() {
             isValid = false;
         }
         return isValid;
-    }
+    };
+
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
-      
+        event.preventDefault();  
         if(!validateForm()){
           loginFail();
             return;
