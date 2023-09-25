@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
 import axios from "axios";
+import NotFound from "../NotFound";
 
 const Profile = () => {
 
@@ -9,16 +10,14 @@ const Profile = () => {
     const userName = localStorage.getItem("name");
     const userRole = localStorage.getItem("role");
     const [allResults, setAllResults] = useState([]);
-
-    const Capitalize = (str) =>{
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
     
     useEffect(() => {
         if(userRole === "ADMIN"){
             fetchResults();
-        } else {
+        } else if(userRole === "USER") {
             fetchResultsByUser();
+        } else{
+            
         }
         
     }, []);
@@ -47,6 +46,9 @@ const Profile = () => {
 
     return(
         <div>
+            {userRole === "ADMIN" || userRole === "USER" ? (
+        <>
+        <div>
             {( userRole === "ADMIN" &&(
                 <AdminNavBar />
             )
@@ -56,7 +58,7 @@ const Profile = () => {
             )
             )} 
             <div>
-                <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px" }}>Hello {Capitalize(userName)},</h1>
+                <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px" }}>Hello {userName},</h1>
             </div>
             {(userRole === "ADMIN" && (
                 <div className="category-table-container">
@@ -121,6 +123,14 @@ const Profile = () => {
                     </table>
                 </div>
                 ))}
+        </div>
+        </>
+        )
+        :(
+        <>
+            <NotFound/>
+        </>
+        )}
         </div>
     )
 }

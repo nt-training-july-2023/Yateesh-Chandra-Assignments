@@ -71,7 +71,7 @@ class UserResponsesDTOTest {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
         String timeStamp = userResponsesDto.setTimeStampMethod();
         assertNotNull(timeStamp);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime parsedTime = LocalDateTime.parse(timeStamp,formatter);
         assertNotNull(parsedTime);
         }
