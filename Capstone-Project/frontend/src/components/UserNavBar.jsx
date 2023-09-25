@@ -25,8 +25,11 @@ function UserNavBar() {
             if(result.isConfirmed){
                 handleSignOut();
                 Swal.fire({
-                    title : "Logout",
+                    title : "Logged out successfully",
+                    position : 'bottom-right',
                     timer : 1500,
+                    timerProgressBar : true,
+                    background : `rgb(255, 252, 167)`,
                     icon : 'success'
                 });
             } 

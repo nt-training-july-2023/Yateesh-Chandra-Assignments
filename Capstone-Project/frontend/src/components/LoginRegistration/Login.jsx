@@ -26,7 +26,7 @@ function Login() {
             icon: 'success',
             title: 'Logged in successfully',
             showConfirmButton: false,
-            background : "yellow",
+            background : "rgb(255, 252, 167)",
             timer: 2000,
             backdrop: false,
             timerProgressBar : true

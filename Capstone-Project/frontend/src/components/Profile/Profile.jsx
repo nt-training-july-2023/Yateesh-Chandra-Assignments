@@ -17,7 +17,7 @@ const Profile = () => {
         } else if(userRole === "USER") {
             fetchResultsByUser();
         } else{
-            
+
         }
         
     }, []);
@@ -109,7 +109,7 @@ const Profile = () => {
                         </thead>
                         
                         <tbody>
-                            {allResults.reverse().map((row, index) => (
+                            {allResults.map((row, index) => (
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{row.categoryName}</td>

@@ -3,6 +3,7 @@ import "../LoginRegistration/LoginRegistration.css"
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import successfulswal from "../image/successfulswal.png";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -32,7 +33,9 @@ export default function Registration() {
     Swal.fire({
       title : "Successfully Registered",
       text : "Hurray, Now you are our subscriber.!",
-      icon : "success"
+      imageUrl : successfulswal,
+      imageHeight : 150,
+      imageHeight : 150,
     })
     .then((res) => {
       
