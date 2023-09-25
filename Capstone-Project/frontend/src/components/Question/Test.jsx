@@ -49,7 +49,11 @@ const Test = () => {
 
     const handleOptionSelect = (option, questionIndex) => {
         const updatedSelectedOptions = [...selectedOptions];
-        updatedSelectedOptions[questionIndex] = option;
+        if(updatedSelectedOptions[questionIndex] === option){
+            updatedSelectedOptions[questionIndex] = null;
+        } else {
+            updatedSelectedOptions[questionIndex] = option;
+        }
         setSelectedOptions(updatedSelectedOptions);
         const answeredQuestions = updatedSelectedOptions.filter(Boolean).length;
         setNumOfQuestionsAnswered(answeredQuestions);
