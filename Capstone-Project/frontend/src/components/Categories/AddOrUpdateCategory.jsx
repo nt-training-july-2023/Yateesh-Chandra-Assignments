@@ -5,6 +5,7 @@ import axios from "axios";
 import AdminNavBar from "../AdminNavBar";
 import Swal from "sweetalert2";
 import NotFound from "../NotFound";
+import CategoryService from "../../services/CategoryService";
 
 const AddOrUpdateCategory = () =>{
 
@@ -38,7 +39,8 @@ const AddOrUpdateCategory = () =>{
   }
 
   const fetchCategoryData = () => {
-    axios.get(`http://localhost:8082/api/v1/category/${categoryId}`)
+    // axios.get(`http://localhost:8082/api/v1/category/${categoryId}`)
+    CategoryService.getCategoryById(categoryId)
       .then((response) => {
         const { categoryName, description } = response.data;
         setCategoryName(categoryName);
@@ -106,7 +108,7 @@ const AddOrUpdateCategory = () =>{
     try {
       if (isUpdating) {
         try{
-          const res = await axios.put(`http://localhost:8082/api/v1/category/${categoryId}`, categoryData);
+          const res = await CategoryService.updateCategory(categoryId, categoryData);
           if(res?.status === 200){
             updateAlert();
             console.log("Category updated successfully.");
@@ -114,7 +116,8 @@ const AddOrUpdateCategory = () =>{
         }
 
         catch(error){
-          if(error?.response?.data?.message === "Category already exists"){
+          console.log(error)  
+          if(error?.response?.data?.code === 302){
             setCategoryNameError("Category already exists");
             Swal.fire({
               title : "Category Already Exists!",
@@ -122,26 +125,28 @@ const AddOrUpdateCategory = () =>{
               icon : "warning"
             })
           }
-      console.log(error)  
+          
         }
       
       } else {
+
         try{
-        const response = await axios.post('http://localhost:8082/api/v1/category', categoryData);
-          if(response.status === 200){
+        const response = await CategoryService.addCategory(categoryData);
+          if(response.status === 201){
             addAlert();
             console.log("Category added successfully.");
           }
-          
+
         } catch(error){
-            if(error?.response?.data?.message === "Category already exists"){
-              setCategoryNameError("Category already exists")
-              Swal.fire({
-                title : "Category Already Exists!",
-                text : "Change the Category name",
-                icon : "warning"
-              })
-            }
+          console.error(error)
+          if(error?.response?.data?.code === 302){
+            setCategoryNameError("Category already exists")
+            Swal.fire({
+              title : "Category Already Exists!",
+              text : "Change the Category name",
+              icon : "warning"
+            })
+          }
         }
       }
     } catch (error) {

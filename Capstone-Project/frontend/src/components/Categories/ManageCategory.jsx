@@ -8,6 +8,7 @@ import UserNavBar from '../UserNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
 import DeactivateBackButton from '../DeactivateBackButton';
 import NotFound from '../NotFound';
+import CategoryService from '../../services/CategoryService';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -16,20 +17,20 @@ const ManageCategory = () => {
     const userRole = localStorage.getItem("role");
 
     useEffect(() => {
-        fetchCategories();
+        getCategories();
     }, []);
 
-    const fetchCategories = () => {
-        axios.get("http://localhost:8082/api/v1/category")
+    const getCategories = () => {
+        CategoryService.getCategories()
         .then((response) => setCategories(response.data))
         .catch((error) => console.log("Error fetching Categories", error));
     };
 
     const handleDeleteCategory = (categoryId) => {
-        axios.delete(`http://localhost:8082/api/v1/category/${categoryId}`)
+        CategoryService.deleteCategory(categoryId)
         .then(() => {
             console.log("Category deleted : ", categoryId);
-            fetchCategories();
+            getCategories();
         })
         .catch((error) => console.error("Error deleting category : ", error));
     };

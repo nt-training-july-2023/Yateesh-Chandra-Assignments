@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,12 +42,14 @@ public class Category {
     /**
      * This is the category name Column.
      */
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false, unique = true)
+    @NotBlank(message = "Category Name is required")
     private String categoryName;
     /**
      * This is the Category Description Column.
      */
-    @Column(name = "category_description")
+    @Column(name = "category_description", nullable = false)
+    @NotBlank(message = "Category Description is required")
     private String description;
 
     /**
@@ -57,7 +60,6 @@ public class Category {
      */
     public Category(final Long catId, final String catName,
             final String desc) {
-//        super();
         this.categoryId = catId;
         this.categoryName = catName;
         this.description = desc;

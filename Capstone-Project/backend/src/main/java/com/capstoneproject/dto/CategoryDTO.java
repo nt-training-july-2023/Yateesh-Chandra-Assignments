@@ -3,9 +3,11 @@
  */
 package com.capstoneproject.dto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +32,13 @@ public class CategoryDTO {
   /**
    * This is Category Title Name field.
    */
+  @Column(nullable = false, unique = true)
+  @NotBlank(message = "Category Name is required")
   private String categoryName;
   /**
    * This is Category Description.
    */
+  @Column(nullable = false)
+  @NotBlank(message = "Category Description is required")
   private String description;
 }

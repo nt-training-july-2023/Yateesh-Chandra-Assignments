@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import com.capstoneproject.dto.CategoryDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.repository.CategoryRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 /**
  * This class contains the Service for Category.
@@ -30,7 +28,7 @@ public class CategoryService {
      * gets all categories.
      * @return the List of all categories.
      */
-    public final List<CategoryDTO> getAllCategories() {
+    public final List<CategoryDTO> getCategories() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream().map(this::convertModelToDto)
                 .collect(Collectors.toList());
@@ -55,21 +53,17 @@ public class CategoryService {
      * @return the Status of the category added.
      */
     public final CategoryDTO addCategory(final CategoryDTO categoryDto) {
-        if (categoryDto.getCategoryName().isEmpty()) {
-            throw new NoInputException();
-        } else {
-            Optional<Category> category = categoryRepository
-                    .getCategoryByName(categoryDto.getCategoryName());
-            if (category.isPresent()) {
-                throw new AlreadyExistsException("Category already exists");
-            }
-            Category newCategory = new Category();
-            newCategory.setCategoryId(categoryDto.getCategoryId());
-            newCategory.setCategoryName(categoryDto.getCategoryName());
-            newCategory.setDescription(categoryDto.getDescription());
-            categoryRepository.save(newCategory);
-            return categoryDto;
+        Optional<Category> category = categoryRepository
+                .getCategoryByName(categoryDto.getCategoryName());
+        if (category.isPresent()) {
+            throw new AlreadyExistsException("Category already exists");
         }
+        Category newCategory = new Category();
+        newCategory.setCategoryId(categoryDto.getCategoryId());
+        newCategory.setCategoryName(categoryDto.getCategoryName());
+        newCategory.setDescription(categoryDto.getDescription());
+        categoryRepository.save(newCategory);
+        return categoryDto;
     }
 
     /**
@@ -77,13 +71,9 @@ public class CategoryService {
      * @param categoryId of Long Type.
      */
     public final void deleteCategory(final Long categoryId) {
-        Category existingCategory = categoryRepository.findById(categoryId)
-                .orElse(null);
-        if (existingCategory == null) {
-            throw new ElementNotExistsException();
-        } else {
+        categoryRepository.findById(categoryId).orElseThrow(
+                () -> new ElementNotExistsException("Category Id Not Found"));
             categoryRepository.deleteById(categoryId);
-        }
     }
 
     /**
@@ -95,29 +85,23 @@ public class CategoryService {
     public final CategoryDTO updateCategory(final Long categoryId,
             final CategoryDTO updatedCategory) {
         Category existingCategory = categoryRepository.findById(categoryId)
-                .orElse(null);
-        if (existingCategory != null) {
-            if (updatedCategory.getCategoryName().isEmpty()) {
-                throw new NoInputException();
-            }
-            Optional<Category> category = categoryRepository
-                    .getCategoryByName(updatedCategory.getCategoryName());
-            if (category.isPresent()
-                    && !category.get().getCategoryId().equals(categoryId)) {
-                throw new AlreadyExistsException("Category already exists");
-            }
-            existingCategory.setCategoryName(updatedCategory.getCategoryName());
-            existingCategory.setDescription(updatedCategory.getDescription());
-
-            Category newCategory = categoryRepository.save(existingCategory);
-            CategoryDTO newCategoryDto = new CategoryDTO();
-            newCategoryDto.setCategoryId(newCategory.getCategoryId());
-            newCategoryDto.setCategoryName(newCategory.getCategoryName());
-            newCategoryDto.setDescription(newCategory.getDescription());
-            return newCategoryDto;
-        } else {
-            throw new ElementNotExistsException();
+                .orElseThrow(
+                () -> new ElementNotExistsException("Category Id not found"));
+        Optional<Category> category = categoryRepository
+                .getCategoryByName(updatedCategory.getCategoryName());
+        if (category.isPresent()
+                && !category.get().getCategoryId().equals(categoryId)) {
+            throw new AlreadyExistsException("Category already exists");
         }
+        existingCategory.setCategoryName(updatedCategory.getCategoryName());
+        existingCategory.setDescription(updatedCategory.getDescription());
+
+        Category newCategory = categoryRepository.save(existingCategory);
+        CategoryDTO newCategoryDto = new CategoryDTO();
+        newCategoryDto.setCategoryId(newCategory.getCategoryId());
+        newCategoryDto.setCategoryName(newCategory.getCategoryName());
+        newCategoryDto.setDescription(newCategory.getDescription());
+        return newCategoryDto;
     }
 
     /**
@@ -127,7 +111,7 @@ public class CategoryService {
      */
     public final CategoryDTO getCategoryById(final Long categoryId) {
         Category existingCategory = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ElementNotExistsException(
                         "Category not found with Id : " + categoryId));
         CategoryDTO categoryDto = new CategoryDTO();
         categoryDto.setCategoryId(existingCategory.getCategoryId());
