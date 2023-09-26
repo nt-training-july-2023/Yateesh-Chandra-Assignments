@@ -5,6 +5,7 @@ import "./ManageQuestion.css";
 import Swal from "sweetalert2";
 import AdminNavBar from "../AdminNavBar";
 import { FaBackward, FaPlusCircle } from "react-icons/fa";
+import NotFound from "../NotFound";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -152,9 +153,9 @@ const ManageQuestion = () => {
 
     return (
         <div className="App">
-            {userRole === "ADMIN" && (
-                <AdminNavBar/>
-            )}
+            {userRole === "ADMIN" ? (
+            <>
+            <AdminNavBar/>
             <div className="manage-questions-container">
                 <h1>{!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? "No Questions Available" :"Manage Questions") : (isAddingQuestion ? 'Add New Question' : 'Edit Question')}</h1>
                 {!isAddingQuestion && !isEditingQuestion ? (
@@ -276,6 +277,12 @@ const ManageQuestion = () => {
               </div>
             )}
             </div>
+            </>
+            ):(
+                <div>
+                    <NotFound/>
+                </div>
+            )}
         </div>
     );
 };

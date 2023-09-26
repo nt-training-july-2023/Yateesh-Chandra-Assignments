@@ -30,6 +30,7 @@ function UserNavBar() {
                     timer : 1500,
                     timerProgressBar : true,
                     background : `rgb(255, 252, 167)`,
+                    showConfirmButton : false,
                     icon : 'success'
                 });
             } 

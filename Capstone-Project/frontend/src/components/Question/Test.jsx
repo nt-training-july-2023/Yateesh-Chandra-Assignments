@@ -7,15 +7,17 @@ import Swal from 'sweetalert2';
 import clockswal from "../image/clockswal.png";
 import oopsswal from "../image/oopsswal.png";
 import instructionswal from "../image/instructionswal.png";
+import DeactivateBackButton from '../DeactivateBackButton';
+import NotFound from '../NotFound';
 
 
 const Test = () => {
     const { quizId } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
-    const { timeInMin } = location.state;
-    const { categoryId } = location.state;
+    const { timeInMin, categoryId } = location.state || {};
     const userId = localStorage.getItem("id");
+    const userRole = localStorage.getItem("role");
     const [questions, setQuestions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [timer, setTimer] = useState(timeInMin * 10);
@@ -58,11 +60,16 @@ const Test = () => {
     };
 
     useEffect(() => {
-        fetchQuestions();
+        if(userRole === "USER"){
+            fetchQuestions();
         console.log(timer);
+        }
     }, [quizId]);
 
     useEffect(() => {
+        if(userRole === "USER"){
+
+        
         if (questions.length > 0 && !instructionsConfirmed) {
             Swal.fire({
                     title : "Instructions for the Test",
@@ -91,6 +98,7 @@ const Test = () => {
                 }
             });
         }
+    }
     }, [questions, instructionsConfirmed]);
     
 
@@ -143,12 +151,23 @@ const Test = () => {
             imageUrl : clockswal,
             imageHeight : 150,
             imageWidth : 150,
-        }).then(() => {
+        }).then((result) => {
+            if(result.isConfirmed){
+                Swal.fire({
+                    title : "Quiz submitted",
+                    text : "redirecting to Profile",
+                    timer : 1500,
+                    timerProgressBar : true,
+                    showConfirmButton : false,
+                    backdrop: `rgba(80,108,62,0.7)`
+                })      
+            }
             navigate("/profile");
         })   
     };
 
     useEffect(() => {
+        if(userRole === "USER"){
         if (instructionsConfirmed) {
             const timerInterval = setInterval(() => {
                 setTimer((prevTimer) => {
@@ -170,6 +189,7 @@ const Test = () => {
                 clearInterval(timerInterval);
             };
         }
+    }
     }, [instructionsConfirmed, autoSubmitted, handleSubmit]);
 
     const handleManualSubmit = () => {
@@ -194,8 +214,9 @@ const Test = () => {
                     Swal.fire({
                         title : "Quiz submitted",
                         text : "redirecting to Profile",
-                        timer : 2500,
+                        timer : 1500,
                         timerProgressBar : true,
+                        showConfirmButton : false,
                         backdrop: `rgba(80,108,62,0.7)`
                     })
                     navigate("/profile");
@@ -206,42 +227,57 @@ const Test = () => {
 
     return (
         <div className="quiz-container">
-            {loading ? (
-                <div>Loading questions... No Questions as of now</div>
-            ) : questions.length > 0 ? (
-                    <div className="question-container">
-                        <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
-                        {questions.map((question, index) => (
+            <DeactivateBackButton/>
+            {(userRole === "USER" ? (
+                <>
+                {loading ? (
+                    <div>Loading questions... No Questions as of now</div>
+                ) : questions.length > 0 ? (
+                
+                <div className="question-container">
+                    <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
+                    {questions.map((question, index) => (
                         <div key={index} className="question-content">
                             <p><b>{index + 1}. {question.questionTitle}</b></p>
                             <div className="options">
                                 {Array.from({ length: 4 }, (_, optionIndex) => {
-                                const optionKey = `option${optionIndex + 1}`;
-                                const optionContent = question[optionKey];
-                                return (
-                                    <div
-                                    key={optionIndex}
-                                    className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
-                                    onClick={() => handleOptionSelect(optionContent, index)}
-                                    >
+                                    const optionKey = `option${optionIndex + 1}`;
+                                    const optionContent = question[optionKey];
+                                    return (
+                                        <div
+                                        key={optionIndex}
+                                        className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
+                                        onClick={() => handleOptionSelect(optionContent, index)}
+                                        >
                                         {optionContent}
-                                    </div>
-                                );
+                                        </div>
+                                    );
                                 })}
                             </div>
                         </div>
                     ))}
-                        <div className="navigation-buttons">
-                            <button onClick={handleManualSubmit} className='next-button'>
-                                Submit
-                            </button>
-                        </div>
+
+                    <div className="navigation-buttons">
+                        <button onClick={handleManualSubmit} className='next-button'>
+                            Submit
+                        </button>
                     </div>
+                </div>                       
                 ) : (
-                <div>No questions available.</div>
+                <div>
+                    No questions available.
+                </div>
             )}
+            </>
+        ) : (
+            <>
+                <NotFound/>
+            </>
+        ))}
         </div>
+        
     );
+    
 };
 
 export default Test;

@@ -30,7 +30,8 @@ function AdminNavBar() {
                     timer : 1500,
                     timerProgressBar : true,
                     background : `rgb(255, 252, 167)`,
-                    icon : 'success'
+                    icon : 'success',
+                    showConfirmButton : false
                 });
             } 
         })

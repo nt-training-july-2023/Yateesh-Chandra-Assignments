@@ -1,7 +1,12 @@
 package com.capstoneproject.exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * This is the AlreadyExistsException.
  */
+@ResponseStatus(HttpStatus.FOUND)
 public class AlreadyExistsException extends RuntimeException {
 
     /**

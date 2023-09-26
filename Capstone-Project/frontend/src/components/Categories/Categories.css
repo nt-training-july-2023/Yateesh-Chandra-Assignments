@@ -143,6 +143,9 @@
     .search-bar {
       max-width: 10%;
   }
+    .blue-button{
+      margin-bottom: 7px;
+    }
   }
 
 @media (min-width: 769px) {
@@ -277,6 +280,7 @@ button {
     }
 
     .search-bar{
+      top: 5px;
       max-width: 100%;
     }
 
@@ -299,3 +303,35 @@ button {
   .small-icon{
     font-size: 10px;
   }
+
+
+.admin-search-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 20px 10px;
+  
+}
+
+.admin-search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; 
+  max-width: 300px; 
+  box-shadow: none; 
+  font-size: 16px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-search-bar {
+    margin: 10px;
+  }
+  
+  .admin-search-bar input {
+    max-width: 100%;
+  }
+}
+
+
+      

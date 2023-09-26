@@ -6,6 +6,7 @@ import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
 import Swal from "sweetalert2";
 import { FaBackward, FaExternalLinkAlt, FaPen, FaPlusCircle, FaTasks, FaTrash } from "react-icons/fa";
+import NotFound from "../NotFound";
 
 const ManageQuiz = () => {
     const { categoryId } = useParams();
@@ -79,65 +80,80 @@ const ManageQuiz = () => {
 
     return (
         <div>
-            {userRole === "ADMIN" ? <AdminNavBar /> : <UserNavBar/>}
-            <div className="manage-quiz-container">
-                <div className="quiz-list-container">
-                    <h1>{quizzes.length === 0 ? "No Quiz Available" : "Quizzes Available"}</h1>
-                    <div className="button-search-container">
-                        <div className="left-buttons">
-                            <button className="red-button" onClick={backButtonClick}>
-                               <FaBackward className="small-icon" /> Back
-                            </button>
+            {userRole === "ADMIN" || userRole === "USER" ? (            
+            <div>
+                {(userRole === "ADMIN" && (
+                    <AdminNavBar />
+                ))} 
 
-                            {userRole === "ADMIN" && (
-                            <button
-                            className="blue-button"
-                            onClick={() => handleAddClick(categoryId)}
-                            >
-                                Add Quiz <FaPlusCircle className="small-icon" />
-                            </button>
-                            )}
-                        </div>
+                {(userRole === "USER" && (
+                    <UserNavBar/>
+                ))}
 
-                        <div className = 'search-bar'>
-                            <input
-                            type="text"
-                            placeholder="Search Quiz"
-                            value = {searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                        </div>
-                    </div>
-          
-                    <div className="quiz-list-scroll-container">
-                        <div className="quiz-grid">
-                            {filterQuiz.map((quiz) => (
-                            <div className="quiz-card" key={quiz.quizId}>
-                                <h2>{quiz.quizName}</h2>
-                                <p>{quiz.quizDescription}</p>
-                                {userRole === "ADMIN" && (<p>Max No of Questions : <b>{quiz.numOfQuestions}</b></p>)}
-                                <p>Duration : <b>{quiz.timeInMin} min</b></p>
-                                <div className="open-quiz">
-                                    {userRole === "ADMIN" && (
-                                    <button className="edit-button" onClick={() => handleEditClick(quiz.quizId)}><FaPen className="small-icon" /> Edit</button>
-                                    )}
-                                    {userRole === "ADMIN" &&(
-                                    <button className="delete-button" onClick ={() => deleteButton(quiz.quizId)}> <FaTrash className="small-icon"/> Delete</button>
-                                    )}
-                                    {userRole === "ADMIN" && (
-                                    <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
-                                    )}
-                    
-                                    {userRole === "USER" && (
-                                    <button className="open-button" onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)}><FaTasks className="small-icon"/> Take Quiz</button>
-                                    )}
-                                </div>
+                <div className="manage-quiz-container">
+                    <div className="quiz-list-container">
+                        <h1>{quizzes.length === 0 ? "No Quiz Available" : "Quizzes Available"}</h1>
+                        <div className="button-search-container">
+                            <div className="left-buttons">
+                                <button className="red-button" onClick={backButtonClick}>
+                                <FaBackward className="small-icon" /> Back
+                                </button>
+
+                                {userRole === "ADMIN" && (
+                                <button
+                                className="blue-button"
+                                onClick={() => handleAddClick(categoryId)}
+                                >
+                                    Add Quiz <FaPlusCircle className="small-icon" />
+                                </button>
+                                )}
                             </div>
-                            ))}
+
+                            <div className = 'search-bar'>
+                                <input
+                                type="text"
+                                placeholder="Search Quiz"
+                                value = {searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                            </div>
+                        </div>
+            
+                        <div className="quiz-list-scroll-container">
+                            <div className="quiz-grid">
+                                {filterQuiz.map((quiz) => (
+                                <div className="quiz-card" key={quiz.quizId}>
+                                    <h2>{quiz.quizName}</h2>
+                                    <p>{quiz.quizDescription}</p>
+                                    {userRole === "ADMIN" && (<p>Max No of Questions : <b>{quiz.numOfQuestions}</b></p>)}
+                                    <p>Duration : <b>{quiz.timeInMin} min</b></p>
+                                    <div className="open-quiz">
+                                        {userRole === "ADMIN" && (
+                                        <button className="edit-button" onClick={() => handleEditClick(quiz.quizId)}><FaPen className="small-icon" /> Edit</button>
+                                        )}
+                                        {userRole === "ADMIN" &&(
+                                        <button className="delete-button" onClick ={() => deleteButton(quiz.quizId)}> <FaTrash className="small-icon"/> Delete</button>
+                                        )}
+                                        {userRole === "ADMIN" && (
+                                        <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
+                                        )}
+                        
+                                        {userRole === "USER" && (
+                                        <button className="open-button" onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)}><FaTasks className="small-icon"/> Take Quiz</button>
+                                        )}
+                                    </div>
+                                </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            ):(
+                <div>
+                    <NotFound/>
+                </div>
+            )}
       </div>
     );
 };

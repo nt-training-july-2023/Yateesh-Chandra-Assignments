@@ -5,6 +5,7 @@ import "../Categories/Categories.css";
 import axios from "axios";
 import {useLocation} from 'react-router-dom'
 import Swal from "sweetalert2";
+import NotFound from "../NotFound";
 
 const AddOrUpdateQuiz = () => {
     const { quizId } = useParams();
@@ -12,7 +13,7 @@ const AddOrUpdateQuiz = () => {
     const location = useLocation();
     const categoryId = location.state?.categoryId;
     const isUpdating = quizId !== undefined;
-
+    const userRole = localStorage.getItem("role");
     const [quizName, setQuizName] = useState("");
     const [quizDescription, setQuizDescription] = useState("");
     const [numOfQuestions, setNumOfQuestions] = useState(0);
@@ -215,6 +216,8 @@ const AddOrUpdateQuiz = () => {
 
     return (
         <div className="App">
+            {userRole === "ADMIN" || userRole === "USER" ? (
+                <>
             <AdminNavBar />
             <div className="add-quiz-container">
                 <h1>{isUpdating ? 'Update Quiz' : 'Add Quiz'}</h1>
@@ -269,6 +272,12 @@ const AddOrUpdateQuiz = () => {
                     </div>
                 </form>
             </div>
+            </>
+            ):(
+                <div>
+                    <NotFound/>
+                </div>
+            )}
         </div>
     );
 };

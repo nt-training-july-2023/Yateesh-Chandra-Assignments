@@ -29,7 +29,6 @@ function App() {
         <Route path = "/manage-quiz/:categoryId" element = {<ManageQuiz/>} />
         <Route path = "/add-quiz" element = {<AddOrUpdateQuiz/>}/>
         <Route path = "/add-quiz/:quizId" element = {<AddOrUpdateQuiz/>}/>
-        <Route path = "/add-quiz/:categoryId" element = {<AddOrUpdateQuiz/>}/>
         <Route path = "/manage-question/:quizId" element = {<ManageQuestion/>}/>
         <Route path = "/test/:quizId" element = {<Test/>}/>
         <Route path = "/user" element = {<UserDashBoard/>}/>

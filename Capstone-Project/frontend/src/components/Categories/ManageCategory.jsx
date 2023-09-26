@@ -6,6 +6,8 @@ import AdminNavBar from '../AdminNavBar';
 import Swal from 'sweetalert2';
 import UserNavBar from '../UserNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
+import DeactivateBackButton from '../DeactivateBackButton';
+import NotFound from '../NotFound';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -63,6 +65,9 @@ const ManageCategory = () => {
 
     return (
         <div className='App'>
+            <DeactivateBackButton/>
+            {userRole === "ADMIN" || userRole === "USER" ? (
+                <>
             {userRole === "ADMIN" ? <AdminNavBar/> : <UserNavBar/>}
             <div className="manage-category-container">
                 <h1>{filterCategory.length > 0 ? "Category List" : "No Category"}</h1>
@@ -113,6 +118,11 @@ const ManageCategory = () => {
                     </table>
                 </div>
             </div>
+            </>) : (
+                <div>
+                    <NotFound/>
+                </div>
+            )}
         </div>
     );
 }

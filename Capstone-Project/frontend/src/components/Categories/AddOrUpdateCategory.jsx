@@ -4,12 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import AdminNavBar from "../AdminNavBar";
 import Swal from "sweetalert2";
+import NotFound from "../NotFound";
 
 const AddOrUpdateCategory = () =>{
 
   const { categoryId } = useParams();
   const navigate = useNavigate();
-
+  const userRole = localStorage.getItem("role");
   const isUpdating = categoryId !== undefined;
 
   const [categoryName, setCategoryName] = useState("");
@@ -150,6 +151,8 @@ const AddOrUpdateCategory = () =>{
   
   return (
     <div className="App">
+      {userRole === "ADMIN" || userRole === "USER" ? (
+        <>
         <AdminNavBar/>
       <div className="add-category-container">
         <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
@@ -183,6 +186,11 @@ const AddOrUpdateCategory = () =>{
           </div>
         </form>
       </div>
+      </> ) : (
+        <div>
+          <NotFound/>
+        </div>
+        )}
     </div>
   );
 
