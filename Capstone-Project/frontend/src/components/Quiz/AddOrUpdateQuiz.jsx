@@ -6,6 +6,8 @@ import axios from "axios";
 import {useLocation} from 'react-router-dom'
 import Swal from "sweetalert2";
 import NotFound from "../NotFound";
+import QuizService from "../../services/QuizService";
+import SweetAlert from "../SweetAlerts/SweetAlert";
 
 const AddOrUpdateQuiz = () => {
     const { quizId } = useParams();
@@ -23,30 +25,13 @@ const AddOrUpdateQuiz = () => {
     const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
     const [timeInMinError, setTimeInMinError] = useState("");
 
-    const updateAlert = () => {
-        Swal.fire({
-            title : "Updated Successfully",
-            icon : "success",
-            timer : 2000
-        })
-        navigate(`/manage-quiz/${categoryId}`);
-    };
-
-    const addAlert = () => {
-        Swal.fire({
-            title : "Added Successfully",
-            icon : "success",
-            timer : 2000
-        })
-    };
-
     const cancelButton = () => {
         console.log("categoryId during Cancel : ", categoryId);
         navigate(`/manage-quiz/${categoryId}`);
     };
 
     const fetchQuizData = () => {
-        axios.get(`http://localhost:8082/api/v1/quiz/${quizId}`)
+        QuizService.getQuizById(quizId)
         .then((response) => {
             const { quizName, quizDescription, numOfQuestions, timeInMin} = response.data;
             setQuizName(quizName);
@@ -82,7 +67,7 @@ const AddOrUpdateQuiz = () => {
     const handleQuizNumOfQuestions = (e) => {
         const validNumOfQuestions = parseInt(e.target.value, 10);
         setNumOfQuestions(validNumOfQuestions);
-        if (isNaN(validNumOfQuestions) || validNumOfQuestions < 0) {
+        if (isNaN(validNumOfQuestions) || validNumOfQuestions <= 0) {
             setNumOfQuestionsError("Enter a valid number of Questions");
         } else {
             setNumOfQuestionsError("");
@@ -119,9 +104,9 @@ const AddOrUpdateQuiz = () => {
         }
 
         if(!numOfQuestions){
-            setNumOfQuestionsError("Enter Number of Questions");
+            setNumOfQuestionsError("Enter Number greater than 0");
         }
-        else if (isNaN(numOfQuestions) || numOfQuestions < 0) {
+        else if (isNaN(numOfQuestions) || numOfQuestions <= 0) {
             setNumOfQuestionsError("Enter a valid number of Questions");
             isValid = false;
         } else {
@@ -129,7 +114,7 @@ const AddOrUpdateQuiz = () => {
         }
 
         if(!timeInMin){
-            setTimeInMinError("Enter Number of Questions");
+            setTimeInMinError("Enter Number greater than 0");
         }
         else if (isNaN(timeInMin)){
             setTimeInMinError("Enter a valid number for Duration of Minutes");
@@ -147,6 +132,7 @@ const AddOrUpdateQuiz = () => {
     const handleAddOrUpdateQuiz = async (e) => {
         e.preventDefault();
         if (!validForm()) {
+            SweetAlert.missingField();
             return;
         }
 
@@ -159,53 +145,77 @@ const AddOrUpdateQuiz = () => {
         };
 
         try {
+            
             if (isUpdating) {
+            
                 try{
-                
-                  const res = await axios.put(`http://localhost:8082/api/v1/quiz/${quizId}`, quizData);
-                  if(res?.status === 200){
-                      updateAlert();
-                      console.log("Quiz Updated Successfully");
-                      fetchQuizData();
-                  }
+                    const res = await QuizService.updateQuiz(quizId, quizData);
+                    
+                    if(res?.status === 200){
+                        SweetAlert.updateSuccessAlert();
+                        navigate(`/manage-quiz/${categoryId}`);
+                        console.log("Quiz Updated Successfully");
+                        fetchQuizData();
+                    }
 
                 } catch(error) {
-                    if(error?.response?.data?.message === "Quiz already exists"){
+                        
+                    if(error?.response?.data?.code === 302){
                         setQuizNameError("Quiz already exists");
                         Swal.fire({
                             title : "Quiz Already Exists!",
                             text : "Change the Quiz name",
                             icon : "warning"
                         })
+                
+                    } else if(error?.response?.data?.message === "Number cannot be 0 or less"){
+                        Swal.fire({
+                            title : "Incorrect Values Detected",
+                            text : "Enter Valid Numbers",
+                            icon : "error"
+                        })
+                    
                     }
-                    console.log(error)  
                 }
 
             } else {
-                try{
-                    const response = await axios.post(`http://localhost:8082/api/v1/quiz`, quizData);            
-                    if(response?.status === 201){
-                        addAlert();
-                        console.log("New Quiz is added successfully.", quizData);
-                        navigate(`/manage-quiz/${categoryId}`);
-                    }
             
+                try{
+                    const response = await QuizService.addQuiz(quizData);            
+                
+                    if(response?.status === 201){
+                        SweetAlert.addSuccessAlert();
+                        navigate(`/manage-quiz/${categoryId}`);
+                        console.log("New Quiz is added successfully.", quizData);
+                    }
+
                 } catch(error) {
-                    if(error?.response?.data?.message === "Quiz already exists"){
+                    console.log(error);
+                    if(error?.response?.data?.code === 302 ){
                         setQuizNameError("Quiz already exists");
                         Swal.fire({
                             title : "Quiz Already Exists!",
                             text : "Change the Quiz name",
                             icon : "warning"
                         })
+                    } 
+                    
+                    else if(error?.response?.data?.message === "Number cannot be 0 or less"){
+                        Swal.fire({
+                            title : "Incorrect Values Detected",
+                            text : "Enter Valid Numbers",
+                            icon : "error"
+                        })
                     }
-                    console.log(error)  
                 }
-          
             }
-        } catch (error) {
+
+        } 
+        
+        catch (error) {
             console.error("Update", error);
         }
+
     };
 
     useEffect(() => {

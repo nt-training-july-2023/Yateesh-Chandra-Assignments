@@ -6,6 +6,7 @@ package com.capstoneproject.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
@@ -20,6 +21,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,26 +47,30 @@ public class Quiz {
     /**
      * This is the Quiz name Column.
      */
-    @Column(name = "quiz_name")
+    @Column(name = "quiz_name",unique = true, nullable = false)
+    @NotEmpty(message = ValidationMessages.QUIZ_NAME_NOTBLANK)
     private String quizName;
 
     /**
      * This is the Quiz Description Column.
      */
-    @Column(name = "quiz_description")
+    @Column(name = "quiz_description", nullable = false)
+    @NotEmpty(message = ValidationMessages.QUIZ_DESC_NOTBLANK)
     private String quizDescription;
 
     /**
      * This column contains the number of questions of integer type.
      */
-    @Column(name = "num_of_questions")
+    @Column(name = "num_of_questions", nullable = false)
     @Basic(fetch = FetchType.EAGER)
+    @NotNull(message = ValidationMessages.QUESTIONS_NOTNULL)
     private int numOfQuestions;
 
     /**
      * This column contains the timer in minutes.
      */
-    @Column
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.TIME_NOTNULL)
     private int timeInMin;
 
     /**

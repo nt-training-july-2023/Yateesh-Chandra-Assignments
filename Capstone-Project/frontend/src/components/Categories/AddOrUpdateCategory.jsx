@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import AdminNavBar from "../AdminNavBar";
 import Swal from "sweetalert2";
 import NotFound from "../NotFound";
 import CategoryService from "../../services/CategoryService";
+import SweetAlert from "../SweetAlerts/SweetAlert";
 
 const AddOrUpdateCategory = () =>{
 
@@ -20,26 +20,7 @@ const AddOrUpdateCategory = () =>{
   const [categoryDescriptionError, setCategoryDescriptionError] = useState("");
 
   
-  const updateAlert = () => {
-    Swal.fire({
-      title : "Updated Successfully",
-      icon : "success",
-      timer : 1500
-    })
-    navigate("/manage-category")
-  }
-
-  const addAlert = () => {
-    Swal.fire({
-      title : "Added Successfully",
-      icon : "success",
-      timer : 1500
-    })
-    navigate("/manage-category")
-  }
-
   const fetchCategoryData = () => {
-    // axios.get(`http://localhost:8082/api/v1/category/${categoryId}`)
     CategoryService.getCategoryById(categoryId)
       .then((response) => {
         const { categoryName, description } = response.data;
@@ -99,6 +80,7 @@ const AddOrUpdateCategory = () =>{
     e.preventDefault();
 
     if (!validForm()) {
+      SweetAlert.missingField();
       return;
     }
     const categoryData = {
@@ -110,8 +92,9 @@ const AddOrUpdateCategory = () =>{
         try{
           const res = await CategoryService.updateCategory(categoryId, categoryData);
           if(res?.status === 200){
-            updateAlert();
+            SweetAlert.updateSuccessAlert();
             console.log("Category updated successfully.");
+            navigate("/manage-category")
           }
         }
 
@@ -133,8 +116,9 @@ const AddOrUpdateCategory = () =>{
         try{
         const response = await CategoryService.addCategory(categoryData);
           if(response.status === 201){
-            addAlert();
+            SweetAlert.addSuccessAlert();
             console.log("Category added successfully.");
+            navigate("/manage-category")
           }
 
         } catch(error){

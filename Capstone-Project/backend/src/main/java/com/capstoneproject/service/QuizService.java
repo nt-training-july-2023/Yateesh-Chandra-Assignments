@@ -38,7 +38,7 @@ public class QuizService {
      * This method gets all the quiz.
      * @return the List of Quiz.
      */
-    public final List<QuizDTO> getAllQuiz() {
+    public final List<QuizDTO> getQuizzes() {
         List<Quiz> quizzes = quizRepository.findAll();
         return quizzes.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
@@ -66,15 +66,11 @@ public class QuizService {
      * @return the List of Quiz by mentioned Category.
      */
     public final List<QuizDTO> getQuizByCategoryId(final Long categoryId) {
-        Category existingCategory = categoryRepository.findById(categoryId)
-                .orElse(null);
-        if (existingCategory == null) {
-            throw new ElementNotExistsException();
-        } else {
-            List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
-            return quizzes.stream().map(this::convertModelToDTO)
-                    .collect(Collectors.toList());
-        }
+        categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ElementNotExistsException("Cannot find Category Id"));
+        List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
+        return quizzes.stream().map(this::convertModelToDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -101,29 +97,28 @@ public class QuizService {
      * @return the quiz being added.
      */
     public final QuizDTO addQuiz(final QuizDTO quizDto) {
-        if (quizDto.getQuizName().isEmpty() || quizDto.getCategoryId() == 0) {
-            throw new NoInputException();
-        } else {
-            Optional<Quiz> existingQuiz = quizRepository
-                    .getQuizByName(quizDto.getQuizName());
-            if (existingQuiz.isPresent()) {
-                throw new AlreadyExistsException("Quiz already Exists");
-            } else {
-                Quiz newQuiz = new Quiz();
-                newQuiz.setQuizId(quizDto.getQuizId());
-                newQuiz.setQuizName(quizDto.getQuizName());
-                newQuiz.setQuizDescription(quizDto.getQuizDescription());
-                newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
-                newQuiz.setTimeInMin(quizDto.getTimeInMin());
-                Category category = categoryRepository
-                        .findById(quizDto.getCategoryId())
-                        .orElseThrow(() -> new ElementNotExistsException(
-                                "Category not found."));
-                newQuiz.setCategory(category);
-                quizRepository.save(newQuiz);
-                return quizDto;
-            }
+        Optional<Quiz> existingQuiz = quizRepository
+                .getQuizByName(quizDto.getQuizName());
+        if (existingQuiz.isPresent()) {
+            throw new AlreadyExistsException("Quiz already Exists");
         }
+        Quiz newQuiz = new Quiz();
+        newQuiz.setQuizId(quizDto.getQuizId());
+        newQuiz.setQuizName(quizDto.getQuizName());
+        newQuiz.setQuizDescription(quizDto.getQuizDescription());
+        if(quizDto.getNumOfQuestions() <= 0
+                || quizDto.getTimeInMin() <= 0) {
+            throw new NoInputException("Number cannot be 0 or less");
+        }
+        newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
+        newQuiz.setTimeInMin(quizDto.getTimeInMin());
+        Category category = categoryRepository
+                .findById(quizDto.getCategoryId())
+                .orElseThrow(() -> new ElementNotExistsException(
+                        "Category Id not found."));
+        newQuiz.setCategory(category);
+        quizRepository.save(newQuiz);
+        return quizDto;
     }
 
     /**
@@ -131,12 +126,9 @@ public class QuizService {
      * @param quizId - of Long Type.
      */
     public final void deleteQuiz(final Long quizId) {
-        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
-        if (existingQuiz == null) {
-            throw new ElementNotExistsException();
-        } else {
-            quizRepository.deleteById(quizId);
-        }
+        quizRepository.findById(quizId).orElseThrow(
+                () -> new ElementNotExistsException("Quiz not exists with Id : " + quizId));
+        quizRepository.deleteById(quizId);
     }
 
     /**
@@ -146,11 +138,10 @@ public class QuizService {
      * @return status of the updated quiz.
      */
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
-        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
-        if (existingQuiz != null) {
-            if (quizDto.getQuizName().isEmpty()) {
-                throw new NoInputException();
-            }
+        Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
+                () -> new ElementNotExistsException("No Quiz Find with this Id."));
+        categoryRepository.findById(quizDto.getCategoryId()).orElseThrow(
+                () -> new ElementNotExistsException("Category Id not found"));
             Optional<Quiz> quiz = quizRepository
                     .getQuizByName(quizDto.getQuizName());
             if (quiz.isPresent() && !quiz.get().getQuizId().equals(quizId)) {
@@ -158,18 +149,13 @@ public class QuizService {
             }
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
+            if(quizDto.getNumOfQuestions() <= 0
+                    || quizDto.getTimeInMin() <= 0) {
+                throw new NoInputException("Number cannot be 0 or less");
+            }
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
             existingQuiz.setTimeInMin(quizDto.getTimeInMin());
-            Quiz newQuiz = quizRepository.save(existingQuiz);
-            QuizDTO newQuizDTO = new QuizDTO();
-            newQuizDTO.setQuizId(newQuiz.getQuizId());
-            newQuizDTO.setQuizName(newQuiz.getQuizName());
-            newQuizDTO.setQuizDescription(newQuiz.getQuizDescription());
-            newQuizDTO.setNumOfQuestions(newQuiz.getNumOfQuestions());
-            newQuizDTO.setTimeInMin(newQuiz.getTimeInMin());
-            return newQuizDTO;
-        } else {
-            throw new ElementNotExistsException("Quiz Not found");
-        }
+            quizRepository.save(existingQuiz);
+            return quizDto;
     }
 }

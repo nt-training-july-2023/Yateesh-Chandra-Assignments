@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Quizzes.css";
@@ -7,6 +6,7 @@ import UserNavBar from "../UserNavBar";
 import Swal from "sweetalert2";
 import { FaBackward, FaExternalLinkAlt, FaPen, FaPlusCircle, FaTasks, FaTrash } from "react-icons/fa";
 import NotFound from "../NotFound";
+import QuizService from "../../services/QuizService";
 
 const ManageQuiz = () => {
     const { categoryId } = useParams();
@@ -21,8 +21,7 @@ const ManageQuiz = () => {
 
     const fetchQuizzes = () => {
         try {
-          axios
-          .get(`http://localhost:8082/api/v1/quiz/byCategory/${categoryId}`)
+        QuizService.getQuizByCategoryId(categoryId)
           .then((response) => {
               console.log('categoryId:', categoryId);
               setQuizzes(response?.data);
@@ -49,7 +48,7 @@ const ManageQuiz = () => {
     }
 
     const handleDeleteQuiz = (quizId) => {
-        axios.delete(`http://localhost:8082/api/v1/quiz/${quizId}`)
+        QuizService.deleteQuiz(quizId)
         .then(() => {
             console.log("Quiz deleted : ", quizId);
             fetchQuizzes();

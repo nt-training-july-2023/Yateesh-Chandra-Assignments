@@ -6,6 +6,7 @@ package com.capstoneproject.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -43,13 +44,13 @@ public class Category {
      * This is the category name Column.
      */
     @Column(name = "category_name", nullable = false, unique = true)
-    @NotBlank(message = "Category Name is required")
+    @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
     private String categoryName;
     /**
      * This is the Category Description Column.
      */
     @Column(name = "category_description", nullable = false)
-    @NotBlank(message = "Category Description is required")
+    @NotBlank(message = ValidationMessages.CATEGORY_DESC_NOTBLANK)
     private String description;
 
     /**

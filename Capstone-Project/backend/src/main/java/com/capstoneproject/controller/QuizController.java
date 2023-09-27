@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capstoneproject.dto.QuizDTO;
 import com.capstoneproject.service.QuizService;
 
+import jakarta.validation.Valid;
+
 /**
  * This class contains the Controller part of Quiz.
  */
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/quiz")
+@RequestMapping(path = "quiz")
 public class QuizController {
     /**
      * quizService variable is used to perform the operations on Quiz Service.
@@ -36,8 +38,8 @@ public class QuizController {
      * @return the List of the quiz.
      */
     @GetMapping
-    public final ResponseEntity<Object> getAllQuiz() {
-        List<QuizDTO> quiz = quizService.getAllQuiz();
+    public final ResponseEntity<List<QuizDTO>> getAllQuiz() {
+        List<QuizDTO> quiz = quizService.getQuizzes();
         return ResponseEntity.ok(quiz);
     }
 
@@ -47,7 +49,7 @@ public class QuizController {
      * @return the status whether the quiz exist or not.
      */
     @GetMapping("/{quizId}")
-    public final ResponseEntity<Object> getQuizById(
+    public final ResponseEntity<QuizDTO> getQuizById(
             @PathVariable final Long quizId) {
         QuizDTO newQuiz = quizService.getQuizById(quizId);
         return ResponseEntity.ok(newQuiz);
@@ -59,10 +61,10 @@ public class QuizController {
      * @return newQuiz.
      */
     @PostMapping
-    public final ResponseEntity<Object> addQuiz(
-            @RequestBody final QuizDTO quizDto) {
-        QuizDTO newQuiz = quizService.addQuiz(quizDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newQuiz);
+    public final ResponseEntity<String> addQuiz(
+            @RequestBody @Valid final QuizDTO quizDto) {
+        quizService.addQuiz(quizDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Quiz is Successfully Created");
     }
 
     /**
@@ -71,10 +73,11 @@ public class QuizController {
      * @return null if the quiz does not exist.
      */
     @DeleteMapping("/{quizId}")
-    public final ResponseEntity<Object> deleteQuiz(
+    public final ResponseEntity<String> deleteQuiz(
             @PathVariable final Long quizId) {
         quizService.deleteQuiz(quizId);
-        return ResponseEntity.noContent().build();
+        String message = "Quiz is deleted"; 
+        return ResponseEntity.noContent().header("Message",message).build();
     }
 
     /**
@@ -84,11 +87,11 @@ public class QuizController {
      * @return the updated quiz.
      */
     @PutMapping("/{quizId}")
-    public final ResponseEntity<Object> updateQuiz(
+    public final ResponseEntity<String> updateQuiz(
             @PathVariable final Long quizId,
-            @RequestBody final QuizDTO updatedQuiz) {
-        QuizDTO newQuiz = quizService.updateQuiz(quizId, updatedQuiz);
-        return ResponseEntity.ok(newQuiz);
+            @RequestBody @Valid final QuizDTO updatedQuiz) {
+        quizService.updateQuiz(quizId, updatedQuiz);
+        return ResponseEntity.ok("Quiz is updated");
     }
 
     /**
@@ -97,7 +100,7 @@ public class QuizController {
      * @return the quiz of that Category Id if found.
      */
     @GetMapping("/byCategory/{categoryId}")
-    public final ResponseEntity<Object> getQuizByCategoryId(
+    public final ResponseEntity<List<QuizDTO>> getQuizByCategoryId(
             @PathVariable final Long categoryId) {
         List<QuizDTO> quizDto = quizService.getQuizByCategoryId(categoryId);
         return ResponseEntity.ok(quizDto);

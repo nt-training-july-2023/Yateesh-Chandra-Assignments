@@ -3,6 +3,8 @@
  */
 package com.capstoneproject.models;
 
+import com.capstoneproject.response.ValidationMessages;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,31 +38,37 @@ public class Question {
      * This is the Question Title Column.
      */
     @Column(name = "question_title", nullable = false)
+    @NotBlank(message = ValidationMessages.QUESTION_TITLE_NOTBLANK)
     private String questionTitle;
     /**
      * This is the Option 1 Column.
      */
     @Column(nullable = false)
+    @NotBlank(message = ValidationMessages.OPTION1_NOTBLANK)
     private String option1;
     /**
      * This is the Option 2 Column.
      */
     @Column(nullable = false)
+    @NotBlank(message = ValidationMessages.OPTION2_NOTBLANK)
     private String option2;
     /**
      * This is the Option 3 Column.
      */
     @Column(nullable = false)
+    @NotBlank(message = ValidationMessages.OPTION3_NOTBLANK)
     private String option3;
     /**
      * This is the Option 4 Column.
      */
     @Column(nullable = false)
+    @NotBlank(message = ValidationMessages.OPTION4_NOTBLANK)
     private String option4;
     /**
      * This Column contains the correct option.
      */
     @Column(nullable = false)
+    @NotBlank(message = ValidationMessages.CORRECT_OPTION_NOTBLANK)
     private String correctOption;
 
     /**
