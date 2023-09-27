@@ -12,7 +12,6 @@ import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.Question;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.QuestionRepository;

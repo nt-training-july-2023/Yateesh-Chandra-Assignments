@@ -5,6 +5,7 @@ import axios from "axios";
 import NotFound from "../NotFound";
 import "../Categories/Categories.css";
 import DeactivateBackButton from "../DeactivateBackButton";
+import ResultService from "../../services/ResultService";
 
 const Profile = () => {
 
@@ -27,7 +28,7 @@ const Profile = () => {
 
     const fetchResults = async () => {
         try{
-            axios.get("http://localhost:8082/api/v1/allresult")
+            ResultService.getResults()
             .then((response) => {
                 setAllResults(response?.data);
             });
@@ -38,7 +39,7 @@ const Profile = () => {
 
     const fetchResultsByUser = async() => {
         try{
-            axios.get(`http://localhost:8082/api/v1/allresult/${userId}`)
+            ResultService.getResultByUserId(userId)
             .then((response) => {
                 setAllResults(response?.data);
             });
@@ -127,7 +128,7 @@ const Profile = () => {
                         </thead>
                         
                         <tbody>
-                            {allResults.map((row, index) => (
+                            {allResults.reverse().map((row, index) => (
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{row.categoryName}</td>

@@ -1,7 +1,6 @@
 package com.capstoneproject.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,32 +52,6 @@ public class AllResultsService {
         allResultsDto.setMarksScored(allResults.getMarksScored());
         allResultsDto.setTimeStamp(allResults.getTimeStamp());
         return allResultsDto;
-    }
-
-    /**
-     * This method gets the Results by user Id and Quiz Name.
-     * @param userId - Long type.
-     * @param quizName - String type.
-     * @return the specific Result.
-     */
-    public final Optional<AllResultsDTO> getResultsByUserIdAndQuizName(
-            final Long userId, final String quizName) {
-        Optional<AllResults> allResults = allResultsRepository
-                .getResultsByUserIdAndQuizName(userId, quizName);
-        AllResults results = allResults.get();
-        AllResultsDTO resultsDto = new AllResultsDTO();
-        resultsDto.setResultId(results.getResultId());
-        resultsDto.setUserId(userId);
-        resultsDto.setUserName(results.getUserName());
-        resultsDto.setCategoryName(results.getCategoryName());
-        resultsDto.setQuizName(quizName);
-        resultsDto.setNumOfQuestions(results.getNumOfQuestions());
-        resultsDto
-              .setNumOfQuestionsAnswered(results.getNumOfQuestionsAnswered());
-        resultsDto.setTotalMarks(results.getTotalMarks());
-        resultsDto.setMarksScored(results.getMarksScored());
-        resultsDto.setTimeStamp(results.getTimeStamp());
-        return Optional.of(resultsDto);
     }
 
     /**

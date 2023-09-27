@@ -50,7 +50,7 @@ public class UserResponses {
     /**
      * This field tells number of questions answered.
      */
-    @Column
+    @Column(nullable = false)
     private int numOfQuestionsAnswered;
 
     /**
@@ -62,12 +62,13 @@ public class UserResponses {
     /**
      * This is marks scored.
      */
-    @Column
+    @Column(nullable = false)
     private int marksScored;
 
     /**
      * This field mentions the time stamp for the test.
      */
+    @Column(nullable = false)
     private String timeStamp;
 
     /**

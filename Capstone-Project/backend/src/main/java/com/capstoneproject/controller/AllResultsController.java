@@ -1,7 +1,6 @@
 package com.capstoneproject.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import com.capstoneproject.service.AllResultsService;
  * This is the controller class for the All Results.
  */
 @RestController
-@RequestMapping("/api/v1/allresult")
+@RequestMapping("results")
 @CrossOrigin
 public class AllResultsController {
 
@@ -33,24 +32,9 @@ public class AllResultsController {
      * @return OK status.
      */
     @GetMapping
-    public final ResponseEntity<Object> getAllResults() {
+    public final ResponseEntity<List<AllResultsDTO>> getAllResults() {
         List<AllResultsDTO> allResultsDTO = allResultsService.getAllResults();
         return ResponseEntity.ok(allResultsDTO);
-    }
-
-    /**
-     * This is the Response Entity for the Get Results by User and Quiz method.
-     * @param userId - Long type.
-     * @param quizName - String type.
-     * @return the OK status.
-     */
-    @GetMapping("/{userId}/{quizName}")
-    public final ResponseEntity<Object> getResultsByUserIdAndQuizName(
-            @PathVariable final Long userId,
-            @PathVariable final String quizName) {
-        Optional<AllResultsDTO> allResults = allResultsService
-                .getResultsByUserIdAndQuizName(userId, quizName);
-        return ResponseEntity.ok(allResults);
     }
 
     /**
@@ -59,7 +43,7 @@ public class AllResultsController {
      * @return the Ok status.
      */
     @GetMapping("/{userId}")
-    public final ResponseEntity<Object> getResultsByUserId(
+    public final ResponseEntity<List<AllResultsDTO>> getResultsByUserId(
             @PathVariable final Long userId) {
         List<AllResultsDTO> allResultsDto = allResultsService
                 .getResultsByUserId(userId);

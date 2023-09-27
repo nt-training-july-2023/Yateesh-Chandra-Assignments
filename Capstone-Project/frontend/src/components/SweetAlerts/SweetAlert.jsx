@@ -72,6 +72,17 @@ class SweetAlert{
             timer : 1500
         })
     }
+
+    quizSubmitted(){
+        Swal.fire({
+            title : "Quiz submitted",
+            text : "redirecting to Profile",
+            timer : 1500,
+            timerProgressBar : true,
+            showConfirmButton : false,
+            backdrop: `rgba(80,108,62,0.7)`
+        })
+    }
 }
 
 export default new SweetAlert();

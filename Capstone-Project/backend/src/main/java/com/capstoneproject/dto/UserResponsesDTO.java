@@ -1,12 +1,12 @@
 package com.capstoneproject.dto;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.capstoneproject.response.ValidationMessages;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,53 +31,56 @@ public class UserResponsesDTO {
     /**
      * This is the User Id.
      */
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.USERID_NOTNULL)
     private Long userId;
 
     /**
      * This is the Quiz Id.
      */
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.QUIZ_ID_NOTNULL)
     private Long quizId;
 
     /**
      * This is the Category Id.
      */
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.CATEGORY_ID_NOTNULL)
     private Long categoryId;
 
     /**
      * This is the Number Of Questions.
      */
     @Column(nullable = false)
+    @NotNull(message = ValidationMessages.NUM_OF_QUE_NOTNULL)
     private int numOfQuestions;
 
     /**
      * This is the number of Questions answered.
      */
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.NUM_OF_QUE_ANSWERED_NOTNULL)
     private int numOfQuestionsAnswered;
 
     /**
      * This is the Total Marks.
      */
     @Column(nullable = false)
+    @NotNull(message = ValidationMessages.TOTAL_MARKS_NOTNULL)
     private int totalMarks;
 
     /**
      * This is the marks scored field.
      */
+    @Column(nullable = false)
+    @NotNull(message = ValidationMessages.MARKS_SCORED_NOTNULL)
     private int marksScored;
 
     /**
      * This is the Time Stamp field.
      */
+    @Column(nullable = false)
     private String timeStamp;
 
-    /**
-     * This is the Time Stamp Setter Method.
-     * @return the current Time Stamp.
-     */
-    public final String setTimeStampMethod() {
-        LocalDateTime currentTimeStamp = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter
-                .ofPattern("dd-MM-yyyy HH:mm:ss");
-        return currentTimeStamp.format(formatter);
-    }
 }

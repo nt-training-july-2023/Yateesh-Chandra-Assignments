@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Test.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FaStopwatch } from 'react-icons/fa';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import clockswal from "../image/clockswal.png";
 import oopsswal from "../image/oopsswal.png";
@@ -10,6 +9,9 @@ import instructionswal from "../image/instructionswal.png";
 import DeactivateBackButton from '../DeactivateBackButton';
 import NotFound from '../NotFound';
 import QuestionService from '../../services/QuestionService';
+import ResponseService from '../../services/ResponseService';
+import SweetAlert from '../SweetAlerts/SweetAlert';
+import {format} from 'date-fns';
 
 
 const Test = () => {
@@ -28,6 +30,8 @@ const Test = () => {
     const [marksScored, setMarksScored] = useState(0);
     const [autoSubmitted, setAutoSubmitted] = useState(false);
     const [instructionsConfirmed, setInstructionsConfirmed] = useState(false);
+    const [startTime, setStartTime] = useState(null);
+
 
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
@@ -92,6 +96,7 @@ const Test = () => {
                 }).then((response) => {
                     if (response.isConfirmed) {
                         setInstructionsConfirmed(true);
+                        setStartTime(new Date().getTime());
                     }
                 });
             }
@@ -123,6 +128,9 @@ const Test = () => {
     };
 
     const handleAddResponses = async () => {
+
+        const formattedTime = format(new Date(startTime), 'dd-MM-yyyy HH:mm:ss');
+
         const data = {
         userId,
         quizId,
@@ -131,10 +139,11 @@ const Test = () => {
         numOfQuestionsAnswered,
         totalMarks,
         marksScored,
+        timeStamp : formattedTime
         };
 
         try {
-            await axios.post("http://localhost:8082/api/v1/response/add", data);
+            await ResponseService.postResponse(data);
         } catch (error) {
             console.log(error);
         }
@@ -150,14 +159,7 @@ const Test = () => {
             imageWidth : 150,
         }).then((result) => {
             if(result.isConfirmed){
-                Swal.fire({
-                    title : "Quiz submitted",
-                    text : "redirecting to Profile",
-                    timer : 1500,
-                    timerProgressBar : true,
-                    showConfirmButton : false,
-                    backdrop: `rgba(80,108,62,0.7)`
-                })      
+                SweetAlert.quizSubmitted();
             }
             navigate("/profile");
         })   
@@ -208,14 +210,7 @@ const Test = () => {
             }).then((result) => {
                 if(result.isConfirmed){
                     handleAddResponses();
-                    Swal.fire({
-                        title : "Quiz submitted",
-                        text : "redirecting to Profile",
-                        timer : 1500,
-                        timerProgressBar : true,
-                        showConfirmButton : false,
-                        backdrop: `rgba(80,108,62,0.7)`
-                    })
+                    SweetAlert.quizSubmitted();
                     navigate("/profile");
                 }
             });
