@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capstoneproject.dto.QuizDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
+import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
@@ -108,7 +108,7 @@ public class QuizService {
         newQuiz.setQuizDescription(quizDto.getQuizDescription());
         if(quizDto.getNumOfQuestions() <= 0
                 || quizDto.getTimeInMin() <= 0) {
-            throw new NoInputException("Number cannot be 0 or less");
+            throw new ValidationException("Number cannot be 0 or less");
         }
         newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
         newQuiz.setTimeInMin(quizDto.getTimeInMin());
@@ -151,7 +151,7 @@ public class QuizService {
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             if(quizDto.getNumOfQuestions() <= 0
                     || quizDto.getTimeInMin() <= 0) {
-                throw new NoInputException("Number cannot be 0 or less");
+                throw new ValidationException("Number cannot be 0 or less");
             }
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
             existingQuiz.setTimeInMin(quizDto.getTimeInMin());

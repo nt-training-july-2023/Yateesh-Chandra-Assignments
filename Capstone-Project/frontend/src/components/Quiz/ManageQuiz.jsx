@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./Quizzes.css";
 import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
-import Swal from "sweetalert2";
 import { FaBackward, FaExternalLinkAlt, FaPen, FaPlusCircle, FaTasks, FaTrash } from "react-icons/fa";
 import NotFound from "../NotFound";
 import QuizService from "../../services/QuizService";
+import SweetAlert from "../SweetAlerts/SweetAlert";
 
 const ManageQuiz = () => {
     const { categoryId } = useParams();
@@ -14,6 +14,7 @@ const ManageQuiz = () => {
     const [quizzes, setQuizzes] = useState([]);
     const navigate = useNavigate();
     const userRole = localStorage.getItem("role");
+    const categoryName = localStorage.getItem("categoryName")
 
     useEffect(() => {
         fetchQuizzes();
@@ -32,19 +33,7 @@ const ManageQuiz = () => {
     };
 
     const deleteButton = (quizId) => {
-        Swal.fire({
-            title : "Delete Quiz?",
-            text : "Are you sure You want to delete. It cannot be undone",
-            icon : "warning",
-            showCancelButton : true,
-            cancelButtonText : "No",
-            showConfirmButton : true,
-            confirmButtonText : "Delete"
-        }).then((result) => {
-            if(result.isConfirmed){
-                handleDeleteQuiz(quizId)
-            }
-        })
+        SweetAlert.deleteAlert("Quiz", quizId, handleDeleteQuiz);
     }
 
     const handleDeleteQuiz = (quizId) => {
@@ -91,7 +80,7 @@ const ManageQuiz = () => {
 
                 <div className="manage-quiz-container">
                     <div className="quiz-list-container">
-                        <h1>{quizzes.length === 0 ? "No Quiz Available" : "Quizzes Available"}</h1>
+                        <h1>{quizzes.length === 0 ? `No Quiz Available in "${categoryName}"` : `Quizzes Available in "${categoryName}"`}</h1>
                         <div className="button-search-container">
                             <div className="left-buttons">
                                 <button className="red-button" onClick={backButtonClick}>
@@ -134,7 +123,7 @@ const ManageQuiz = () => {
                                         <button className="delete-button" onClick ={() => deleteButton(quiz.quizId)}> <FaTrash className="small-icon"/> Delete</button>
                                         )}
                                         {userRole === "ADMIN" && (
-                                        <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
+                                        <button className="open-button" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions, quizName : quiz.quizName}})}><FaExternalLinkAlt className="small-icon"/> Open</button>
                                         )}
                         
                                         {userRole === "USER" && (

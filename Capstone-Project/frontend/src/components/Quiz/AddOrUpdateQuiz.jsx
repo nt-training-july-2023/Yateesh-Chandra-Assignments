@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminNavBar from "../AdminNavBar";
 import "../Categories/Categories.css";
-import axios from "axios";
 import {useLocation} from 'react-router-dom'
-import Swal from "sweetalert2";
 import NotFound from "../NotFound";
 import QuizService from "../../services/QuizService";
 import SweetAlert from "../SweetAlerts/SweetAlert";
@@ -162,19 +160,10 @@ const AddOrUpdateQuiz = () => {
                         
                     if(error?.response?.data?.code === 302){
                         setQuizNameError("Quiz already exists");
-                        Swal.fire({
-                            title : "Quiz Already Exists!",
-                            text : "Change the Quiz name",
-                            icon : "warning"
-                        })
+                        SweetAlert.alreadyExists("Quiz");
                 
                     } else if(error?.response?.data?.message === "Number cannot be 0 or less"){
-                        Swal.fire({
-                            title : "Incorrect Values Detected",
-                            text : "Enter Valid Numbers",
-                            icon : "error"
-                        })
-                    
+                        SweetAlert.incorrectValues();
                     }
                 }
 
@@ -193,19 +182,11 @@ const AddOrUpdateQuiz = () => {
                     console.log(error);
                     if(error?.response?.data?.code === 302 ){
                         setQuizNameError("Quiz already exists");
-                        Swal.fire({
-                            title : "Quiz Already Exists!",
-                            text : "Change the Quiz name",
-                            icon : "warning"
-                        })
+                        SweetAlert.alreadyExists("Quiz");
                     } 
                     
                     else if(error?.response?.data?.message === "Number cannot be 0 or less"){
-                        Swal.fire({
-                            title : "Incorrect Values Detected",
-                            text : "Enter Valid Numbers",
-                            icon : "error"
-                        })
+                        SweetAlert.incorrectValues();
                     }
                 }
             }
@@ -227,61 +208,61 @@ const AddOrUpdateQuiz = () => {
     return (
         <div className="App">
             {userRole === "ADMIN" || userRole === "USER" ? (
-                <>
-            <AdminNavBar />
-            <div className="add-quiz-container">
-                <h1>{isUpdating ? 'Update Quiz' : 'Add Quiz'}</h1>
-                <form onSubmit={handleAddOrUpdateQuiz}>
-                    <div className="form-group">
-                        <label>Quiz Name:</label>
-                        <input
-                        type="text"
-                        value={quizName}
-                        onChange={handleQuizNameChange}
-                        placeholder="Enter Quiz Name"
-                        />
+            <>
+                <AdminNavBar />
+                <div className="add-quiz-container">
+                    <h1>{isUpdating ? 'Update Quiz' : 'Add Quiz'}</h1>
+                    <form onSubmit={handleAddOrUpdateQuiz}>
+                        <div className="form-group">
+                            <label>Quiz Name:</label>
+                            <input
+                            type="text"
+                            value={quizName}
+                            onChange={handleQuizNameChange}
+                            placeholder="Enter Quiz Name"
+                            />
 
-                        {quizNameError && <div className="error">{quizNameError}</div>}
+                            {quizNameError && <div className="error">{quizNameError}</div>}
 
-                        <label>Quiz Description:</label>
-                        <textarea
-                        value={quizDescription}
-                        onChange={handleQuizDescriptionChange}
-                        placeholder="Enter Quiz Description"
-                        />
+                            <label>Quiz Description:</label>
+                            <textarea
+                            value={quizDescription}
+                            onChange={handleQuizDescriptionChange}
+                            placeholder="Enter Quiz Description"
+                            />
 
-                        {quizDescriptionError && <div className="error">{quizDescriptionError}</div>}
+                            {quizDescriptionError && <div className="error">{quizDescriptionError}</div>}
 
-                        <label>Number of Questions:</label>
-                        <input
-                        type="number"
-                        value={numOfQuestions}
-                        onChange={handleQuizNumOfQuestions}
-                        placeholder="Enter Number of Questions"
-                        />
+                            <label>Number of Questions:</label>
+                            <input
+                            type="number"
+                            value={numOfQuestions}
+                            onChange={handleQuizNumOfQuestions}
+                            placeholder="Enter Number of Questions"
+                            />
 
-                        {numOfQuestionsError && <div className="error">{numOfQuestionsError}</div>}
+                            {numOfQuestionsError && <div className="error">{numOfQuestionsError}</div>}
 
-                        <label>Duration(in Minutes): </label>
-                        <input
-                        type = "number"
-                        value = {timeInMin}
-                        onChange = {handleQuizDuration}
-                        place Holder = "Enter Duration"
-                        />
-                        
-                        {timeInMinError && <div className="error">{timeInMinError}</div>}
+                            <label>Duration(in Minutes): </label>
+                            <input
+                            type = "number"
+                            value = {timeInMin}
+                            onChange = {handleQuizDuration}
+                            place Holder = "Enter Duration"
+                            />
+                            
+                            {timeInMinError && <div className="error">{timeInMinError}</div>}
 
-                    </div>
-                    
-                    <div className="form-group">
-                        <div className="button-container-category">
-                            <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
-                            <button type="button" className="red-button" onClick={cancelButton}>Cancel</button>
                         </div>
-                    </div>
-                </form>
-            </div>
+                        
+                        <div className="form-group">
+                            <div className="button-container-category">
+                                <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
+                                <button type="button" className="red-button" onClick={cancelButton}>Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </>
             ):(
                 <div>

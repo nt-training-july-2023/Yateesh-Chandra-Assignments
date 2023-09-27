@@ -1,14 +1,18 @@
 package com.capstoneproject.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.QuestionDTO;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
+import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.Question;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.QuestionRepository;
@@ -36,7 +40,7 @@ public class QuestionService {
      *
      * @return List of Questions.
      */
-    public final List<QuestionDTO> getAllQuestions() {
+    public final List<QuestionDTO> getQuestions() {
         List<Question> question = questionRepository.findAll();
         return question.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
@@ -89,30 +93,40 @@ public class QuestionService {
      * @return the status of the question being added.
      */
     public final QuestionDTO addQuestion(final QuestionDTO questionDTO) {
-        if (questionDTO.getQuestionTitle().isEmpty()
-                || questionDTO.getOption1().isEmpty()
-                || questionDTO.getOption2().isEmpty()
-                || questionDTO.getOption3().isEmpty()
-                || questionDTO.getOption4().isEmpty()
-                || questionDTO.getCorrectOption().isEmpty()
-                || questionDTO.getQuizId() == 0) {
-            throw new NoInputException("No Inputs detected");
-        } else {
-            Question newQuestion = new Question();
-            newQuestion.setQuestionId(questionDTO.getQuestionId());
-            newQuestion.setQuestionTitle(questionDTO.getQuestionTitle());
-            newQuestion.setOption1(questionDTO.getOption1());
-            newQuestion.setOption2(questionDTO.getOption2());
-            newQuestion.setOption3(questionDTO.getOption3());
-            newQuestion.setOption4(questionDTO.getOption4());
-            newQuestion.setCorrectOption(questionDTO.getCorrectOption());
-            Quiz quiz = quizRepository.findById(questionDTO.getQuizId())
-                    .orElseThrow(() -> new ElementNotExistsException(
-                            "Quiz not found"));
-            newQuestion.setQuiz(quiz);
-            questionRepository.save(newQuestion);
-            return questionDTO;
+
+        Quiz quiz = quizRepository.findById(
+                questionDTO.getQuizId()).orElseThrow(
+                        () -> new ElementNotExistsException("No Quiz found with Id : " + questionDTO.getQuizId()));
+        
+        Set<String> optionList = new HashSet<>();
+        optionList.add(questionDTO.getOption1());
+        optionList.add(questionDTO.getOption2());
+        optionList.add(questionDTO.getOption3());
+        optionList.add(questionDTO.getOption4());
+        final int optionNumber = 4;
+        if(optionList.size() < optionNumber) {
+            throw new AlreadyExistsException("Options must not be repeated");
         }
+        Question newQuestion = new Question();
+        newQuestion.setQuestionId(questionDTO.getQuestionId());
+        newQuestion.setQuestionTitle(questionDTO.getQuestionTitle());
+        newQuestion.setOption1(questionDTO.getOption1());
+        newQuestion.setOption2(questionDTO.getOption2());
+        newQuestion.setOption3(questionDTO.getOption3());
+        newQuestion.setOption4(questionDTO.getOption4());
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if(questionDTO.getCorrectOption().equalsIgnoreCase(option)) {
+                newQuestion.setCorrectOption(questionDTO.getCorrectOption());
+                matchFound = true;
+            } 
+        }
+        if(!matchFound) {
+            throw new ConflictException("Option does not match any option");
+        }
+        newQuestion.setQuiz(quiz);
+        questionRepository.save(newQuestion);
+        return questionDTO;
     }
 
     /**
@@ -125,29 +139,34 @@ public class QuestionService {
     public final QuestionDTO updateQuestion(final Long questionId,
             final QuestionDTO updatedQuestionDTO) {
         Question existingQuestion = questionRepository.findById(questionId)
-                .orElse(null);
-        if (existingQuestion != null) {
-            if (updatedQuestionDTO.getQuestionTitle().isEmpty()
-                    || updatedQuestionDTO.getOption1().isEmpty()
-                    || updatedQuestionDTO.getOption2().isEmpty()
-                    || updatedQuestionDTO.getOption3().isEmpty()
-                    || updatedQuestionDTO.getOption4().isEmpty()
-                    || updatedQuestionDTO.getCorrectOption().isEmpty()) {
-                throw new NoInputException("No Inputs detected");
-            }
-            existingQuestion
+                .orElseThrow(() -> new ElementNotExistsException("No question found with that Id"));
+        existingQuestion
                     .setQuestionTitle(updatedQuestionDTO.getQuestionTitle());
-            existingQuestion.setOption1(updatedQuestionDTO.getOption1());
-            existingQuestion.setOption2(updatedQuestionDTO.getOption2());
-            existingQuestion.setOption3(updatedQuestionDTO.getOption3());
-            existingQuestion.setOption4(updatedQuestionDTO.getOption4());
-            existingQuestion
-                    .setCorrectOption(updatedQuestionDTO.getCorrectOption());
-            questionRepository.save(existingQuestion);
-            return updatedQuestionDTO;
-        } else {
-            throw new ElementNotExistsException("Question ID not found");
+        Set<String> optionList = new HashSet<>();
+        optionList.add(updatedQuestionDTO.getOption1());
+        optionList.add(updatedQuestionDTO.getOption2());
+        optionList.add(updatedQuestionDTO.getOption3());
+        optionList.add(updatedQuestionDTO.getOption4());
+        final int optionNumber = 4;
+        if(optionList.size() < optionNumber) {
+            throw new AlreadyExistsException("Options must not be repeated");
         }
+        existingQuestion.setOption1(updatedQuestionDTO.getOption1());
+        existingQuestion.setOption2(updatedQuestionDTO.getOption2());
+        existingQuestion.setOption3(updatedQuestionDTO.getOption3());
+        existingQuestion.setOption4(updatedQuestionDTO.getOption4());
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if(updatedQuestionDTO.getCorrectOption().equalsIgnoreCase(option)) {
+                existingQuestion.setCorrectOption(updatedQuestionDTO.getCorrectOption());
+                matchFound = true;
+            } 
+        }
+        if(!matchFound) {
+            throw new ConflictException("Option does not match any option");
+        }
+        questionRepository.save(existingQuestion);
+        return updatedQuestionDTO;
     }
 
     /**
@@ -156,14 +175,9 @@ public class QuestionService {
      * @param questionId of Long type.
      */
     public final void deleteQuestion(final Long questionId) {
-        Question existingQuestion = questionRepository.findById(questionId)
-                .orElse(null);
-        if (existingQuestion == null) {
-            throw new ElementNotExistsException(
-                    "No Question was found with that ID");
-        } else {
-            questionRepository.deleteById(questionId);
-        }
+       questionRepository.findById(questionId)
+                .orElseThrow(() -> new ElementNotExistsException("No Question found with that Id"));
+       questionRepository.deleteById(questionId);
     }
 
     /**
@@ -172,14 +186,11 @@ public class QuestionService {
      * @return the List Of questions.
      */
     public final List<QuestionDTO> getQuestionByQuizId(final Long quizId) {
-        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
-        if (existingQuiz == null) {
-            throw new ElementNotExistsException("Quiz not available");
-        } else {
-            List<Question> questions = questionRepository
+        quizRepository.findById(quizId).orElseThrow(
+                () -> new ElementNotExistsException("Quiz Not Found with that ID"));
+        List<Question> questions = questionRepository
                     .getQuestionByQuizId(quizId);
-            return questions.stream().map(this::convertModelToDTO)
-                    .collect(Collectors.toList());
-        }
+        return questions.stream().map(this::convertModelToDTO)
+                .collect(Collectors.toList());
     }
 }

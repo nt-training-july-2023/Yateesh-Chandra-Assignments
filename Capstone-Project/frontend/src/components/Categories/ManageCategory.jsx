@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Categories.css';
 import AdminNavBar from '../AdminNavBar';
-import Swal from 'sweetalert2';
 import UserNavBar from '../UserNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
 import DeactivateBackButton from '../DeactivateBackButton';
 import NotFound from '../NotFound';
 import CategoryService from '../../services/CategoryService';
+import SweetAlert from '../SweetAlerts/SweetAlert';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -40,19 +39,7 @@ const ManageCategory = () => {
     };
 
     const handleDeleteClick = (categoryId) => {
-        Swal.fire({
-            title : "Delete Category?",
-            text : "Are you sure You want to delete. It cannot be undone",
-            icon : "warning",
-            showCancelButton : true,
-            cancelButtonText : "No",
-            showConfirmButton : true,
-            confirmButtonText : "Delete"
-        }).then((result) => {
-            if(result.isConfirmed){
-                handleDeleteCategory(categoryId);
-            }
-        })
+        SweetAlert.deleteAlert("Category", categoryId, handleDeleteCategory);
     };
 
     const handleOpenButton = (categoryId, categoryName) => {

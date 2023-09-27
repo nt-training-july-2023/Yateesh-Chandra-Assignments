@@ -3,6 +3,7 @@ package com.capstoneproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.service.QuestionService;
 
+import jakarta.validation.Valid;
+
 /**
  * This class contains the Controller part for the Question.
  */
 @CrossOrigin
 @RestController
-@RequestMapping(path = "api/v1/question")
+@RequestMapping(path = "question")
 public class QuestionController {
     /**
      * questionService variable is used to operate on the Question Service.
@@ -35,9 +38,9 @@ public class QuestionController {
      * @return the List of the questions.
      */
     @GetMapping
-    public final ResponseEntity<Object> getAllQuestions() {
-        List<QuestionDTO> question = questionService.getAllQuestions();
-        return ResponseEntity.ok(question);
+    public final ResponseEntity<List<QuestionDTO>> getAllQuestions() {
+        List<QuestionDTO> questions = questionService.getQuestions();
+        return ResponseEntity.ok(questions);
     }
 
     /**
@@ -46,7 +49,7 @@ public class QuestionController {
      * @return the Question associated with a specific ID.
      */
     @GetMapping("/{questionId}")
-    public final ResponseEntity<Object> getQuestionById(
+    public final ResponseEntity<QuestionDTO> getQuestionById(
             @PathVariable final Long questionId) {
         QuestionDTO newQuestion = questionService.getQuestionById(questionId);
         return ResponseEntity.ok(newQuestion);
@@ -58,10 +61,10 @@ public class QuestionController {
      * @return the success status when added.
      */
     @PostMapping
-    public final ResponseEntity<Object> addQuestion(
-            @RequestBody final QuestionDTO questionDto) {
-        QuestionDTO newQuestion = questionService.addQuestion(questionDto);
-        return ResponseEntity.ok(newQuestion);
+    public final ResponseEntity<String> addQuestion(
+            @RequestBody @Valid final QuestionDTO questionDto) {
+        questionService.addQuestion(questionDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Question added");
     }
 
     /**
@@ -70,10 +73,11 @@ public class QuestionController {
      * @return the deleted successfully status.
      */
     @DeleteMapping("/{questionId}")
-    public final ResponseEntity<Object> deleteQuestion(
+    public final ResponseEntity<Void> deleteQuestion(
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
-        return ResponseEntity.noContent().build();
+        String message = "Question is Deleted";
+        return ResponseEntity.noContent().header("Message", message).build();
     }
 
     /**
@@ -83,12 +87,12 @@ public class QuestionController {
      * @return the success status after updating.
      */
     @PutMapping("/{questionId}")
-    public final ResponseEntity<Object> updateQuestion(
+    public final ResponseEntity<String> updateQuestion(
             @PathVariable final Long questionId,
-            @RequestBody final QuestionDTO updatedQuestionDto) {
-        QuestionDTO newQuestion = questionService.updateQuestion(questionId,
+            @RequestBody @Valid final QuestionDTO updatedQuestionDto) {
+        questionService.updateQuestion(questionId,
                 updatedQuestionDto);
-        return ResponseEntity.ok(newQuestion);
+        return ResponseEntity.ok("Quiz is updated");
     }
 
     /**
@@ -97,7 +101,7 @@ public class QuestionController {
      * @return the Response Ok.
      */
     @GetMapping("/byQuiz/{quizId}")
-    public final ResponseEntity<Object> getQuestionByQuizId(
+    public final ResponseEntity<List<QuestionDTO>> getQuestionByQuizId(
             @PathVariable final Long quizId) {
         List<QuestionDTO> questionDto = questionService
                 .getQuestionByQuizId(quizId);

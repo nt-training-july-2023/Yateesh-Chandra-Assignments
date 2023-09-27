@@ -9,6 +9,7 @@ import oopsswal from "../image/oopsswal.png";
 import instructionswal from "../image/instructionswal.png";
 import DeactivateBackButton from '../DeactivateBackButton';
 import NotFound from '../NotFound';
+import QuestionService from '../../services/QuestionService';
 
 
 const Test = () => {
@@ -34,10 +35,8 @@ const Test = () => {
         return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
     };
 
-    const apiUrl = `http://localhost:8082/api/v1/question/byQuiz/${quizId}`;
-
     const fetchQuestions = () => {
-        axios.get(apiUrl)
+        QuestionService.getQuestionsByQuizId(quizId)
         .then((response) => {
             if(response.data.length === 0){
                 Swal.fire({
@@ -68,37 +67,35 @@ const Test = () => {
 
     useEffect(() => {
         if(userRole === "USER"){
-
-        
-        if (questions.length > 0 && !instructionsConfirmed) {
-            Swal.fire({
-                    title : "Instructions for the Test",
-                    width : "700px",
-                    padding: '3em',
-                    color: 'black',
-                    backdrop: `
-                      rgb(240, 240, 240, 0.8)
-                    `,
-                    imageUrl : instructionswal,
-                    imageWidth : 100,
-                    allowOutsideClick : false,
-                    showConfirmButton : true,
-                    confirmButtonText : "Start",
-                    html : `
-                    <ol>
-                      <li style = "margin-bottom: 10px;">Each Question carries Two Marks.</li>
-                      <li style = "margin-bottom: 10px;">This is a Timed Test. Look the timer.</li>
-                      <li style = "margin-bottom: 10px;">Questions are of "Choose the Correct Answer" type.</li>
-                      <li style = "margin-bottom: 10px;">There is no negative marking.</li>
-                    </ol>
-                    `,
-            }).then((response) => {
-                if (response.isConfirmed) {
-                    setInstructionsConfirmed(true);
-                }
-            });
+            if (questions.length > 0 && !instructionsConfirmed) {
+                Swal.fire({
+                        title : "Instructions for the Test",
+                        width : "700px",
+                        padding: '3em',
+                        color: 'black',
+                        backdrop: `
+                        rgb(240, 240, 240, 0.8)
+                        `,
+                        imageUrl : instructionswal,
+                        imageWidth : 100,
+                        allowOutsideClick : false,
+                        showConfirmButton : true,
+                        confirmButtonText : "Start",
+                        html : `
+                        <ol>
+                        <li style = "margin-bottom: 10px;">Each Question carries Two Marks.</li>
+                        <li style = "margin-bottom: 10px;">This is a Timed Test. Look the timer.</li>
+                        <li style = "margin-bottom: 10px;">Questions are of "Choose the Correct Answer" type.</li>
+                        <li style = "margin-bottom: 10px;">There is no negative marking.</li>
+                        </ol>
+                        `,
+                }).then((response) => {
+                    if (response.isConfirmed) {
+                        setInstructionsConfirmed(true);
+                    }
+                });
+            }
         }
-    }
     }, [questions, instructionsConfirmed]);
     
 
@@ -137,9 +134,9 @@ const Test = () => {
         };
 
         try {
-        await axios.post("http://localhost:8082/api/v1/response/add", data);
+            await axios.post("http://localhost:8082/api/v1/response/add", data);
         } catch (error) {
-        console.log(error);
+            console.log(error);
         }
     };
 

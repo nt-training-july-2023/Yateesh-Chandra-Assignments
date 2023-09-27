@@ -73,7 +73,7 @@ public class QuizController {
      * @return null if the quiz does not exist.
      */
     @DeleteMapping("/{quizId}")
-    public final ResponseEntity<String> deleteQuiz(
+    public final ResponseEntity<Void> deleteQuiz(
             @PathVariable final Long quizId) {
         quizService.deleteQuiz(quizId);
         String message = "Quiz is deleted"; 

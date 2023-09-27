@@ -4,15 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This class is about Validation Exception.
+ * This exception is about Entity Not Found Exception.
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ValidationException extends RuntimeException {
+@ResponseStatus(HttpStatus.CONFLICT)
+public class ConflictException extends RuntimeException {
     /**
      * This method returns the Exception message.
      * @param message of String type.
      */
-    public ValidationException(final String message) {
+    public ConflictException(final String message) {
         super(message);
     }
 }

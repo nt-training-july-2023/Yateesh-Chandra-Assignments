@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./ManageQuestion.css";
@@ -6,12 +5,15 @@ import Swal from "sweetalert2";
 import AdminNavBar from "../AdminNavBar";
 import { FaBackward, FaPlusCircle } from "react-icons/fa";
 import NotFound from "../NotFound";
+import QuestionService from "../../services/QuestionService";
+import SweetAlert from "../SweetAlerts/SweetAlert";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
     const location = useLocation();
     const userRole = localStorage.getItem("role");
     const categoryId = location.state?.categoryId;
+    const quizName = location.state?.quizName;
     const numOfQuestions = location.state ? location.state.numOfQuestions : null;
     const { quizId } = useParams();
     const navigate = useNavigate();
@@ -35,8 +37,7 @@ const ManageQuestion = () => {
     }, []);
 
     const fetchQuestions = () => {
-        axios
-        .get(`http://localhost:8082/api/v1/question/byQuiz/${quizId}`)
+        QuestionService.getQuestionsByQuizId(quizId)
         .then((response) => {
             setQuestions(response.data);
         })
@@ -60,68 +61,60 @@ const ManageQuestion = () => {
     };
 
     const handleAddQuestion = () => {
-            console.log("question length : ", questions.length);
-            console.log("Number of Questions : " , numOfQuestions);
-            axios
-            .post("http://localhost:8082/api/v1/question", newQuestion)
-            .then(() => {
-                fetchQuestions();
-                setNewQuestion({
-                    questionTitle: "",
-                    option1: "",
-                    option2: "",
-                    option3: "",
-                    option4: "",
-                    correctOption: "",
-                    quizId,
-                });
-                console.log("Question added successfully");
-                setIsAddingQuestion(false);
-            })
-            .catch((error) => {
-                console.error("Error adding question", error);
-                if(error.response.data.message === "No Inputs detected"){
-                    Swal.fire({
-                        title : "Can not add Question",
-                        text : "Please fill all the fields",
-                        icon : "error"
-                    })
-                }
+        if(!newQuestion.questionTitle || !newQuestion.option1 || !newQuestion.option2 || !newQuestion.option3
+            || !newQuestion.option4 || !newQuestion.correctOption){
+                SweetAlert.missingField();
+                return;
+        }
+
+        QuestionService.addQuestion(newQuestion)
+        .then(() => {
+            SweetAlert.addSuccessAlert();
+            fetchQuestions();
+            setNewQuestion({
+                questionTitle: "",
+                option1: "",
+                option2: "",
+                option3: "",
+                option4: "",
+                correctOption: "",
+                quizId,
             });
+            console.log("Question added successfully");
+            setIsAddingQuestion(false);
+        })
+        .catch((error) => {
+            console.log("Error adding question", error);
+            if(error?.response?.data?.message === "Options must not be repeated"){
+                SweetAlert.duplicateOptions();
+            }
+        });
 
     };
 
-    const limitReached = () => {
-        Swal.fire({
-            title : "You have reached the limit",
-            icon : 'warning',
-            timer : 1500
-        })
-    }
-
     const handleEditQuestion = () => {
-        axios
-        .put(`http://localhost:8082/api/v1/question/${editedQuestion.questionId}`, editedQuestion)
+        if(!editedQuestion.questionTitle || !editedQuestion.option1 || !editedQuestion.option2 || !editedQuestion.option3
+            || !editedQuestion.option4 || !editedQuestion.correctOption){
+                SweetAlert.missingField();
+                return;
+        }
+        QuestionService.updateQuestion(editedQuestion.questionId, editedQuestion)
         .then(() => {
+            SweetAlert.updateSuccessAlert();
             fetchQuestions();
             setIsEditingQuestion(false);
             console.log("Question updated successfully");
         })
         .catch((error) => {
             console.error("Error updating question", error);
-            if(error.response.data.message === "No Inputs detected"){
-                Swal.fire({
-                    title : "Can not add Question",
-                    text : "Please fill all the fields",
-                    icon : "error"
-                })
+            if(error?.response?.data?.message === "Options must not be repeated"){
+                SweetAlert.duplicateOptions();
             }
         });
     };
 
     const handleDeleteQuestion = (questionId) => {
-        axios
-        .delete(`http://localhost:8082/api/v1/question/${questionId}`)
+        QuestionService.deleteQuestion(questionId)
         .then(() => {
             console.log("Question deleted: ", questionId);
             fetchQuestions();
@@ -130,20 +123,7 @@ const ManageQuestion = () => {
     };
 
     const handleDeleteButton = (questionId) => {
-        Swal.fire({
-            title : "Delete Question?",
-            text : "Are you sure you want to delete Question?",
-            icon : 'warning',
-            showCancelButton : true,
-            cancelButtonText : "No",
-            showConfirmButton : true,
-            confirmButtonText : "Delete"
-        })
-        .then((result) => {
-            if(result.isConfirmed){
-                handleDeleteQuestion(questionId)
-            }
-        })
+        SweetAlert.deleteAlert("Question", questionId, handleDeleteQuestion)
     }
 
     const handleEditClick = (question) => {
@@ -157,7 +137,7 @@ const ManageQuestion = () => {
             <>
             <AdminNavBar/>
             <div className="manage-questions-container">
-                <h1>{!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? "No Questions Available" :"Manage Questions") : (isAddingQuestion ? 'Add New Question' : 'Edit Question')}</h1>
+                <h1>{!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')}</h1>
                 {!isAddingQuestion && !isEditingQuestion ? (
                 <div className="button-container">
                     <button className="red-button" onClick={backButton}>
@@ -166,7 +146,7 @@ const ManageQuestion = () => {
                    
                     <button
                     className="blue-button"
-                    onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => limitReached()) }
+                    onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) }
                     >
                        Add Question <FaPlusCircle className="small-icon" />
                     </button>

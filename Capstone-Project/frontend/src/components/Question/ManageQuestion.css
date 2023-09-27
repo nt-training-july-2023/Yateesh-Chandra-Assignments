@@ -31,7 +31,7 @@
   color: #333;
 }
 
-.question-form input, select {
+.question-form input[type = "text"], select {
   width: 50%;
   padding: 8px;
   margin-bottom: 10px;
