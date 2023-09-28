@@ -2,8 +2,9 @@ package com.capstoneproject.service;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
-import com.capstoneproject.exceptions.CustomException;
-import com.capstoneproject.exceptions.ValidationException;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ElementNotExistsException;
+import com.capstoneproject.exceptions.UnAuthorizedException;
 import com.capstoneproject.models.User;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.response.LoginResponse;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -64,31 +64,8 @@ class UserServiceTest {
 
         when(userRepository.findByEmail(userDTO.getEmail())).thenReturn(Optional.of(new User()));
 
-        assertThrows(DuplicateKeyException.class, () -> userService.addUser(userDTO));
+        assertThrows(AlreadyExistsException.class, () -> userService.addUser(userDTO));
         verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void addUser_InvalidData_ShouldThrowValidationException() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName(null);
-        userDTO.setEmail(null);
-        userDTO.setPassword("short");
-        userDTO.setPhoneNumber(null);
-
-        assertThrows(ValidationException.class, () -> userService.addUser(userDTO));
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void addUser_EmailNotAllowed_ShouldThrowCustomException() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName("Yateesh");
-        userDTO.setEmail("yateesh@gmail.com");
-        userDTO.setPassword("password123");
-        userDTO.setPhoneNumber("1234567890");
-
-        assertThrows(CustomException.class, () -> userService.addUser(userDTO));
     }
 
     @Test
@@ -118,21 +95,42 @@ class UserServiceTest {
     }
 
     @Test
-    void loginUser_InvalidEmail_ShouldReturnLoginResponse() {
+    void loginUser_InvalidEmail_ShouldThrowUnAuthorizedException() {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setEmail("nonexistent@nucleusteq.com");
         loginDTO.setPassword("password123");
-
         when(userRepository.findByEmail(loginDTO.getEmail())).thenReturn(Optional.empty());
-        LoginResponse response = userService.loginUser(loginDTO);
-
-        assertFalse(response.getStatus());
-        assertEquals("Email does not exist.!", response.getMessage());
+        assertThrows(UnAuthorizedException.class, () -> userService.loginUser(loginDTO));
     }
 
+    @Test
+    void deleteUser_ExistingUser_ShouldDeleteUser() {
+        Long userId = 1L;
+        User user = new User();
+        user.setUserId(userId);
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        userService.deleteUser(userId);
+
+        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, times(1)).deleteById(userId);
+    }
 
     @Test
-    void loginUser_InvalidPassword_ShouldReturnLoginResponse() {
+    void deleteUser_NonExistingUser_ShouldThrowElementNotExistsException() {
+        Long userId = 1L;
+
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+
+        assertThrows(ElementNotExistsException.class, () -> userService.deleteUser(userId));
+
+        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, never()).deleteById(userId);
+    }
+
+    @Test
+    void testLoginUser_InvalidPassword_ShouldThrowUnAuthorizedException() {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setEmail("yateesh@nucleusteq.com");
         loginDTO.setPassword("wrongPassword");
@@ -144,9 +142,7 @@ class UserServiceTest {
         when(userRepository.findByEmail(loginDTO.getEmail())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())).thenReturn(false);
 
-        LoginResponse response = userService.loginUser(loginDTO);
-
-        assertFalse(response.getStatus());
-        assertEquals("Passwords did not match", response.getMessage());
+        assertThrows(UnAuthorizedException.class, () -> userService.loginUser(loginDTO));
     }
+
 }

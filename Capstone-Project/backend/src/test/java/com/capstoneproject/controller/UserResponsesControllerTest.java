@@ -1,6 +1,8 @@
 package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,11 +31,19 @@ class UserResponsesControllerTest {
 
     @Test
     void testAddUserResponses() {
-        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
-        when(userResponsesService.addUserResponses(userResponsesDto)).thenReturn(userResponsesDto);
-        ResponseEntity<Object> responseEntity = userResponsesController.addUserResponses(userResponsesDto);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(userResponsesDto, responseEntity.getBody());
+        // Arrange
+        UserResponsesDTO userResponsesDTO = new UserResponsesDTO();
+        when(userResponsesService.addUserResponses(userResponsesDTO)).thenReturn(null);
+
+        ResponseEntity<String> response = userResponsesController.addUserResponses(userResponsesDTO);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        String responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals("Successfully submitted", responseBody);
+        verify(userResponsesService, times(1)).addUserResponses(userResponsesDTO);
     }
 
 }

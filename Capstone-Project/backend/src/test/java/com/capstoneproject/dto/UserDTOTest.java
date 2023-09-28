@@ -46,7 +46,7 @@ class UserDTOTest {
         assertEquals(null, userDto.getName());
         assertEquals(null, userDto.getEmail());
         assertEquals(null, userDto.getPassword());
-        assertEquals(null, userDto.getUserRole());
+        assertEquals("USER", userDto.getUserRole());
         assertEquals(null, userDto.getPhoneNumber());
     }
 }

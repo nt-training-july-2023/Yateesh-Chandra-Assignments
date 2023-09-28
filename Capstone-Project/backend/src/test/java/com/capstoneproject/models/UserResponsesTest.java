@@ -53,7 +53,7 @@ class UserResponsesTest {
         assertEquals(marksScored, userResponses.getMarksScored());
         assertEquals(timeStamp, userResponses.getTimeStamp());
     }
-    
+
     @Test
     void testUserConstructor() {
         User user = new User(4L, "Yateesh");

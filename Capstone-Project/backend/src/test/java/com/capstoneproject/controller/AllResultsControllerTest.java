@@ -1,11 +1,12 @@
 package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,29 +40,20 @@ class AllResultsControllerTest {
         allResultsDto.add(result1);
         allResultsDto.add(result2);
         when(allResultsService.getAllResults()).thenReturn(allResultsDto);
-        ResponseEntity<Object> responseEntity = allResultsController.getAllResults();
+        ResponseEntity<List<AllResultsDTO>> responseEntity = allResultsController.getAllResults();
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(allResultsDto, responseEntity.getBody());
     }
-
+    
     @Test
-    void testGetResultsByEmail() {
-        List<AllResultsDTO> allResultsDto = new ArrayList<>();
-        AllResultsDTO result1 = new AllResultsDTO();
-        AllResultsDTO result2 = new AllResultsDTO();
-        allResultsDto.add(result1);
-        allResultsDto.add(result2);
-        when(allResultsService.getResultsByUserId(5L)).thenReturn(allResultsDto);
-        ResponseEntity<Object> responseEntity = allResultsController.getResultsByUserId(5L);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(allResultsDto, responseEntity.getBody());
-    }
-
-    @Test
-    void testGetResultsByUserIdAndQuizName() {
-        AllResultsDTO allResultsDto = new AllResultsDTO();
-        when(allResultsService.getResultsByUserIdAndQuizName(1L, "Test Quiz")).thenReturn(Optional.of(allResultsDto));
-        ResponseEntity<Object> responseEntity = allResultsController.getResultsByUserIdAndQuizName(1L,"Test Quiz");
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    public void testGetResultsByUserId() {
+        Long userId = 1L;
+        List<AllResultsDTO> resultsList = new ArrayList<>();
+        resultsList.add(new AllResultsDTO());
+        when(allResultsService.getResultsByUserId(userId)).thenReturn(resultsList);
+        ResponseEntity<List<AllResultsDTO>> response = allResultsController.getResultsByUserId(userId);
+        verify(allResultsService, times(1)).getResultsByUserId(userId);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(resultsList, response.getBody());
     }
 }

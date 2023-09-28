@@ -32,11 +32,10 @@ public class QuizControllerTest {
         List<QuizDTO> quizzes = new ArrayList<>();
         quizzes.add(new QuizDTO(1L, "Quiz1", "Description1", 5, 2, 1L));
         quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 4, 2L));
-        when(quizService.getAllQuiz()).thenReturn(quizzes);
-        ResponseEntity<Object> response = quizController.getAllQuiz();
+        when(quizService.getQuizzes()).thenReturn(quizzes);
+        ResponseEntity<List<QuizDTO>> response = quizController.getAllQuiz();
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        @SuppressWarnings("unchecked")
         List<QuizDTO> responseQuizzes = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizzes);
         assertEquals(2, responseQuizzes.size());
@@ -48,7 +47,7 @@ public class QuizControllerTest {
         Long quizId = 1L;
         QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 2, 1L);
         when(quizService.getQuizById(quizId)).thenReturn(quizDTO);
-        ResponseEntity<Object> response = quizController.getQuizById(quizId);
+        ResponseEntity<QuizDTO> response = quizController.getQuizById(quizId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         QuizDTO responseQuiz = (QuizDTO) response.getBody();
@@ -61,18 +60,18 @@ public class QuizControllerTest {
     public void testAddQuiz() {
         QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 2, 1L);
         when(quizService.addQuiz(quizDTO)).thenReturn(quizDTO);
-        ResponseEntity<Object> response = quizController.addQuiz(quizDTO);
+        ResponseEntity<String> response = quizController.addQuiz(quizDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        QuizDTO addedQuiz = (QuizDTO) response.getBody();
-        assertNotNull(addedQuiz);
-        assertEquals("New Quiz", addedQuiz.getQuizName());
+        String resposeBody = response.getBody();
+        assertNotNull(resposeBody);
+        assertEquals("Quiz is Successfully Created", resposeBody);
     }
 
     @Test
     public void testDeleteQuiz() {
         Long quizId = 1L;
-        ResponseEntity<Object> response = quizController.deleteQuiz(quizId);
+        ResponseEntity<Void> response = quizController.deleteQuiz(quizId);
         assertNotNull(response);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -82,12 +81,12 @@ public class QuizControllerTest {
         Long quizId = 1L;
         QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 2, 1L);
         when(quizService.updateQuiz(quizId, updatedQuizDTO)).thenReturn(updatedQuizDTO);
-        ResponseEntity<Object> response = quizController.updateQuiz(quizId, updatedQuizDTO);
+        ResponseEntity<String> response = quizController.updateQuiz(quizId, updatedQuizDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        QuizDTO updatedQuiz = (QuizDTO) response.getBody();
-        assertNotNull(updatedQuiz);
-        assertEquals("Updated Quiz", updatedQuiz.getQuizName());
+        String body = response.getBody();
+        assertNotNull(body);
+        assertEquals("Quiz is updated", body);
     }
 
 
@@ -98,10 +97,9 @@ public class QuizControllerTest {
         quizList.add(new QuizDTO(1L, "Quiz 1", "Quiz 1 Description", 7, 2, 9L));
         quizList.add(new QuizDTO(2L, "Quiz 2", "Quiz 2 Description", 8, 3, 10L));
         when(quizService.getQuizByCategoryId(categoryId)).thenReturn(quizList);
-        ResponseEntity<Object> response = quizController.getQuizByCategoryId(categoryId);
+        ResponseEntity<List<QuizDTO>> response = quizController.getQuizByCategoryId(categoryId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        @SuppressWarnings("unchecked")
         List<QuizDTO> responseQuizList = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizList);
         assertEquals(2, responseQuizList.size());

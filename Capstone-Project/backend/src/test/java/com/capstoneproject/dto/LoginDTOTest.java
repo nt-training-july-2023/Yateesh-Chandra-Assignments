@@ -35,5 +35,12 @@ class LoginDTOTest {
         assertEquals(null, loginDto.getEmail());
         assertEquals(null, loginDto.getPassword());
     }
+    
+    @Test
+    public void testAllArgsConstructor() {
+        LoginDTO loginDTO = new LoginDTO("test@example.com", "testpassword");
+        assertEquals("test@example.com", loginDTO.getEmail());
+        assertEquals("testpassword", loginDTO.getPassword());
+    }
 
 }

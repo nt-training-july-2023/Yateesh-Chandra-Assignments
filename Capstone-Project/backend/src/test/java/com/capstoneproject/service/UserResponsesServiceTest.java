@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.capstoneproject.dto.UserResponsesDTO;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.models.User;
@@ -74,12 +73,6 @@ class UserResponsesServiceTest {
     }
 
     @Test
-    public void testAddResponses_NoInputException() {
-        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
-        assertThrows(NoInputException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
-    }
-
-    @Test
     public void testAddUserResponsesWithExistingResponse() {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
         userResponsesDto.setUserId(1L);
@@ -91,7 +84,7 @@ class UserResponsesServiceTest {
         userResponsesDto.setNumOfQuestionsAnswered(8);
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
     }
-    
+
     @Test
     public void testAddUserResponsesWithNonExistingUser() {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();

@@ -21,9 +21,4 @@ public class ElementNotExistsException extends RuntimeException {
         super(message);
     }
 
-    /**
-     * This is No arguments constructor.
-     */
-    public ElementNotExistsException() {
-    }
 }

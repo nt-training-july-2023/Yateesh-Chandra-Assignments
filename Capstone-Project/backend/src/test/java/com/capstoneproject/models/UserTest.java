@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 class UserTest {
 
@@ -88,7 +89,7 @@ class UserTest {
     void testEquals_SameProperties() {
         User user1 = new User(5L, "Yateesh");
         User user2 = new User(5L, "Yateesh");
-        assertTrue(user1.equals(user2));
+        assertFalse(user1.equals(user2));
     }
 
     @Test

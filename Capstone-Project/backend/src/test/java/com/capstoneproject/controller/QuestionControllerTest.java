@@ -35,11 +35,10 @@ class QuestionControllerTest {
         List<QuestionDTO> questions = new ArrayList<>();
         questions.add(new QuestionDTO(null, "Test Question", "A", "B", "C", "D", "OptionB", 4L));
         questions.add(new QuestionDTO(null, "Test Question 2", "A1", "B2", "C3", "D4", "OptionB", 5L));
-        when(questionService.getAllQuestions()).thenReturn(questions);
-        ResponseEntity<Object> response = questionController.getAllQuestions();
+        when(questionService.getQuestions()).thenReturn(questions);
+        ResponseEntity<List<QuestionDTO>> response = questionController.getQuestions();
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        @SuppressWarnings("unchecked")
         List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
         assertNotNull(responseQuestions);
         assertEquals(2, responseQuestions.size());
@@ -52,7 +51,7 @@ class QuestionControllerTest {
         Long questionId = 9L;
         QuestionDTO questionDTO = new QuestionDTO(questionId, "Question 1", "A", "B", "C", "D", "OptionB", 4L );
         when(questionService.getQuestionById(questionId)).thenReturn(questionDTO);
-        ResponseEntity<Object> response = questionController.getQuestionById(questionId);
+        ResponseEntity<QuestionDTO> response = questionController.getQuestionById(questionId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         QuestionDTO responseQuestion = (QuestionDTO) response.getBody();
@@ -60,40 +59,40 @@ class QuestionControllerTest {
         assertEquals(questionId, responseQuestion.getQuestionId());
         assertEquals("Question 1", responseQuestion.getQuestionTitle());
     }
-    
+
     @Test
     public void testAddQuestion() {
         QuestionDTO questionDto = new QuestionDTO(null, "Question 1", "A", "B", "C", "D", "OptionB", 4L);
         when(questionService.addQuestion(questionDto)).thenReturn(questionDto);
-        ResponseEntity<Object> response = questionController.addQuestion(questionDto);
+        ResponseEntity<String> response = questionController.addQuestion(questionDto);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        QuestionDTO addedQuestion = (QuestionDTO) response.getBody() ;
-        assertNotNull(addedQuestion);
-        assertEquals("Question 1", addedQuestion.getQuestionTitle());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        String responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals("Question added", responseBody);
     }
-    
+
     @Test
     public void testDeleteQuestion() {
         Long questionId = 3L;
-        ResponseEntity<Object> response = questionController.deleteQuestion(questionId);
+        ResponseEntity<Void> response = questionController.deleteQuestion(questionId);
         assertNotNull(response);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
-    
+
     @Test
     public void testUpdateQuestion() {
         Long questionId = 8L;
         QuestionDTO updatedQuestionDTO = new QuestionDTO(null, "Updated Question", "A", "B", "C", "D", "OptionB", 4L);
         when(questionService.updateQuestion(questionId, updatedQuestionDTO)).thenReturn(updatedQuestionDTO);
-        ResponseEntity<Object> response = questionController.updateQuestion(questionId, updatedQuestionDTO);
+        ResponseEntity<String> response = questionController.updateQuestion(questionId, updatedQuestionDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        QuestionDTO updatedQuestion = (QuestionDTO) response.getBody();
-        assertNotNull(updatedQuestion);
-        assertEquals("Updated Question", updatedQuestion.getQuestionTitle());
+        String responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals("Quiz is updated", responseBody); // Ensure the response body contains the expected message
     }
-    
+
     @Test
     public void testQuestionByQuizId() {
         Long questionId = 1L;
@@ -101,10 +100,9 @@ class QuestionControllerTest {
         questions.add(new QuestionDTO(1L, "Question 1", "A", "B", "C", "D", "OptionB", 4L));
         questions.add(new QuestionDTO(2L, "Question 2", "A", "B", "C", "D", "OptionB", 5L));
         when(questionService.getQuestionByQuizId(questionId)).thenReturn(questions);
-        ResponseEntity<Object> response = questionController.getQuestionByQuizId(questionId);
+        ResponseEntity<List<QuestionDTO>> response = questionController.getQuestionByQuizId(questionId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        @SuppressWarnings("unchecked")
         List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
         assertNotNull(responseQuestions);
         assertEquals(2, responseQuestions.size());

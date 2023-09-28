@@ -23,14 +23,7 @@ class CategoryDTOTest {
         assertEquals(categoryName, categoryDto.getCategoryName());
         assertEquals(categoryDescription, categoryDto.getDescription());
     }
-    
-    @Test
-    public void testCategoryDTOToString() {
-        CategoryDTO categoryDto = new CategoryDTO(5L, "Java", "This is Java");
-        String expectedString = String.format("CategoryDTO(categoryId=%d, categoryName=%s, description=%s)", categoryDto.getCategoryId(), categoryDto.getCategoryName(),categoryDto.getDescription());
-        assertEquals(expectedString, categoryDto.toString());
-    }
-    
+
     @Test
     public void testCategoryDTODefaultConstructor() {
         CategoryDTO categoryDto = new CategoryDTO();

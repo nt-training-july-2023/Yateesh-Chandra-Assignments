@@ -2,9 +2,6 @@ package com.capstoneproject.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 class UserResponsesDTOTest {
@@ -65,15 +62,4 @@ class UserResponsesDTOTest {
         assertEquals(marksScored, userResponsesDto.getMarksScored());
         assertEquals(timeStamp, userResponsesDto.getTimeStamp());
     }
-
-    @Test
-    public void testSetTimeStampMethod() {
-        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
-        String timeStamp = userResponsesDto.setTimeStampMethod();
-        assertNotNull(timeStamp);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        LocalDateTime parsedTime = LocalDateTime.parse(timeStamp,formatter);
-        assertNotNull(parsedTime);
-        }
-
 }

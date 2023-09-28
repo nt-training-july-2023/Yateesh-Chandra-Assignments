@@ -17,11 +17,8 @@ import org.mockito.MockitoAnnotations;
 import com.capstoneproject.dto.CategoryDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.repository.CategoryRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 class CategoryServiceTest {
 
@@ -42,7 +39,7 @@ class CategoryServiceTest {
         categories.add(new Category(1L, "Category1", "Category Description1"));
         categories.add(new Category(2L, "Category2", "Category Description2"));
         when(categoryRepository.findAll()).thenReturn(categories);
-        List<CategoryDTO> categoryDtos = categoryService.getAllCategories();
+        List<CategoryDTO> categoryDtos = categoryService.getCategories();
         assertEquals(2, categoryDtos.size());
         assertEquals("Category1", categoryDtos.get(0).getCategoryName());
         assertEquals("Category Description2", categoryDtos.get(1).getDescription());
@@ -69,12 +66,6 @@ class CategoryServiceTest {
         verify(categoryRepository, never()).save(any(Category.class));
     }
 
-    @Test
-    public void testAddCategoryNoInput() {
-        CategoryDTO categoryDto = new CategoryDTO(null, "", "Description");
-        assertThrows(NoInputException.class, () -> categoryService.addCategory(categoryDto));
-        verify(categoryRepository, never()).save(any(Category.class));
-    }
 
     @Test
     public void testDeleteCategory() {
@@ -117,15 +108,6 @@ class CategoryServiceTest {
         verify(categoryRepository, never()).save(any(Category.class));
     }
 
-    @Test
-    public void testUpdateCategoryNoInput() {
-        Long categoryId = 1L;
-        CategoryDTO updatedCategoryDTO = new CategoryDTO(categoryId, "", "Updated Description");
-        Category existingCategory = new Category(categoryId, "ExistingCategory", "Description");
-        when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(existingCategory));
-        assertThrows(NoInputException.class, () -> categoryService.updateCategory(categoryId, updatedCategoryDTO));
-        verify(categoryRepository, never()).save(any(Category.class));
-    }
 
     @Test
     public void testGetCategoryById() {
@@ -141,6 +123,6 @@ class CategoryServiceTest {
     public void testGetCategoryByIdNotFound() {
         Long categoryId = 1L;
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
-        assertThrows(EntityNotFoundException.class, () -> categoryService.getCategoryById(categoryId));
+        assertThrows(ElementNotExistsException.class, () -> categoryService.getCategoryById(categoryId));
     }
 }

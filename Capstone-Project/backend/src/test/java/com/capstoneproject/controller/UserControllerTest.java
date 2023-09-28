@@ -1,5 +1,7 @@
 package com.capstoneproject.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,13 +35,19 @@ class UserControllerTest {
     
     @Test
     void testSaveUser() {
-        UserDTO userDto = new UserDTO();
-        userDto.setName("testUser");
-        when(userService.addUser(userDto)).thenReturn("123");
-        
-        String response = userController.saveUser(userDto);
-        verify(userService, times(1)).addUser(userDto);
-        assert response.equals("123");
+
+        UserDTO userDTO = new UserDTO();
+        when(userService.addUser(userDTO)).thenReturn(null);
+
+        ResponseEntity<String> response = userController.saveUser(userDTO);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        String responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals("User Registered successfully", responseBody);
+        verify(userService, times(1)).addUser(userDTO);
     }
 
     @Test
@@ -52,4 +60,11 @@ class UserControllerTest {
         assert response.getStatusCode()==HttpStatus.OK;
     }
 
+    @Test
+    public void deleteUser() {
+        Long userId = 1L;
+        ResponseEntity<Void> response = userController.deleteUser(userId);
+        assertNotNull(response);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 }

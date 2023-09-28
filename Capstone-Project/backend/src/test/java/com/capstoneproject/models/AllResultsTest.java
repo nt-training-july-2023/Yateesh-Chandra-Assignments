@@ -1,79 +1,72 @@
 package com.capstoneproject.models;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
-class AllResultsTest {
+public class AllResultsTest {
 
     @Test
-    void testGettersAndSetters() {
-        Long resultId = 4L;
-        Long userId = 5L;
-        String email = "test@test.com";
-        String userName = "test User";
-        String categoryName = "Test Category";
-        String quizName = "Test Quiz";
-        int numOfQ = 4;
-        int numOfQA = 2;
-        int tot = 4;
-        int mar = 2;
-        String timeStamp = "2023-09-20";
-
+    void testGetterSetter() {
         AllResults allResults = new AllResults();
-        allResults.setResultId(resultId);
-        allResults.setUserId(userId);
-        allResults.setEmail(email);
-        allResults.setUserName(userName);
-        allResults.setCategoryName(categoryName);
-        allResults.setQuizName(quizName);
-        allResults.setNumOfQuestions(numOfQ);
-        allResults.setNumOfQuestionsAnswered(numOfQA);
-        allResults.setTotalMarks(tot);
-        allResults.setMarksScored(mar);
-        allResults.setTimeStamp(timeStamp);
+        allResults.setResultId(1L);
+        allResults.setUserId(2L);
+        allResults.setEmail("test@example.com");
+        allResults.setUserName("TestUser");
+        allResults.setCategoryName("TestCategory");
+        allResults.setQuizName("TestQuiz");
+        allResults.setNumOfQuestions(10);
+        allResults.setNumOfQuestionsAnswered(8);
+        allResults.setTotalMarks(20);
+        allResults.setMarksScored(15);
+        allResults.setTimeStamp("2023-09-28 15:30:00");
 
-        assertEquals(resultId, allResults.getResultId());
-        assertEquals(userId, allResults.getUserId());
-        assertEquals(email, allResults.getEmail());
-        assertEquals(userName, allResults.getUserName());
-        assertEquals(categoryName, allResults.getCategoryName());
-        assertEquals(quizName, allResults.getQuizName());
-        assertEquals(numOfQ, allResults.getNumOfQuestions());
-        assertEquals(numOfQA, allResults.getNumOfQuestionsAnswered());
-        assertEquals(tot, allResults.getTotalMarks());
-        assertEquals(mar, allResults.getMarksScored());
-        assertEquals(timeStamp, allResults.getTimeStamp());
+        assertEquals(1L, allResults.getResultId());
+        assertEquals(2L, allResults.getUserId());
+        assertEquals("test@example.com", allResults.getEmail());
+        assertEquals("TestUser", allResults.getUserName());
+        assertEquals("TestCategory", allResults.getCategoryName());
+        assertEquals("TestQuiz", allResults.getQuizName());
+        assertEquals(10, allResults.getNumOfQuestions());
+        assertEquals(8, allResults.getNumOfQuestionsAnswered());
+        assertEquals(20, allResults.getTotalMarks());
+        assertEquals(15, allResults.getMarksScored());
+        assertEquals("2023-09-28 15:30:00", allResults.getTimeStamp());
+    }
+
+    @Test
+    void testNoArgsConstructor() {
+        AllResults allResults = new AllResults();
+
+        assertNotNull(allResults);
+        assertEquals(null, allResults.getResultId());
+        assertEquals(null, allResults.getUserId());
+        assertEquals(null, allResults.getEmail());
+        assertEquals(null, allResults.getUserName());
+        assertEquals(null, allResults.getCategoryName());
+        assertEquals(null, allResults.getQuizName());
+        assertEquals(0, allResults.getNumOfQuestions());
+        assertEquals(0, allResults.getNumOfQuestionsAnswered());
+        assertEquals(0, allResults.getTotalMarks());
+        assertEquals(0, allResults.getMarksScored());
+        assertEquals(null, allResults.getTimeStamp());
     }
 
     @Test
     void testAllArgsConstructor() {
-        Long resultId = 4L;
-        Long userId = 5L;
-        String email = "test@test.com";
-        String userName = "test User";
-        String categoryName = "Test Category";
-        String quizName = "Test Quiz";
-        int numOfQ = 4;
-        int numOfQA = 2;
-        int tot = 4;
-        int mar = 2;
-        String timeStamp = "2023-09-20";
+        AllResults allResults = new AllResults(1L, 2L, "test@example.com", "TestUser",
+                "TestCategory", "TestQuiz", 10, 8, 20, 15, "2023-09-28 15:30:00");
 
-        AllResults allResults = new AllResults(resultId, userId, email, userName, categoryName,
-               quizName, numOfQ, numOfQA, tot, mar, timeStamp);
-
-        assertEquals(resultId, allResults.getResultId());
-        assertEquals(userId, allResults.getUserId());
-        assertEquals(email, allResults.getEmail());
-        assertEquals(userName, allResults.getUserName());
-        assertEquals(categoryName, allResults.getCategoryName());
-        assertEquals(quizName, allResults.getQuizName());
-        assertEquals(numOfQ, allResults.getNumOfQuestions());
-        assertEquals(numOfQA, allResults.getNumOfQuestionsAnswered());
-        assertEquals(tot, allResults.getTotalMarks());
-        assertEquals(mar, allResults.getMarksScored());
-        assertEquals(timeStamp, allResults.getTimeStamp());
+        assertNotNull(allResults);
+        assertEquals(1L, allResults.getResultId());
+        assertEquals(2L, allResults.getUserId());
+        assertEquals("test@example.com", allResults.getEmail());
+        assertEquals("TestUser", allResults.getUserName());
+        assertEquals("TestCategory", allResults.getCategoryName());
+        assertEquals("TestQuiz", allResults.getQuizName());
+        assertEquals(10, allResults.getNumOfQuestions());
+        assertEquals(8, allResults.getNumOfQuestionsAnswered());
+        assertEquals(20, allResults.getTotalMarks());
+        assertEquals(15, allResults.getMarksScored());
+        assertEquals("2023-09-28 15:30:00", allResults.getTimeStamp());
     }
-
 }

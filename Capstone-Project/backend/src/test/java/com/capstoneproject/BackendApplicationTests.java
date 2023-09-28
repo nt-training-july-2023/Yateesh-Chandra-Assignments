@@ -11,5 +11,4 @@ class BackendApplicationTests {
 	void testMain() {
 	    assertDoesNotThrow(() -> BackendApplication.main(new String[] {}));
 	}
-
 }

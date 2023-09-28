@@ -5,8 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -44,27 +42,7 @@ class AllResultsServiceTest {
     }
 
     @Test
-    public void testGetResultsByUserAndQuizName() {
-        AllResults allResults = new AllResults();
-        allResults.setResultId(1L);
-        allResults.setUserId(2L);
-        allResults.setUserName("Test User");
-        allResults.setCategoryName("Test Category");
-        allResults.setQuizName("Test Quiz");
-        when(allResultsRepo.getResultsByUserIdAndQuizName(2L,"Test Quiz")).thenReturn(Optional.of(allResults));
-        Optional<AllResultsDTO> allResultsDto = allResultsService.getResultsByUserIdAndQuizName(2L, "Test Quiz");
-        assertTrue(allResultsDto.isPresent());
-        
-        AllResultsDTO resultsDto = allResultsDto.get();
-        assertEquals(1L, resultsDto.getResultId());
-        assertEquals(2L, resultsDto.getUserId());
-        assertEquals("Test User", resultsDto.getUserName());
-        assertEquals("Test Category", resultsDto.getCategoryName());
-        assertEquals("Test Quiz", resultsDto.getQuizName());
-    }
-
-    @Test
-    public void testGetResultsByEmail() {
+    public void testGetResultsByUserId() {
         List<AllResults> allResults = new ArrayList<>();
         AllResults allResults1 = new AllResults();
         allResults1.setResultId(1L);

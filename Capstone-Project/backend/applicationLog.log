@@ -1,855 +1,125 @@
-2023-09-28T08:18:43.424+05:30  INFO 14188 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 14188 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T08:18:43.429+05:30  INFO 14188 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T08:18:43.553+05:30  INFO 14188 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T08:18:43.553+05:30  INFO 14188 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T08:18:45.733+05:30  INFO 14188 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T08:18:45.903+05:30  INFO 14188 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 160 ms. Found 6 JPA repository interfaces.
-2023-09-28T08:18:46.923+05:30  INFO 14188 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T08:18:46.937+05:30  INFO 14188 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T08:18:46.938+05:30  INFO 14188 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T08:18:47.051+05:30  INFO 14188 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T08:18:47.052+05:30  INFO 14188 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3497 ms
-2023-09-28T08:18:47.295+05:30  INFO 14188 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T08:18:47.383+05:30  INFO 14188 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T08:18:47.386+05:30  INFO 14188 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T08:18:47.625+05:30  INFO 14188 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T08:18:47.851+05:30  INFO 14188 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T08:18:47.877+05:30  INFO 14188 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T08:18:48.241+05:30  INFO 14188 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@32e98c52
-2023-09-28T08:18:48.244+05:30  INFO 14188 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T08:18:48.998+05:30  INFO 14188 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T08:18:50.264+05:30  INFO 14188 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T08:18:50.509+05:30  INFO 14188 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T08:18:50.886+05:30  INFO 14188 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T08:18:51.658+05:30  WARN 14188 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T08:18:52.072+05:30  INFO 14188 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T08:18:52.132+05:30  INFO 14188 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T08:18:52.146+05:30  INFO 14188 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 10.807 seconds (process running for 12.562)
-2023-09-28T08:33:27.259+05:30  WARN 14188 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m38s699ms435µs800ns).
-2023-09-28T10:04:16.424+05:30  WARN 14188 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m48s217ms834µs200ns).
-2023-09-28T10:14:44.561+05:30  INFO 14188 --- [RMI TCP Connection(93)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T10:14:44.583+05:30  INFO 14188 --- [RMI TCP Connection(93)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T10:14:44.611+05:30  INFO 14188 --- [RMI TCP Connection(93)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:14:44.622+05:30  INFO 14188 --- [RMI TCP Connection(93)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T10:14:44.626+05:30  INFO 14188 --- [RMI TCP Connection(93)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T10:14:52.499+05:30  INFO 13600 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 13600 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T10:14:52.503+05:30  INFO 13600 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T10:14:52.629+05:30  INFO 13600 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T10:14:52.629+05:30  INFO 13600 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T10:14:53.961+05:30  INFO 13600 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T10:14:54.099+05:30  INFO 13600 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 125 ms. Found 6 JPA repository interfaces.
-2023-09-28T10:14:55.397+05:30  INFO 13600 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T10:14:55.413+05:30  INFO 13600 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T10:14:55.413+05:30  INFO 13600 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T10:14:55.531+05:30  INFO 13600 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T10:14:55.532+05:30  INFO 13600 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2902 ms
-2023-09-28T10:14:55.810+05:30  INFO 13600 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T10:14:55.902+05:30  INFO 13600 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T10:14:55.908+05:30  INFO 13600 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T10:14:56.139+05:30  INFO 13600 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:14:56.468+05:30  INFO 13600 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T10:14:56.507+05:30  INFO 13600 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T10:14:56.760+05:30  INFO 13600 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T10:14:56.762+05:30  INFO 13600 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T10:14:57.270+05:30  INFO 13600 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:14:58.509+05:30  INFO 13600 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T10:14:58.725+05:30  INFO 13600 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:14:59.042+05:30  INFO 13600 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T10:14:59.769+05:30  WARN 13600 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T10:15:00.284+05:30  INFO 13600 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T10:15:00.347+05:30  INFO 13600 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T10:15:00.368+05:30  INFO 13600 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 9.77 seconds (process running for 12.798)
-2023-09-28T10:18:21.809+05:30  INFO 13600 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T10:18:21.809+05:30  INFO 13600 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T10:18:21.809+05:30  INFO 13600 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2023-09-28T10:21:37.340+05:30  WARN 13600 --- [http-nio-8082-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value [madhu.varun@nucleusteq.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@73700146,^(?!.*@nucleusteq\.com$).*]; default message [Invalid Email Format]] ]
-2023-09-28T10:21:50.196+05:30  WARN 13600 --- [http-nio-8082-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value [madhu@nucleusteq.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@73700146,^(?!.*@nucleusteq\.com$).*]; default message [Invalid Email Format]] ]
-2023-09-28T10:24:39.375+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T10:24:39.390+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T10:24:39.391+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T10:24:39.404+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:24:39.408+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T10:24:39.415+05:30  INFO 13600 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T10:24:46.965+05:30  INFO 6004 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 6004 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T10:24:46.968+05:30  INFO 6004 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T10:24:47.112+05:30  INFO 6004 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T10:24:47.112+05:30  INFO 6004 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T10:24:48.462+05:30  INFO 6004 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T10:24:48.577+05:30  INFO 6004 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 110 ms. Found 6 JPA repository interfaces.
-2023-09-28T10:24:49.467+05:30  INFO 6004 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T10:24:49.482+05:30  INFO 6004 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T10:24:49.482+05:30  INFO 6004 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T10:24:49.645+05:30  INFO 6004 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T10:24:49.651+05:30  INFO 6004 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2538 ms
-2023-09-28T10:24:50.100+05:30  INFO 6004 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T10:24:50.269+05:30  INFO 6004 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T10:24:50.269+05:30  INFO 6004 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T10:24:50.612+05:30  INFO 6004 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:24:50.989+05:30  INFO 6004 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T10:24:51.019+05:30  INFO 6004 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T10:24:51.392+05:30  INFO 6004 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@18e3ef54
-2023-09-28T10:24:51.402+05:30  INFO 6004 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T10:24:52.149+05:30  INFO 6004 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:24:53.950+05:30  INFO 6004 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T10:24:54.140+05:30  INFO 6004 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:24:54.672+05:30  INFO 6004 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T10:24:55.824+05:30  WARN 6004 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T10:24:56.510+05:30  INFO 6004 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T10:24:56.616+05:30  INFO 6004 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T10:24:56.649+05:30  INFO 6004 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 11.9 seconds (process running for 14.84)
-2023-09-28T10:27:37.211+05:30  INFO 6004 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T10:27:37.211+05:30  INFO 6004 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T10:27:37.211+05:30  INFO 6004 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2023-09-28T10:27:37.556+05:30  WARN 6004 --- [http-nio-8082-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value [madhu.varun@nucleusteq.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@18a62100,^(?!.*@nucleusteq\.com$).*]; default message [Invalid Email Format]] ]
-2023-09-28T10:30:35.830+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T10:30:35.845+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T10:30:35.848+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T10:30:35.861+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:30:35.865+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T10:30:35.873+05:30  INFO 6004 --- [RMI TCP Connection(9)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T10:30:41.043+05:30  INFO 9224 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 9224 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T10:30:41.149+05:30  INFO 9224 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T10:30:41.298+05:30  INFO 9224 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T10:30:41.310+05:30  INFO 9224 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T10:30:43.555+05:30  INFO 9224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T10:30:43.717+05:30  INFO 9224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 136 ms. Found 6 JPA repository interfaces.
-2023-09-28T10:30:45.037+05:30  INFO 9224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T10:30:45.055+05:30  INFO 9224 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T10:30:45.056+05:30  INFO 9224 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T10:30:45.172+05:30  INFO 9224 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T10:30:45.173+05:30  INFO 9224 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3861 ms
-2023-09-28T10:30:45.473+05:30  INFO 9224 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T10:30:45.563+05:30  INFO 9224 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T10:30:45.568+05:30  INFO 9224 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T10:30:45.793+05:30  INFO 9224 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:30:46.039+05:30  INFO 9224 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T10:30:46.062+05:30  INFO 9224 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T10:30:46.316+05:30  INFO 9224 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@37c38cb4
-2023-09-28T10:30:46.319+05:30  INFO 9224 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T10:30:46.828+05:30  INFO 9224 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:30:47.945+05:30  INFO 9224 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T10:30:48.127+05:30  INFO 9224 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:30:48.447+05:30  INFO 9224 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T10:30:49.196+05:30  WARN 9224 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T10:30:49.568+05:30  INFO 9224 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T10:30:49.621+05:30  INFO 9224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T10:30:49.635+05:30  INFO 9224 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 9.434 seconds (process running for 12.149)
-2023-09-28T10:31:15.279+05:30  INFO 9224 --- [http-nio-8082-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T10:31:15.281+05:30  INFO 9224 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T10:31:15.284+05:30  INFO 9224 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2023-09-28T10:31:15.522+05:30  WARN 9224 --- [http-nio-8082-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value [madhu.varun@nucleusteq.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@6471bdfb,^(?!.*@nucleusteq\.com$).*]; default message [Invalid Email Format]] ]
-2023-09-28T10:32:44.234+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T10:32:44.250+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T10:32:44.252+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T10:32:44.264+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:32:44.268+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T10:32:44.271+05:30  INFO 9224 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T10:32:50.834+05:30  INFO 5304 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 5304 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T10:32:50.838+05:30  INFO 5304 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T10:32:50.944+05:30  INFO 5304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T10:32:50.944+05:30  INFO 5304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T10:32:52.390+05:30  INFO 5304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T10:32:52.684+05:30  INFO 5304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 275 ms. Found 6 JPA repository interfaces.
-2023-09-28T10:32:53.907+05:30  INFO 5304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T10:32:53.921+05:30  INFO 5304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T10:32:53.922+05:30  INFO 5304 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T10:32:54.021+05:30  INFO 5304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T10:32:54.021+05:30  INFO 5304 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3076 ms
-2023-09-28T10:32:54.243+05:30  INFO 5304 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T10:32:54.331+05:30  INFO 5304 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T10:32:54.338+05:30  INFO 5304 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T10:32:54.509+05:30  INFO 5304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:32:54.730+05:30  INFO 5304 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T10:32:54.750+05:30  INFO 5304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T10:32:54.967+05:30  INFO 5304 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29973673
-2023-09-28T10:32:54.970+05:30  INFO 5304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T10:32:55.437+05:30  INFO 5304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:32:56.636+05:30  INFO 5304 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T10:32:56.796+05:30  INFO 5304 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:32:57.129+05:30  INFO 5304 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T10:32:57.874+05:30  WARN 5304 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T10:32:58.276+05:30  INFO 5304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T10:32:58.331+05:30  INFO 5304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T10:32:58.350+05:30  INFO 5304 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 9.417 seconds (process running for 12.021)
-2023-09-28T10:33:09.131+05:30  INFO 5304 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T10:33:09.132+05:30  INFO 5304 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T10:33:09.134+05:30  INFO 5304 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2023-09-28T10:33:09.602+05:30  WARN 5304 --- [http-nio-8082-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23502
-2023-09-28T10:33:09.603+05:30 ERROR 5304 --- [http-nio-8082-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: null value in column "user_role" of relation "users" violates not-null constraint
-  Detail: Failing row contains (82, madhu.varun@nucleusteq.com, Madhu Varun, $2a$10$pH0GPMD557oV5PPp7xyp0ejAadbpBkkpAH3EGD9vylTAm08B43mBq, 9876543210, null).
-2023-09-28T10:33:09.620+05:30 ERROR 5304 --- [http-nio-8082-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: could not execute statement [ERROR: null value in column "user_role" of relation "users" violates not-null constraint
-  Detail: Failing row contains (82, madhu.varun@nucleusteq.com, Madhu Varun, $2a$10$pH0GPMD557oV5PPp7xyp0ejAadbpBkkpAH3EGD9vylTAm08B43mBq, 9876543210, null).] [insert into users (user_email,user_name,password,phone_number,user_role) values (?,?,?,?,?)]; SQL [insert into users (user_email,user_name,password,phone_number,user_role) values (?,?,?,?,?)]; constraint [user_role" of relation "users]] with root cause
-
-org.postgresql.util.PSQLException: ERROR: null value in column "user_role" of relation "users" violates not-null constraint
-  Detail: Failing row contains (82, madhu.varun@nucleusteq.com, Madhu Varun, $2a$10$pH0GPMD557oV5PPp7xyp0ejAadbpBkkpAH3EGD9vylTAm08B43mBq, 9876543210, null).
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2401) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:368) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.6.0.jar:42.6.0]
-	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.6.0.jar:42.6.0]
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:275) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:169) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:111) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2779) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:676) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:360) ~[spring-orm-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy126.persist(Unknown Source) ~[na:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311) ~[spring-orm-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy126.persist(Unknown Source) ~[na:na]
-	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.1.4.jar:3.1.4]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244) ~[spring-aop-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy141.save(Unknown Source) ~[na:na]
-	at com.capstoneproject.service.UserService.addUser(UserService.java:50) ~[classes/:na]
-	at com.capstoneproject.controller.UserController.saveUser(UserController.java:42) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.13.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.13.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
-
-2023-09-28T10:35:18.238+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T10:35:18.254+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T10:35:18.256+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T10:35:18.269+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:35:18.272+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T10:35:18.279+05:30  INFO 5304 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T10:35:24.328+05:30  INFO 11348 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 11348 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T10:35:24.332+05:30  INFO 11348 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T10:35:24.452+05:30  INFO 11348 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T10:35:24.452+05:30  INFO 11348 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T10:35:25.753+05:30  INFO 11348 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T10:35:25.902+05:30  INFO 11348 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 6 JPA repository interfaces.
-2023-09-28T10:35:27.104+05:30  INFO 11348 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T10:35:27.115+05:30  INFO 11348 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T10:35:27.116+05:30  INFO 11348 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T10:35:27.235+05:30  INFO 11348 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T10:35:27.236+05:30  INFO 11348 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2783 ms
-2023-09-28T10:35:27.471+05:30  INFO 11348 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T10:35:27.543+05:30  INFO 11348 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T10:35:27.547+05:30  INFO 11348 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T10:35:27.756+05:30  INFO 11348 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:35:27.985+05:30  INFO 11348 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T10:35:28.005+05:30  INFO 11348 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T10:35:28.223+05:30  INFO 11348 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6b600ea0
-2023-09-28T10:35:28.227+05:30  INFO 11348 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T10:35:28.661+05:30  INFO 11348 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T10:35:29.778+05:30  INFO 11348 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T10:35:29.948+05:30  INFO 11348 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T10:35:30.280+05:30  INFO 11348 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T10:35:30.989+05:30  WARN 11348 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T10:35:31.391+05:30  INFO 11348 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T10:35:31.444+05:30  INFO 11348 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T10:35:31.462+05:30  INFO 11348 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 8.565 seconds (process running for 11.211)
-2023-09-28T10:35:44.327+05:30  INFO 11348 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T10:35:44.327+05:30  INFO 11348 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T10:35:44.329+05:30  INFO 11348 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2023-09-28T10:35:58.911+05:30  WARN 11348 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value [madhu.varun@gmail.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@3674bb66,^[A-Za-z0-9+_.-]+@nucleusteq\.com$]; default message [Invalid Email Format]] ]
-2023-09-28T10:36:07.223+05:30  WARN 11348 --- [http-nio-8082-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO) with 2 errors: [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] [Field error in object 'userDTO' on field 'email': rejected value [madhu.varun@gmail.com]; codes [Pattern.userDTO.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@3674bb66,^[A-Za-z0-9+_.-]+@nucleusteq\.com$]; default message [Invalid Email Format]] ]
-2023-09-28T10:36:18.188+05:30  WARN 11348 --- [http-nio-8082-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] ]
-2023-09-28T10:36:25.117+05:30  WARN 11348 --- [http-nio-8082-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO) with 3 errors: [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] [Field error in object 'userDTO' on field 'password': rejected value []; codes [NotBlank.userDTO.password,NotBlank.password,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.password,password]; arguments []; default message [password]]; default message [Password is required]] [Field error in object 'userDTO' on field 'password': rejected value []; codes [Size.userDTO.password,Size.password,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.password,password]; arguments []; default message [password],2147483647,6]; default message [Password should be atleast 6 characters]] ]
-2023-09-28T10:36:34.617+05:30  WARN 11348 --- [http-nio-8082-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO) with 2 errors: [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] [Field error in object 'userDTO' on field 'password': rejected value [madhu]; codes [Size.userDTO.password,Size.password,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.password,password]; arguments []; default message [password],2147483647,6]; default message [Password should be atleast 6 characters]] ]
-2023-09-28T10:36:42.504+05:30  WARN 11348 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] ]
-2023-09-28T10:37:07.847+05:30  WARN 11348 --- [http-nio-8082-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'phoneNumber': rejected value [987654321]; codes [Pattern.userDTO.phoneNumber,Pattern.phoneNumber,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.phoneNumber,phoneNumber]; arguments []; default message [phoneNumber],[Ljakarta.validation.constraints.Pattern$Flag;@3674bb66,\d{10}]; default message [Phone Number should be 10 Digits]] ]
-2023-09-28T10:37:17.145+05:30  WARN 11348 --- [http-nio-8082-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'phoneNumber': rejected value [98765432t0]; codes [Pattern.userDTO.phoneNumber,Pattern.phoneNumber,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.phoneNumber,phoneNumber]; arguments []; default message [phoneNumber],[Ljakarta.validation.constraints.Pattern$Flag;@3674bb66,\d{10}]; default message [Phone Number should be 10 Digits]] ]
-2023-09-28T10:37:39.842+05:30  WARN 11348 --- [http-nio-8082-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'phoneNumber': rejected value [null]; codes [NotBlank.userDTO.phoneNumber,NotBlank.phoneNumber,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.phoneNumber,phoneNumber]; arguments []; default message [phoneNumber]]; default message [Phone Number Can not be null]] ]
-2023-09-28T11:13:53.542+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T11:13:53.555+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T11:13:53.559+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T11:13:53.572+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T11:13:53.575+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T11:13:53.583+05:30  INFO 11348 --- [RMI TCP Connection(42)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T11:13:59.647+05:30  INFO 10296 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 10296 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T11:13:59.652+05:30  INFO 10296 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T11:13:59.743+05:30  INFO 10296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T11:13:59.743+05:30  INFO 10296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T11:14:01.137+05:30  INFO 10296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T11:14:01.281+05:30  INFO 10296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 130 ms. Found 6 JPA repository interfaces.
-2023-09-28T11:14:02.386+05:30  INFO 10296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T11:14:02.407+05:30  INFO 10296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T11:14:02.408+05:30  INFO 10296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T11:14:02.588+05:30  INFO 10296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T11:14:02.589+05:30  INFO 10296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2845 ms
-2023-09-28T11:14:02.863+05:30  INFO 10296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T11:14:02.929+05:30  INFO 10296 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T11:14:02.933+05:30  INFO 10296 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T11:14:03.142+05:30  INFO 10296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T11:14:03.363+05:30  INFO 10296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T11:14:03.389+05:30  INFO 10296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T11:14:03.611+05:30  INFO 10296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T11:14:03.614+05:30  INFO 10296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T11:14:04.084+05:30  INFO 10296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T11:14:05.139+05:30  INFO 10296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T11:14:05.318+05:30  INFO 10296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T11:14:05.632+05:30  INFO 10296 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T11:14:06.390+05:30  WARN 10296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T11:14:06.811+05:30  INFO 10296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T11:14:06.867+05:30  INFO 10296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T11:14:06.881+05:30  INFO 10296 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 8.845 seconds (process running for 11.403)
-2023-09-28T11:14:35.523+05:30  INFO 10296 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T11:14:35.523+05:30  INFO 10296 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T11:14:35.532+05:30  INFO 10296 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
-2023-09-28T11:14:46.873+05:30  WARN 10296 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T11:23:00.258+05:30  WARN 10296 --- [http-nio-8082-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T11:23:03.679+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T11:23:03.705+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T11:23:03.705+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T11:23:03.720+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T11:23:03.720+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T11:23:03.739+05:30  INFO 10296 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T11:23:08.985+05:30  INFO 9252 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 9252 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T11:23:08.989+05:30  INFO 9252 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T11:23:09.113+05:30  INFO 9252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T11:23:09.163+05:30  INFO 9252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T11:23:11.158+05:30  INFO 9252 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T11:23:11.298+05:30  INFO 9252 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 123 ms. Found 6 JPA repository interfaces.
-2023-09-28T11:23:12.416+05:30  INFO 9252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T11:23:12.435+05:30  INFO 9252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T11:23:12.435+05:30  INFO 9252 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T11:23:12.613+05:30  INFO 9252 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T11:23:12.614+05:30  INFO 9252 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3434 ms
-2023-09-28T11:23:12.935+05:30  INFO 9252 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T11:23:13.044+05:30  INFO 9252 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T11:23:13.048+05:30  INFO 9252 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T11:23:13.278+05:30  INFO 9252 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T11:23:13.488+05:30  INFO 9252 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T11:23:13.509+05:30  INFO 9252 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T11:23:13.727+05:30  INFO 9252 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29973673
-2023-09-28T11:23:13.731+05:30  INFO 9252 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T11:23:14.197+05:30  INFO 9252 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T11:23:15.322+05:30  INFO 9252 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T11:23:15.480+05:30  INFO 9252 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T11:23:15.776+05:30  INFO 9252 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T11:23:16.572+05:30  WARN 9252 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T11:23:16.957+05:30  INFO 9252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T11:23:17.008+05:30  INFO 9252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T11:23:17.023+05:30  INFO 9252 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 9.096 seconds (process running for 11.844)
-2023-09-28T11:23:24.060+05:30  INFO 9252 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T11:23:24.060+05:30  INFO 9252 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T11:23:24.062+05:30  INFO 9252 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2023-09-28T11:23:24.386+05:30  WARN 9252 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T11:23:34.261+05:30  WARN 9252 --- [http-nio-8082-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Passwords did not match]
-2023-09-28T11:25:00.959+05:30  WARN 9252 --- [http-nio-8082-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.loginUser(com.capstoneproject.dto.LoginDTO) with 2 errors: [Field error in object 'loginDTO' on field 'email': rejected value []; codes [NotBlank.loginDTO.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [loginDTO.email,email]; arguments []; default message [email]]; default message [Email is required]] [Field error in object 'loginDTO' on field 'password': rejected value []; codes [NotBlank.loginDTO.password,NotBlank.password,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [loginDTO.password,password]; arguments []; default message [password]]; default message [Password is required]] ]
-2023-09-28T12:19:14.449+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T12:19:14.467+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T12:19:14.470+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T12:19:14.488+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T12:19:14.495+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T12:19:14.501+05:30  INFO 9252 --- [RMI TCP Connection(58)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T12:19:21.714+05:30  INFO 14392 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 14392 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T12:19:21.718+05:30  INFO 14392 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T12:19:21.822+05:30  INFO 14392 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T12:19:21.822+05:30  INFO 14392 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T12:19:23.133+05:30  INFO 14392 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T12:19:23.266+05:30  INFO 14392 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 122 ms. Found 6 JPA repository interfaces.
-2023-09-28T12:19:24.377+05:30  INFO 14392 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T12:19:24.393+05:30  INFO 14392 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T12:19:24.393+05:30  INFO 14392 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T12:19:24.495+05:30  INFO 14392 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T12:19:24.495+05:30  INFO 14392 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2672 ms
-2023-09-28T12:19:24.728+05:30  INFO 14392 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T12:19:24.802+05:30  INFO 14392 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T12:19:24.816+05:30  INFO 14392 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T12:19:25.039+05:30  INFO 14392 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T12:19:25.286+05:30  INFO 14392 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T12:19:25.333+05:30  INFO 14392 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T12:19:25.842+05:30  INFO 14392 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@273cd202
-2023-09-28T12:19:25.845+05:30  INFO 14392 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T12:19:26.846+05:30  INFO 14392 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T12:19:28.684+05:30  INFO 14392 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T12:19:28.984+05:30  INFO 14392 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T12:19:29.579+05:30  INFO 14392 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T12:19:30.847+05:30  WARN 14392 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T12:19:31.602+05:30  INFO 14392 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T12:19:31.681+05:30  INFO 14392 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T12:19:31.713+05:30  INFO 14392 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 11.047 seconds (process running for 14.001)
-2023-09-28T12:19:59.181+05:30  INFO 14392 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T12:19:59.181+05:30  INFO 14392 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T12:19:59.187+05:30  INFO 14392 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2023-09-28T12:22:02.188+05:30  WARN 14392 --- [http-nio-8082-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
-2023-09-28T12:25:23.867+05:30  WARN 14392 --- [http-nio-8082-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:25:36.849+05:30  WARN 14392 --- [http-nio-8082-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
-2023-09-28T12:26:57.193+05:30  WARN 14392 --- [http-nio-8082-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:27:30.945+05:30  WARN 14392 --- [http-nio-8082-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:27:46.083+05:30  WARN 14392 --- [http-nio-8082-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:29:32.244+05:30  WARN 14392 --- [http-nio-8082-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:38:44.859+05:30  WARN 14392 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s589ms130µs900ns).
-2023-09-28T12:49:26.895+05:30  WARN 14392 --- [http-nio-8082-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T12:54:37.603+05:30  WARN 14392 --- [http-nio-8082-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T13:29:48.564+05:30  WARN 14392 --- [http-nio-8082-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public final org.springframework.http.ResponseEntity<java.lang.String> com.capstoneproject.controller.UserController.saveUser(com.capstoneproject.dto.UserDTO): [Field error in object 'userDTO' on field 'name': rejected value [null]; codes [NotBlank.userDTO.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [User Name is required]] ]
-2023-09-28T13:54:32.248+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T13:54:32.263+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T13:54:32.266+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T13:54:32.277+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T13:54:32.283+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T13:54:32.284+05:30  INFO 14392 --- [RMI TCP Connection(98)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T13:54:45.692+05:30  INFO 13832 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 13832 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T13:54:45.693+05:30  INFO 13832 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T13:54:45.735+05:30  INFO 13832 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T13:54:45.736+05:30  INFO 13832 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T13:54:46.690+05:30  INFO 13832 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T13:54:46.749+05:30  INFO 13832 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 6 JPA repository interfaces.
-2023-09-28T13:54:47.202+05:30  INFO 13832 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T13:54:47.210+05:30  INFO 13832 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T13:54:47.211+05:30  INFO 13832 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T13:54:47.265+05:30  INFO 13832 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T13:54:47.265+05:30  INFO 13832 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1528 ms
-2023-09-28T13:54:47.432+05:30  INFO 13832 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T13:54:47.472+05:30  INFO 13832 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T13:54:47.473+05:30  INFO 13832 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T13:54:47.586+05:30  INFO 13832 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T13:54:47.699+05:30  INFO 13832 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T13:54:47.714+05:30  INFO 13832 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T13:54:47.840+05:30  INFO 13832 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@21d673bd
-2023-09-28T13:54:47.841+05:30  INFO 13832 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T13:54:48.063+05:30  INFO 13832 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T13:54:48.599+05:30  INFO 13832 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T13:54:48.685+05:30  INFO 13832 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T13:54:48.855+05:30  INFO 13832 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T13:54:49.223+05:30  WARN 13832 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T13:54:49.442+05:30  INFO 13832 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T13:54:49.480+05:30  INFO 13832 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T13:54:49.488+05:30  INFO 13832 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 4.069 seconds (process running for 5.014)
-2023-09-28T13:56:13.052+05:30  INFO 13832 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T13:56:13.052+05:30  INFO 13832 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T13:56:13.053+05:30  INFO 13832 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2023-09-28T13:57:54.679+05:30  WARN 13832 --- [http-nio-8082-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T13:58:57.514+05:30  WARN 13832 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T14:00:45.680+05:30  WARN 13832 --- [http-nio-8082-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Passwords did not match]
-2023-09-28T14:15:31.769+05:30  WARN 13832 --- [http-nio-8082-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Email does not exist.!]
-2023-09-28T14:15:45.058+05:30  WARN 13832 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Passwords did not match]
-2023-09-28T14:53:41.642+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T14:53:41.651+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T14:53:41.653+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T14:53:41.659+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:53:41.662+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T14:53:41.664+05:30  INFO 13832 --- [RMI TCP Connection(62)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T14:53:44.283+05:30  INFO 14344 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 14344 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T14:53:44.284+05:30  INFO 14344 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T14:53:44.352+05:30  INFO 14344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T14:53:44.353+05:30  INFO 14344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T14:53:45.287+05:30  INFO 14344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T14:53:45.340+05:30  INFO 14344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 6 JPA repository interfaces.
-2023-09-28T14:53:45.958+05:30  INFO 14344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T14:53:45.969+05:30  INFO 14344 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T14:53:45.969+05:30  INFO 14344 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T14:53:46.023+05:30  INFO 14344 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T14:53:46.023+05:30  INFO 14344 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1664 ms
-2023-09-28T14:53:46.154+05:30  INFO 14344 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T14:53:46.201+05:30  INFO 14344 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T14:53:46.203+05:30  INFO 14344 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T14:53:46.305+05:30  INFO 14344 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:53:46.418+05:30  INFO 14344 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T14:53:46.434+05:30  INFO 14344 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T14:53:46.556+05:30  INFO 14344 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T14:53:46.557+05:30  INFO 14344 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T14:53:46.801+05:30  INFO 14344 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:53:47.380+05:30  INFO 14344 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T14:53:47.472+05:30  INFO 14344 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:53:47.646+05:30  INFO 14344 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T14:53:48.044+05:30  WARN 14344 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T14:53:48.280+05:30  INFO 14344 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T14:53:48.311+05:30  INFO 14344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T14:53:48.321+05:30  INFO 14344 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 4.481 seconds (process running for 5.532)
-2023-09-28T14:54:26.668+05:30  INFO 14344 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-09-28T14:54:26.668+05:30  INFO 14344 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-09-28T14:54:26.669+05:30  INFO 14344 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2023-09-28T14:54:26.944+05:30  WARN 14344 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Email already Exists]
-2023-09-28T14:54:40.443+05:30 ERROR 14344 --- [http-nio-8082-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: jakarta.validation.ConstraintViolationException: Validation failed for classes [com.capstoneproject.models.User] during persist time for groups [jakarta.validation.groups.Default, ]
-List of constraint violations:[
-	ConstraintViolationImpl{interpolatedMessage='Invalid Email Format', propertyPath=email, rootBeanClass=class com.capstoneproject.models.User, messageTemplate='Invalid Email Format'}
-]] with root cause
-
-jakarta.validation.ConstraintViolationException: Validation failed for classes [com.capstoneproject.models.User] during persist time for groups [jakarta.validation.groups.Default, ]
-List of constraint violations:[
-	ConstraintViolationImpl{interpolatedMessage='Invalid Email Format', propertyPath=email, rootBeanClass=class com.capstoneproject.models.User, messageTemplate='Invalid Email Format'}
-]
-	at org.hibernate.boot.beanvalidation.BeanValidationEventListener.validate(BeanValidationEventListener.java:151) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.boot.beanvalidation.BeanValidationEventListener.onPreInsert(BeanValidationEventListener.java:81) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.action.internal.EntityIdentityInsertAction.preInsert(EntityIdentityInsertAction.java:186) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:75) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:676) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739) ~[hibernate-core-6.2.9.Final.jar:6.2.9.Final]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:360) ~[spring-orm-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy126.persist(Unknown Source) ~[na:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311) ~[spring-orm-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy126.persist(Unknown Source) ~[na:na]
-	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.1.4.jar:3.1.4]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72) ~[spring-data-commons-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.1.4.jar:3.1.4]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.12.jar:6.0.12]
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244) ~[spring-aop-6.0.12.jar:6.0.12]
-	at jdk.proxy4/jdk.proxy4.$Proxy141.save(Unknown Source) ~[na:na]
-	at com.capstoneproject.service.UserService.addUser(UserService.java:49) ~[classes/:na]
-	at com.capstoneproject.controller.UserController.saveUser(UserController.java:43) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.13.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.12.jar:6.0.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.13.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
-	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
-
-2023-09-28T14:56:55.037+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T14:56:55.047+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T14:56:55.049+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-09-28T14:56:55.055+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:56:55.057+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T14:56:55.060+05:30  INFO 14344 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T14:56:57.445+05:30  INFO 18792 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 18792 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T14:56:57.447+05:30  INFO 18792 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T14:56:57.487+05:30  INFO 18792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T14:56:57.487+05:30  INFO 18792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T14:56:58.377+05:30  INFO 18792 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T14:56:58.448+05:30  INFO 18792 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 6 JPA repository interfaces.
-2023-09-28T14:56:58.922+05:30  INFO 18792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T14:56:58.929+05:30  INFO 18792 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T14:56:58.930+05:30  INFO 18792 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T14:56:58.988+05:30  INFO 18792 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T14:56:58.988+05:30  INFO 18792 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1500 ms
-2023-09-28T14:56:59.188+05:30  INFO 18792 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T14:56:59.234+05:30  INFO 18792 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T14:56:59.238+05:30  INFO 18792 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T14:56:59.405+05:30  INFO 18792 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:56:59.525+05:30  INFO 18792 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T14:56:59.538+05:30  INFO 18792 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T14:56:59.680+05:30  INFO 18792 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@18e3ef54
-2023-09-28T14:56:59.681+05:30  INFO 18792 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T14:56:59.940+05:30  INFO 18792 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:57:00.502+05:30  INFO 18792 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T14:57:00.585+05:30  INFO 18792 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:57:00.766+05:30  INFO 18792 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T14:57:01.154+05:30  WARN 18792 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T14:57:01.399+05:30  INFO 18792 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T14:57:01.434+05:30  INFO 18792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T14:57:01.447+05:30  INFO 18792 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 4.356 seconds (process running for 5.335)
-2023-09-28T14:57:48.816+05:30  INFO 18792 --- [RMI TCP Connection(4)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T14:57:48.823+05:30  INFO 18792 --- [RMI TCP Connection(4)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T14:57:48.829+05:30  INFO 18792 --- [RMI TCP Connection(4)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:57:48.831+05:30  INFO 18792 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T14:57:48.833+05:30  INFO 18792 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T14:57:50.469+05:30  INFO 18592 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 18592 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T14:57:50.470+05:30  INFO 18592 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T14:57:50.502+05:30  INFO 18592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T14:57:50.502+05:30  INFO 18592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T14:57:50.905+05:30  INFO 18592 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T14:57:50.954+05:30  INFO 18592 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 6 JPA repository interfaces.
-2023-09-28T14:57:51.322+05:30  INFO 18592 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T14:57:51.328+05:30  INFO 18592 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T14:57:51.328+05:30  INFO 18592 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T14:57:51.369+05:30  INFO 18592 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T14:57:51.369+05:30  INFO 18592 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 867 ms
-2023-09-28T14:57:51.489+05:30  INFO 18592 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T14:57:51.518+05:30  INFO 18592 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T14:57:51.520+05:30  INFO 18592 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T14:57:51.597+05:30  INFO 18592 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:57:51.683+05:30  INFO 18592 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T14:57:51.693+05:30  INFO 18592 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T14:57:51.808+05:30  INFO 18592 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@62e7f2cc
-2023-09-28T14:57:51.809+05:30  INFO 18592 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T14:57:52.016+05:30  INFO 18592 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T14:57:52.542+05:30  INFO 18592 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T14:57:52.627+05:30  INFO 18592 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T14:57:52.829+05:30  INFO 18592 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T14:57:53.187+05:30  WARN 18592 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T14:57:53.399+05:30  INFO 18592 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T14:57:53.425+05:30  INFO 18592 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T14:57:53.432+05:30  INFO 18592 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 3.217 seconds (process running for 3.679)
-2023-09-28T15:10:40.878+05:30  INFO 18592 --- [RMI TCP Connection(15)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T15:10:40.887+05:30  INFO 18592 --- [RMI TCP Connection(15)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T15:10:40.893+05:30  INFO 18592 --- [RMI TCP Connection(15)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T15:10:40.895+05:30  INFO 18592 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T15:10:40.898+05:30  INFO 18592 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T15:10:43.190+05:30  INFO 8068 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 8068 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T15:10:43.192+05:30  INFO 8068 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T15:10:43.246+05:30  INFO 8068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T15:10:43.248+05:30  INFO 8068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T15:10:44.222+05:30  INFO 8068 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T15:10:44.273+05:30  INFO 8068 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 6 JPA repository interfaces.
-2023-09-28T15:10:44.759+05:30  INFO 8068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T15:10:44.795+05:30  INFO 8068 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T15:10:44.796+05:30  INFO 8068 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T15:10:44.852+05:30  INFO 8068 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T15:10:44.852+05:30  INFO 8068 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1604 ms
-2023-09-28T15:10:45.003+05:30  INFO 8068 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T15:10:45.043+05:30  INFO 8068 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T15:10:45.045+05:30  INFO 8068 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T15:10:45.135+05:30  INFO 8068 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T15:10:45.245+05:30  INFO 8068 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T15:10:45.261+05:30  INFO 8068 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T15:10:45.506+05:30  INFO 8068 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T15:10:45.507+05:30  INFO 8068 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T15:10:45.719+05:30  INFO 8068 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T15:10:46.288+05:30  INFO 8068 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T15:10:46.373+05:30  INFO 8068 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T15:10:46.538+05:30  INFO 8068 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T15:10:46.909+05:30  WARN 8068 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T15:10:47.123+05:30  INFO 8068 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T15:10:47.149+05:30  INFO 8068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T15:10:47.157+05:30  INFO 8068 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 4.246 seconds (process running for 5.217)
-2023-09-28T15:23:51.533+05:30  INFO 8068 --- [RMI TCP Connection(15)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T15:23:51.540+05:30  INFO 8068 --- [RMI TCP Connection(15)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T15:23:51.547+05:30  INFO 8068 --- [RMI TCP Connection(15)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T15:23:51.549+05:30  INFO 8068 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T15:23:51.551+05:30  INFO 8068 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T15:23:53.922+05:30  INFO 17916 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 17916 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T15:23:53.924+05:30  INFO 17916 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T15:23:53.961+05:30  INFO 17916 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T15:23:53.962+05:30  INFO 17916 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T15:23:54.997+05:30  INFO 17916 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T15:23:55.057+05:30  INFO 17916 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 6 JPA repository interfaces.
-2023-09-28T15:23:55.632+05:30  INFO 17916 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T15:23:55.641+05:30  INFO 17916 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T15:23:55.641+05:30  INFO 17916 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T15:23:55.703+05:30  INFO 17916 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T15:23:55.704+05:30  INFO 17916 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1742 ms
-2023-09-28T15:23:55.840+05:30  INFO 17916 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T15:23:55.882+05:30  INFO 17916 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T15:23:55.883+05:30  INFO 17916 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T15:23:55.977+05:30  INFO 17916 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T15:23:56.092+05:30  INFO 17916 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T15:23:56.107+05:30  INFO 17916 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T15:23:56.247+05:30  INFO 17916 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T15:23:56.248+05:30  INFO 17916 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T15:23:56.468+05:30  INFO 17916 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T15:23:57.072+05:30  INFO 17916 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T15:23:57.166+05:30  INFO 17916 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T15:23:57.346+05:30  INFO 17916 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T15:23:57.750+05:30  WARN 17916 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T15:23:58.003+05:30  INFO 17916 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T15:23:58.031+05:30  INFO 17916 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T15:23:58.039+05:30  INFO 17916 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 4.457 seconds (process running for 5.457)
-2023-09-28T16:45:14.160+05:30  INFO 17916 --- [RMI TCP Connection(85)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T16:45:14.179+05:30  INFO 17916 --- [RMI TCP Connection(85)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T16:45:14.192+05:30  INFO 17916 --- [RMI TCP Connection(85)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T16:45:14.197+05:30  INFO 17916 --- [RMI TCP Connection(85)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T16:45:14.204+05:30  INFO 17916 --- [RMI TCP Connection(85)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T16:45:20.769+05:30  INFO 11824 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 11824 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T16:45:20.773+05:30  INFO 11824 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T16:45:20.910+05:30  INFO 11824 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T16:45:20.910+05:30  INFO 11824 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T16:45:22.177+05:30  INFO 11824 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T16:45:22.317+05:30  INFO 11824 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 129 ms. Found 6 JPA repository interfaces.
-2023-09-28T16:45:23.242+05:30  INFO 11824 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T16:45:23.256+05:30  INFO 11824 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T16:45:23.256+05:30  INFO 11824 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T16:45:23.408+05:30  INFO 11824 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T16:45:23.409+05:30  INFO 11824 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2497 ms
-2023-09-28T16:45:23.646+05:30  INFO 11824 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T16:45:23.719+05:30  INFO 11824 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T16:45:23.722+05:30  INFO 11824 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T16:45:23.922+05:30  INFO 11824 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T16:45:24.135+05:30  INFO 11824 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T16:45:24.158+05:30  INFO 11824 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T16:45:24.379+05:30  INFO 11824 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70ec08a9
-2023-09-28T16:45:24.380+05:30  INFO 11824 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T16:45:24.776+05:30  INFO 11824 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T16:45:25.916+05:30  INFO 11824 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T16:45:26.086+05:30  INFO 11824 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T16:45:26.387+05:30  INFO 11824 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T16:45:27.141+05:30  WARN 11824 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T16:45:27.512+05:30  INFO 11824 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T16:45:27.562+05:30  INFO 11824 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T16:45:27.580+05:30  INFO 11824 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 8.227 seconds (process running for 10.774)
-2023-09-28T16:45:46.167+05:30  INFO 11824 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-09-28T16:45:46.195+05:30  INFO 11824 --- [RMI TCP Connection(2)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-28T16:45:46.209+05:30  INFO 11824 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T16:45:46.214+05:30  INFO 11824 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-28T16:45:46.226+05:30  INFO 11824 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-28T16:45:49.207+05:30  INFO 1884 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 1884 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-09-28T16:45:49.209+05:30  INFO 1884 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-09-28T16:45:49.285+05:30  INFO 1884 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-28T16:45:49.285+05:30  INFO 1884 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-28T16:45:50.251+05:30  INFO 1884 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-28T16:45:50.364+05:30  INFO 1884 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 104 ms. Found 6 JPA repository interfaces.
-2023-09-28T16:45:51.080+05:30  INFO 1884 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-09-28T16:45:51.092+05:30  INFO 1884 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-28T16:45:51.092+05:30  INFO 1884 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-09-28T16:45:51.177+05:30  INFO 1884 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-28T16:45:51.178+05:30  INFO 1884 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1891 ms
-2023-09-28T16:45:51.363+05:30  INFO 1884 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-28T16:45:51.438+05:30  INFO 1884 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-09-28T16:45:51.441+05:30  INFO 1884 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-28T16:45:51.586+05:30  INFO 1884 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T16:45:51.782+05:30  INFO 1884 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-28T16:45:51.805+05:30  INFO 1884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-28T16:45:52.038+05:30  INFO 1884 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7921ce2b
-2023-09-28T16:45:52.040+05:30  INFO 1884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-28T16:45:52.490+05:30  INFO 1884 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-28T16:45:53.604+05:30  INFO 1884 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-28T16:45:53.779+05:30  INFO 1884 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-28T16:45:54.083+05:30  INFO 1884 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-28T16:45:55.079+05:30  WARN 1884 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-28T16:45:55.478+05:30  INFO 1884 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-28T16:45:55.533+05:30  INFO 1884 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-09-28T16:45:55.552+05:30  INFO 1884 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 6.874 seconds (process running for 8.051)
+2023-09-29T00:07:40.750+05:30  INFO 18624 --- [main] c.c.BackendApplicationTests              : Starting BackendApplicationTests using Java 20.0.2 with PID 18624 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
+2023-09-29T00:07:40.765+05:30  INFO 18624 --- [main] c.c.BackendApplicationTests              : No active profile set, falling back to 1 default profile: "default"
+2023-09-29T00:07:42.599+05:30  INFO 18624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-29T00:07:42.810+05:30  INFO 18624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 181 ms. Found 6 JPA repository interfaces.
+2023-09-29T00:07:44.007+05:30  INFO 18624 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-29T00:07:44.256+05:30  INFO 18624 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
+2023-09-29T00:07:44.264+05:30  INFO 18624 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-09-29T00:07:44.801+05:30  INFO 18624 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-29T00:07:45.229+05:30  INFO 18624 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-29T00:07:45.305+05:30  INFO 18624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-29T00:07:45.980+05:30  INFO 18624 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d0c3793
+2023-09-29T00:07:45.989+05:30  INFO 18624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-29T00:07:47.257+05:30  INFO 18624 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-29T00:07:49.744+05:30  INFO 18624 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-29T00:07:49.992+05:30  INFO 18624 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29T00:07:50.605+05:30  INFO 18624 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-09-29T00:07:52.195+05:30  WARN 18624 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-29T00:07:53.039+05:30  INFO 18624 --- [main] c.c.BackendApplicationTests              : Started BackendApplicationTests in 13.302 seconds (process running for 17.063)
+2023-09-29T00:07:54.252+05:30  INFO 18624 --- [main] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 18624 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
+2023-09-29T00:07:54.253+05:30  INFO 18624 --- [main] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-09-29T00:07:54.625+05:30  INFO 18624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-29T00:07:54.666+05:30  INFO 18624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 6 JPA repository interfaces.
+2023-09-29T00:07:55.137+05:30  INFO 18624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2023-09-29T00:07:55.180+05:30  INFO 18624 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-29T00:07:55.181+05:30  INFO 18624 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-09-29T00:07:55.357+05:30  INFO 18624 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-29T00:07:55.357+05:30  INFO 18624 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1100 ms
+2023-09-29T00:07:55.553+05:30  INFO 18624 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-29T00:07:55.579+05:30  INFO 18624 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-29T00:07:55.580+05:30  INFO 18624 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-29T00:07:55.582+05:30  INFO 18624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-09-29T00:07:55.648+05:30  INFO 18624 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@456839ee
+2023-09-29T00:07:55.649+05:30  INFO 18624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-09-29T00:07:55.749+05:30  INFO 18624 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-29T00:07:56.032+05:30  INFO 18624 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-29T00:07:56.188+05:30  INFO 18624 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29T00:07:56.464+05:30  WARN 18624 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-29T00:07:56.674+05:30  INFO 18624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2023-09-29T00:07:56.682+05:30  INFO 18624 --- [main] com.capstoneproject.BackendApplication   : Started BackendApplication in 2.481 seconds (process running for 20.706)
+2023-09-29T00:07:57.685+05:30 ERROR 18624 --- [main] c.c.service.CategoryService              : Category already Exists
+2023-09-29T00:07:57.734+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Fetched the Categories
+2023-09-29T00:07:57.736+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Converting the model into DTO
+2023-09-29T00:07:57.737+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Converting the model into DTO
+2023-09-29T00:07:57.780+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Category found
+2023-09-29T00:07:57.780+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Category Updated
+2023-09-29T00:07:57.799+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Category deleted
+2023-09-29T00:07:57.811+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Category added Successfully
+2023-09-29T00:07:57.837+05:30  INFO 18624 --- [main] c.c.service.CategoryService              : Category Found
+2023-09-29T00:07:58.569+05:30  INFO 18624 --- [main] c.c.service.UserResponsesService         : Response added successfully
+2023-09-29T00:07:58.720+05:30 ERROR 18624 --- [main] c.capstoneproject.service.UserService    : Email already Exists
+2023-09-29T00:07:58.734+05:30 ERROR 18624 --- [main] c.capstoneproject.service.UserService    : Email does not exist.!
+2023-09-29T00:07:58.755+05:30  INFO 18624 --- [main] c.capstoneproject.service.UserService    : Deleted Successfully
+2023-09-29T00:07:58.765+05:30  INFO 18624 --- [main] c.capstoneproject.service.UserService    : User Successfully Registered
+2023-09-29T00:07:58.777+05:30  INFO 18624 --- [main] c.capstoneproject.service.UserService    : Logged in Successfully
+2023-09-29T00:07:58.791+05:30 ERROR 18624 --- [main] c.capstoneproject.service.UserService    : Passwords did not match
+2023-09-29T00:07:58.801+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Fetching the results of the user
+2023-09-29T00:07:58.803+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Converting The model into DTO
+2023-09-29T00:07:58.803+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Converting The model into DTO
+2023-09-29T00:07:58.812+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Fetching the Results.
+2023-09-29T00:07:58.813+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Converting The model into DTO
+2023-09-29T00:07:58.815+05:30  INFO 18624 --- [main] c.c.service.AllResultsService            : Converting The model into DTO
+2023-09-29T00:07:58.994+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question found
+2023-09-29T00:07:58.995+05:30 ERROR 18624 --- [main] c.c.service.QuestionService              : Option does not match any option
+2023-09-29T00:07:59.003+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question found
+2023-09-29T00:07:59.004+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question updated Successfully
+2023-09-29T00:07:59.028+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Quiz fetched with the Id
+2023-09-29T00:07:59.029+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Converted Model to DTO
+2023-09-29T00:07:59.030+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Converted Model to DTO
+2023-09-29T00:07:59.047+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question deleted
+2023-09-29T00:07:59.074+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question found
+2023-09-29T00:07:59.083+05:30 ERROR 18624 --- [main] c.c.service.QuestionService              : Option does not match any option
+2023-09-29T00:07:59.100+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Fetched all the Questions
+2023-09-29T00:07:59.101+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Converted Model to DTO
+2023-09-29T00:07:59.101+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Converted Model to DTO
+2023-09-29T00:07:59.110+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question found
+2023-09-29T00:07:59.110+05:30 ERROR 18624 --- [main] c.c.service.QuestionService              : No Question found with Id 
+2023-09-29T00:07:59.116+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Question found
+2023-09-29T00:07:59.117+05:30 ERROR 18624 --- [main] c.c.service.QuestionService              : No Question found with Id 
+2023-09-29T00:07:59.126+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Fetched the Question successfully
+2023-09-29T00:07:59.133+05:30  INFO 18624 --- [main] c.c.service.QuestionService              : Added Question
+2023-09-29T00:07:59.152+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Added Quiz Successfully
+2023-09-29T00:07:59.164+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-09-29T00:07:59.180+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Fetched all the Quizzes 
+2023-09-29T00:07:59.181+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Model is converted to DTO.
+2023-09-29T00:07:59.182+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Model is converted to DTO.
+2023-09-29T00:07:59.202+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-09-29T00:07:59.203+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz updated
+2023-09-29T00:07:59.211+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Fetched the Quiz Details
+2023-09-29T00:07:59.218+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz deleted
+2023-09-29T00:07:59.236+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Fetched the Quiz details of the category Id 
+2023-09-29T00:07:59.239+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Model is converted to DTO.
+2023-09-29T00:07:59.239+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Model is converted to DTO.
+2023-09-29T00:07:59.249+05:30 ERROR 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz already Exists
+2023-09-29T00:07:59.259+05:30  INFO 18624 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-09-29T00:08:00.050+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Succesfully Added Category
+2023-09-29T00:08:00.081+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Fetched Categories successfully
+2023-09-29T00:08:00.090+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Catgory Updated Successfully
+2023-09-29T00:08:00.100+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Category Deleted
+2023-09-29T00:08:00.110+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Fetched Category by Id
+2023-09-29T00:08:00.224+05:30  INFO 18624 --- [main] c.c.controller.UserController            : User Registered successfully
+2023-09-29T00:08:00.234+05:30  INFO 18624 --- [main] c.c.controller.UserController            : Logged in Successfully
+2023-09-29T00:08:00.243+05:30  INFO 18624 --- [main] c.c.controller.UserController            : Deleted Successfully
+2023-09-29T00:08:00.381+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Added Quiz successfully
+2023-09-29T00:08:00.392+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Quiz is Updated
+2023-09-29T00:08:00.400+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Fetched Quizzes
+2023-09-29T00:08:00.410+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Fetched Quiz by the Id
+2023-09-29T00:08:00.417+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Deleted Quiz
+2023-09-29T00:08:00.426+05:30  INFO 18624 --- [main] c.c.controller.QuizController            : Fetched Quizzes by the CategoryId
+2023-09-29T00:08:00.521+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results User Id : 1
+2023-09-29T00:08:00.530+05:30  INFO 18624 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
+2023-09-29T00:08:00.643+05:30  INFO 18624 --- [main] c.c.controller.UserResponsesController   : Responses added Successfully
+2023-09-29T00:08:00.755+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Quiz is updated
+2023-09-29T00:08:00.761+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Question is Deleted
+2023-09-29T00:08:00.768+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Fetched Questions By Quiz
+2023-09-29T00:08:00.776+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Fetched Question
+2023-09-29T00:08:00.782+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Fetched Questions successfully
+2023-09-29T00:08:00.790+05:30  INFO 18624 --- [main] c.c.controller.QuestionController        : Question added
+2023-09-29T00:08:00.920+05:30  INFO 18624 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.capstoneproject.models.UserTest]: UserTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-29T00:08:00.983+05:30  INFO 18624 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.capstoneproject.BackendApplication for test class com.capstoneproject.models.UserTest
+2023-09-29T00:08:01.203+05:30  INFO 18624 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29T00:08:02.771+05:30  INFO 18624 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-09-29T00:08:02.799+05:30  INFO 18624 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-09-29T00:08:03.230+05:30  INFO 18624 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29T00:08:03.238+05:30  INFO 18624 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-09-29T00:08:03.256+05:30  INFO 18624 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
