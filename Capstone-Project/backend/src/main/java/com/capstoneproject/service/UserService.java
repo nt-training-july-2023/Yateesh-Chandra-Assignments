@@ -2,16 +2,17 @@ package com.capstoneproject.service;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.capstoneproject.controller.LoginResponse;
+
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
-import com.capstoneproject.exceptions.CustomException;
-import com.capstoneproject.exceptions.ValidationException;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ElementNotExistsException;
+import com.capstoneproject.exceptions.UnAuthorizedException;
 import com.capstoneproject.models.User;
 import com.capstoneproject.repository.UserRepository;
+import com.capstoneproject.response.LoginResponse;
 
 /**
  * Service class for handling user-related Operations.
@@ -23,11 +24,6 @@ public class UserService {
      */
     @Autowired
     private UserRepository userRepo;
-
-    /**
-     * This constant is used to prevent Check style Error.
-     */
-    private static final int NUM = 6;
 
     /**
      * The Encoder variable to encode the password entered.
@@ -42,26 +38,16 @@ public class UserService {
      * @return the name of the user.
      */
     public final String addUser(final UserDTO userDTO) {
-        if (userDTO.getUserRole() == null) {
-            userDTO.setUserRole("USER");
+        Optional<User> user = userRepo.findByEmail(userDTO.getEmail());
+        if (user.isPresent()) {
+            throw new AlreadyExistsException("Email already Exists");
         }
-        if (userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new DuplicateKeyException("Email already Exists");
-        }
-        if (userDTO.getName() == null || userDTO.getEmail() == null
-                || userDTO.getPassword().length() < NUM
-                || userDTO.getPhoneNumber() == null) {
-            throw new ValidationException("Invalid Data Provided");
-        }
-        if (userDTO.getEmail().matches("^(?!.*@nucleusteq\\.com$).*")) {
-            throw new CustomException("Can not register Email");
-        }
-            User user = new User(userDTO.getUserId(), userDTO.getName(),
+        User users = new User(userDTO.getUserId(), userDTO.getName(),
                     userDTO.getEmail(),
                     this.passwordEncoder.encode(userDTO.getPassword()),
                     userDTO.getUserRole(), userDTO.getPhoneNumber());
-            userRepo.save(user);
-            return user.getName();
+        userRepo.save(users);
+        return users.getName();
     }
 
     /**
@@ -73,34 +59,28 @@ public class UserService {
      */
     public final LoginResponse loginUser(final LoginDTO loginDTO) {
         String msg = "";
-        try {
-            Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
-            if (user1.isPresent()) {
-                String password = loginDTO.getPassword();
-                String encodedPassword = user1.get().getPassword();
-                Boolean isPwdRight = passwordEncoder.matches(password,
-                        encodedPassword);
-                if (isPwdRight) {
-                    Optional<User> user = userRepo.findOneByEmailAndPassword(
-                            loginDTO.getEmail(), encodedPassword);
-                    if (user.isPresent()) {
-                        return new LoginResponse(msg + "Login Successful..!",
-                                true, user.get().getUserRole(),
-                                user.get().getUserId(), user.get().getName(),
-                                user.get().getEmail());
-                    } else {
-                        return new LoginResponse(msg + "Login Failed", false);
-                    }
+        Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
+        if (user1.isPresent()) {
+            String password = loginDTO.getPassword();
+            String encodedPassword = user1.get().getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password,
+                    encodedPassword);
+            if (isPwdRight) {
+                Optional<User> user = userRepo.findOneByEmailAndPassword(
+                        loginDTO.getEmail(), encodedPassword);
+                if (user.isPresent()) {
+                    return new LoginResponse(msg + "Login Successful..!",
+                            true, user.get().getUserRole(),
+                            user.get().getUserId(), user.get().getName(),
+                            user.get().getEmail());
                 } else {
-                    return new LoginResponse(msg + "Passwords did not match",
-                            false);
+                    throw new UnAuthorizedException(msg + "Login Failed");
                 }
             } else {
-                return new LoginResponse(msg + "Email does not exist.!", false);
+                throw new UnAuthorizedException(msg + "Passwords did not match");
             }
-        } catch (CustomException e) {
-            throw new CustomException(
-                    "An error occured while processing the request.");
+        } else {
+            throw new UnAuthorizedException(msg + "Email does not exist.!");
         }
     }
 
@@ -111,5 +91,11 @@ public class UserService {
      */
     public final Optional<User> findByEmail(final String email) {
         return userRepo.findByEmail(email);
+    }
+
+    public void deleteUser(final Long userId) {
+        userRepo.findById(userId).orElseThrow(
+                () -> new ElementNotExistsException("No user found with Id"));
+        userRepo.deleteById(userId);
     }
 }

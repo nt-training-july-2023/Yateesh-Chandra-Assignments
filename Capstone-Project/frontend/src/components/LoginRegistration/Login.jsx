@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import React, { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
+import UserServices from "../../services/UserServices";
+import SweetAlert from "../SweetAlerts/SweetAlert";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -30,14 +31,6 @@ function Login() {
             timer: 2000,
             backdrop: false,
             timerProgressBar : true
-        })
-    }
-
-    const alertEmailError = () => {
-        Swal.fire({
-            title : "Unregistered Email",
-            text : "No such Email is registered before(run backend)",
-            icon : "error"
         })
     }
 
@@ -109,47 +102,41 @@ function Login() {
         }
             
         try {
-          const response = await axios.post("http://localhost:8082/api/v1/user/login", {
-            email,
-            password,
-          });
 
-          console.log(response.data);
-          localStorage.setItem("role", response.data.userRole);
-          localStorage.setItem("id", response.data.userId)
-          localStorage.setItem("name", response.data.name);
-          localStorage.setItem("email", response.data.email);
-      
-          if (response.data.message === "Email does not exist.!") {
-            setEmailError("Email not exists..!");
-            console.log("Oops.! The mail entered does not exist.!");
-          } else if (response.data.message === "Login Successful..!") {
-            const userRole = response.data.userRole;
-            console.log("User Role", userRole);
-
-            if (userRole === "USER") {
-              loginUserSuccessSwal();
-              navigate("/user");
-              console.log("You are navigated to User dashboard..!");
-            } else if (userRole === "ADMIN") {
-               console.log(userRole);
-               loginAdminSuccessSwal();
-              navigate("/admin");
-              console.log("You are navigated to Admin dashboard..!");
-            } else {
-              setEmailError("Unable to access..!");
-              console.log("You have no access to the website");
+            const data = {
+              email,
+              password,
             }
-          } else {
-            loginFail();
-            setEmailError("Incorrect credentials");
-            console.log("Detected mistake in the email ID or Password..!");
-          }
-         
+
+            const response = await UserServices.loginUser(data);
+
+            console.log(response);
+
+            localStorage.setItem("role", response.data.userRole);
+            localStorage.setItem("id", response.data.userId)
+            localStorage.setItem("name", response.data.name);
+            localStorage.setItem("email", response.data.email);
+
+            const userRole = localStorage.getItem("role");
+
+            if(response?.status === 200){
+                
+                console.log("User Role", userRole);
+                if (userRole === "ADMIN") {
+                    console.log(userRole);
+                    loginAdminSuccessSwal();
+                    navigate("/admin");
+                } else {
+                    loginUserSuccessSwal();
+                    navigate("/user");
+                    console.log("You are navigated to User dashboard..!");
+                }
+              }
         } catch (err) {
-          alertEmailError();
-          setEmailError("No such email exists.");
-          console.log(err);
+            if(err?.response?.data?.message === "Passwords did not match" 
+            || err?.response?.data?.message === "Email does not exist.!" ){
+                SweetAlert.alertError()
+            }
         }
       };
 

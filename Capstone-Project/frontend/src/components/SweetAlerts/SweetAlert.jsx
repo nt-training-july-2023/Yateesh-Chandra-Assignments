@@ -83,6 +83,32 @@ class SweetAlert{
             backdrop: `rgba(80,108,62,0.7)`
         })
     }
+
+    registrationSuccessFireAlert(img){
+        Swal.fire({
+          title : "Successfully Registered",
+          text : "Hurray, Now you are our subscriber.!",
+          imageUrl : img,
+          imageHeight : 150,
+          imageWidth : 150,
+        })
+      }
+    
+      registrationFailureFireAlert(failureText) {
+        Swal.fire({
+          title : "Unable to Register",
+          text : failureText,
+          icon : "error"
+        })
+      }
+
+     alertError(){
+        Swal.fire({
+            title : "Login Failed",
+            text : "Invalid Email or Password",
+            icon : "error"
+        })
+    }
 }
 
 export default new SweetAlert();

@@ -1,4 +1,4 @@
-package com.capstoneproject.controller;
+package com.capstoneproject.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +37,7 @@ public class LoginResponse {
      * This is the email.
      */
     private String email;
+
     /**
      * checks the login response.
      * @param messagee of String Type.

@@ -5,8 +5,8 @@ package com.capstoneproject.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -17,6 +17,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,59 +38,51 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", length = ID_MIN_LENGTH)
+    @Column(name = "user_id")
     private Long userId;
+
     /**
      * This is the name column.
      */
     @Column(name = "user_name", length = ID_MAX_LENGTH, nullable = false)
+    @NotBlank(message = ValidationMessages.NAME_NOT_BLANK)
     private String name;
+
     /**
      * This is the user_email column.
      */
     @Column(name = "user_email", unique = true, length = ID_MAX_LENGTH)
+    @NotBlank(message = ValidationMessages.EMAIL_NOT_BLANK)
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@nucleusteq\\.com$", message = ValidationMessages.EMAIL_PATTERN)
     private String email;
+
     /**
      * This is the password column.
      */
     @Column(name = "password", length = ID_MAX_LENGTH)
+    @NotBlank(message = ValidationMessages.PASSWORD_NOT_NULL)
+    @Size(min = 6, message = ValidationMessages.PASSWORD_PATTERN)
     private String password;
+
     /**
      * This is the user_role either Administrator or User.
      */
     @Column(name = "user_role", columnDefinition = "varchar(255)"
             + " default 'USER'")
-    private String userRole;
+    private String userRole = "USER";
+
     /**
      * This is the phone number column.
      */
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
+    @NotBlank(message = ValidationMessages.PHONE_NULL)
+    @Pattern(regexp = "\\d{10}", message = ValidationMessages.PHONE_PATTERN)
     private String phoneNumber;
-    /**
-     * This ID_MIN_LENGTH contains the minimum value to be the value in column.
-     */
-    private static final int ID_MIN_LENGTH = 45;
+
     /**
      * This ID_MAX_LENGTH contains the minimum value to be the value in column.
      */
     private static final int ID_MAX_LENGTH = 255;
-
-    @Override
-    public final boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(userId, user.userId)
-                && Objects.equals(name, user.name)
-                && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password)
-                && Objects.equals(userRole, user.userRole)
-                && Objects.equals(phoneNumber, user.phoneNumber);
-    }
 
     /**
      * This joins the column in the User Responses Column.
@@ -110,15 +105,6 @@ public class User {
      */
     public void setUserResponses(final List<UserResponses> userResponse) {
         this.userResponses = new ArrayList<>(userResponse);
-    }
-
-    /**
-     * This is Hash Code.
-     */
-    @Override
-    public final int hashCode() {
-        return Objects.hash(
-                userId, name, email, password, userRole, phoneNumber);
     }
 
     /**

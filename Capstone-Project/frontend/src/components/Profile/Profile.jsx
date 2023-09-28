@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
-import axios from "axios";
 import NotFound from "../NotFound";
 import "../Categories/Categories.css";
 import DeactivateBackButton from "../DeactivateBackButton";

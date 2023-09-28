@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
+import com.capstoneproject.response.LoginResponse;
 import com.capstoneproject.service.UserService;
 
 class UserControllerTest {

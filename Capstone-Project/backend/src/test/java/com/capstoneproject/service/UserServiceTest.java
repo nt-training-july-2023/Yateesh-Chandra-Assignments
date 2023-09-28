@@ -6,7 +6,8 @@ import com.capstoneproject.exceptions.CustomException;
 import com.capstoneproject.exceptions.ValidationException;
 import com.capstoneproject.models.User;
 import com.capstoneproject.repository.UserRepository;
-import com.capstoneproject.controller.LoginResponse;
+import com.capstoneproject.response.LoginResponse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
