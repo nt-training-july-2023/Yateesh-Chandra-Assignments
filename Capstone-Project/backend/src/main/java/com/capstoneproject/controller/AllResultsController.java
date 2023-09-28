@@ -2,6 +2,8 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,12 +30,18 @@ public class AllResultsController {
     private AllResultsService allResultsService;
 
     /**
+     * Creating instance for the Logger
+     */
+    private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
+
+    /**
      * This is the Response Entity of All Results.
      * @return OK status.
      */
     @GetMapping
     public final ResponseEntity<List<AllResultsDTO>> getAllResults() {
         List<AllResultsDTO> allResultsDTO = allResultsService.getAllResults();
+        logger.info("Successfully fetched Results of all Users");
         return ResponseEntity.ok(allResultsDTO);
     }
 
@@ -47,6 +55,7 @@ public class AllResultsController {
             @PathVariable final Long userId) {
         List<AllResultsDTO> allResultsDto = allResultsService
                 .getResultsByUserId(userId);
+        logger.info("Successfully fetched Results User Id : " + userId);
         return ResponseEntity.ok(allResultsDto);
     }
 }

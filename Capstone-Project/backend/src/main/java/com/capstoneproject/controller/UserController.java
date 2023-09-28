@@ -1,6 +1,8 @@
 package com.capstoneproject.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,11 @@ public class UserController {
     private UserService userService;
 
     /**
+     * Creating Instance for logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    /**
      * This method is used for new users to register.
      * @param userDTO of UserDTO class.
      * @return the id after registering.
@@ -41,6 +48,7 @@ public class UserController {
     public final ResponseEntity<String> saveUser(
             @RequestBody @Valid final UserDTO userDTO) {
             userService.addUser(userDTO);
+            logger.info("User Registered successfully");
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     "User Registered successfully");
     }
@@ -55,14 +63,21 @@ public class UserController {
     public final ResponseEntity<LoginResponse> loginUser(
             @RequestBody @Valid final LoginDTO loginDTO) {
             LoginResponse loginResponse = userService.loginUser(loginDTO);
+            logger.info("Logged in Successfully");
             return ResponseEntity.ok(loginResponse);
     }
 
+    /**
+     * This is for deleting the User by User Id.
+     * @param userId - of Long type.
+     * @return the no content status.
+     */
     @DeleteMapping(path = "/{userId}")
     public final ResponseEntity<Void> deleteUser(
             @PathVariable Long userId){
         userService.deleteUser(userId);
         String message = "Deleted Successfully";
+        logger.info(message);
         return ResponseEntity.noContent().header("Message", message).build();
     }
 }

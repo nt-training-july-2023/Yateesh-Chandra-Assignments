@@ -2,6 +2,8 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,18 @@ public class QuizController {
     private QuizService quizService;
 
     /**
+     * Create an instance for the Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(QuizController.class);
+
+    /**
      * get all the Quiz.
      * @return the List of the quiz.
      */
     @GetMapping
     public final ResponseEntity<List<QuizDTO>> getAllQuiz() {
         List<QuizDTO> quiz = quizService.getQuizzes();
+        logger.info("Fetched Quizzes");
         return ResponseEntity.ok(quiz);
     }
 
@@ -52,6 +60,7 @@ public class QuizController {
     public final ResponseEntity<QuizDTO> getQuizById(
             @PathVariable final Long quizId) {
         QuizDTO newQuiz = quizService.getQuizById(quizId);
+        logger.info("Fetched Quiz by the Id");
         return ResponseEntity.ok(newQuiz);
     }
 
@@ -64,7 +73,9 @@ public class QuizController {
     public final ResponseEntity<String> addQuiz(
             @RequestBody @Valid final QuizDTO quizDto) {
         quizService.addQuiz(quizDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Quiz is Successfully Created");
+        logger.info("Added Quiz successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                "Quiz is Successfully Created");
     }
 
     /**
@@ -77,6 +88,7 @@ public class QuizController {
             @PathVariable final Long quizId) {
         quizService.deleteQuiz(quizId);
         String message = "Quiz is deleted"; 
+        logger.info("Deleted Quiz");
         return ResponseEntity.noContent().header("Message",message).build();
     }
 
@@ -91,6 +103,7 @@ public class QuizController {
             @PathVariable final Long quizId,
             @RequestBody @Valid final QuizDTO updatedQuiz) {
         quizService.updateQuiz(quizId, updatedQuiz);
+        logger.info("Quiz is Updated");
         return ResponseEntity.ok("Quiz is updated");
     }
 
@@ -103,6 +116,7 @@ public class QuizController {
     public final ResponseEntity<List<QuizDTO>> getQuizByCategoryId(
             @PathVariable final Long categoryId) {
         List<QuizDTO> quizDto = quizService.getQuizByCategoryId(categoryId);
+        logger.info("Fetched Quizzes by the CategoryId");
         return ResponseEntity.ok(quizDto);
     }
 }

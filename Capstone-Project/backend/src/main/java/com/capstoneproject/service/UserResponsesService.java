@@ -2,6 +2,8 @@ package com.capstoneproject.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.repository.UserResponsesRepository;
+import com.capstoneproject.response.ExceptionMessages;
 
 /**
  * This is Service class for the UserResponses.
@@ -55,6 +58,12 @@ public class UserResponsesService {
     private QuizRepository quizRepository;
 
     /**
+     * Creating Instance for logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(
+            UserResponsesService.class);
+
+    /**
      * This method is used to add the User Responses.
      * @param responses of UserResponsesDTO is passed.
      * @return the added User Response.
@@ -62,11 +71,14 @@ public class UserResponsesService {
     public final UserResponsesDTO addUserResponses(
             final UserResponsesDTO responses) {
         User user = userRepository.findById(responses.getUserId())
-                    .orElseThrow(() -> new ElementNotExistsException("User not found with Id : " + responses.getUserId()));
+                    .orElseThrow(() -> new ElementNotExistsException(
+                            ExceptionMessages.USER_NOT_EXIST 
+                            + responses.getUserId()));
         Quiz quiz = quizRepository.findById(responses.getQuizId())
-                    .orElseThrow(() -> new ElementNotExistsException("Quiz with "
-                            + responses.getQuizId() + " not exists"));
-
+                    .orElseThrow(() -> new ElementNotExistsException(
+                            ExceptionMessages.QUIZ_NOT_EXIST
+                            + responses.getQuizId()));
+        logger.info("Response added successfully");
         AllResults results = new AllResults();
         results.setUserId(responses.getUserId());
         Optional<User> users = userRepository

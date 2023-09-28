@@ -1,6 +1,9 @@
 package com.capstoneproject.service;
 
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.exceptions.UnAuthorizedException;
 import com.capstoneproject.models.User;
 import com.capstoneproject.repository.UserRepository;
+import com.capstoneproject.response.ExceptionMessages;
 import com.capstoneproject.response.LoginResponse;
 
 /**
@@ -32,6 +36,11 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     /**
+     * Creating Instance for logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    /**
      * Add the user.
      *
      * @param userDTO The user data to create.
@@ -40,8 +49,11 @@ public class UserService {
     public final String addUser(final UserDTO userDTO) {
         Optional<User> user = userRepo.findByEmail(userDTO.getEmail());
         if (user.isPresent()) {
-            throw new AlreadyExistsException("Email already Exists");
+            logger.error(ExceptionMessages.EMAIL_ALREADY_EXISTS);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.EMAIL_ALREADY_EXISTS);
         }
+        logger.info("User Successfully Registered");
         User users = new User(userDTO.getUserId(), userDTO.getName(),
                     userDTO.getEmail(),
                     this.passwordEncoder.encode(userDTO.getPassword()),
@@ -58,7 +70,6 @@ public class UserService {
      *         attempt.
      */
     public final LoginResponse loginUser(final LoginDTO loginDTO) {
-        String msg = "";
         Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
         if (user1.isPresent()) {
             String password = loginDTO.getPassword();
@@ -69,33 +80,37 @@ public class UserService {
                 Optional<User> user = userRepo.findOneByEmailAndPassword(
                         loginDTO.getEmail(), encodedPassword);
                 if (user.isPresent()) {
-                    return new LoginResponse(msg + "Login Successful..!",
+                    logger.info("Logged in Successfully");
+                    return new LoginResponse("Login Successful..!",
                             true, user.get().getUserRole(),
                             user.get().getUserId(), user.get().getName(),
                             user.get().getEmail());
                 } else {
-                    throw new UnAuthorizedException(msg + "Login Failed");
+                    logger.error(ExceptionMessages.LOGIN_FAIL);
+                    throw new UnAuthorizedException(
+                            ExceptionMessages.LOGIN_FAIL);
                 }
             } else {
-                throw new UnAuthorizedException(msg + "Passwords did not match");
+                logger.error(ExceptionMessages.UNMATCHED_PWD);
+                throw new UnAuthorizedException(
+                        ExceptionMessages.UNMATCHED_PWD);
             }
         } else {
-            throw new UnAuthorizedException(msg + "Email does not exist.!");
+            logger.error(ExceptionMessages.EMAIL_NOT_EXISTS);
+            throw new UnAuthorizedException(
+                    ExceptionMessages.EMAIL_NOT_EXISTS);
         }
     }
 
     /**
      * This is the method to find by Email.
-     * @param email of String type is taken as input.
-     * @return email by finding in the repository.
+     * @param userId of Long type is taken as input.
      */
-    public final Optional<User> findByEmail(final String email) {
-        return userRepo.findByEmail(email);
-    }
-
     public void deleteUser(final Long userId) {
         userRepo.findById(userId).orElseThrow(
-                () -> new ElementNotExistsException("No user found with Id"));
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.USER_NOT_EXIST));
         userRepo.deleteById(userId);
+        logger.info("Deleted Successfully");
     }
 }

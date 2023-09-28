@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
+import com.capstoneproject.response.ExceptionMessages;
 
 /**
  * This class works like Service.
@@ -35,11 +38,17 @@ public class QuizService {
     private CategoryRepository categoryRepository;
 
     /**
+     * Creating Logger Instance.
+     */
+    private Logger logger = LoggerFactory.getLogger(QuizService.class);
+
+    /**
      * This method gets all the quiz.
      * @return the List of Quiz.
      */
     public final List<QuizDTO> getQuizzes() {
         List<Quiz> quizzes = quizRepository.findAll();
+        logger.info("Fetched all the Quizzes ");
         return quizzes.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -50,6 +59,7 @@ public class QuizService {
      * @return the Quiz DTO.
      */
     public final QuizDTO convertModelToDTO(final Quiz quiz) {
+        logger.info("Model is converted to DTO.");
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(quiz.getQuizId());
         quizDto.setQuizName(quiz.getQuizName());
@@ -67,8 +77,10 @@ public class QuizService {
      */
     public final List<QuizDTO> getQuizByCategoryId(final Long categoryId) {
         categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ElementNotExistsException("Cannot find Category Id"));
+                .orElseThrow(() -> new ElementNotExistsException(
+                        ExceptionMessages.CATEGORY_NOT_EXIST));
         List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
+        logger.info("Fetched the Quiz details of the category Id ");
         return quizzes.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -80,7 +92,9 @@ public class QuizService {
      */
     public final QuizDTO getQuizById(final Long quizId) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
-                () -> new ElementNotExistsException("No quiz with the Id"));
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.QUIZ_NOT_EXIST));
+        logger.info("Fetched the Quiz Details");
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(existingQuiz.getQuizId());
         quizDto.setQuizName(existingQuiz.getQuizName());
@@ -100,22 +114,25 @@ public class QuizService {
         Optional<Quiz> existingQuiz = quizRepository
                 .getQuizByName(quizDto.getQuizName());
         if (existingQuiz.isPresent()) {
-            throw new AlreadyExistsException("Quiz already Exists");
+            logger.error(ExceptionMessages.QUIZ_ALREADY_EXISTS);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.QUIZ_ALREADY_EXISTS);
         }
+        logger.info("Added Quiz Successfully");
         Quiz newQuiz = new Quiz();
         newQuiz.setQuizId(quizDto.getQuizId());
         newQuiz.setQuizName(quizDto.getQuizName());
         newQuiz.setQuizDescription(quizDto.getQuizDescription());
         if(quizDto.getNumOfQuestions() <= 0
                 || quizDto.getTimeInMin() <= 0) {
-            throw new ValidationException("Number cannot be 0 or less");
+            throw new ValidationException(ExceptionMessages.INVALID_NUMBER);
         }
         newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
         newQuiz.setTimeInMin(quizDto.getTimeInMin());
         Category category = categoryRepository
                 .findById(quizDto.getCategoryId())
                 .orElseThrow(() -> new ElementNotExistsException(
-                        "Category Id not found."));
+                        ExceptionMessages.CATEGORY_NOT_EXIST));
         newQuiz.setCategory(category);
         quizRepository.save(newQuiz);
         return quizDto;
@@ -127,7 +144,9 @@ public class QuizService {
      */
     public final void deleteQuiz(final Long quizId) {
         quizRepository.findById(quizId).orElseThrow(
-                () -> new ElementNotExistsException("Quiz not exists with Id : " + quizId));
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.QUIZ_NOT_EXIST));
+        logger.info("Quiz deleted");
         quizRepository.deleteById(quizId);
     }
 
@@ -139,22 +158,29 @@ public class QuizService {
      */
     public final QuizDTO updateQuiz(final Long quizId, final QuizDTO quizDto) {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
-                () -> new ElementNotExistsException("No Quiz Find with this Id."));
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.QUIZ_NOT_EXIST));
+        logger.info("Quiz Found");
         categoryRepository.findById(quizDto.getCategoryId()).orElseThrow(
-                () -> new ElementNotExistsException("Category Id not found"));
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.CATEGORY_NOT_EXIST));
             Optional<Quiz> quiz = quizRepository
                     .getQuizByName(quizDto.getQuizName());
             if (quiz.isPresent() && !quiz.get().getQuizId().equals(quizId)) {
-                throw new AlreadyExistsException("Quiz already exists");
+                logger.error(ExceptionMessages.QUIZ_ALREADY_EXISTS);
+                throw new AlreadyExistsException(
+                        ExceptionMessages.QUIZ_ALREADY_EXISTS);
             }
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             if(quizDto.getNumOfQuestions() <= 0
                     || quizDto.getTimeInMin() <= 0) {
-                throw new ValidationException("Number cannot be 0 or less");
+                throw new ValidationException(
+                        ExceptionMessages.INVALID_NUMBER);
             }
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
             existingQuiz.setTimeInMin(quizDto.getTimeInMin());
+            logger.info("Quiz updated");
             quizRepository.save(existingQuiz);
             return quizDto;
     }

@@ -2,6 +2,8 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,18 @@ public class QuestionController {
     private QuestionService questionService;
 
     /**
+     * Creating instance for the Logger
+     */
+    private Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
+    /**
      * Gets all the questions.
      * @return the List of the questions.
      */
     @GetMapping
-    public final ResponseEntity<List<QuestionDTO>> getAllQuestions() {
+    public final ResponseEntity<List<QuestionDTO>> getQuestions() {
         List<QuestionDTO> questions = questionService.getQuestions();
+        logger.info("Fetched Questions successfully");
         return ResponseEntity.ok(questions);
     }
 
@@ -52,6 +60,7 @@ public class QuestionController {
     public final ResponseEntity<QuestionDTO> getQuestionById(
             @PathVariable final Long questionId) {
         QuestionDTO newQuestion = questionService.getQuestionById(questionId);
+        logger.info("Fetched Question");
         return ResponseEntity.ok(newQuestion);
     }
 
@@ -64,6 +73,7 @@ public class QuestionController {
     public final ResponseEntity<String> addQuestion(
             @RequestBody @Valid final QuestionDTO questionDto) {
         questionService.addQuestion(questionDto);
+        logger.info("Question added");
         return ResponseEntity.status(HttpStatus.CREATED).body("Question added");
     }
 
@@ -77,6 +87,7 @@ public class QuestionController {
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
         String message = "Question is Deleted";
+        logger.info(message);
         return ResponseEntity.noContent().header("Message", message).build();
     }
 
@@ -92,6 +103,7 @@ public class QuestionController {
             @RequestBody @Valid final QuestionDTO updatedQuestionDto) {
         questionService.updateQuestion(questionId,
                 updatedQuestionDto);
+        logger.info("Quiz is updated");
         return ResponseEntity.ok("Quiz is updated");
     }
 
@@ -105,6 +117,7 @@ public class QuestionController {
             @PathVariable final Long quizId) {
         List<QuestionDTO> questionDto = questionService
                 .getQuestionByQuizId(quizId);
+        logger.info("Fetched Questions By Quiz");
         return ResponseEntity.ok(questionDto);
     }
 

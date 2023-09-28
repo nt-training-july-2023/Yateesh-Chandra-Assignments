@@ -2,6 +2,8 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,18 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
+     * Creating instance for the Logger
+     */
+    private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
+
+    /**
      * Gets all the categories.
      * @return the list of categories.
      */
     @GetMapping
     public final ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getCategories();
+        logger.info("Fetched Categories successfully");
         return ResponseEntity.ok(categories);
     }
 
@@ -53,6 +61,7 @@ public class CategoryController {
             @PathVariable final Long categoryId) {
         CategoryDTO newCategoryDto = categoryService
                 .getCategoryById(categoryId);
+        logger.info("Fetched Category by Id");
         return ResponseEntity.ok(newCategoryDto);
     }
 
@@ -65,7 +74,9 @@ public class CategoryController {
     public final ResponseEntity<String> addCategory(
             @RequestBody @Valid final CategoryDTO categoryDto) {
         categoryService.addCategory(categoryDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Added Category Successfully");
+        logger.info("Succesfully Added Category");
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                "Added Category Successfully");
     }
 
     /**
@@ -78,6 +89,7 @@ public class CategoryController {
             @PathVariable final Long categoryId) {
         categoryService.deleteCategory(categoryId);
         String message =  "Category Deleted";
+        logger.info(message);
         return ResponseEntity.noContent().header("Message",message).build();
     }
 
@@ -92,6 +104,7 @@ public class CategoryController {
             @PathVariable final Long categoryId,
             @RequestBody @Valid final CategoryDTO updatedCategoryDto) {
         categoryService.updateCategory(categoryId, updatedCategoryDto);
+        logger.info("Catgory Updated Successfully");
         return ResponseEntity.ok("Updated Category successfully");
     }
 }

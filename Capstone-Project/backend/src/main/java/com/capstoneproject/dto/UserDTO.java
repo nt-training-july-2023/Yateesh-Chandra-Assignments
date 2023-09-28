@@ -46,7 +46,7 @@ public class UserDTO {
      */
     @Column(name = "user_email", unique = true, length = ID_MAX_LENGTH)
     @NotBlank(message = ValidationMessages.EMAIL_NOT_BLANK)
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@nucleusteq\\.com$", message = ValidationMessages.EMAIL_PATTERN)
+    @Pattern(regexp = "^[a-z0-9]{2,}[.][a-z]{2,}+@nucleusteq.com$", message = ValidationMessages.EMAIL_PATTERN)
     private String email;
 
     /**
