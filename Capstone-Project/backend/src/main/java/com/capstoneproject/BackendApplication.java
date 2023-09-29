@@ -13,7 +13,7 @@ public class BackendApplication {
      * Run method.
      * @param args String type arguments.
      */
-    public final void run(final String[] args) {
+    private void run(final String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
     /**
@@ -21,6 +21,6 @@ public class BackendApplication {
      * @param args are the command line arguments.
      */
     public static void main(final String[] args) {
-        SpringApplication.run(BackendApplication.class, args);
+        new BackendApplication().run(args);
     }
 }

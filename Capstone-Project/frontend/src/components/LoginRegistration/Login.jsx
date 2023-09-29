@@ -17,49 +17,49 @@ function Login() {
     }
 
     const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
+        setShowPassword(!showPassword);
     }
 
     const loginUserSuccessSwal = () => {
-      let timeInterval
-      Swal.fire({
-        title : "Welcome User .!",
-        text : "You are successfully logged in",
-        timer : 2000,
-        icon : "success",
-        willClose : () => {
-          clearInterval(timeInterval)
-        }
-      })
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Logged in successfully',
+            showConfirmButton: false,
+            background : "rgb(255, 252, 167)",
+            timer: 2000,
+            backdrop: false,
+            timerProgressBar : true
+        })
     }
 
     const alertEmailError = () => {
-      Swal.fire({
-        title : "Unregistered Email",
-        text : "No such Email is registered before",
-        icon : "error"
-      })
+        Swal.fire({
+            title : "Unregistered Email",
+            text : "No such Email is registered before(run backend)",
+            icon : "error"
+        })
     }
 
     const loginFail = () => {
-      Swal.fire({
-        title : "Unable to Login",
-        text : "Fill the valid details",
-        icon : "error"
-      })
+        Swal.fire({
+            title : "Unable to Login",
+            text : "Fill the valid details",
+            icon : "error"
+        })
     }
 
     const loginAdminSuccessSwal = () => {
-      let timeInterval
-      Swal.fire({
-        title : "Welcome Admin .!",
-        text : "You are successfully Logged in",
-        timer : 2000,
-        icon : "success",
-        willClose : () => {
-          clearInterval(timeInterval)
-        }
-      })
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Logged in successfully, admin',
+            showConfirmButton: false,
+            backdrop : false,
+            background : "yellow",
+            timer: 1500,
+            timerProgressBar : true
+        })
     }
 
     const handleEmailChange = (e) => {
@@ -99,10 +99,10 @@ function Login() {
             isValid = false;
         }
         return isValid;
-    }
+    };
+
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
-      
+        event.preventDefault();  
         if(!validateForm()){
           loginFail();
             return;
@@ -116,6 +116,9 @@ function Login() {
 
           console.log(response.data);
           localStorage.setItem("role", response.data.userRole);
+          localStorage.setItem("id", response.data.userId)
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("email", response.data.email);
       
           if (response.data.message === "Email does not exist.!") {
             setEmailError("Email not exists..!");

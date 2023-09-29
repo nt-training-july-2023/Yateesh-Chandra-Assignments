@@ -7,8 +7,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +19,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "userId", "quizId" }) })
 public class UserResponsesDTO {
 
     /**
@@ -56,7 +52,6 @@ public class UserResponsesDTO {
     /**
      * This is the number of Questions answered.
      */
-    @Column(nullable = false)
     private int numOfQuestionsAnswered;
 
     /**
@@ -68,7 +63,6 @@ public class UserResponsesDTO {
     /**
      * This is the marks scored field.
      */
-    @Column(nullable = false)
     private int marksScored;
 
     /**
@@ -83,7 +77,7 @@ public class UserResponsesDTO {
     public final String setTimeStampMethod() {
         LocalDateTime currentTimeStamp = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter
-                .ofPattern("yyyy-MM-dd HH:mm:ss");
+                .ofPattern("dd-MM-yyyy HH:mm:ss");
         return currentTimeStamp.format(formatter);
     }
 }

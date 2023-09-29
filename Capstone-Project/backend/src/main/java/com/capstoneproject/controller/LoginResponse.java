@@ -26,12 +26,23 @@ public class LoginResponse {
      */
     private String userRole;
     /**
+     * This is the User Id.
+     */
+    private Long userId;
+    /**
+     * This is User Name.
+     */
+    private String name;
+    /**
+     * This is the email.
+     */
+    private String email;
+    /**
      * checks the login response.
      * @param messagee of String Type.
      * @param statuss of boolean type is checked.
      */
     public LoginResponse(final String messagee, final Boolean statuss) {
-        super();
         this.message = messagee;
         this.status = statuss;
     }

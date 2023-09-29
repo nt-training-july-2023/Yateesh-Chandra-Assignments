@@ -55,6 +55,7 @@ public class QuizService {
         quizDto.setQuizName(quiz.getQuizName());
         quizDto.setQuizDescription(quiz.getQuizDescription());
         quizDto.setNumOfQuestions(quiz.getNumOfQuestions());
+        quizDto.setTimeInMin(quiz.getTimeInMin());
         quizDto.setCategoryId(quiz.getCategory().getCategoryId());
         return quizDto;
     }
@@ -89,6 +90,7 @@ public class QuizService {
         quizDto.setQuizName(existingQuiz.getQuizName());
         quizDto.setQuizDescription(existingQuiz.getQuizDescription());
         quizDto.setNumOfQuestions(existingQuiz.getNumOfQuestions());
+        quizDto.setTimeInMin(existingQuiz.getTimeInMin());
         quizDto.setCategoryId(existingQuiz.getCategory().getCategoryId());
         return quizDto;
     }
@@ -112,6 +114,7 @@ public class QuizService {
                 newQuiz.setQuizName(quizDto.getQuizName());
                 newQuiz.setQuizDescription(quizDto.getQuizDescription());
                 newQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
+                newQuiz.setTimeInMin(quizDto.getTimeInMin());
                 Category category = categoryRepository
                         .findById(quizDto.getCategoryId())
                         .orElseThrow(() -> new ElementNotExistsException(
@@ -156,12 +159,14 @@ public class QuizService {
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
+            existingQuiz.setTimeInMin(quizDto.getTimeInMin());
             Quiz newQuiz = quizRepository.save(existingQuiz);
             QuizDTO newQuizDTO = new QuizDTO();
             newQuizDTO.setQuizId(newQuiz.getQuizId());
             newQuizDTO.setQuizName(newQuiz.getQuizName());
             newQuizDTO.setQuizDescription(newQuiz.getQuizDescription());
             newQuizDTO.setNumOfQuestions(newQuiz.getNumOfQuestions());
+            newQuizDTO.setTimeInMin(newQuiz.getTimeInMin());
             return newQuizDTO;
         } else {
             throw new ElementNotExistsException("Quiz Not found");

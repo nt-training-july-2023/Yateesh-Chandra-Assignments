@@ -61,6 +61,12 @@ public class Quiz {
     private int numOfQuestions;
 
     /**
+     * This column contains the timer in minutes.
+     */
+    @Column
+    private int timeInMin;
+
+    /**
      * This is Category id column from Category Entity.
      */
     @ManyToOne(fetch = FetchType.EAGER)
@@ -79,12 +85,12 @@ public class Quiz {
      */
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserResponses> responses = new ArrayList<>();
+    private List<UserResponses> userResponses = new ArrayList<>();
     /**
      * List the questions.
      *@return the list of questions.
      */
-    public final List<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return new ArrayList<>(questions);
     }
 
@@ -92,7 +98,7 @@ public class Quiz {
      * This is Setter method for the Question Table.
      * @param que contains the list of questions.
      */
-    public final void setQuestions(final List<Question> que) {
+    public void setQuestions(final List<Question> que) {
         this.questions = new ArrayList<>(que);
     }
 
@@ -100,7 +106,7 @@ public class Quiz {
      * Get category.
      * @return category that was set.
      */
-    public final Category getCategory() {
+    public Category getCategory() {
         return new Category(category.getCategoryId(),
                 category.getCategoryName(), category.getDescription());
     }
@@ -109,7 +115,7 @@ public class Quiz {
      * Sets the category.
      * @param cate is final.
      */
-    public final void setCategory(final Category cate) {
+    public void setCategory(final Category cate) {
             this.category = new Category(cate.getCategoryId(),
                     cate.getCategoryName(), cate.getDescription());
     }
@@ -118,17 +124,17 @@ public class Quiz {
      * This is the getter method for the User Response.
      * @return the List of Responses.
      */
-    public final List<UserResponses> getUserResponses() {
-        return new ArrayList<>(responses);
+    public List<UserResponses> getUserResponses() {
+        return new ArrayList<>(userResponses);
     }
 
     /**
      * This is the setter method for User Responses.
      * @param userResponse - User Response.
      */
-    public final void setUserResponses(
+    public void setUserResponses(
             final List<UserResponses> userResponse) {
-        this.responses = new ArrayList<>(userResponse);
+        this.userResponses = new ArrayList<>(userResponse);
     }
 
     /**
@@ -137,13 +143,15 @@ public class Quiz {
      * @param quizname Name of the quiz.
      * @param quizDesc the description.
      * @param numOfQue number of questions.
+     * @param timeInmin timer in minutes.
      */
     public Quiz(final Long id, final String quizname, final String quizDesc,
-            final int numOfQue) {
+            final int numOfQue, final int timeInmin) {
         this.quizId = id;
         this.quizName = quizname;
         this.quizDescription = quizDesc;
         this.numOfQuestions = numOfQue;
+        this.timeInMin = timeInmin;
     }
 
 }

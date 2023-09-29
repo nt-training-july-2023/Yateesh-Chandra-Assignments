@@ -73,7 +73,7 @@ public class Category {
      * Quiz.
      * @return the list.
      */
-    public final List<Quiz> getQuiz() {
+    public List<Quiz> getQuiz() {
         return new ArrayList<>(quiz);
     }
 
@@ -81,7 +81,7 @@ public class Category {
      * Quiz Setter overriding.
      * @param q is quiz.
      */
-    public final void setQuiz(final List<Quiz> q) {
+    public void setQuiz(final List<Quiz> q) {
         this.quiz = new ArrayList<>(q);
     }
 

@@ -11,7 +11,7 @@ class QuizDTOTest {
 
     @BeforeEach
     public void setUp() {
-        quizDto = new QuizDTO(1L, "Test Quiz", "This is Quiz Description",10, 2L);
+        quizDto = new QuizDTO(1L, "Test Quiz", "This is Quiz Description",10, 4, 2L);
     }
 
     @Test
@@ -20,9 +20,10 @@ class QuizDTOTest {
         String quizName = "Test Quiz";
         String quizDescription = "This is the Description of the Test Quiz";
         int numOfQuestions = 10;
+        int time = 4;
         Long categoryId = null;
         
-        QuizDTO quizDtoTest = new QuizDTO(quizId, quizName, quizDescription, numOfQuestions, categoryId);
+        QuizDTO quizDtoTest = new QuizDTO(quizId, quizName, quizDescription, numOfQuestions, time, categoryId);
         assertEquals(quizId, quizDtoTest.getQuizId());
         assertEquals(quizName, quizDtoTest.getQuizName());
         assertEquals(quizDescription, quizDtoTest.getQuizDescription());
@@ -66,10 +67,30 @@ class QuizDTOTest {
     @Test
     public void testGetCategoryId() {
         Long categoryIdNotNull = 1L;
-        QuizDTO quizDtoNotNull = new QuizDTO(1L, "Test Quiz", "Test Description",7, categoryIdNotNull);
+        QuizDTO quizDtoNotNull = new QuizDTO(1L, "Test Quiz", "Test Description",7, 3, categoryIdNotNull);
         assertEquals(categoryIdNotNull, quizDtoNotNull.getCategoryId());
-        
-        QuizDTO quizDtoNull = new QuizDTO(2L, "Test Quiz 2", "Test 2 Description", 10, null);
+        QuizDTO quizDtoNull = new QuizDTO(2L, "Test Quiz 2", "Test 2 Description", 10, 4, null);
         assertEquals(-1L, quizDtoNull.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNotNull() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(5L);
+        assertEquals(5L, quizDto.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNull() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(null);
+        assertEquals(-1L, quizDto.getCategoryId());
+    }
+
+    @Test
+    void testGetCategoryIdNegative() {
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setCategoryId(-5L);
+        assertEquals(-5L, quizDto.getCategoryId());
     }
 }

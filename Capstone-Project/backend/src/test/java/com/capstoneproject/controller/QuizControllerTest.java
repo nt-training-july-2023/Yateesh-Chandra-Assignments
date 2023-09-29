@@ -30,8 +30,8 @@ public class QuizControllerTest {
     @Test
     public void testGetAllQuiz() {
         List<QuizDTO> quizzes = new ArrayList<>();
-        quizzes.add(new QuizDTO(1L, "Quiz1", "Description1", 5, 1L));
-        quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 2L));
+        quizzes.add(new QuizDTO(1L, "Quiz1", "Description1", 5, 2, 1L));
+        quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 4, 2L));
         when(quizService.getAllQuiz()).thenReturn(quizzes);
         ResponseEntity<Object> response = quizController.getAllQuiz();
         assertNotNull(response);
@@ -46,7 +46,7 @@ public class QuizControllerTest {
     @Test
     public void testGetQuizById() {
         Long quizId = 1L;
-        QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 1L);
+        QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 2, 1L);
         when(quizService.getQuizById(quizId)).thenReturn(quizDTO);
         ResponseEntity<Object> response = quizController.getQuizById(quizId);
         assertNotNull(response);
@@ -59,7 +59,7 @@ public class QuizControllerTest {
 
     @Test
     public void testAddQuiz() {
-        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 1L);
+        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 2, 1L);
         when(quizService.addQuiz(quizDTO)).thenReturn(quizDTO);
         ResponseEntity<Object> response = quizController.addQuiz(quizDTO);
         assertNotNull(response);
@@ -80,7 +80,7 @@ public class QuizControllerTest {
     @Test
     public void testUpdateQuiz() {
         Long quizId = 1L;
-        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
+        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 2, 1L);
         when(quizService.updateQuiz(quizId, updatedQuizDTO)).thenReturn(updatedQuizDTO);
         ResponseEntity<Object> response = quizController.updateQuiz(quizId, updatedQuizDTO);
         assertNotNull(response);
@@ -95,8 +95,8 @@ public class QuizControllerTest {
     public void testGetQuizByCategoryId() throws Exception{
         Long categoryId = 1L;
         List<QuizDTO> quizList = new ArrayList<>();
-        quizList.add(new QuizDTO(1L, "Quiz 1", "Quiz 1 Description", 7, 9L));
-        quizList.add(new QuizDTO(2L, "Quiz 2", "Quiz 2 Description", 8, 10L));
+        quizList.add(new QuizDTO(1L, "Quiz 1", "Quiz 1 Description", 7, 2, 9L));
+        quizList.add(new QuizDTO(2L, "Quiz 2", "Quiz 2 Description", 8, 3, 10L));
         when(quizService.getQuizByCategoryId(categoryId)).thenReturn(quizList);
         ResponseEntity<Object> response = quizController.getQuizByCategoryId(categoryId);
         assertNotNull(response);

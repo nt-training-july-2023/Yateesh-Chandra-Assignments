@@ -4,12 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import AdminNavBar from "../AdminNavBar";
 import Swal from "sweetalert2";
+import NotFound from "../NotFound";
 
 const AddOrUpdateCategory = () =>{
 
   const { categoryId } = useParams();
   const navigate = useNavigate();
-
+  const userRole = localStorage.getItem("role");
   const isUpdating = categoryId !== undefined;
 
   const [categoryName, setCategoryName] = useState("");
@@ -24,6 +25,7 @@ const AddOrUpdateCategory = () =>{
       icon : "success",
       timer : 1500
     })
+    navigate("/manage-category")
   }
 
   const addAlert = () => {
@@ -32,6 +34,7 @@ const AddOrUpdateCategory = () =>{
       icon : "success",
       timer : 1500
     })
+    navigate("/manage-category")
   }
 
   const fetchCategoryData = () => {
@@ -82,8 +85,7 @@ const AddOrUpdateCategory = () =>{
     }
 
     if (!description) {
-      setCategoryDescriptionError("Add some description ot proceed");
-      console.log("Add some Description to proceed");
+      setCategoryDescriptionError("Add some description");
       isValid = false;
     } else {
       setCategoryDescriptionError("");
@@ -129,7 +131,6 @@ const AddOrUpdateCategory = () =>{
           if(response.status === 200){
             addAlert();
             console.log("Category added successfully.");
-            navigate("/manage-category")
           }
           
         } catch(error){
@@ -143,7 +144,6 @@ const AddOrUpdateCategory = () =>{
             }
         }
       }
-      // navigate("/manage-category");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -151,37 +151,46 @@ const AddOrUpdateCategory = () =>{
   
   return (
     <div className="App">
+      {userRole === "ADMIN" || userRole === "USER" ? (
+        <>
         <AdminNavBar/>
-    <div className="add-category-container">
-      <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
-      <form onSubmit={handleAddOrUpdateCategory}>
-        <div className="form-group">
-          <label>Category Title:</label>
-          <input
-            type="text"
-            value={categoryName}
-            onChange={handleCategoryNameChange}
-            placeholder="Enter Category Name"
-          />
-          <span className="error-message">{categoryNameError}</span>
-        </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <textarea
-            value={description}
-            onChange={handleCategoryDescriptionChange}
-            placeholder="Enter Category Description"
-          />
-          <span className="error-message">{categoryDescriptionError}</span>
-        </div>
-        <div className="form-group">
-          <div className="button-container-category">
-            <button type="submit">{isUpdating ? 'Update Category' : 'Add Category'}</button>
-            <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
+      <div className="add-category-container">
+        <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
+        <form onSubmit={handleAddOrUpdateCategory}>
+          <div className="form-group">
+            <label>Category Title:</label>
+            <input
+              type="text"
+              value={categoryName}
+              onChange={handleCategoryNameChange}
+              placeholder="Enter Category Name"
+            />
+            {categoryNameError && <div className="error">{categoryNameError}</div>}
           </div>
+          
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              value={description}
+              onChange={handleCategoryDescriptionChange}
+              placeholder="Enter Category Description"
+            />
+            {categoryDescriptionError && <div className="error">{categoryDescriptionError}</div>}
+          </div>
+
+          <div className="form-group">
+            <div className="button-container-category">
+              <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
+              <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      </> ) : (
+        <div>
+          <NotFound/>
         </div>
-      </form>
-    </div>
+        )}
     </div>
   );
 

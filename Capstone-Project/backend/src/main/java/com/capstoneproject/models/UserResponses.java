@@ -7,8 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +18,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "userId", "quizId" }) })
 public class UserResponses {
 
     /**
@@ -54,7 +50,7 @@ public class UserResponses {
     /**
      * This field tells number of questions answered.
      */
-    @Column(nullable = false)
+    @Column
     private int numOfQuestionsAnswered;
 
     /**
@@ -66,7 +62,7 @@ public class UserResponses {
     /**
      * This is marks scored.
      */
-    @Column(nullable = false)
+    @Column
     private int marksScored;
 
     /**
@@ -78,7 +74,7 @@ public class UserResponses {
      * This is getter Method for User.
      * @return the User object.
      */
-    public final User getUsers() {
+    public User getUsers() {
         return new User(users.getUserId(), users.getName());
     }
 
@@ -86,7 +82,7 @@ public class UserResponses {
      * This method sets the users.
      * @param user - User.
      */
-    public final void setUsers(final User user) {
+    public void setUsers(final User user) {
         this.users = new User(user.getUserId(), user.getName());
     }
 
@@ -94,17 +90,41 @@ public class UserResponses {
      * This is getter method for Quiz.
      * @return the new Quiz Object.
      */
-    public final Quiz getQuiz() {
+    public Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
-                quiz.getQuizDescription(), quiz.getNumOfQuestions());
+                quiz.getQuizDescription(), quiz.getNumOfQuestions(),
+                quiz.getTimeInMin());
     }
 
     /**
      * This is setter method for Quiz.
      * @param qui - Quiz.
      */
-    public final void setQuiz(final Quiz qui) {
+    public void setQuiz(final Quiz qui) {
         this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
-                qui.getQuizDescription(), qui.getNumOfQuestions());
+                qui.getQuizDescription(), qui.getNumOfQuestions(),
+                qui.getTimeInMin());
     }
+
+    /**
+     * This is User Responses Constructor.
+     * @param responseid           .
+     * @param numOfQuestion        .
+     * @param numOfQuestionsAnswer .
+     * @param totalMark            .
+     * @param marksScore           .
+     * @param timestamp            .
+     */
+    public UserResponses(final Long responseid, final int numOfQuestion,
+            final int numOfQuestionsAnswer, final int totalMark,
+            final int marksScore, final String timestamp) {
+        super();
+        this.responseId = responseid;
+        this.numOfQuestions = numOfQuestion;
+        this.numOfQuestionsAnswered = numOfQuestionsAnswer;
+        this.totalMarks = totalMark;
+        this.marksScored = marksScore;
+        this.timeStamp = timestamp;
+    }
+
 }

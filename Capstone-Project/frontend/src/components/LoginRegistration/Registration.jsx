@@ -3,6 +3,7 @@ import "../LoginRegistration/LoginRegistration.css"
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import successfulswal from "../image/successfulswal.png";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -32,7 +33,9 @@ export default function Registration() {
     Swal.fire({
       title : "Successfully Registered",
       text : "Hurray, Now you are our subscriber.!",
-      icon : "success"
+      imageUrl : successfulswal,
+      imageHeight : 150,
+      imageHeight : 150,
     })
     .then((res) => {
       
@@ -95,7 +98,7 @@ export default function Registration() {
   };
 
   const handlephoneChange = (e) => {
-    const numericInput = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    const numericInput = e.target.value.replace(/\D/g, "");
     setPhoneNumber(numericInput);
     if (numericInput.length < 10) {
       setPhoneNumberError("Phone number must be 10 digits");
@@ -145,12 +148,17 @@ export default function Registration() {
       setConfirmPasswordError("");
     }
 
+    if(password !== confirmPassword){
+      setConfirmPasswordError("Passwords did not match");
+      isValid = false;
+    }
+
     if (!phoneNumber) {
       setPhoneNumberError("Phone Number is required");
       isValid = false;
     }
-    else if(phoneNumber.length<10){
-      setPhoneNumberError ("Phone number is less than 10 digits.")
+    else if(phoneNumber.length<10 || phoneNumber.length>10){
+      setPhoneNumberError ("Phone number must be 10 digits.")
       isValid=false;
       console.log("The number should be of 10 digits");
     }

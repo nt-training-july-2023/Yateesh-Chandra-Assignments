@@ -12,6 +12,8 @@ class LoginResponseTest {
         assertEquals(null, loginResponse.getMessage());
         assertEquals(null, loginResponse.getStatus());
         assertEquals(null, loginResponse.getUserRole());
+        assertEquals(null, loginResponse.getUserId());
+        
     }
     
     @Test
@@ -19,10 +21,16 @@ class LoginResponseTest {
         String message = "Hello";
         boolean status = true;
         String userRole = "ADMIN";
-        LoginResponse loginResponse = new LoginResponse(message, status, userRole);
+        String name = "Yateesh";
+        String email = "test@nucelusteq.com";
+        Long userId = 7L;
+        LoginResponse loginResponse = new LoginResponse(message, status, userRole, userId, name, email);
         assertEquals(message, loginResponse.getMessage());
         assertEquals(status, loginResponse.getStatus());
         assertEquals(userRole, loginResponse.getUserRole());
+        assertEquals(userId, loginResponse.getUserId());
+        assertEquals(name, loginResponse.getName());
+        assertEquals(email, loginResponse.getEmail());
     }
     
     @Test

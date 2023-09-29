@@ -40,8 +40,8 @@ public class QuizServiceTest {
     @Test
     public void testGetAllQuiz() {
         Category category = new Category(5L, "Category 1", "Category Description");
-        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5);
-        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10);
+        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5, 2);
+        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10, 4);
         q1.setCategory(category);
         q2.setCategory(category);
         List<Quiz> quizList = new ArrayList<>();
@@ -59,8 +59,8 @@ public class QuizServiceTest {
     public void testGetQuizByCategoryId() {
         Long categoryId = 1L;
         Category category = new Category(categoryId, "Category 1", "Category Description");
-        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5);
-        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10);
+        Quiz q1 = new Quiz(1L, "Quiz 1", "Description 1", 5, 2);
+        Quiz q2 = new Quiz(2L, "Quiz 2", "Description 2", 10, 4);
         q1.setCategory(category);
         q2.setCategory(category);
         List<Quiz> quizList = new ArrayList<>();
@@ -86,7 +86,7 @@ public class QuizServiceTest {
     public void testGetQuizById() {
         Long quizId = 1L;
         Category category = new Category(1L, "Category 1", "Category Description");
-        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5);
+        Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5, 2);
         quiz.setCategory(category);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
         QuizDTO quizDTO = quizService.getQuizById(quizId);
@@ -106,11 +106,11 @@ public class QuizServiceTest {
     @Test
     public void testAddQuiz() {
         Long categoryId = 1L;
-        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, categoryId);
+        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 2, categoryId);
         Category category = new Category(categoryId, "Category 1", "Category Description");
         when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.empty());
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        when(quizRepository.save(any(Quiz.class))).thenReturn(new Quiz(1L, "New Quiz", "New Description", 5));
+        when(quizRepository.save(any(Quiz.class))).thenReturn(new Quiz(1L, "New Quiz", "New Description", 5, 2));
         QuizDTO addedQuiz = quizService.addQuiz(quizDTO);
         assertNull(addedQuiz.getQuizId());
         assertEquals("New Quiz", addedQuiz.getQuizName());
@@ -121,7 +121,7 @@ public class QuizServiceTest {
     @Test
     public void testAddQuizAlreadyExists() {
         Long categoryId = 1L;
-        QuizDTO quizDTO = new QuizDTO(null, "Existing Quiz", "Description", 5, categoryId);
+        QuizDTO quizDTO = new QuizDTO(null, "Existing Quiz", "Description", 5, 4, categoryId);
         Category category = new Category(categoryId, "Category 1", "Category Description");
         when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.of(new Quiz()));
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
@@ -131,7 +131,7 @@ public class QuizServiceTest {
     @Test
     public void testAddQuizInvalidInput() {
         Long categoryId = 1L;
-        QuizDTO quizDTO = new QuizDTO(null, "", "Description", 5, categoryId);
+        QuizDTO quizDTO = new QuizDTO(null, "", "Description", 5, 2, categoryId);
         assertThrows(NoInputException.class, () -> quizService.addQuiz(quizDTO));
     }
 
@@ -161,8 +161,8 @@ public class QuizServiceTest {
     @Test
     public void testUpdateQuiz() {
         Long quizId = 1L;
-        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
-        Quiz existingQuiz = new Quiz(quizId, "Existing Quiz", "Description", 5);
+        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 4, 1L);
+        Quiz existingQuiz = new Quiz(quizId, "Existing Quiz", "Description", 5, 2);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(existingQuiz));
         when(quizRepository.save(any(Quiz.class))).thenReturn(existingQuiz);
         QuizDTO updatedQuiz = quizService.updateQuiz(quizId, updatedQuizDTO);
@@ -175,7 +175,7 @@ public class QuizServiceTest {
     @Test
     public void testUpdateQuizNotFound() {
         Long quizId = 1L;
-        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 1L);
+        QuizDTO updatedQuizDTO = new QuizDTO(null, "Updated Quiz", "Updated Description", 10, 2, 1L);
         when(quizRepository.findById(quizId)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, updatedQuizDTO));
     }
