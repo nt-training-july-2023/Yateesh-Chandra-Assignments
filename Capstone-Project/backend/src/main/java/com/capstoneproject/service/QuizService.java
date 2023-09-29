@@ -123,7 +123,7 @@ public class QuizService {
         newQuiz.setQuizId(quizDto.getQuizId());
         newQuiz.setQuizName(quizDto.getQuizName());
         newQuiz.setQuizDescription(quizDto.getQuizDescription());
-        if(quizDto.getNumOfQuestions() <= 0
+        if (quizDto.getNumOfQuestions() <= 0
                 || quizDto.getTimeInMin() <= 0) {
             throw new ValidationException(ExceptionMessages.INVALID_NUMBER);
         }
@@ -173,7 +173,7 @@ public class QuizService {
             }
             existingQuiz.setQuizName(quizDto.getQuizName());
             existingQuiz.setQuizDescription(quizDto.getQuizDescription());
-            if(quizDto.getNumOfQuestions() <= 0
+            if (quizDto.getNumOfQuestions() <= 0
                     || quizDto.getTimeInMin() <= 0) {
                 throw new ValidationException(
                         ExceptionMessages.INVALID_NUMBER);

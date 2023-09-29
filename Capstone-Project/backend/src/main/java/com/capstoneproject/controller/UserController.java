@@ -74,7 +74,7 @@ public class UserController {
      */
     @DeleteMapping(path = "/{userId}")
     public final ResponseEntity<Void> deleteUser(
-            @PathVariable Long userId){
+            @PathVariable final Long userId) {
         userService.deleteUser(userId);
         String message = "Deleted Successfully";
         logger.info(message);

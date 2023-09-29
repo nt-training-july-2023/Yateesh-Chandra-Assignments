@@ -72,7 +72,7 @@ public class UserResponsesService {
             final UserResponsesDTO responses) {
         User user = userRepository.findById(responses.getUserId())
                     .orElseThrow(() -> new ElementNotExistsException(
-                            ExceptionMessages.USER_NOT_EXIST 
+                            ExceptionMessages.USER_NOT_EXIST
                             + responses.getUserId()));
         Quiz quiz = quizRepository.findById(responses.getQuizId())
                     .orElseThrow(() -> new ElementNotExistsException(

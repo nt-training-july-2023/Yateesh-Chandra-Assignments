@@ -87,9 +87,9 @@ public class QuizController {
     public final ResponseEntity<Void> deleteQuiz(
             @PathVariable final Long quizId) {
         quizService.deleteQuiz(quizId);
-        String message = "Quiz is deleted"; 
+        String message = "Quiz is deleted";
         logger.info("Deleted Quiz");
-        return ResponseEntity.noContent().header("Message",message).build();
+        return ResponseEntity.noContent().header("Message", message).build();
     }
 
     /**

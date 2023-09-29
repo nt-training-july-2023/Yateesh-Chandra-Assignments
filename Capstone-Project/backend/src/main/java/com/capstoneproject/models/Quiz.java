@@ -47,7 +47,7 @@ public class Quiz {
     /**
      * This is the Quiz name Column.
      */
-    @Column(name = "quiz_name",unique = true, nullable = false)
+    @Column(name = "quiz_name", unique = true, nullable = false)
     @NotEmpty(message = ValidationMessages.QUIZ_NAME_NOTBLANK)
     private String quizName;
 

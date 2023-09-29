@@ -30,7 +30,7 @@ public class AllResultsController {
     private AllResultsService allResultsService;
 
     /**
-     * Creating instance for the Logger
+     * Creating instance for the Logger.
      */
     private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
 

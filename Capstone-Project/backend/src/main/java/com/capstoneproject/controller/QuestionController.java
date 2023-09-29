@@ -36,7 +36,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     /**
-     * Creating instance for the Logger
+     * Creating instance for the Logger.
      */
     private Logger logger = LoggerFactory.getLogger(QuestionController.class);
 

@@ -27,6 +27,11 @@ import lombok.Setter;
 public class UserDTO {
 
     /**
+     * This ID_MIN_LENGTH contains the minimum value to be the value in column.
+     */
+    private static final int MIN_LENGTH = 6;
+
+    /**
      * This is the Id field to be entered by new User.
      */
     @Id
@@ -46,7 +51,8 @@ public class UserDTO {
      */
     @Column(name = "user_email", unique = true, length = ID_MAX_LENGTH)
     @NotBlank(message = ValidationMessages.EMAIL_NOT_BLANK)
-    @Pattern(regexp = "^[a-z][a-zA-Z0-9]*@nucleusteq\\.com$", message = ValidationMessages.EMAIL_PATTERN)
+    @Pattern(regexp = "^[a-z][a-zA-Z0-9]*@nucleusteq\\.com$",
+    message = ValidationMessages.EMAIL_PATTERN)
     private String email;
 
     /**
@@ -54,7 +60,7 @@ public class UserDTO {
      */
     @Column(name = "password", length = ID_MAX_LENGTH)
     @NotBlank(message = ValidationMessages.PASSWORD_NOT_NULL)
-    @Size(min = 6, message = ValidationMessages.PASSWORD_PATTERN)
+    @Size(min = MIN_LENGTH, message = ValidationMessages.PASSWORD_PATTERN)
     private String password;
 
     /**

@@ -115,7 +115,7 @@ public class QuestionService {
         optionList.add(questionDTO.getOption3());
         optionList.add(questionDTO.getOption4());
         final int optionNumber = 4;
-        if(optionList.size() < optionNumber) {
+        if (optionList.size() < optionNumber) {
             logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
             throw new AlreadyExistsException(
                     ExceptionMessages.OPTIONS_NOT_REPEATED);
@@ -129,12 +129,12 @@ public class QuestionService {
         newQuestion.setOption4(questionDTO.getOption4());
         boolean matchFound = false;
         for (String option : optionList) {
-            if(questionDTO.getCorrectOption().equalsIgnoreCase(option)) {
+            if (questionDTO.getCorrectOption().equalsIgnoreCase(option)) {
                 newQuestion.setCorrectOption(questionDTO.getCorrectOption());
                 matchFound = true;
-            } 
+            }
         }
-        if(!matchFound) {
+        if (!matchFound) {
             logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
             throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
         }
@@ -165,7 +165,7 @@ public class QuestionService {
         optionList.add(updatedQuestionDTO.getOption3());
         optionList.add(updatedQuestionDTO.getOption4());
         final int optionNumber = 4;
-        if(optionList.size() < optionNumber) {
+        if (optionList.size() < optionNumber) {
             logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
             throw new AlreadyExistsException(
                     ExceptionMessages.OPTIONS_NOT_REPEATED);
@@ -176,12 +176,14 @@ public class QuestionService {
         existingQuestion.setOption4(updatedQuestionDTO.getOption4());
         boolean matchFound = false;
         for (String option : optionList) {
-            if(updatedQuestionDTO.getCorrectOption().equalsIgnoreCase(option)) {
-                existingQuestion.setCorrectOption(updatedQuestionDTO.getCorrectOption());
+            if (updatedQuestionDTO.getCorrectOption().equalsIgnoreCase(
+                    option)) {
+                existingQuestion.setCorrectOption(
+                        updatedQuestionDTO.getCorrectOption());
                 matchFound = true;
-            } 
+            }
         }
-        if(!matchFound) {
+        if (!matchFound) {
             logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
             throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
         }

@@ -36,7 +36,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * Creating instance for the Logger
+     * Creating instance for the Logger.
      */
     private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
 
@@ -90,7 +90,7 @@ public class CategoryController {
         categoryService.deleteCategory(categoryId);
         String message =  "Category Deleted";
         logger.info(message);
-        return ResponseEntity.noContent().header("Message",message).build();
+        return ResponseEntity.noContent().header("Message", message).build();
     }
 
     /**
