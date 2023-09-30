@@ -17,6 +17,7 @@ const Profile = () => {
     useEffect(() => {
         if(userRole === "ADMIN"){
             fetchResults();
+            console.log(allResults.length);
         } else if(userRole === "USER") {
             fetchResultsByUser();
         } else{
@@ -26,15 +27,15 @@ const Profile = () => {
     }, []);
 
     const fetchResults = async () => {
-        try{
-            ResultService.getResults()
-            .then((response) => {
-                setAllResults(response?.data);
-            });
-        } catch(error) {
-            console.error("Error Fetching Results : ", error);
+        try {
+          const response = await ResultService.getResults();
+          const results = response?.data;
+          results.sort(sortByTimeStamp);
+          setAllResults(results);
+        } catch (error) {
+          console.error("Error Fetching Results : ", error);
         }
-    };
+      };
 
     const fetchResultsByUser = async() => {
         try{
@@ -47,9 +48,13 @@ const Profile = () => {
         }
     }
 
+    const sortByTimeStamp = (a, b) => {
+        return new Date(b.timeStamp) - new Date(a.timeStamp);
+    }
+
     const filterResults = allResults.filter((results) => {
         return results.userName.toLowerCase().includes(searchQuery.toLowerCase()) || results.email.toLowerCase().includes(searchQuery.toLowerCase());
-    })
+    }).sort(sortByTimeStamp);
 
     return(
         <div>
@@ -78,43 +83,54 @@ const Profile = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
-                <div className="category-table-container">
-                    <table className="category-table">
-                        <thead>
-                            <tr>
-                                <th>Sno</th>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Category Name</th>
-                                <th>Quiz Name</th>
-                                <th>Questions Attempted</th>
-                                <th>Marks Scored</th>
-                                <th>Test Time Stamp</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {filterResults.reverse().map((row, index) => (
-                            <tr key={index}>
-                                <td>{index+1}</td>
-                                <td>{row.userName}</td>
-                                <td>{row.email}</td>
-                                <td>{row.categoryName}</td>
-                                <td>{row.quizName}</td>
-                                <td style={{textAlign : "center"}}>{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
-                                <td style={{textAlign : "center"}}>{row.marksScored}/{row.totalMarks}</td>
-                                <td>{row.timeStamp}</td>
+                    
+                    <div className="category-table-container">
+                        <table className="category-table">
+                        {allResults.length !== 0 ? (
+                            <>
+                            <thead>
+                                <tr>
+                                    <th>Sno</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Category Name</th>
+                                    <th>Quiz Name</th>
+                                    <th>Questions Attempted</th>
+                                    <th>Marks Scored</th>
+                                    <th>Test Time Stamp</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            
+                            <tbody>
+                                {filterResults.reverse().map((row, index) => (
+                                <tr key={index}>
+                                    <td>{index+1}</td>
+                                    <td>{row.userName}</td>
+                                    <td>{row.email}</td>
+                                    <td>{row.categoryName}</td>
+                                    <td>{row.quizName}</td>
+                                    <td style={{textAlign : "center"}}>{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
+                                    <td style={{textAlign : "center"}}>{row.marksScored}/{row.totalMarks}</td>
+                                    <td>{row.timeStamp}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            </>
+                        ) : (
+                            <h1 style={{fontSize : "22px"}}>
+                                No User has taken test as of now.
+                            </h1>
+                        )}
+                        </table>
+                    </div>
                 </div>
                 ))}
                 
                 {(userRole === "USER" && (
                 <div className="category-table-container">
                     <table className="category-table">
+                    {allResults.length !== 0 ? (
+                            <>
                         <thead>
                             <tr>
                                 <th>Sno</th>
@@ -138,6 +154,12 @@ const Profile = () => {
                                 </tr>
                             ))}
                         </tbody>
+                        </>
+                        ) : (
+                            <h1 style={{fontSize : "22px"}}>
+                                You have not taken any tests so far. Start assessing now.
+                            </h1>
+                        )}
                     </table>
                 </div>
                 ))}

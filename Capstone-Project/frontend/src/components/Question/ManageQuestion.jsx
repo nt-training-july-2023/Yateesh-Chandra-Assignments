@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./ManageQuestion.css";
-import Swal from "sweetalert2";
 import AdminNavBar from "../AdminNavBar";
 import { FaBackward, FaPlusCircle } from "react-icons/fa";
 import NotFound from "../NotFound";
@@ -69,7 +68,7 @@ const ManageQuestion = () => {
 
         QuestionService.addQuestion(newQuestion)
         .then(() => {
-            SweetAlert.addSuccessAlert();
+            SweetAlert.successAlert("Added");
             fetchQuestions();
             setNewQuestion({
                 questionTitle: "",
@@ -85,7 +84,7 @@ const ManageQuestion = () => {
         })
         .catch((error) => {
             console.log("Error adding question", error);
-            if(error?.response?.data?.message === "Options must not be repeated"){
+            if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
         });
@@ -100,14 +99,14 @@ const ManageQuestion = () => {
         }
         QuestionService.updateQuestion(editedQuestion.questionId, editedQuestion)
         .then(() => {
-            SweetAlert.updateSuccessAlert();
+            SweetAlert.successAlert("Updated");
             fetchQuestions();
             setIsEditingQuestion(false);
             console.log("Question updated successfully");
         })
         .catch((error) => {
             console.error("Error updating question", error);
-            if(error?.response?.data?.message === "Options must not be repeated"){
+            if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
         });

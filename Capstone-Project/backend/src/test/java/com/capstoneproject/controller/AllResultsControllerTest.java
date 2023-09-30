@@ -44,7 +44,7 @@ class AllResultsControllerTest {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(allResultsDto, responseEntity.getBody());
     }
-    
+
     @Test
     public void testGetResultsByUserId() {
         Long userId = 1L;

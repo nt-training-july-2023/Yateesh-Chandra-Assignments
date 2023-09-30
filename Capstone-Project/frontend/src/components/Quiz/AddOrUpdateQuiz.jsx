@@ -150,7 +150,7 @@ const AddOrUpdateQuiz = () => {
                     const res = await QuizService.updateQuiz(quizId, quizData);
                     
                     if(res?.status === 200){
-                        SweetAlert.updateSuccessAlert();
+                        SweetAlert.successAlert("Updated");
                         navigate(`/manage-quiz/${categoryId}`);
                         console.log("Quiz Updated Successfully");
                         fetchQuizData();
@@ -173,7 +173,7 @@ const AddOrUpdateQuiz = () => {
                     const response = await QuizService.addQuiz(quizData);            
                 
                     if(response?.status === 201){
-                        SweetAlert.addSuccessAlert();
+                        SweetAlert.successAlert("Added");
                         navigate(`/manage-quiz/${categoryId}`);
                         console.log("New Quiz is added successfully.", quizData);
                     }

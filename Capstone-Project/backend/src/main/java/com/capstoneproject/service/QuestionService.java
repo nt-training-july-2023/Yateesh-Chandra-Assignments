@@ -19,6 +19,7 @@ import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.QuestionRepository;
 import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This class contains the Service for Question.
@@ -49,7 +50,7 @@ public class QuestionService {
      */
     public final List<QuestionDTO> getQuestions() {
         List<Question> question = questionRepository.findAll();
-        logger.info("Fetched all the Questions");
+        logger.info(SuccessMessages.QUESTION_FETCH);
         return question.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -60,7 +61,7 @@ public class QuestionService {
      * @return the Question DTO.
      */
     public final QuestionDTO convertModelToDTO(final Question question) {
-        logger.info("Converted Model to DTO");
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionId(question.getQuestionId());
         questionDTO.setQuestionTitle(question.getQuestionTitle());
@@ -83,7 +84,7 @@ public class QuestionService {
         Question existingQuestion = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.QUESTION_NOT_EXIST));
-        logger.info("Fetched the Question successfully");
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_ID);
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionId(existingQuestion.getQuestionId());
         questionDTO.setQuestionTitle(existingQuestion.getQuestionTitle());
@@ -129,7 +130,7 @@ public class QuestionService {
         newQuestion.setOption4(questionDTO.getOption4());
         boolean matchFound = false;
         for (String option : optionList) {
-            if (questionDTO.getCorrectOption().equalsIgnoreCase(option)) {
+            if (questionDTO.getCorrectOption().equals(option)) {
                 newQuestion.setCorrectOption(questionDTO.getCorrectOption());
                 matchFound = true;
             }
@@ -139,7 +140,7 @@ public class QuestionService {
             throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
         }
         newQuestion.setQuiz(quiz);
-        logger.info("Added Question");
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
         questionRepository.save(newQuestion);
         return questionDTO;
     }
@@ -156,7 +157,7 @@ public class QuestionService {
         Question existingQuestion = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.QUESTION_NOT_EXIST));
-        logger.info("Question found");
+        logger.info(SuccessMessages.QUESTION_FOUND);
         existingQuestion
                     .setQuestionTitle(updatedQuestionDTO.getQuestionTitle());
         Set<String> optionList = new HashSet<>();
@@ -176,7 +177,7 @@ public class QuestionService {
         existingQuestion.setOption4(updatedQuestionDTO.getOption4());
         boolean matchFound = false;
         for (String option : optionList) {
-            if (updatedQuestionDTO.getCorrectOption().equalsIgnoreCase(
+            if (updatedQuestionDTO.getCorrectOption().equals(
                     option)) {
                 existingQuestion.setCorrectOption(
                         updatedQuestionDTO.getCorrectOption());
@@ -187,7 +188,7 @@ public class QuestionService {
             logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
             throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
         }
-        logger.info("Question updated Successfully");
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
         questionRepository.save(existingQuestion);
         return updatedQuestionDTO;
     }
@@ -201,7 +202,7 @@ public class QuestionService {
        questionRepository.findById(questionId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.QUESTION_NOT_EXIST));
-       logger.info("Question deleted");
+       logger.info(SuccessMessages.QUESTION_DELETE_SUCCESS);
        questionRepository.deleteById(questionId);
     }
 
@@ -214,9 +215,10 @@ public class QuestionService {
         quizRepository.findById(quizId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.QUIZ_NOT_EXIST));
+        logger.info(SuccessMessages.QUIZ_FOUND);
         List<Question> questions = questionRepository
                     .getQuestionByQuizId(quizId);
-        logger.info("Quiz fetched with the Id");
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID);
         return questions.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }

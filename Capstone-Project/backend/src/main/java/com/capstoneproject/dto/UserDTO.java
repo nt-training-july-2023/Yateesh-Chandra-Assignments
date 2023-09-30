@@ -5,7 +5,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,29 +35,25 @@ public class UserDTO {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
     /**
      * This is the name field to be entered by new User.
      */
-    @Column(name = "user_name", length = ID_MAX_LENGTH, nullable = false)
     @NotBlank(message = ValidationMessages.NAME_NOT_BLANK)
     private String name;
 
     /**
      * This is the email field to be entered by new User.
      */
-    @Column(name = "user_email", unique = true, length = ID_MAX_LENGTH)
     @NotBlank(message = ValidationMessages.EMAIL_NOT_BLANK)
-    @Pattern(regexp = "^[a-z][a-zA-Z0-9]*@nucleusteq\\.com$",
+    @Pattern(regexp = "^[a-z][a-zA-Z0-9.]*@nucleusteq\\.com",
     message = ValidationMessages.EMAIL_PATTERN)
     private String email;
 
     /**
      * This is the password field to be entered by new User.
      */
-    @Column(name = "password", length = ID_MAX_LENGTH)
     @NotBlank(message = ValidationMessages.PASSWORD_NOT_NULL)
     @Size(min = MIN_LENGTH, message = ValidationMessages.PASSWORD_PATTERN)
     private String password;
@@ -66,20 +61,13 @@ public class UserDTO {
     /**
      * This is the userRole field which is user by default.
      */
-    @Column(name = "user_role", columnDefinition = "varchar(255)"
-            + " default 'USER'")
     private String userRole = "USER";
 
     /**
      * This is the phone Number field to be entered by new User.
      */
-    @Column(name = "phone_number", nullable = false)
     @NotBlank(message = ValidationMessages.PHONE_NULL)
     @Pattern(regexp = "\\d{10}", message = ValidationMessages.PHONE_PATTERN)
     private String phoneNumber;
 
-    /**
-     * This ID_MAX_LENGTH contains the minimum value to be the value in column.
-     */
-    private static final int ID_MAX_LENGTH = 255;
 }

@@ -73,24 +73,4 @@ class QuizDTOTest {
         assertEquals(-1L, quizDtoNull.getCategoryId());
     }
 
-    @Test
-    void testGetCategoryIdNotNull() {
-        QuizDTO quizDto = new QuizDTO();
-        quizDto.setCategoryId(5L);
-        assertEquals(5L, quizDto.getCategoryId());
-    }
-
-    @Test
-    void testGetCategoryIdNull() {
-        QuizDTO quizDto = new QuizDTO();
-        quizDto.setCategoryId(null);
-        assertEquals(-1L, quizDto.getCategoryId());
-    }
-
-    @Test
-    void testGetCategoryIdNegative() {
-        QuizDTO quizDto = new QuizDTO();
-        quizDto.setCategoryId(-5L);
-        assertEquals(-5L, quizDto.getCategoryId());
-    }
 }

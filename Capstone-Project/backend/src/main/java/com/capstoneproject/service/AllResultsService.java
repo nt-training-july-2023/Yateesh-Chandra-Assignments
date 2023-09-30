@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.capstoneproject.dto.AllResultsDTO;
 import com.capstoneproject.models.AllResults;
 import com.capstoneproject.repository.AllResultsRepository;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This is the Service class for the All Results.
@@ -35,7 +36,7 @@ public class AllResultsService {
      */
     public final List<AllResultsDTO> getAllResults() {
         List<AllResults> allResults = allResultsRepository.findAll();
-        logger.info("Fetching the Results.");
+        logger.info(SuccessMessages.RESULTS_FETCH);
         return allResults.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -46,7 +47,7 @@ public class AllResultsService {
      * @return the converted DTO.
      */
     private AllResultsDTO convertModelToDTO(final AllResults allResults) {
-        logger.info("Converting The model into DTO");
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         AllResultsDTO allResultsDto = new AllResultsDTO();
         allResultsDto.setResultId(allResults.getResultId());
         allResultsDto.setUserId(allResults.getUserId());
@@ -71,7 +72,7 @@ public class AllResultsService {
     public final List<AllResultsDTO> getResultsByUserId(final Long userId) {
         List<AllResults> allResults = allResultsRepository
                 .getResultsByUserId(userId);
-        logger.info("Fetching the results of the user");
+        logger.info(SuccessMessages.RESULTS_FETCH_BY_ID);
         return allResults.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }

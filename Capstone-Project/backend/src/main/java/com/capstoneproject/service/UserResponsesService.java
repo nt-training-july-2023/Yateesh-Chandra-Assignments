@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.UserResponsesDTO;
+import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.models.AllResults;
 import com.capstoneproject.models.Category;
@@ -20,6 +21,7 @@ import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.repository.UserResponsesRepository;
 import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This is Service class for the UserResponses.
@@ -78,7 +80,10 @@ public class UserResponsesService {
                     .orElseThrow(() -> new ElementNotExistsException(
                             ExceptionMessages.QUIZ_NOT_EXIST
                             + responses.getQuizId()));
-        logger.info("Response added successfully");
+        categoryRepository.findById(responses.getCategoryId()).orElseThrow(
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.CATEGORY_NOT_EXIST));
+        logger.info(SuccessMessages.RESPONSE_ADDED);
         AllResults results = new AllResults();
         results.setUserId(responses.getUserId());
         Optional<User> users = userRepository
@@ -91,24 +96,51 @@ public class UserResponsesService {
         Optional<Quiz> quizz = quizRepository
                 .findById(responses.getQuizId());
         results.setQuizName(quizz.get().getQuizName());
-        results.setNumOfQuestions(responses.getNumOfQuestions());
-        results.setNumOfQuestionsAnswered(
-                responses.getNumOfQuestionsAnswered());
-        results.setTotalMarks(responses.getTotalMarks());
-        results.setMarksScored(responses.getMarksScored());
-        results.setTimeStamp(responses.getTimeStamp());
+        if(responses.getNumOfQuestionsAnswered() 
+                <= responses.getNumOfQuestions()) {
+            results.setNumOfQuestions(responses.getNumOfQuestions());
+            results.setNumOfQuestionsAnswered(
+                    responses.getNumOfQuestionsAnswered());
+        } else {
+            throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
+        }
+        if (responses.getMarksScored() <= responses.getTotalMarks()){
+            results.setTotalMarks(responses.getTotalMarks());
+            results.setMarksScored(responses.getMarksScored());
+        } else {
+            throw new ConflictException(ExceptionMessages.MARKS_CONFLICT);
+        }
+        if(responses.getTimeStamp() != null) {
+            results.setTimeStamp(responses.getTimeStamp());
+        }
+        else {
+            results.setTimeStamp(responses.setTimeStamp());
+        }
         allResultsRepository.save(results);
 
         UserResponses userResponses = new UserResponses();
         userResponses.setUsers(user);
         userResponses.setQuiz(quiz);
-        userResponses
-                .setNumOfQuestions(results.getNumOfQuestions());
-        userResponses.setNumOfQuestionsAnswered(
-                results.getNumOfQuestionsAnswered());
-        userResponses.setTotalMarks(responses.getTotalMarks());
-        userResponses.setMarksScored(responses.getMarksScored());
-        userResponses.setTimeStamp(responses.getTimeStamp());
+        if(responses.getNumOfQuestionsAnswered() 
+                <= responses.getNumOfQuestions()) {
+            userResponses
+            .setNumOfQuestions(responses.getNumOfQuestions());
+            userResponses.setNumOfQuestionsAnswered(
+                    responses.getNumOfQuestionsAnswered());
+        } else {
+            throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
+        }
+        if (responses.getMarksScored() <= responses.getTotalMarks()){
+            userResponses.setTotalMarks(responses.getTotalMarks());
+            userResponses.setMarksScored(responses.getMarksScored());
+        } else {
+            throw new ConflictException(ExceptionMessages.MARKS_CONFLICT);
+        }
+        if (responses.getTimeStamp() != null) {
+            userResponses.setTimeStamp(responses.getTimeStamp());
+        } else {
+            userResponses.setTimeStamp(responses.setTimeStamp());
+        }
         responsesRepository.save(userResponses);
         return responses;
     }

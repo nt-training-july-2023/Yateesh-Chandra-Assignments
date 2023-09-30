@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.QuizDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.QuizService;
 
 import jakarta.validation.Valid;
@@ -47,7 +49,7 @@ public class QuizController {
     @GetMapping
     public final ResponseEntity<List<QuizDTO>> getAllQuiz() {
         List<QuizDTO> quiz = quizService.getQuizzes();
-        logger.info("Fetched Quizzes");
+        logger.info(SuccessMessages.QUIZ_FETCH);
         return ResponseEntity.ok(quiz);
     }
 
@@ -60,7 +62,7 @@ public class QuizController {
     public final ResponseEntity<QuizDTO> getQuizById(
             @PathVariable final Long quizId) {
         QuizDTO newQuiz = quizService.getQuizById(quizId);
-        logger.info("Fetched Quiz by the Id");
+        logger.info(SuccessMessages.QUIZ_FETCH_BY_ID);
         return ResponseEntity.ok(newQuiz);
     }
 
@@ -70,12 +72,14 @@ public class QuizController {
      * @return newQuiz.
      */
     @PostMapping
-    public final ResponseEntity<String> addQuiz(
+    public final ResponseEntity<Response> addQuiz(
             @RequestBody @Valid final QuizDTO quizDto) {
         quizService.addQuiz(quizDto);
-        logger.info("Added Quiz successfully");
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                "Quiz is Successfully Created");
+        logger.info(SuccessMessages.QUIZ_ADD_SUCCESS);
+        Response response = new Response(HttpStatus.CREATED.value(),
+                SuccessMessages.QUIZ_ADD_SUCCESS);
+        return new ResponseEntity<Response>(response,
+                HttpStatus.CREATED);
     }
 
     /**
@@ -84,12 +88,13 @@ public class QuizController {
      * @return null if the quiz does not exist.
      */
     @DeleteMapping("/{quizId}")
-    public final ResponseEntity<Void> deleteQuiz(
+    public final ResponseEntity<Response> deleteQuiz(
             @PathVariable final Long quizId) {
         quizService.deleteQuiz(quizId);
-        String message = "Quiz is deleted";
-        logger.info("Deleted Quiz");
-        return ResponseEntity.noContent().header("Message", message).build();
+        logger.info(SuccessMessages.QUIZ_DELETE_SUCCESS);
+        Response response = new Response(HttpStatus.NO_CONTENT.value(),
+                SuccessMessages.QUIZ_DELETE_SUCCESS);
+        return new ResponseEntity<Response>(response, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -99,12 +104,14 @@ public class QuizController {
      * @return the updated quiz.
      */
     @PutMapping("/{quizId}")
-    public final ResponseEntity<String> updateQuiz(
+    public final ResponseEntity<Response> updateQuiz(
             @PathVariable final Long quizId,
             @RequestBody @Valid final QuizDTO updatedQuiz) {
         quizService.updateQuiz(quizId, updatedQuiz);
-        logger.info("Quiz is Updated");
-        return ResponseEntity.ok("Quiz is updated");
+        logger.info(SuccessMessages.QUIZ_UPDATED_SUCCESS);
+       Response response = new Response(HttpStatus.OK.value(),
+               SuccessMessages.QUIZ_DELETE_SUCCESS);
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
     /**
@@ -116,7 +123,7 @@ public class QuizController {
     public final ResponseEntity<List<QuizDTO>> getQuizByCategoryId(
             @PathVariable final Long categoryId) {
         List<QuizDTO> quizDto = quizService.getQuizByCategoryId(categoryId);
-        logger.info("Fetched Quizzes by the CategoryId");
+        logger.info(SuccessMessages.QUIZ_FETCH_BY_CATEGORY_ID);
         return ResponseEntity.ok(quizDto);
     }
 }

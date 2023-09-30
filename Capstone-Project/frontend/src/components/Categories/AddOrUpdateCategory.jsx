@@ -93,7 +93,7 @@ const AddOrUpdateCategory = () =>{
                 try{
                     const res = await CategoryService.updateCategory(categoryId, categoryData);
                     if(res?.status === 200){
-                        SweetAlert.updateSuccessAlert();
+                        SweetAlert.successAlert("Updated");
                         console.log("Category updated successfully.");
                         navigate("/manage-category");
                     }
@@ -112,7 +112,7 @@ const AddOrUpdateCategory = () =>{
                 try{
                     const response = await CategoryService.addCategory(categoryData);
                     if(response.status === 201){
-                        SweetAlert.addSuccessAlert();
+                        SweetAlert.successAlert("Added");
                         console.log("Category added successfully.");
                         navigate("/manage-category")
                       }

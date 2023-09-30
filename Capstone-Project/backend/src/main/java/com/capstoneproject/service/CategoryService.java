@@ -15,6 +15,7 @@ import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This class contains the Service for Category.
@@ -37,7 +38,7 @@ public class CategoryService {
      */
     public final List<CategoryDTO> getCategories() {
         List<Category> categories = categoryRepository.findAll();
-        logger.info("Fetched the Categories");
+        logger.info(SuccessMessages.CATEGORY_FETCH);
         return categories.stream().map(this::convertModelToDto)
                 .collect(Collectors.toList());
     }
@@ -48,7 +49,7 @@ public class CategoryService {
      * @return the Category DTO.
      */
     private CategoryDTO convertModelToDto(final Category category) {
-        logger.info("Converting the model into DTO");
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         CategoryDTO categoryDto = new CategoryDTO();
         categoryDto.setCategoryId(category.getCategoryId());
         categoryDto.setCategoryName(category.getCategoryName());
@@ -73,7 +74,7 @@ public class CategoryService {
         newCategory.setCategoryId(categoryDto.getCategoryId());
         newCategory.setCategoryName(categoryDto.getCategoryName());
         newCategory.setDescription(categoryDto.getDescription());
-        logger.info("Category added Successfully");
+        logger.info(SuccessMessages.CATEGORY_ADD_SUCCESS);
         categoryRepository.save(newCategory);
         return categoryDto;
     }
@@ -86,7 +87,7 @@ public class CategoryService {
         categoryRepository.findById(categoryId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.CATEGORY_NOT_EXIST));
-        logger.info("Category deleted");
+        logger.info(SuccessMessages.CATEGORY_DELETE_SUCCESS);
         categoryRepository.deleteById(categoryId);
     }
 
@@ -102,7 +103,7 @@ public class CategoryService {
                 .orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.CATEGORY_NOT_EXIST));
-        logger.info("Category found");
+        logger.info(SuccessMessages.CATEGORY_FOUND);
         Optional<Category> category = categoryRepository
                 .getCategoryByName(updatedCategory.getCategoryName());
         if (category.isPresent()
@@ -114,7 +115,7 @@ public class CategoryService {
         existingCategory.setCategoryName(updatedCategory.getCategoryName());
         existingCategory.setDescription(updatedCategory.getDescription());
 
-        logger.info("Category Updated");
+        logger.info(SuccessMessages.CATEGORY_UPDATED_SUCCESS);
         Category newCategory = categoryRepository.save(existingCategory);
         CategoryDTO newCategoryDto = new CategoryDTO();
         newCategoryDto.setCategoryId(newCategory.getCategoryId());
@@ -132,7 +133,7 @@ public class CategoryService {
         Category existingCategory = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.CATEGORY_NOT_EXIST));
-        logger.info("Category Found");
+        logger.info(SuccessMessages.CATEGORY_FETCH_BY_ID);
         CategoryDTO categoryDto = new CategoryDTO();
         categoryDto.setCategoryId(existingCategory.getCategoryId());
         categoryDto.setCategoryName(existingCategory.getCategoryName());

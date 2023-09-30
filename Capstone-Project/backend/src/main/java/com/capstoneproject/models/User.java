@@ -6,7 +6,6 @@ package com.capstoneproject.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -17,9 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,11 +31,6 @@ import lombok.Setter;
 public class User {
 
     /**
-     * This ID_MIN_LENGTH contains the minimum value to be the value in column.
-     */
-    private static final int MIN_LENGTH = 6;
-
-    /**
      * This is the user_id column and is primary key.
      */
     @Id
@@ -50,25 +41,19 @@ public class User {
     /**
      * This is the name column.
      */
-    @Column(name = "user_name", length = ID_MAX_LENGTH, nullable = false)
-    @NotBlank(message = ValidationMessages.NAME_NOT_BLANK)
+    @Column(name = "user_name", nullable = false)
     private String name;
 
     /**
      * This is the user_email column.
      */
-    @Column(name = "user_email", unique = true, length = ID_MAX_LENGTH)
-    @NotBlank(message = ValidationMessages.EMAIL_NOT_BLANK)
-    @Pattern(regexp = "^[a-z][a-zA-Z0-9]*@nucleusteq\\.com$",
-    message = ValidationMessages.EMAIL_PATTERN)
+    @Column(name = "user_email", unique = true)
     private String email;
 
     /**
      * This is the password column.
      */
-    @Column(name = "password", length = ID_MAX_LENGTH)
-    @NotBlank(message = ValidationMessages.PASSWORD_NOT_NULL)
-    @Size(min = MIN_LENGTH, message = ValidationMessages.PASSWORD_PATTERN)
+    @Column(name = "password")
     private String password;
 
     /**
@@ -82,14 +67,7 @@ public class User {
      * This is the phone number column.
      */
     @Column(name = "phone_number", nullable = false)
-    @NotBlank(message = ValidationMessages.PHONE_NULL)
-    @Pattern(regexp = "\\d{10}", message = ValidationMessages.PHONE_PATTERN)
     private String phoneNumber;
-
-    /**
-     * This ID_MAX_LENGTH contains the minimum value to be the value in column.
-     */
-    private static final int ID_MAX_LENGTH = 255;
 
     /**
      * This joins the column in the User Responses Column.

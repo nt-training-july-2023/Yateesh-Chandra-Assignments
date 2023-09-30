@@ -6,7 +6,6 @@ package com.capstoneproject.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
@@ -21,8 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -48,14 +46,12 @@ public class Quiz {
      * This is the Quiz name Column.
      */
     @Column(name = "quiz_name", unique = true, nullable = false)
-    @NotEmpty(message = ValidationMessages.QUIZ_NAME_NOTBLANK)
     private String quizName;
 
     /**
      * This is the Quiz Description Column.
      */
     @Column(name = "quiz_description", nullable = false)
-    @NotEmpty(message = ValidationMessages.QUIZ_DESC_NOTBLANK)
     private String quizDescription;
 
     /**
@@ -63,14 +59,12 @@ public class Quiz {
      */
     @Column(name = "num_of_questions", nullable = false)
     @Basic(fetch = FetchType.EAGER)
-    @NotNull(message = ValidationMessages.QUESTIONS_NOTNULL)
     private int numOfQuestions;
 
     /**
      * This column contains the timer in minutes.
      */
     @Column(nullable = false)
-    @NotNull(message = ValidationMessages.TIME_NOTNULL)
     private int timeInMin;
 
     /**
@@ -120,11 +114,11 @@ public class Quiz {
 
     /**
      * Sets the category.
-     * @param cate is final.
+     * @param categoryy is final.
      */
-    public void setCategory(final Category cate) {
-            this.category = new Category(cate.getCategoryId(),
-                    cate.getCategoryName(), cate.getDescription());
+    public void setCategory(final Category categoryy) {
+            this.category = new Category(categoryy.getCategoryId(),
+                    categoryy.getCategoryName(), categoryy.getDescription());
     }
 
     /**

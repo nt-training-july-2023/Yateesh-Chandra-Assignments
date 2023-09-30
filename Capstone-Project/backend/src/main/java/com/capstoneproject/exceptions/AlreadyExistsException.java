@@ -12,7 +12,8 @@ public class AlreadyExistsException extends RuntimeException {
     /**
      * This is the Serial Version Id.
      */
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+
     /**
      * This is AlreadyExistsException.
      * @param message .

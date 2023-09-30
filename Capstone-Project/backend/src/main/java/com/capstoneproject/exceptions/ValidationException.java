@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class ValidationException extends RuntimeException {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     /**
      * This method returns the Exception message.
      * @param message of String type.

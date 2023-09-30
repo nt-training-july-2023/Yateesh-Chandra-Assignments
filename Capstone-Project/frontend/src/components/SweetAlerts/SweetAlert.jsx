@@ -10,17 +10,9 @@ class SweetAlert{
         })
     }
 
-    addSuccessAlert(){
+    successAlert(tag){
         Swal.fire({
-            title : "Added Successfully",
-            icon : "success",
-            timer : 1500
-          })
-    }
-
-    updateSuccessAlert(){
-        Swal.fire({
-            title : "Updated Successfully",
+            title : tag + " Successfully",
             icon : "success",
             timer : 1500
           })
@@ -69,6 +61,7 @@ class SweetAlert{
         Swal.fire({
             title : "You have reached the limit",
             icon : 'warning',
+            showConfirmButton: false,
             timer : 1500
         })
     }
@@ -77,6 +70,17 @@ class SweetAlert{
         Swal.fire({
             title : "Quiz submitted",
             text : "redirecting to Profile",
+            timer : 1500,
+            timerProgressBar : true,
+            showConfirmButton : false,
+            backdrop: `rgba(80,108,62,0.7)`
+        })
+    }
+
+    manualQuizSubmitted(){
+        Swal.fire({
+            title : "Quiz submitted",
+            text : "redirecting to User",
             timer : 1500,
             timerProgressBar : true,
             showConfirmButton : false,

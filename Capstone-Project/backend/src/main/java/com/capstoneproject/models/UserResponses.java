@@ -99,12 +99,12 @@ public class UserResponses {
 
     /**
      * This is setter method for Quiz.
-     * @param qui - Quiz.
+     * @param quizz - Quiz.
      */
-    public void setQuiz(final Quiz qui) {
-        this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
-                qui.getQuizDescription(), qui.getNumOfQuestions(),
-                qui.getTimeInMin());
+    public void setQuiz(final Quiz quizz) {
+        this.quiz = new Quiz(quizz.getQuizId(), quizz.getQuizName(),
+                quizz.getQuizDescription(), quizz.getNumOfQuestions(),
+                quizz.getTimeInMin());
     }
 
     /**

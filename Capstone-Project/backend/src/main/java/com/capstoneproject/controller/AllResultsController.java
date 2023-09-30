@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.AllResultsDTO;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.AllResultsService;
 
 /**
@@ -41,7 +42,7 @@ public class AllResultsController {
     @GetMapping
     public final ResponseEntity<List<AllResultsDTO>> getAllResults() {
         List<AllResultsDTO> allResultsDTO = allResultsService.getAllResults();
-        logger.info("Successfully fetched Results of all Users");
+        logger.info(SuccessMessages.RESULTS_FETCH);
         return ResponseEntity.ok(allResultsDTO);
     }
 
@@ -55,7 +56,7 @@ public class AllResultsController {
             @PathVariable final Long userId) {
         List<AllResultsDTO> allResultsDto = allResultsService
                 .getResultsByUserId(userId);
-        logger.info("Successfully fetched Results User Id : " + userId);
+        logger.info(SuccessMessages.RESULTS_FETCH_BY_ID + userId);
         return ResponseEntity.ok(allResultsDto);
     }
 }

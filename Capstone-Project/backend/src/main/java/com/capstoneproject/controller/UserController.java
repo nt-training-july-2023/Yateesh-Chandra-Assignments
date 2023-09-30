@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
-import com.capstoneproject.response.LoginResponse;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.UserService;
 
 import jakarta.validation.Valid;
@@ -45,12 +46,14 @@ public class UserController {
      * @return the id after registering.
      */
     @PostMapping(path = "/save")
-    public final ResponseEntity<String> saveUser(
+    public final ResponseEntity<Response> saveUser(
             @RequestBody @Valid final UserDTO userDTO) {
             userService.addUser(userDTO);
-            logger.info("User Registered successfully");
-            return ResponseEntity.status(HttpStatus.CREATED).body(
-                    "User Registered successfully");
+            logger.info(SuccessMessages.REGISTRATION_SUCCESS);
+            Response response = new Response(HttpStatus.CREATED.value(),
+                    SuccessMessages.REGISTRATION_SUCCESS);
+            return new ResponseEntity<Response>(response,
+                    HttpStatus.CREATED);
     }
 
     /**
@@ -60,11 +63,13 @@ public class UserController {
      * @return the Id if it exists.
      */
     @PostMapping(path = "/login")
-    public final ResponseEntity<LoginResponse> loginUser(
+    public final ResponseEntity<Response> loginUser(
             @RequestBody @Valid final LoginDTO loginDTO) {
-            LoginResponse loginResponse = userService.loginUser(loginDTO);
-            logger.info("Logged in Successfully");
-            return ResponseEntity.ok(loginResponse);
+            userService.loginUser(loginDTO);
+            logger.info(SuccessMessages.LOGIN_SUCCESS);
+            Response response = new Response(HttpStatus.OK.value(),
+                    SuccessMessages.LOGIN_SUCCESS);
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
     /**
@@ -73,11 +78,14 @@ public class UserController {
      * @return the no content status.
      */
     @DeleteMapping(path = "/{userId}")
-    public final ResponseEntity<Void> deleteUser(
+    public final ResponseEntity<Response> deleteUser(
             @PathVariable final Long userId) {
         userService.deleteUser(userId);
-        String message = "Deleted Successfully";
-        logger.info(message);
-        return ResponseEntity.noContent().header("Message", message).build();
+        logger.info(SuccessMessages.USER_DELETE_SUCCESS);
+        Response response = new Response(HttpStatus.NO_CONTENT.value(), 
+                SuccessMessages.USER_DELETE_SUCCESS);
+        return new ResponseEntity<Response>(response,
+                HttpStatus.NO_CONTENT);
     }
+
 }

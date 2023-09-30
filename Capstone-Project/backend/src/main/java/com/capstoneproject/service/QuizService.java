@@ -18,6 +18,7 @@ import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This class works like Service.
@@ -48,7 +49,7 @@ public class QuizService {
      */
     public final List<QuizDTO> getQuizzes() {
         List<Quiz> quizzes = quizRepository.findAll();
-        logger.info("Fetched all the Quizzes ");
+        logger.info(SuccessMessages.QUIZ_FETCH);
         return quizzes.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -59,7 +60,7 @@ public class QuizService {
      * @return the Quiz DTO.
      */
     public final QuizDTO convertModelToDTO(final Quiz quiz) {
-        logger.info("Model is converted to DTO.");
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(quiz.getQuizId());
         quizDto.setQuizName(quiz.getQuizName());
@@ -79,8 +80,9 @@ public class QuizService {
         categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.CATEGORY_NOT_EXIST));
+        logger.info(SuccessMessages.CATEGORY_FOUND);
         List<Quiz> quizzes = quizRepository.getQuizByCategoryId(categoryId);
-        logger.info("Fetched the Quiz details of the category Id ");
+        logger.info(SuccessMessages.QUIZ_FETCH_BY_CATEGORY_ID);
         return quizzes.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -94,7 +96,7 @@ public class QuizService {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.QUIZ_NOT_EXIST));
-        logger.info("Fetched the Quiz Details");
+        logger.info(SuccessMessages.QUIZ_FETCH_BY_ID);
         QuizDTO quizDto = new QuizDTO();
         quizDto.setQuizId(existingQuiz.getQuizId());
         quizDto.setQuizName(existingQuiz.getQuizName());
@@ -118,7 +120,7 @@ public class QuizService {
             throw new AlreadyExistsException(
                     ExceptionMessages.QUIZ_ALREADY_EXISTS);
         }
-        logger.info("Added Quiz Successfully");
+        logger.info(SuccessMessages.QUIZ_ADD_SUCCESS);
         Quiz newQuiz = new Quiz();
         newQuiz.setQuizId(quizDto.getQuizId());
         newQuiz.setQuizName(quizDto.getQuizName());
@@ -146,7 +148,7 @@ public class QuizService {
         quizRepository.findById(quizId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.QUIZ_NOT_EXIST));
-        logger.info("Quiz deleted");
+        logger.info(SuccessMessages.QUIZ_DELETE_SUCCESS);
         quizRepository.deleteById(quizId);
     }
 
@@ -160,7 +162,7 @@ public class QuizService {
         Quiz existingQuiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.QUIZ_NOT_EXIST));
-        logger.info("Quiz Found");
+        logger.info(SuccessMessages.QUIZ_FOUND);
         categoryRepository.findById(quizDto.getCategoryId()).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.CATEGORY_NOT_EXIST));
@@ -180,7 +182,7 @@ public class QuizService {
             }
             existingQuiz.setNumOfQuestions(quizDto.getNumOfQuestions());
             existingQuiz.setTimeInMin(quizDto.getTimeInMin());
-            logger.info("Quiz updated");
+            logger.info(SuccessMessages.QUIZ_UPDATED_SUCCESS);
             quizRepository.save(existingQuiz);
             return quizDto;
     }

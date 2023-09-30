@@ -133,7 +133,7 @@ function Login() {
                 }
               }
         } catch (err) {
-            if(err?.response?.data?.message === "Passwords did not match" 
+            if(err?.response?.data?.message === "Invalid Password" 
             || err?.response?.data?.message === "Email does not exist.!" ){
                 SweetAlert.alertError()
             }

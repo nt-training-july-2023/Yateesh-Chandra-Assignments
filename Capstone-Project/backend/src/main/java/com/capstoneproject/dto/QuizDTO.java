@@ -2,7 +2,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,40 +16,41 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuizDTO {
+
     /**
      * This is quizId variable.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long quizId;
+
     /**
      * This is quizName variable.
      */
-    @Column(unique = true, nullable = false)
     @NotEmpty(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
     private String quizName;
+
     /**
      * This is Quiz Description variable.
      */
-    @Column(nullable = false)
     @NotEmpty(message = ValidationMessages.QUIZ_DESC_NOTBLANK)
     private String quizDescription;
+
     /**
      * This field contains the number of Questions variable.
      */
-    @Column(nullable = false)
     @NotNull(message = ValidationMessages.QUESTIONS_NOTNULL)
     private int numOfQuestions;
     /**
      * This field contains time in Minutes.
      */
-    @Column(nullable = false)
+
     @NotNull(message = ValidationMessages.TIME_NOTNULL)
     private int timeInMin;
+
     /**
      * This is the categoryId variable.
      */
-    @Column(nullable = false)
     @NotNull(message = ValidationMessages.CATEGORY_ID_NOTNULL)
     private Long categoryId;
 

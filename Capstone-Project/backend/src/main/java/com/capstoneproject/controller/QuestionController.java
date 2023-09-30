@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.QuestionDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.QuestionService;
 
 import jakarta.validation.Valid;
@@ -47,7 +49,7 @@ public class QuestionController {
     @GetMapping
     public final ResponseEntity<List<QuestionDTO>> getQuestions() {
         List<QuestionDTO> questions = questionService.getQuestions();
-        logger.info("Fetched Questions successfully");
+        logger.info(SuccessMessages.QUESTION_FETCH);
         return ResponseEntity.ok(questions);
     }
 
@@ -60,7 +62,7 @@ public class QuestionController {
     public final ResponseEntity<QuestionDTO> getQuestionById(
             @PathVariable final Long questionId) {
         QuestionDTO newQuestion = questionService.getQuestionById(questionId);
-        logger.info("Fetched Question");
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_ID);
         return ResponseEntity.ok(newQuestion);
     }
 
@@ -70,11 +72,13 @@ public class QuestionController {
      * @return the success status when added.
      */
     @PostMapping
-    public final ResponseEntity<String> addQuestion(
+    public final ResponseEntity<Response> addQuestion(
             @RequestBody @Valid final QuestionDTO questionDto) {
         questionService.addQuestion(questionDto);
-        logger.info("Question added");
-        return ResponseEntity.status(HttpStatus.CREATED).body("Question added");
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
+        Response response = new Response(HttpStatus.CREATED.value(),
+                SuccessMessages.QUESTION_ADD_SUCCESS);
+        return new ResponseEntity<Response>(response, HttpStatus.CREATED);
     }
 
     /**
@@ -83,12 +87,13 @@ public class QuestionController {
      * @return the deleted successfully status.
      */
     @DeleteMapping("/{questionId}")
-    public final ResponseEntity<Void> deleteQuestion(
+    public final ResponseEntity<Response> deleteQuestion(
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
-        String message = "Question is Deleted";
-        logger.info(message);
-        return ResponseEntity.noContent().header("Message", message).build();
+        logger.info(SuccessMessages.QUESTION_DELETE_SUCCESS);
+        Response response = new Response(HttpStatus.NO_CONTENT.value(),
+                SuccessMessages.QUESTION_DELETE_SUCCESS);
+        return new ResponseEntity<Response>(response, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -98,26 +103,28 @@ public class QuestionController {
      * @return the success status after updating.
      */
     @PutMapping("/{questionId}")
-    public final ResponseEntity<String> updateQuestion(
+    public final ResponseEntity<Response> updateQuestion(
             @PathVariable final Long questionId,
             @RequestBody @Valid final QuestionDTO updatedQuestionDto) {
         questionService.updateQuestion(questionId,
                 updatedQuestionDto);
-        logger.info("Quiz is updated");
-        return ResponseEntity.ok("Quiz is updated");
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        return new ResponseEntity<Response>(response, HttpStatus.CREATED);
     }
 
     /**
      * This is used to get Question by Quiz Id.
      * @param quizId of Quiz.
-     * @return the Response Ok.
+     * @return the Response OK.
      */
     @GetMapping("/byQuiz/{quizId}")
     public final ResponseEntity<List<QuestionDTO>> getQuestionByQuizId(
             @PathVariable final Long quizId) {
         List<QuestionDTO> questionDto = questionService
                 .getQuestionByQuizId(quizId);
-        logger.info("Fetched Questions By Quiz");
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID);
         return ResponseEntity.ok(questionDto);
     }
 

@@ -6,7 +6,6 @@ package com.capstoneproject.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capstoneproject.response.ValidationMessages;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -17,7 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,13 +41,11 @@ public class Category {
      * This is the category name Column.
      */
     @Column(name = "category_name", nullable = false, unique = true)
-    @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
     private String categoryName;
     /**
      * This is the Category Description Column.
      */
     @Column(name = "category_description", nullable = false)
-    @NotBlank(message = ValidationMessages.CATEGORY_DESC_NOTBLANK)
     private String description;
 
     /**
@@ -57,11 +54,11 @@ public class Category {
      * @param catName of String Type.
      * @param desc of String type.
      */
-    public Category(final Long catId, final String catName,
-            final String desc) {
-        this.categoryId = catId;
-        this.categoryName = catName;
-        this.description = desc;
+    public Category(final Long categoryid, final String categoryname,
+            final String categoryDescription) {
+        this.categoryId = categoryid;
+        this.categoryName = categoryname;
+        this.description = categoryDescription;
     }
 
     /**
@@ -82,8 +79,8 @@ public class Category {
      * Quiz Setter overriding.
      * @param q is quiz.
      */
-    public void setQuiz(final List<Quiz> q) {
-        this.quiz = new ArrayList<>(q);
+    public void setQuiz(final List<Quiz> quizz) {
+        this.quiz = new ArrayList<>(quizz);
     }
 
 }

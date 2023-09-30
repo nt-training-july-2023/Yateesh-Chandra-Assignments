@@ -2,7 +2,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,42 +31,36 @@ public class QuestionDTO {
     /**
      * This is Question Title Field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.QUESTION_TITLE_NOTBLANK)
     private String questionTitle;
 
     /**
      * This is Option 1 field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.OPTION1_NOTBLANK)
     private String option1;
 
     /**
      * This is Option 2 field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.OPTION2_NOTBLANK)
     private String option2;
 
     /**
      * This is Option 3 field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.OPTION3_NOTBLANK)
     private String option3;
 
     /**
      * This is Option 4 field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.OPTION4_NOTBLANK)
     private String option4;
 
     /**
      * This is Correct Option field.
      */
-    @Column(nullable = false)
     @NotBlank(message = ValidationMessages.CORRECT_OPTION_NOTBLANK)
     private String correctOption;
 

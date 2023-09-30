@@ -17,6 +17,7 @@ import com.capstoneproject.models.User;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.response.ExceptionMessages;
 import com.capstoneproject.response.LoginResponse;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * Service class for handling user-related Operations.
@@ -53,7 +54,7 @@ public class UserService {
             throw new AlreadyExistsException(
                     ExceptionMessages.EMAIL_ALREADY_EXISTS);
         }
-        logger.info("User Successfully Registered");
+        logger.info(SuccessMessages.REGISTRATION_SUCCESS);
         User users = new User(userDTO.getUserId(), userDTO.getName(),
                     userDTO.getEmail(),
                     this.passwordEncoder.encode(userDTO.getPassword()),
@@ -80,8 +81,8 @@ public class UserService {
                 Optional<User> user = userRepo.findOneByEmailAndPassword(
                         loginDTO.getEmail(), encodedPassword);
                 if (user.isPresent()) {
-                    logger.info("Logged in Successfully");
-                    return new LoginResponse("Login Successful..!",
+                    logger.info(SuccessMessages.LOGIN_SUCCESS);
+                    return new LoginResponse(SuccessMessages.LOGIN_SUCCESS,
                             true, user.get().getUserRole(),
                             user.get().getUserId(), user.get().getName(),
                             user.get().getEmail());
@@ -91,9 +92,9 @@ public class UserService {
                             ExceptionMessages.LOGIN_FAIL);
                 }
             } else {
-                logger.error(ExceptionMessages.UNMATCHED_PWD);
+                logger.error(ExceptionMessages.INCORRECT_PWD);
                 throw new UnAuthorizedException(
-                        ExceptionMessages.UNMATCHED_PWD);
+                        ExceptionMessages.INCORRECT_PWD);
             }
         } else {
             logger.error(ExceptionMessages.EMAIL_NOT_EXISTS);
@@ -110,7 +111,8 @@ public class UserService {
         userRepo.findById(userId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.USER_NOT_EXIST));
+        logger.info(SuccessMessages.USER_DELETE_SUCCESS);
         userRepo.deleteById(userId);
-        logger.info("Deleted Successfully");
+        
     }
 }

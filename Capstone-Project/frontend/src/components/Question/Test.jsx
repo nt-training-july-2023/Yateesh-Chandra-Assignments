@@ -12,6 +12,8 @@ import QuestionService from '../../services/QuestionService';
 import ResponseService from '../../services/ResponseService';
 import SweetAlert from '../SweetAlerts/SweetAlert';
 import {format} from 'date-fns';
+import AdminNavBar from '../AdminNavBar';
+import TimerNavBar from '../TestNavBar';
 
 
 const Test = () => {
@@ -23,7 +25,7 @@ const Test = () => {
     const userRole = localStorage.getItem("role");
     const [questions, setQuestions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const [timer, setTimer] = useState(timeInMin * 10);
+    const [timer, setTimer] = useState(timeInMin * 60);
     const [loading, setLoading] = useState(true);
     const [numOfQuestionsAnswered, setNumOfQuestionsAnswered] = useState(0);
     const totalMarks = questions.length * 2;
@@ -65,7 +67,6 @@ const Test = () => {
     useEffect(() => {
         if(userRole === "USER"){
             fetchQuestions();
-        console.log(timer);
         }
     }, [quizId]);
 
@@ -210,7 +211,7 @@ const Test = () => {
             }).then((result) => {
                 if(result.isConfirmed){
                     handleAddResponses();
-                    SweetAlert.quizSubmitted();
+                    SweetAlert.manualQuizSubmitted();
                     navigate("/profile");
                 }
             });
@@ -218,56 +219,55 @@ const Test = () => {
     }
 
     return (
-        <div className="quiz-container">
+        <div>
             <DeactivateBackButton/>
+            <TimerNavBar timerValue={formatTime(timer)} className={ timer < 30 ? "timer-out" : "timer"} />
             {(userRole === "USER" ? (
-                <>
-                {loading ? (
-                    <div>Loading questions... No Questions as of now</div>
-                ) : questions.length > 0 ? (
-                
-                <div className="question-container">
-                    <div className={timer < 60 ? "timer-out" : "timer"}><FaStopwatch /> Time Left: {formatTime(timer)}</div>
-                    {questions.map((question, index) => (
-                        <div key={index} className="question-content">
-                            <p><b>{index + 1}. {question.questionTitle}</b></p>
-                            <div className="options">
-                                {Array.from({ length: 4 }, (_, optionIndex) => {
-                                    const optionKey = `option${optionIndex + 1}`;
-                                    const optionContent = question[optionKey];
-                                    return (
-                                        <div
-                                        key={optionIndex}
-                                        className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
-                                        onClick={() => handleOptionSelect(optionContent, index)}
-                                        >
-                                        {optionContent}
-                                        </div>
-                                    );
-                                })}
+            <div className="quiz-container">
+                    {loading ? (
+                        <div>Loading questions... No Questions as of now</div>
+                    ) : questions.length > 0 ? (
+                    <div className="question-container">
+                        {questions.map((question, index) => (
+                            <div key={index} className="question-content">
+                                <p><b>{index + 1}. {question.questionTitle}</b></p>
+                                <div className="options">
+                                    {Array.from({ length: 4 }, (_, optionIndex) => {
+                                        const optionKey = `option${optionIndex + 1}`;
+                                        const optionContent = question[optionKey];
+                                        return (
+                                            <div
+                                            key={optionIndex}
+                                            className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
+                                            onClick={() => handleOptionSelect(optionContent, index)}
+                                            >
+                                            {optionContent}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
 
-                    <div className="navigation-buttons">
-                        <button onClick={handleManualSubmit} className='next-button'>
-                            Submit
-                        </button>
+                        <div className="navigation-buttons">
+                            <button onClick={handleManualSubmit} className='next-button'>
+                                Submit
+                            </button>
+                        </div>
+                    </div>                       
+                    ) : (
+                    <div>
+                        No questions available.
                     </div>
-                </div>                       
-                ) : (
-                <div>
-                    No questions available.
+                )}
+                
                 </div>
-            )}
-            </>
-        ) : (
-            <>
-                <NotFound/>
-            </>
-        ))}
+            ) : (
+                <>
+                    <NotFound/>
+                </>
+            ))}
         </div>
-        
     );
     
 };

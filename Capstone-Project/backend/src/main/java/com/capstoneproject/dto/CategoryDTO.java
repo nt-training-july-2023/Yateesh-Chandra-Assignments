@@ -5,7 +5,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,13 +31,11 @@ public class CategoryDTO {
   /**
    * This is Category Title Name field.
    */
-  @Column(nullable = false, unique = true)
   @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
   private String categoryName;
   /**
    * This is Category Description.
    */
-  @Column(nullable = false)
   @NotBlank(message = ValidationMessages.CATEGORY_DESC_NOTBLANK)
   private String description;
 }
