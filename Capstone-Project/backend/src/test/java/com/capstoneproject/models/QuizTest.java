@@ -53,10 +53,12 @@ class QuizTest {
     @Test
     void testGetAndSetUserResponses() {
         Quiz quiz = new Quiz();
+
         List<UserResponses> userResponses = new ArrayList<>();
         userResponses.add(new UserResponses(4L,5, 4, 20, 16, "2023-09-20"));
         userResponses.add(new UserResponses(5L,5, 3, 20, 12, "2023-09-19"));
         quiz.setUserResponses(userResponses);
+
         List<UserResponses> list = quiz.getUserResponses();
         assertNotSame(userResponses, list);
         assertEquals(userResponses, list);

@@ -17,7 +17,7 @@ class UserResponsesDTOTest {
         int totalMarks = 7;
         int marksScored = 6;
         String timeStamp = "2023-09-2023";
-        
+
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
         userResponsesDto.setResponseId(responseId);
         userResponsesDto.setUserId(userId);
@@ -51,6 +51,7 @@ class UserResponsesDTOTest {
         int totalMarks = 7;
         int marksScored = 6;
         String timeStamp = "2023-09-20";
+
         UserResponsesDTO userResponsesDto = new UserResponsesDTO(4L, 7L, 8L, 9L, 7, 6, 7, 6, "2023-09-20");
         assertEquals(responseId, userResponsesDto.getResponseId());
         assertEquals(userId, userResponsesDto.getUserId());

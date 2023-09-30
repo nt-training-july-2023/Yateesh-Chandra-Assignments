@@ -69,8 +69,8 @@ class CategoryTest {
         quizList.add(new Quiz(1L, "Quiz1", "Description1", 24, 6));
         quizList.add(new Quiz(2L, "Quiz2", "Description2", 24, 6));
         category.setQuiz(quizList);
-        List<Quiz> retrievedQuizList = category.getQuiz();
 
+        List<Quiz> retrievedQuizList = category.getQuiz();
         assertNotNull(retrievedQuizList);
         assertEquals(quizList.size(), retrievedQuizList.size());
 

@@ -13,12 +13,12 @@ class CategoryDTOTest {
         Long categoryId = 5L;
         String categoryName = "Java";
         String categoryDescription = "This is Category Name";
-        
+
         CategoryDTO categoryDto = new CategoryDTO();
         categoryDto.setCategoryId(categoryId);
         categoryDto.setCategoryName(categoryName);
         categoryDto.setDescription(categoryDescription);
-        
+
         assertEquals(categoryId, categoryDto.getCategoryId());
         assertEquals(categoryName, categoryDto.getCategoryName());
         assertEquals(categoryDescription, categoryDto.getDescription());

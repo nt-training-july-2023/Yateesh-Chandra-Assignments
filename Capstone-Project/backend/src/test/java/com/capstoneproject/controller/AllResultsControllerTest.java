@@ -40,6 +40,7 @@ class AllResultsControllerTest {
         allResultsDto.add(result1);
         allResultsDto.add(result2);
         when(allResultsService.getAllResults()).thenReturn(allResultsDto);
+
         ResponseEntity<List<AllResultsDTO>> responseEntity = allResultsController.getAllResults();
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(allResultsDto, responseEntity.getBody());
@@ -51,6 +52,7 @@ class AllResultsControllerTest {
         List<AllResultsDTO> resultsList = new ArrayList<>();
         resultsList.add(new AllResultsDTO());
         when(allResultsService.getResultsByUserId(userId)).thenReturn(resultsList);
+
         ResponseEntity<List<AllResultsDTO>> response = allResultsController.getResultsByUserId(userId);
         verify(allResultsService, times(1)).getResultsByUserId(userId);
         assertEquals(HttpStatus.OK, response.getStatusCode());

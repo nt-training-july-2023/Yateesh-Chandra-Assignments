@@ -75,6 +75,7 @@ class UserResponsesServiceTest {
     @Test
     public void testAddUserResponsesWithExistingResponse() {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+
         userResponsesDto.setUserId(1L);
         userResponsesDto.setCategoryId(3L);
         userResponsesDto.setQuizId(5L);
@@ -82,6 +83,7 @@ class UserResponsesServiceTest {
         userResponsesDto.setMarksScored(8);
         userResponsesDto.setNumOfQuestions(10);
         userResponsesDto.setNumOfQuestionsAnswered(8);
+
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
     }
 
@@ -95,6 +97,7 @@ class UserResponsesServiceTest {
         userResponsesDto.setMarksScored(8);
         userResponsesDto.setNumOfQuestions(10);
         userResponsesDto.setNumOfQuestionsAnswered(8);
+
         when(userResponsesRepo.findById(1L)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
     }
@@ -102,6 +105,7 @@ class UserResponsesServiceTest {
     @Test
     public void testAddUserResponsesWithNonExistingQuiz() {
         UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+
         userResponsesDto.setUserId(1L);
         userResponsesDto.setCategoryId(3L);
         userResponsesDto.setQuizId(5L);
@@ -109,6 +113,7 @@ class UserResponsesServiceTest {
         userResponsesDto.setMarksScored(8);
         userResponsesDto.setNumOfQuestions(10);
         userResponsesDto.setNumOfQuestionsAnswered(8);
+
         when(userRepo.findById(1L)).thenReturn(Optional.of(new User()));
         when(quizRepo.findById(5L)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));

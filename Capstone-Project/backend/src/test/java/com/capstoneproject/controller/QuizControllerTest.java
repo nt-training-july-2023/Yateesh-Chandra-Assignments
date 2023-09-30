@@ -35,9 +35,11 @@ public class QuizControllerTest {
         quizzes.add(new QuizDTO(1L, "Quiz1", "Description1", 5, 2, 1L));
         quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 4, 2L));
         when(quizService.getQuizzes()).thenReturn(quizzes);
+
         ResponseEntity<List<QuizDTO>> response = quizController.getAllQuiz();
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
         List<QuizDTO> responseQuizzes = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizzes);
         assertEquals(2, responseQuizzes.size());
@@ -49,9 +51,11 @@ public class QuizControllerTest {
         Long quizId = 1L;
         QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 2, 1L);
         when(quizService.getQuizById(quizId)).thenReturn(quizDTO);
+
         ResponseEntity<QuizDTO> response = quizController.getQuizById(quizId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
         QuizDTO responseQuiz = (QuizDTO) response.getBody();
         assertNotNull(responseQuiz);
         assertEquals(quizId, responseQuiz.getQuizId());
@@ -62,9 +66,11 @@ public class QuizControllerTest {
     public void testAddQuiz() {
         QuizDTO quizDTO = new QuizDTO(1L, "New Quiz", "New Description", 5, 2, 1L);
         when(quizService.addQuiz(quizDTO)).thenReturn(quizDTO);
+
         ResponseEntity<Response> response = quizController.addQuiz(quizDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
         Response resposeBody = response.getBody();
         assertNotNull(resposeBody);
         assertEquals(SuccessMessages.QUIZ_ADD_SUCCESS, resposeBody.getMessage());

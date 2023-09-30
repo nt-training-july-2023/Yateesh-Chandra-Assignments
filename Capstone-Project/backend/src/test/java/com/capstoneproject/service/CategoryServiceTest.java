@@ -39,6 +39,7 @@ class CategoryServiceTest {
         categories.add(new Category(1L, "Category1", "Category Description1"));
         categories.add(new Category(2L, "Category2", "Category Description2"));
         when(categoryRepository.findAll()).thenReturn(categories);
+
         List<CategoryDTO> categoryDtos = categoryService.getCategories();
         assertEquals(2, categoryDtos.size());
         assertEquals("Category1", categoryDtos.get(0).getCategoryName());
@@ -62,6 +63,7 @@ class CategoryServiceTest {
     public void testAddCategoryAlreadyExists() {
         CategoryDTO categoryDto = new CategoryDTO(null, "Existing Category", "Description");
         when(categoryRepository.getCategoryByName("Existing Category")).thenReturn(Optional.of(new Category()));
+
         assertThrows(AlreadyExistsException.class, () -> categoryService.addCategory(categoryDto));
         verify(categoryRepository, never()).save(any(Category.class));
     }
@@ -72,6 +74,7 @@ class CategoryServiceTest {
         Long categoryIdToDelete = 1L;
         Category existingCategory = new Category(categoryIdToDelete, "Existing Category","Description");
         when(categoryRepository.findById(categoryIdToDelete)).thenReturn(Optional.of(existingCategory));
+
         assertDoesNotThrow(() -> categoryService.deleteCategory(categoryIdToDelete));
         verify(categoryRepository, times(1)).deleteById(categoryIdToDelete);
     }
@@ -80,6 +83,7 @@ class CategoryServiceTest {
     public void testDeleteCategoryNotFound() {
         Long categoryIdToDelete = 1L;
         when(categoryRepository.findById(categoryIdToDelete)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> categoryService.deleteCategory(categoryIdToDelete));
         verify(categoryRepository, never()).deleteById(categoryIdToDelete);
     }
@@ -123,6 +127,7 @@ class CategoryServiceTest {
     public void testGetCategoryByIdNotFound() {
         Long categoryId = 1L;
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> categoryService.getCategoryById(categoryId));
     }
 }

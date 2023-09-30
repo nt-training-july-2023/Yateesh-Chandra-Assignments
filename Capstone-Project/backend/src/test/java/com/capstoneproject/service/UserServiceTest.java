@@ -99,6 +99,7 @@ class UserServiceTest {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setEmail("nonexistent@nucleusteq.com");
         loginDTO.setPassword("password123");
+
         when(userRepository.findByEmail(loginDTO.getEmail())).thenReturn(Optional.empty());
         assertThrows(UnAuthorizedException.class, () -> userService.loginUser(loginDTO));
     }

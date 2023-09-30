@@ -50,11 +50,12 @@ class QuestionServiceTest {
         Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5, 2);
         q1.setQuiz(quiz);
         q2.setQuiz(quiz);
+
         List<Question> questionList = new ArrayList<>();
         questionList.add(q2);
         questionList.add(q1);
         when(questionRepository.findAll()).thenReturn(questionList);
-        
+
         List<QuestionDTO> questionDtoList = questionService.getQuestions();
         assertEquals("Test Question", questionDtoList.get(1).getQuestionTitle());
         assertEquals("Test Question 2", questionDtoList.get(0).getQuestionTitle());
@@ -87,9 +88,10 @@ class QuestionServiceTest {
     public void testGetQuestionByQuizIdElementNotExists() {
         Long quizId = 1L;
         when(quizRepository.findById(quizId)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> questionService.getQuestionByQuizId(quizId));
     }
-    
+
     @Test
     public void testGetQuestionById() {
         Long questionId = 10L;
@@ -107,11 +109,12 @@ class QuestionServiceTest {
         assertEquals("D", questionDto.getOption4());
         assertEquals("OptionB", questionDto.getCorrectOption());
     }
-    
+
     @Test
     public void testQuestionByIdElementNotExists() {
         Long questionId = 1L;
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> questionService.getQuestionById(questionId));
     }
     
@@ -140,6 +143,7 @@ class QuestionServiceTest {
         Long questionId = 1L;
         QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "B", 1L);
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> {
             questionService.updateQuestion(questionId, questionDTO);
         });
@@ -186,7 +190,9 @@ class QuestionServiceTest {
         questionDTO.setOption4("6");
         questionDTO.setCorrectOption("4");
         questionDTO.setQuizId(7L);
+
         when(quizRepository.findById(questionDTO.getQuizId())).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> questionService.addQuestion(questionDTO));
     }
 
@@ -235,6 +241,7 @@ class QuestionServiceTest {
     public void testUpdateQuestionNotFound() {
         Long questionId = 7L;
         QuestionDTO questionDto = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "OptionB", 1L);
+
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> questionService.updateQuestion(questionId, questionDto));
     }
@@ -243,6 +250,7 @@ class QuestionServiceTest {
     public void testUpdateQuizWithElementNotFoundException() {
         Long questionId = 5L;
         QuestionDTO questionDto = new QuestionDTO();
+
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> questionService.updateQuestion(questionId, questionDto));
     }

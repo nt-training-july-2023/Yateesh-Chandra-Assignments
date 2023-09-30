@@ -16,7 +16,7 @@ class UserResponsesTest {
         int totalMarks = 7;
         int marksScored = 6;
         String timeStamp = "2023-09-2023";
-        
+
         UserResponses userResponses = new UserResponses();
         userResponses.setResponseId(responseId);
         userResponses.setUsers(user);
@@ -26,7 +26,7 @@ class UserResponsesTest {
         userResponses.setTotalMarks(totalMarks);
         userResponses.setMarksScored(marksScored);
         userResponses.setTimeStamp(timeStamp);
-        
+
         assertEquals(responseId, userResponses.getResponseId());
         assertEquals(user.getUserId(), userResponses.getUsers().getUserId());
         assertEquals(quiz.getQuizId(), userResponses.getQuiz().getQuizId());
@@ -45,6 +45,7 @@ class UserResponsesTest {
         int totalMarks = 7;
         int marksScored = 6;
         String timeStamp = "2023-09-20";
+
         UserResponses userResponses = new UserResponses(4L, 7, 6, 7, 6, "2023-09-20");
         assertEquals(responseId, userResponses.getResponseId());
         assertEquals(num, userResponses.getNumOfQuestions());
@@ -57,6 +58,7 @@ class UserResponsesTest {
     @Test
     void testUserConstructor() {
         User user = new User(4L, "Yateesh");
+
         UserResponses userResponses = new UserResponses();
         userResponses.setUsers(user);
         assertEquals(user.getUserId(), userResponses.getUsers().getUserId());
@@ -65,6 +67,7 @@ class UserResponsesTest {
     @Test
     void testQuizConstructor() {
         Quiz quiz = new Quiz(4L, "Quiz test", "Quiz Description", 10, 5);
+
         UserResponses userResponses = new UserResponses();
         userResponses.setQuiz(quiz);
         assertEquals(quiz.getQuizId(), userResponses.getQuiz().getQuizId());
