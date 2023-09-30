@@ -31,6 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping(path = "category")
 @CrossOrigin(origins = "*")
 public class CategoryController {
+
     /**
      * The categoryService variable is used to operate on Category Service.
      */

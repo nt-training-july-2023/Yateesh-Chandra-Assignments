@@ -110,7 +110,7 @@ public class QuizController {
         quizService.updateQuiz(quizId, updatedQuiz);
         logger.info(SuccessMessages.QUIZ_UPDATED_SUCCESS);
        Response response = new Response(HttpStatus.OK.value(),
-               SuccessMessages.QUIZ_DELETE_SUCCESS);
+               SuccessMessages.QUIZ_UPDATED_SUCCESS);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 

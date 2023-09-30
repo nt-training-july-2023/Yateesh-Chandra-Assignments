@@ -111,7 +111,7 @@ public class QuestionController {
         logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
         Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.QUESTION_UPDATED_SUCCESS);
-        return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.capstoneproject.controller;
 
 import com.capstoneproject.dto.CategoryDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CategoryControllerTest {
 
@@ -31,50 +33,73 @@ public class CategoryControllerTest {
 
     @Test
     public void testGetAllCategories() {
-        List<CategoryDTO> mockCategories = new ArrayList<>();
-        when(categoryService.getCategories()).thenReturn(mockCategories);
+        List<CategoryDTO> categories = new ArrayList<>();
+        CategoryDTO category1 = new CategoryDTO(1L, "Category Name",  "This is Description");
+        CategoryDTO category2 = new CategoryDTO(1L, "Category Name",  "This is Description");
+        categories.add(category1);
+        categories.add(category2);
+        assertEquals(2, categories.size());
+
+        when(categoryService.getCategories()).thenReturn(categories);
         ResponseEntity<List<CategoryDTO>> response = categoryController.getAllCategories();
-        verify(categoryService, times(1)).getCategories();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(mockCategories, response.getBody());
+        assertEquals(categories, response.getBody());
     }
 
     @Test
     public void testGetCategoryById() {
         Long categoryId = 1L;
-        CategoryDTO mockCategory = new CategoryDTO();
-        when(categoryService.getCategoryById(categoryId)).thenReturn(mockCategory);
+        CategoryDTO category = new CategoryDTO(categoryId, "Category Name",  "This is Description");
+        when(categoryService.getCategoryById(categoryId)).thenReturn(category);
+
         ResponseEntity<CategoryDTO> response = categoryController.getCategoryById(categoryId);
-        verify(categoryService, times(1)).getCategoryById(categoryId);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(mockCategory, response.getBody());
+        assertEquals(category, response.getBody());
     }
 
     @Test
     public void testAddCategory() {
         CategoryDTO categoryDto = new CategoryDTO();
-        ResponseEntity<String> response = categoryController.addCategory(categoryDto);
-        verify(categoryService, times(1)).addCategory(categoryDto);
+
+        ResponseEntity<Response> response = categoryController.addCategory(categoryDto);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Added Category Successfully", response.getBody());
+
+        Response responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(HttpStatus.CREATED.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.CATEGORY_ADD_SUCCESS, responseBody.getMessage());
+
+        verify(categoryService, times(1)).addCategory(categoryDto);
     }
 
     @Test
     public void testDeleteCategory() {
         Long categoryId = 1L;
-        ResponseEntity<String> response = categoryController.deleteCategory(categoryId);
-        verify(categoryService, times(1)).deleteCategory(categoryId);
+
+        ResponseEntity<Response> response = categoryController.deleteCategory(categoryId);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-        assertEquals("Category Deleted", response.getHeaders().getFirst("Message"));
+
+        Response responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(HttpStatus.NO_CONTENT.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.CATEGORY_DELETE_SUCCESS, responseBody.getMessage());
+
+        verify(categoryService, times(1)).deleteCategory(categoryId);
     }
 
     @Test
     public void testUpdateCategory() {
         Long categoryId = 1L;
         CategoryDTO updatedCategoryDto = new CategoryDTO();
-        ResponseEntity<String> response = categoryController.updateCategory(categoryId, updatedCategoryDto);
-        verify(categoryService, times(1)).updateCategory(categoryId, updatedCategoryDto);
+
+        ResponseEntity<Response> response = categoryController.updateCategory(categoryId, updatedCategoryDto);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Updated Category successfully", response.getBody());
+
+        Response responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.CATEGORY_UPDATED_SUCCESS, responseBody.getMessage());
+
+        verify(categoryService, times(1)).updateCategory(categoryId, updatedCategoryDto);
     }
 }

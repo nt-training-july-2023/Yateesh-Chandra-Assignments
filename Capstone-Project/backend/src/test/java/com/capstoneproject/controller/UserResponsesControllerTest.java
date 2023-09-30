@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.UserResponsesDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.UserResponsesService;
 
 class UserResponsesControllerTest {
@@ -31,18 +33,18 @@ class UserResponsesControllerTest {
 
     @Test
     void testAddUserResponses() {
-        // Arrange
+
         UserResponsesDTO userResponsesDTO = new UserResponsesDTO();
         when(userResponsesService.addUserResponses(userResponsesDTO)).thenReturn(null);
 
-        ResponseEntity<String> response = userResponsesController.addUserResponses(userResponsesDTO);
-
-        // Assert
+        ResponseEntity<Response> response = userResponsesController.addUserResponses(userResponsesDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        String responseBody = response.getBody();
+
+        Response responseBody = response.getBody();
         assertNotNull(responseBody);
-        assertEquals("Successfully submitted", responseBody);
+        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.RESPONSE_ADDED, responseBody.getMessage());
         verify(userResponsesService, times(1)).addUserResponses(userResponsesDTO);
     }
 

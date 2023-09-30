@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
 import com.capstoneproject.response.LoginResponse;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.UserService;
 
 class UserControllerTest {
@@ -39,32 +41,41 @@ class UserControllerTest {
         UserDTO userDTO = new UserDTO();
         when(userService.addUser(userDTO)).thenReturn(null);
 
-        ResponseEntity<String> response = userController.saveUser(userDTO);
-
-        // Assert
+        ResponseEntity<Response> response = userController.saveUser(userDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        String responseBody = response.getBody();
+
+        Response responseBody = response.getBody();
         assertNotNull(responseBody);
-        assertEquals("User Registered successfully", responseBody);
+        assertEquals(HttpStatus.CREATED.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.REGISTRATION_SUCCESS, responseBody.getMessage());
         verify(userService, times(1)).addUser(userDTO);
     }
 
     @Test
     public void testLoginUser() {
         LoginDTO loginDto = new LoginDTO();
-        loginDto.setEmail("test@gmail.com");
+        loginDto.setEmail("test@nucleusteq.com");
         when(userService.loginUser(loginDto)).thenReturn(new LoginResponse());
-        ResponseEntity<?> response = userController.loginUser(loginDto);
+        ResponseEntity<Response> response = userController.loginUser(loginDto);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        Response responseBody = response.getBody();
+        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.LOGIN_SUCCESS, responseBody.getMessage());
         verify(userService, times(1)).loginUser(loginDto);
-        assert response.getStatusCode()==HttpStatus.OK;
     }
 
     @Test
     public void deleteUser() {
         Long userId = 1L;
-        ResponseEntity<Void> response = userController.deleteUser(userId);
+        ResponseEntity<Response> response = userController.deleteUser(userId);
         assertNotNull(response);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
+        Response responseBody = response.getBody();
+        assertEquals(HttpStatus.NO_CONTENT.value(), responseBody.getCode());
+        assertEquals(SuccessMessages.USER_DELETE_SUCCESS, responseBody.getMessage());
+        verify(userService, times(1)).deleteUser(userId);
     }
 }

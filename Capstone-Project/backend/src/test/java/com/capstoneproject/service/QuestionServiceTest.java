@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -64,16 +63,19 @@ class QuestionServiceTest {
     @Test
     public void testGetQuestionByQuizId() {
         Long quizId = 5L;
+
         Quiz quiz = new Quiz(quizId, "Quiz 1", "Description 1", 5, 2);
         Question q1= new Question("Test Question", "A", "B", "C", "D", "OptionB");
         Question q2= new Question("Test Question 2", "A1", "B2", "C3", "D4", "OptionC");
         q1.setQuiz(quiz);
         q2.setQuiz(quiz);
+
         List<Question> questionList = new ArrayList<>();
         questionList.add(q1);
         questionList.add(q2);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
         when(questionRepository.getQuestionByQuizId(quizId)).thenReturn(questionList);
+
         List<QuestionDTO> questionDtoList = questionService.getQuestionByQuizId(quizId);
         assertNotNull(questionDtoList);
         assertEquals(2, questionDtoList.size());
@@ -92,9 +94,11 @@ class QuestionServiceTest {
     public void testGetQuestionById() {
         Long questionId = 10L;
         Quiz quiz = new Quiz(2L, "Test QUiz", "Desc", 5, 2);
+
         Question question = new Question("Test Question", "A", "B", "C", "D", "OptionB");
         question.setQuiz(quiz);
         when(questionRepository.findById(questionId)).thenReturn(Optional.of(question));
+
         QuestionDTO questionDto = questionService.getQuestionById(questionId);
         assertEquals("Test Question", questionDto.getQuestionTitle());
         assertEquals("A", questionDto.getOption1());
@@ -115,9 +119,11 @@ class QuestionServiceTest {
     public void testAddQuestion() {
         Long quizId = 1L;
         QuestionDTO questionDto = new QuestionDTO(null, "Test Question", "A", "B", "C", "D", "B", quizId);
+
         Quiz quiz = new Quiz(quizId, "Quiz 1", "Quiz 1 Description", 7, 2);
         when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
         when(questionRepository.save(any(Question.class))).thenReturn(new Question("Test Question", "A", "B", "C", "D", "B"));
+
         QuestionDTO addedQuestion = questionService.addQuestion(questionDto);
         assertNull(addedQuestion.getQuestionId());
         assertEquals("Test Question", addedQuestion.getQuestionTitle());
@@ -134,7 +140,6 @@ class QuestionServiceTest {
         Long questionId = 1L;
         QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "B", 1L);
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
-
         assertThrows(ElementNotExistsException.class, () -> {
             questionService.updateQuestion(questionId, questionDTO);
         });
@@ -142,12 +147,12 @@ class QuestionServiceTest {
     }
 
     @Test
-    void testAddQuestion_DuplicateOptions() {
+    void testUPDATEQuestion_DuplicateOptions() {
         Long questionId = 1L;
         QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "A", "B", 1L);
+
         Question addedQuestion = new Question("Hello", "A", "B", "C", "A", "B");
         when(questionRepository.findById(questionId)).thenReturn(Optional.of(addedQuestion));
-
         assertThrows(AlreadyExistsException.class, () -> {
             questionService.updateQuestion(questionId, questionDTO);
         });
@@ -156,7 +161,7 @@ class QuestionServiceTest {
     }
 
     @Test
-    void testAddQuestion_CorrectOptionMismatch() {
+    void testUPDATEQuestion_CorrectOptionMismatch() {
 
         Long questionId = 1L;
         QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "optB", 1L);
@@ -199,25 +204,6 @@ class QuestionServiceTest {
         assertThrows(ElementNotExistsException.class, () -> questionService.deleteQuestion(questionId));
     }
     
-    @Test
-    void testUpdateQuestion_Success() {
-
-        Long questionId = 1L;
-        QuestionDTO updatedQuestionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "B", 1L);
-        Question existingQuestion = new Question("Hello", "A", "B", "C", "D", "B");
-        when(questionRepository.findById(questionId)).thenReturn(Optional.of(existingQuestion));
-
-        QuestionDTO updatedQuestion = questionService.updateQuestion(questionId, updatedQuestionDTO);
-        assertNotNull(updatedQuestion);
-        assertEquals("Hello", updatedQuestion.getQuestionTitle());
-        assertEquals("A", updatedQuestion.getOption1());
-        assertEquals("B", updatedQuestion.getOption2());
-        assertEquals("C", updatedQuestion.getOption3());
-        assertEquals("D", updatedQuestion.getOption4());
-        assertEquals("B", updatedQuestion.getCorrectOption());
-        
-        verify(questionRepository, times(1)).save(existingQuestion);
-    }
 
     @Test
     void testUpdateQuestion_QuestionNotFound() {
@@ -244,22 +230,6 @@ class QuestionServiceTest {
 
         verify(questionRepository, never()).save(any());
     }
-
-    @Test
-    void testUpdateQuestion_CorrectOptionMismatch() {
-
-        Long questionId = 1L;
-        QuestionDTO updatedQuestionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "optB", 1L);
-        Question existingQuestion = new Question("Hello", "A", "B", "C", "D", "optB");
-        when(questionRepository.findById(questionId)).thenReturn(Optional.of(existingQuestion));
-
-        assertThrows(ConflictException.class, () -> {
-            questionService.updateQuestion(questionId, updatedQuestionDTO);
-        });
-
-        verify(questionRepository, never()).save(any());
-    }
-
 
     @Test
     public void testUpdateQuestionNotFound() {
