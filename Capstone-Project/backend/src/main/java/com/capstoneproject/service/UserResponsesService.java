@@ -96,7 +96,7 @@ public class UserResponsesService {
         Optional<Quiz> quizz = quizRepository
                 .findById(responses.getQuizId());
         results.setQuizName(quizz.get().getQuizName());
-        if(responses.getNumOfQuestionsAnswered() 
+        if (responses.getNumOfQuestionsAnswered()
                 <= responses.getNumOfQuestions()) {
             results.setNumOfQuestions(responses.getNumOfQuestions());
             results.setNumOfQuestionsAnswered(
@@ -104,16 +104,15 @@ public class UserResponsesService {
         } else {
             throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
         }
-        if (responses.getMarksScored() <= responses.getTotalMarks()){
+        if (responses.getMarksScored() <= responses.getTotalMarks()) {
             results.setTotalMarks(responses.getTotalMarks());
             results.setMarksScored(responses.getMarksScored());
         } else {
             throw new ConflictException(ExceptionMessages.MARKS_CONFLICT);
         }
-        if(responses.getTimeStamp() != null) {
+        if (responses.getTimeStamp() != null) {
             results.setTimeStamp(responses.getTimeStamp());
-        }
-        else {
+        } else {
             results.setTimeStamp(responses.setTimeStamp());
         }
         allResultsRepository.save(results);
@@ -121,7 +120,7 @@ public class UserResponsesService {
         UserResponses userResponses = new UserResponses();
         userResponses.setUsers(user);
         userResponses.setQuiz(quiz);
-        if(responses.getNumOfQuestionsAnswered() 
+        if (responses.getNumOfQuestionsAnswered()
                 <= responses.getNumOfQuestions()) {
             userResponses
             .setNumOfQuestions(responses.getNumOfQuestions());
@@ -130,7 +129,7 @@ public class UserResponsesService {
         } else {
             throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
         }
-        if (responses.getMarksScored() <= responses.getTotalMarks()){
+        if (responses.getMarksScored() <= responses.getTotalMarks()) {
             userResponses.setTotalMarks(responses.getTotalMarks());
             userResponses.setMarksScored(responses.getMarksScored());
         } else {

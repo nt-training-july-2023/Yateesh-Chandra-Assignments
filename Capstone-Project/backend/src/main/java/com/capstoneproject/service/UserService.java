@@ -113,6 +113,5 @@ public class UserService {
                         ExceptionMessages.USER_NOT_EXIST));
         logger.info(SuccessMessages.USER_DELETE_SUCCESS);
         userRepo.deleteById(userId);
-        
     }
 }

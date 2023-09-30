@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UnAuthorizedException extends RuntimeException {
 
     /**
-     * 
+     * This is Serial version.
      */
     private static final long serialVersionUID = 1L;
 

@@ -3,7 +3,7 @@ package com.capstoneproject.response;
 public final class SuccessMessages {
 
     /**
-     * This is the Unparameterized Success Messages. 
+     * This is the Unparameterized Success Messages.
      */
     private SuccessMessages() {
     }
@@ -22,7 +22,8 @@ public final class SuccessMessages {
     /**
      * This is user deleted message.
      */
-    public static final String USER_DELETE_SUCCESS = "User deleted Successfully";
+    public static final String USER_DELETE_SUCCESS = "User deleted"
+            + " Successfully";
 
     /**
      * This is success message for Category added.
@@ -130,7 +131,7 @@ public final class SuccessMessages {
     public static final String RESPONSE_ADDED = "Responses added Successfully";
 
     /**
-     * This is the success message for the fetching results of all users. 
+     * This is the success message for the fetching results of all users.
      */
     public static final String RESULTS_FETCH = "Successfully fetched Results"
             + " of all Users";

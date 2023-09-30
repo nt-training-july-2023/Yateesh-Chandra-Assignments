@@ -82,7 +82,7 @@ public class UserController {
             @PathVariable final Long userId) {
         userService.deleteUser(userId);
         logger.info(SuccessMessages.USER_DELETE_SUCCESS);
-        Response response = new Response(HttpStatus.NO_CONTENT.value(), 
+        Response response = new Response(HttpStatus.NO_CONTENT.value(),
                 SuccessMessages.USER_DELETE_SUCCESS);
         return new ResponseEntity<Response>(response,
                 HttpStatus.NO_CONTENT);

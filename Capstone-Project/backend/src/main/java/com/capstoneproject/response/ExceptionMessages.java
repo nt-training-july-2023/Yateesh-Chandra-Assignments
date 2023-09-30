@@ -82,13 +82,13 @@ public final class ExceptionMessages {
             + " match any option";
 
     /**
-     * This is Question conflict field;
+     * This is Question conflict field.
      */
     public static final String QUESTION_CONFLICT = "Number of Questions "
             + "answered should not be greater than Total questions";
 
     /**
-     * This is marks conflict field;
+     * This is marks conflict field.
      */
     public static final String MARKS_CONFLICT = "Scored Marks should not be "
             + "greater than Total Marks";

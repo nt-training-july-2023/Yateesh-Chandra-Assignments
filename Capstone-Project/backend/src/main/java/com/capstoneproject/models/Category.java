@@ -50,9 +50,9 @@ public class Category {
 
     /**
      * This is the constructor with 3 parameters.
-     * @param catId of Long type.
-     * @param catName of String Type.
-     * @param desc of String type.
+     * @param categoryid of Long type.
+     * @param categoryname of String Type.
+     * @param categoryDescription of String type.
      */
     public Category(final Long categoryid, final String categoryname,
             final String categoryDescription) {
@@ -77,7 +77,7 @@ public class Category {
 
     /**
      * Quiz Setter overriding.
-     * @param q is quiz.
+     * @param quizz is quiz.
      */
     public void setQuiz(final List<Quiz> quizz) {
         this.quiz = new ArrayList<>(quizz);

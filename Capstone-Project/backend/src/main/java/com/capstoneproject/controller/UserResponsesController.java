@@ -39,7 +39,7 @@ public class UserResponsesController {
             UserResponsesController.class);
     /**
      * This is the addUser Response Entity.
-     * @param response - UserResponse DTO.
+     * @param userResponse - UserResponse DTO.
      * @return Ok status.
      */
     @PostMapping("/add")
