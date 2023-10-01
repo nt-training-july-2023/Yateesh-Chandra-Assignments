@@ -102,6 +102,22 @@
   font-size: 24px;
 }
 
+.add-quiz-container input[type="text"], input[type = "number"], textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #4c518f;
+  border-radius: 5px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-quiz-container textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #4c518f;
+  border-radius: 5px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 @media (max-width: 768px) {
 
   .quiz-list-container h1{

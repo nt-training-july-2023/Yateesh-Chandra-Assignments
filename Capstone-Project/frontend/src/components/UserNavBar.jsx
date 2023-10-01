@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCode, FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
+import { FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -43,7 +43,6 @@ function UserNavBar() {
                 <nav>
                     <ul>
                         <li><Link to="/user" className={location.pathname === '/user' ? 'active' : ''}><FaHome/> Home</Link></li>
-                        <li><Link to="/manage-category" className={location.pathname === '/manage-category' ? 'active' : ''}><FaCode/> Categories</Link></li>
                         <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}><FaListAlt/> Report</Link></li>
                         <div className='sign-out-button'>
                             <button onClick={signOutSweetAlert}>Sign Out <FaPowerOff/></button>

@@ -151,10 +151,10 @@ const ManageQuestion = () => {
                     </button>
                 </div>
                 ) : (
-                <>
+                <div className="add-update">
                     <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
-                    <input
-                     type="text"
+                    <textarea
+                    className="question-form-group"
                      name="questionTitle"
                      placeholder="Question title"
                      value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
@@ -163,6 +163,7 @@ const ManageQuestion = () => {
 
                     <input
                     type="text"
+                    className="question-form-group"
                     name="option1"
                     placeholder="Option 1"
                     value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
@@ -172,6 +173,7 @@ const ManageQuestion = () => {
                     <input
                     type="text"
                     name="option2"
+                    className="question-form-group"
                     placeholder="Option 2"
                     value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
                     onChange={handleInputChange}
@@ -180,6 +182,7 @@ const ManageQuestion = () => {
                     <input
                     type="text"
                     name="option3"
+                    className="question-form-group"
                     placeholder="Option 3"
                     value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
                     onChange={handleInputChange}
@@ -188,6 +191,7 @@ const ManageQuestion = () => {
                     <input
                     type="text"
                     name="option4"
+                    className="question-form-group"
                     placeholder="Option 4"
                     value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
                     onChange={handleInputChange}
@@ -195,6 +199,7 @@ const ManageQuestion = () => {
                     
                     <select
                     name="correctOption"
+                    className="question-form-group"
                     placeholder="Correct Option"
                     value={isEditingQuestion ? editedQuestion.correctOption : newQuestion.correctOption}
                     onChange={handleInputChange}
@@ -229,7 +234,7 @@ const ManageQuestion = () => {
                     }}>Cancel</button>
                 </div>
                 </div>
-            </>
+            </div>
           )}
           {isAddingQuestion || isEditingQuestion ? null : (
               <div className="question-list-container">

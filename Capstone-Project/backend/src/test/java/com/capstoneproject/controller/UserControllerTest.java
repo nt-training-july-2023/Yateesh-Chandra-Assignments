@@ -57,12 +57,9 @@ class UserControllerTest {
         LoginDTO loginDto = new LoginDTO();
         loginDto.setEmail("test@nucleusteq.com");
         when(userService.loginUser(loginDto)).thenReturn(new LoginResponse());
-        ResponseEntity<Response> response = userController.loginUser(loginDto);
+        ResponseEntity<LoginResponse> response = userController.loginUser(loginDto);
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        Response responseBody = response.getBody();
-        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.LOGIN_SUCCESS, responseBody.getMessage());
         verify(userService, times(1)).loginUser(loginDto);
     }
 

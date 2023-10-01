@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
+import com.capstoneproject.response.LoginResponse;
 import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.UserService;
@@ -63,13 +64,12 @@ public class UserController {
      * @return the Id if it exists.
      */
     @PostMapping(path = "/login")
-    public final ResponseEntity<Response> loginUser(
+    public final ResponseEntity<LoginResponse> loginUser(
             @RequestBody @Valid final LoginDTO loginDTO) {
-            userService.loginUser(loginDTO);
+            LoginResponse loginResponse = userService.loginUser(loginDTO);
             logger.info(SuccessMessages.LOGIN_SUCCESS);
-            Response response = new Response(HttpStatus.OK.value(),
-                    SuccessMessages.LOGIN_SUCCESS);
-            return new ResponseEntity<Response>(response, HttpStatus.OK);
+            return new ResponseEntity<LoginResponse>(loginResponse,
+                    HttpStatus.OK);
     }
 
     /**

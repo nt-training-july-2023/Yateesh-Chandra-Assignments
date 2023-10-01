@@ -31,14 +31,6 @@
   color: #333;
 }
 
-.question-form input[type = "text"], select {
-  width: 50%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 2px solid hsl(246, 69%, 61%);
-  border-radius: 5px;
-}
-
 .question-form button {
   color: #fff6f6;
   padding: 8px 16px;
@@ -50,6 +42,37 @@
   width: 20%;
   min-width: 100px;
 }
+
+.question-form-group{
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.add-update input[type="text"], textarea {
+  width: 50%; 
+  padding: 10px;  
+  border: 1px solid #4c518f;
+  border-radius: 5px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-update textarea{
+  min-width: 50%; 
+  padding: 10px;  
+  border: 1px solid #4c518f;
+  border-radius: 5px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-update select {
+  width: 53%;
+  padding: 10px;
+  border: 1px solid #4c518f;
+  border-radius: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
 
 .question-list-container {
   max-height: 350px;
@@ -101,6 +124,30 @@
   .question-list li {
     width: 100%;
   }
+
+  .add-update input[type="text"], textarea {
+    width: 70%; 
+    padding: 10px;  
+    border: 1px solid #4c518f;
+    border-radius: 5px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .add-update textarea{
+    min-width: 50%; 
+    padding: 10px;  
+    border: 1px solid #4c518f;
+    border-radius: 5px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .add-update select {
+    width: 76%;
+    padding: 10px;
+    border: 1px solid #4c518f;
+    border-radius: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 }
 
 @media (max-width: 1300px) {
@@ -132,10 +179,4 @@
 
 .question-actions {
   margin-top: 10px;
-}
-
-@media (max-width: 600px) {
-  .question-form select {
-    width: 100%;
-  }
 }

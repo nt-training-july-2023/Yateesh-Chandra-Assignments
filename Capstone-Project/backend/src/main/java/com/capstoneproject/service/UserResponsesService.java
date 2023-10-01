@@ -80,9 +80,6 @@ public class UserResponsesService {
                     .orElseThrow(() -> new ElementNotExistsException(
                             ExceptionMessages.QUIZ_NOT_EXIST
                             + responses.getQuizId()));
-        categoryRepository.findById(responses.getCategoryId()).orElseThrow(
-                () -> new ElementNotExistsException(
-                        ExceptionMessages.CATEGORY_NOT_EXIST));
         logger.info(SuccessMessages.RESPONSE_ADDED);
         AllResults results = new AllResults();
         results.setUserId(responses.getUserId());

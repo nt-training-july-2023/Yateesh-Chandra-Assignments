@@ -63,4 +63,5 @@ public class Response {
     public final void setMessage(final String errorMessage) {
         this.message = errorMessage;
     }
+
 }

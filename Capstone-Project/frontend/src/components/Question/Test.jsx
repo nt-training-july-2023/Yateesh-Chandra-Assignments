@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Test.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { FaStopwatch } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import clockswal from "../image/clockswal.png";
 import oopsswal from "../image/oopsswal.png";
@@ -11,29 +10,56 @@ import NotFound from '../NotFound';
 import QuestionService from '../../services/QuestionService';
 import ResponseService from '../../services/ResponseService';
 import SweetAlert from '../SweetAlerts/SweetAlert';
-import {format} from 'date-fns';
-import AdminNavBar from '../AdminNavBar';
-import TimerNavBar from '../TestNavBar';
-
+import { format } from 'date-fns';
+import TimerNavBar from '../TimerNavBar';
 
 const Test = () => {
+
     const { quizId } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
-    const { timeInMin, categoryId } = location.state || {};
+    const { timeInMin } = location.state || {};
+    const categoryId = localStorage.getItem("categoryId");
     const userId = localStorage.getItem("id");
     const userRole = localStorage.getItem("role");
     const [questions, setQuestions] = useState([]);
-    const [selectedOptions, setSelectedOptions] = useState([]);
-    const [timer, setTimer] = useState(timeInMin * 60);
     const [loading, setLoading] = useState(true);
-    const [numOfQuestionsAnswered, setNumOfQuestionsAnswered] = useState(0);
     const totalMarks = questions.length * 2;
-    const [marksScored, setMarksScored] = useState(0);
     const [autoSubmitted, setAutoSubmitted] = useState(false);
     const [instructionsConfirmed, setInstructionsConfirmed] = useState(false);
-    const [startTime, setStartTime] = useState(null);
+    const [numOfQuestionsAnswered, setNumOfQuestionsAnswered] = useState(() => {
+        const storedNumberOfAttempted = localStorage.getItem('numberOfAttempted');
+        return storedNumberOfAttempted ? parseInt(storedNumberOfAttempted) : 0;
+    }); 
 
+    const [marksScored, setMarksScored] = useState(() => {
+        const storedMarksScored = localStorage.getItem('marksScored');
+        return storedMarksScored ? parseInt(storedMarksScored) : 0;
+    });
+
+    const [startTime, setStartTime] = useState(() => {
+        const storedStartTime = localStorage.getItem('startTime');
+        return storedStartTime ? parseInt(storedStartTime) : null;
+    });
+
+    const [selectedOptions, setSelectedOptions] = useState(() => {
+        const storedOptions = localStorage.getItem('selectedOptions');
+        return storedOptions ? JSON.parse(storedOptions) : [];
+    });
+
+    const [timer, setTimer] = useState(() => {
+        const storedTimer = localStorage.getItem('timer');
+        if (storedTimer && startTime) {
+
+            const currentTime = new Date().getTime();
+            const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+            const remainingTime = parseInt(storedTimer) - elapsedTimeInSeconds;
+            return remainingTime > 0 ? remainingTime : 0;
+
+        } else {
+            return timeInMin * 60;
+        }
+    });
 
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
@@ -43,108 +69,90 @@ const Test = () => {
 
     const fetchQuestions = () => {
         QuestionService.getQuestionsByQuizId(quizId)
-        .then((response) => {
-            if(response.data.length === 0){
-                Swal.fire({
-                    title : "No Questions available",
-                    text : "Kindly take another Quiz",
-                    imageUrl : oopsswal,
-                    imageHeight : 100,
-                    imageWidth : 150,
-                }).then(() => {
-                    navigate(`/manage-quiz/${categoryId}`);
-                })
-            } else {
-                setQuestions(response.data);
-                setLoading(false);
-            }
-        })
-        .catch((error) => {
-            console.error('Error fetching questions:', error);
-        });
+            .then((response) => {
+                if (response.data.length === 0) {
+                    Swal.fire({
+                        title: "No Questions available",
+                        text: "Kindly take another Quiz",
+                        imageUrl: oopsswal,
+                        imageHeight: 100,
+                        imageWidth: 150,
+                    }).then(() => {
+                        navigate(`/manage-quiz/${categoryId}`);
+                    })
+                } else {
+                    setQuestions(response.data);
+                    setLoading(false);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching questions:', error);
+            });
     };
 
     useEffect(() => {
-        if(userRole === "USER"){
+        if (userRole === "USER") {
             fetchQuestions();
         }
     }, [quizId]);
 
-    useEffect(() => {
-        if(userRole === "USER"){
-            if (questions.length > 0 && !instructionsConfirmed) {
-                Swal.fire({
-                        title : "Instructions for the Test",
-                        width : "700px",
-                        padding: '3em',
-                        color: 'black',
-                        backdrop: `
-                        rgb(240, 240, 240, 0.8)
-                        `,
-                        imageUrl : instructionswal,
-                        imageWidth : 100,
-                        allowOutsideClick : false,
-                        showConfirmButton : true,
-                        confirmButtonText : "Start",
-                        html : `
-                        <ol>
-                        <li style = "margin-bottom: 10px;">Each Question carries Two Marks.</li>
-                        <li style = "margin-bottom: 10px;">This is a Timed Test. Look the timer.</li>
-                        <li style = "margin-bottom: 10px;">Questions are of "Choose the Correct Answer" type.</li>
-                        <li style = "margin-bottom: 10px;">There is no negative marking.</li>
-                        </ol>
-                        `,
-                }).then((response) => {
-                    if (response.isConfirmed) {
-                        setInstructionsConfirmed(true);
-                        setStartTime(new Date().getTime());
-                    }
-                });
-            }
-        }
-    }, [questions, instructionsConfirmed]);
     
-
     const handleOptionSelect = (option, questionIndex) => {
         const updatedSelectedOptions = [...selectedOptions];
-        if(updatedSelectedOptions[questionIndex] === option){
+        if (updatedSelectedOptions[questionIndex] === option) {
             updatedSelectedOptions[questionIndex] = null;
         } else {
             updatedSelectedOptions[questionIndex] = option;
         }
+
         setSelectedOptions(updatedSelectedOptions);
+
         const answeredQuestions = updatedSelectedOptions.filter(Boolean).length;
         setNumOfQuestionsAnswered(answeredQuestions);
 
         let score = 0;
         for (let i = 0; i < questions.length; i++) {
-        const correctOption = questions[i].correctOption;
-        const selectedOption = updatedSelectedOptions[i];
+            const correctOption = questions[i].correctOption;
+            const selectedOption = updatedSelectedOptions[i];
 
-        if (selectedOption === correctOption) {
-            score += 2;
-        }
+            if (selectedOption === correctOption) {
+                score += 2;
+            }
         }
         setMarksScored(score);
+
+        localStorage.setItem('numberOfAttempted', answeredQuestions.toString());
+        localStorage.setItem('marksScored', score.toString());
     };
+
+    const clearLocalStorage = () => {
+        localStorage.removeItem('selectedOptions');
+        localStorage.removeItem('startTime');
+        localStorage.removeItem('timer');
+        localStorage.removeItem('instructionShown');
+        localStorage.removeItem("pageRefreshed");
+        localStorage.removeItem('numberOfAttempted');
+        localStorage.removeItem('marksScored');
+    }
 
     const handleAddResponses = async () => {
 
         const formattedTime = format(new Date(startTime), 'dd-MM-yyyy HH:mm:ss');
 
         const data = {
-        userId,
-        quizId,
-        categoryId,
-        numOfQuestions: questions.length,
-        numOfQuestionsAnswered,
-        totalMarks,
-        marksScored,
-        timeStamp : formattedTime
+            userId,
+            quizId,
+            categoryId,
+            numOfQuestions: questions.length,
+            numOfQuestionsAnswered,
+            totalMarks,
+            marksScored,
+            timeStamp: formattedTime
         };
 
         try {
             await ResponseService.postResponse(data);
+            console.log(data);
         } catch (error) {
             console.log(error);
         }
@@ -153,123 +161,210 @@ const Test = () => {
     const handleSubmit = () => {
         handleAddResponses();
         Swal.fire({
-            title : "Time up",
-            text : "Don't worry, The quiz is submitted",
-            imageUrl : clockswal,
-            imageHeight : 150,
-            imageWidth : 150,
+            title: "Time up",
+            text: "Don't worry, The quiz is submitted",
+            imageUrl: clockswal,
+            imageHeight: 150,
+            imageWidth: 150,
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 SweetAlert.quizSubmitted();
+                clearLocalStorage();
             }
             navigate("/profile");
-        })   
+        })
     };
 
     useEffect(() => {
-        if(userRole === "USER"){
-        if (instructionsConfirmed) {
-            const timerInterval = setInterval(() => {
-                setTimer((prevTimer) => {
-                    if (prevTimer > 0) {
-                        return prevTimer - 1;
-                    } else if (!autoSubmitted) {
+        if (userRole === "USER") {
+            const instructionShown = localStorage.getItem("instructionShown");
+            if (questions.length > 0 && !instructionsConfirmed && !instructionShown) {
+                Swal.fire({
+                    title: "Instructions for the Test",
+                    width: "900px",
+                    padding: '3em',
+                    color: 'black',
+                    backdrop: `
+                        rgb(240, 240, 240, 0.8)
+                    `,
+                    imageUrl: instructionswal,
+                    imageWidth: 100,
+                    allowOutsideClick: false,
+                    showConfirmButton: true,
+                    confirmButtonText: "Start",
+                    html: `
+                        <ol>
+                        <li>Each Question carries Two Marks.</li><br>
+                        <li>This is a Timed Test. Look at the timer.</li><br>
+                        <li>Questions are of "Choose the Correct Answer" type.</li><br>
+                        <li>There is no negative marking.</li><br>
+                        <p style="text-align : left; margin-top : 10px;"><strong>NOTE: IF YOU RELOAD, IT AUTOMATICALLY GETS SUBMITTED.</strong>
+                        </ol>
+                    `,
+                }).then((response) => {
+                    if (response.isConfirmed) {
+                        setInstructionsConfirmed(true);
+                        const currentTime = new Date().getTime();
+                        setStartTime(currentTime);
+
+                        localStorage.setItem("instructionShown", "true");
+                        localStorage.setItem("startTime", currentTime.toString());
+                    }
+                });
+            } else {
+
+                const pageRefreshed = localStorage.getItem("pageRefreshed");
+                if (pageRefreshed) {
+                    Swal.fire({
+                        title: "Page Reloaded",
+                        text: "Your Responses are posted",
+                        icon: "info",
+                        showConfirmButton: true,
+                        backdrop: 
+                        `
+                            rgb(200, 200, 200, 0.9)
+                        `,
+                        confirmButtonText: "Ok",
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            handleAddResponses();
+                            clearLocalStorage();
+                            navigate("/profile");
+                        }
+                    });
+                }
+            }
+        }
+    }, [userRole, questions, instructionsConfirmed]);
+
+
+    useEffect(() => {
+        if (userRole === "USER" && instructionsConfirmed) {
+            let interval;
+
+            const startTimer = () => {
+                if (startTime) {
+                    const currentTime = new Date().getTime();
+                    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+                    const remainingTime = Math.max(timeInMin * 60 - elapsedTimeInSeconds, 0);
+
+                    setTimer(remainingTime);
+
+                    localStorage.setItem('timer', remainingTime.toString());
+                    localStorage.setItem('startTime', startTime.toString());
+
+                    if (remainingTime <= 0 && !autoSubmitted) {
                         setAutoSubmitted(true);
                         handleSubmit();
+                        clearInterval(interval);
                     }
+                }
+            };
 
-                    if (prevTimer < 0) {
-                        return 0;
-                    }
-                    return prevTimer;
-                });
-            }, 1000);
+            if (!startTime) {
+                const currentTime = new Date().getTime();
+                setStartTime(currentTime);
+                localStorage.setItem('startTime', currentTime.toString());
+            }
+
+            interval = setInterval(startTimer, 1000);
 
             return () => {
-                clearInterval(timerInterval);
+                clearInterval(interval);
             };
         }
-    }
-    }, [instructionsConfirmed, autoSubmitted, handleSubmit]);
+    }, [instructionsConfirmed, autoSubmitted, handleSubmit, timeInMin, userRole, startTime]);
 
     const handleManualSubmit = () => {
-        if(numOfQuestionsAnswered === 0){
+        if (numOfQuestionsAnswered === 0) {
             Swal.fire({
                 title: "UnAttempted Test",
-                text : "Unable to Submit as You have not attempted the test",
+                text: "Unable to Submit as You have not attempted the test",
                 icon: "error",
             })
         } else {
             Swal.fire({
                 title: "Do you want to submit",
-                text : "Once you submit, You will be redirected out",
+                text: "Once you submit, You will be redirected out",
                 icon: "warning",
-                showConfirmButton : true,
-                confirmButtonText : "Ok",
-                showCancelButton : true,
-                cancelButtonText : "Cancel"
+                showConfirmButton: true,
+                confirmButtonText: "Ok",
+                showCancelButton: true,
+                cancelButtonText: "Cancel"
             }).then((result) => {
-                if(result.isConfirmed){
+                if (result.isConfirmed) {
                     handleAddResponses();
                     SweetAlert.manualQuizSubmitted();
+                    clearLocalStorage();
                     navigate("/profile");
                 }
             });
-        }        
-    }
+        }
+    };
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {        
+            localStorage.setItem("pageRefreshed", "true");
+        };
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
 
     return (
         <div>
-            <DeactivateBackButton/>
-            <TimerNavBar timerValue={formatTime(timer)} className={ timer < 30 ? "timer-out" : "timer"} />
+            <DeactivateBackButton />
+            <TimerNavBar timerValue={formatTime(timer)} className={timer < 30 ? "timer-out" : "timer"} />
             {(userRole === "USER" ? (
-            <div className="quiz-container">
+                <div className="quiz-container">
                     {loading ? (
                         <div>Loading questions... No Questions as of now</div>
                     ) : questions.length > 0 ? (
-                    <div className="question-container">
-                        {questions.map((question, index) => (
-                            <div key={index} className="question-content">
-                                <p><b>{index + 1}. {question.questionTitle}</b></p>
-                                <div className="options">
-                                    {Array.from({ length: 4 }, (_, optionIndex) => {
-                                        const optionKey = `option${optionIndex + 1}`;
-                                        const optionContent = question[optionKey];
-                                        return (
-                                            <div
-                                            key={optionIndex}
-                                            className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
-                                            onClick={() => handleOptionSelect(optionContent, index)}
-                                            >
-                                            {optionContent}
-                                            </div>
-                                        );
-                                    })}
+                        <div className="question-container">
+                            {questions.map((question, index) => (
+                                <div key={index} className="question-content">
+                                    <p><b>{index + 1}. {question.questionTitle}</b></p>
+                                    <div className="options">
+                                        {Array.from({ length: 4 }, (_, optionIndex) => {
+                                            const optionKey = `option${optionIndex + 1}`;
+                                            const optionContent = question[optionKey];
+                                            return (
+                                                <div
+                                                    key={optionIndex}
+                                                    className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
+                                                    onClick={() => handleOptionSelect(optionContent, index)}
+                                                >
+                                                    {optionContent}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
 
-                        <div className="navigation-buttons">
-                            <button onClick={handleManualSubmit} className='next-button'>
-                                Submit
-                            </button>
+                            <div className="navigation-buttons">
+                                <button onClick={handleManualSubmit} className='next-button'>
+                                    Submit
+                                </button>
+                            </div>
                         </div>
-                    </div>                       
                     ) : (
-                    <div>
-                        No questions available.
-                    </div>
-                )}
-                
+                        <div>
+                            No questions available.
+                        </div>
+                    )}
+
                 </div>
             ) : (
                 <>
-                    <NotFound/>
+                    <NotFound />
                 </>
             ))}
         </div>
     );
-    
+
 };
 
 export default Test;
