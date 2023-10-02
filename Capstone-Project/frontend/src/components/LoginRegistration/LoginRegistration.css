@@ -38,12 +38,13 @@
   }
   
   .error {
+    margin-top: 4px;
     font-size: 11px;
-  color: rgba(241, 16, 16, 0.74);
-  font-weight: bold;
-  position: absolute;
-  text-align: left;
-  margin-left: 15px;
+    color: rgba(241, 16, 16, 0.74);
+    font-weight: bold;
+    position: absolute;
+    text-align: left;
+    margin-left: 15px;
   }
 
   .button-container{
@@ -59,22 +60,18 @@
   .password-toggle-button{
     cursor: pointer;
     position: absolute;
-    font-size: 12px;
+    font-size: 13px;
     top: 51%;
     right: 10px;
     transform: translateY(-52%) ;
-    background-color : #00fff2;
+    background-color : #eaf5f4;
     color : rgb(1, 0, 10);
     border : None;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: all 0.5s;
   }
 
-  .password-toggle-button:hover {
-    background-color: #098bbe;
-  }
-  
-  input[type="Submit"] {
+  .button-container button[type="Submit"] {
     width: 45%;
     padding: 10px;
     margin-left: 10px;
@@ -87,7 +84,7 @@
     margin-bottom: 10px;
   }
 
-  input[type="button"] {
+  .button-container button[type="button"] {
     width: 45%;
     padding: 10px;
     margin-right: 10px;

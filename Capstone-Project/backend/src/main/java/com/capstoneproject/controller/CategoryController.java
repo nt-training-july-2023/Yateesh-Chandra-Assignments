@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +29,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(path = "category")
 @CrossOrigin(origins = "*")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CategoryController {
 
     /**
@@ -48,10 +48,12 @@ public class CategoryController {
      * @return the list of categories.
      */
     @GetMapping
-    public final ResponseEntity<List<CategoryDTO>> getAllCategories() {
+    public final Response getAllCategories() {
         List<CategoryDTO> categories = categoryService.getCategories();
         logger.info(SuccessMessages.CATEGORY_FETCH);
-        return ResponseEntity.ok(categories);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_FETCH, categories);
+        return response;
     }
 
     /**
@@ -60,12 +62,14 @@ public class CategoryController {
      * @return the category if exists.
      */
     @GetMapping("/{categoryId}")
-    public final ResponseEntity<CategoryDTO> getCategoryById(
+    public final Response getCategoryById(
             @PathVariable final Long categoryId) {
         CategoryDTO newCategoryDto = categoryService
                 .getCategoryById(categoryId);
         logger.info(SuccessMessages.CATEGORY_FETCH_BY_ID);
-        return ResponseEntity.ok(newCategoryDto);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_FETCH_BY_ID, newCategoryDto);
+        return response;
     }
 
     /**
@@ -74,13 +78,13 @@ public class CategoryController {
      * @return the success status when added.
      */
     @PostMapping
-    public final ResponseEntity<Response> addCategory(
+    public final Response addCategory(
             @RequestBody @Valid final CategoryDTO categoryDto) {
         categoryService.addCategory(categoryDto);
         logger.info(SuccessMessages.CATEGORY_ADD_SUCCESS);
         Response response = new Response(HttpStatus.CREATED.value(),
                 SuccessMessages.CATEGORY_ADD_SUCCESS);
-        return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+        return response;
     }
 
     /**
@@ -89,13 +93,13 @@ public class CategoryController {
      * @return deleted successfully if not found.
      */
     @DeleteMapping("/{categoryId}")
-    public final ResponseEntity<Response> deleteCategory(
+    public final Response deleteCategory(
             @PathVariable final Long categoryId) {
         categoryService.deleteCategory(categoryId);
         logger.info(SuccessMessages.CATEGORY_DELETE_SUCCESS);
-        Response response = new Response(HttpStatus.NO_CONTENT.value(),
+        Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.CATEGORY_DELETE_SUCCESS);
-        return new ResponseEntity<Response>(response, HttpStatus.NO_CONTENT);
+        return response;
     }
 
     /**
@@ -105,14 +109,14 @@ public class CategoryController {
      * @return the updated category status.
      */
     @PutMapping("/{categoryId}")
-    public final ResponseEntity<Response> updateCategory(
+    public final Response updateCategory(
             @PathVariable final Long categoryId,
             @RequestBody @Valid final CategoryDTO updatedCategoryDto) {
         categoryService.updateCategory(categoryId, updatedCategoryDto);
         logger.info(SuccessMessages.CATEGORY_UPDATED_SUCCESS);
         Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.CATEGORY_UPDATED_SUCCESS);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return response;
     }
 
 }

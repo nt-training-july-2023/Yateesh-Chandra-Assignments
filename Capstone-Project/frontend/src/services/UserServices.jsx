@@ -11,6 +11,10 @@ class UserServices{
     loginUser(User){
         return axios.post(USER_URL + "/login", User);
     }
+
+    getUsers(){
+        return axios.get(USER_URL);
+    }
 }
 
 export default new UserServices();

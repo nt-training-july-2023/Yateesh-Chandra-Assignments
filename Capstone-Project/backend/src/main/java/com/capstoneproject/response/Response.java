@@ -1,9 +1,22 @@
 package com.capstoneproject.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
- * This is the Error Response Class.
+ * This is Response Class.
+ * @param <T> General Body.
  */
-public class Response {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Response<T> {
 
     /**
      * code variable is of integer type to display status code.
@@ -16,52 +29,18 @@ public class Response {
     private String message;
 
     /**
+     * This is the Response Body Entity.
+     */
+    private T body;
+
+    /**
      * This is the constructor for error response.
-     * @param errorCode of integer type.
-     * @param errorMessage of String type.
+     * @param code of integer type.
+     * @param statusMessage of String type.
      */
-    public Response(final int errorCode, final String errorMessage) {
-        this.statusCode = errorCode;
-        this.message = errorMessage;
-    }
-
-    /**
-     * This is Constructor with no arguments.
-     */
-    public Response() {
-        super();
-    }
-
-    /**
-     * This is the getter method for code.
-     * @return the Code.
-     */
-    public final int getCode() {
-        return statusCode;
-    }
-
-    /**
-     * This is the setter method for the error code.
-     * @param errorCode of integer type.
-     */
-    public final void setCode(final int errorCode) {
-        this.statusCode = errorCode;
-    }
-
-    /**
-     * This is the getter method for the message.
-     * @return the message.
-     */
-    public final String getMessage() {
-        return message;
-    }
-
-    /**
-     * This is the Error Message setter method.
-     * @param errorMessage of String type.
-     */
-    public final void setMessage(final String errorMessage) {
-        this.message = errorMessage;
+    public Response(final int code, final String statusMessage) {
+        this.statusCode = code;
+        this.message = statusMessage;
     }
 
 }

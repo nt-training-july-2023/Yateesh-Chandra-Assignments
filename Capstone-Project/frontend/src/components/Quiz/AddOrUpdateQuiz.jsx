@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminNavBar from "../AdminNavBar";
-import "../Categories/Categories.css";
 import {useLocation} from 'react-router-dom'
 import NotFound from "../NotFound";
 import QuizService from "../../services/QuizService";

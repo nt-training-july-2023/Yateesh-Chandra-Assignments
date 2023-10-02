@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AdminNavBar from "../AdminNavBar";
 import UserNavBar from "../UserNavBar";
 import NotFound from "../NotFound";
-import "../Categories/Categories.css";
 import DeactivateBackButton from "../DeactivateBackButton";
 import ResultService from "../../services/ResultService";
 
@@ -71,7 +70,7 @@ const Profile = () => {
             )
             )} 
             <div>
-                <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px" }}>Hello {userName},</h1>
+                <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px" }}>Hello</h1>
             </div>
             {(userRole === "ADMIN" && (
                 <div>

@@ -4,6 +4,8 @@ import { useState } from "react";
 import successfulswal from "../image/successfulswal.png";
 import UserServices from "../../services/UserServices";
 import SweetAlert from "../SweetAlerts/SweetAlert";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import InputComponent from "../InputComponent";
 
 export default function Registration() {
     const [name, setName] = useState("");
@@ -174,7 +176,7 @@ export default function Registration() {
         <h2>Signup</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="form-group">
-            <input
+            <InputComponent
               type="text"
               name="name"
               placeholder="Enter your Name"
@@ -185,7 +187,7 @@ export default function Registration() {
           </div>
 
           <div className="form-group">
-            <input
+              <InputComponent
               type="email"
               name="email"
               placeholder="Enter your Email"
@@ -197,7 +199,7 @@ export default function Registration() {
 
           <div className="form-group">
             <div className="password-input-container">
-              <input
+                <InputComponent
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Enter your Password"
@@ -209,7 +211,7 @@ export default function Registration() {
                 className="password-toggle-button"
                 onClick={togglePasswordVisibility}
               >
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? <FaEyeSlash/> : <FaEye/>}
               </button>
             </div>
             {passwordError && <div className="error">{passwordError}</div>}
@@ -217,7 +219,7 @@ export default function Registration() {
 
           <div className="form-group">
             <div className="password-input-container">
-              <input
+                <InputComponent
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 placeholder="Enter Password to confirm"
@@ -229,7 +231,7 @@ export default function Registration() {
                 className="password-toggle-button"
                 onClick={toggleConfirmPasswordVisibility}
               >
-                {showConfirmPassword ? "Hide" : "Show"}
+                {showConfirmPassword ? <FaEyeSlash/> : <FaEye/>}
               </button>
             </div>
             {confirmPasswordError && (
@@ -238,7 +240,7 @@ export default function Registration() {
           </div>
 
           <div className="form-group">
-            <input
+              <InputComponent
               type="phone"
               name="phoneNumber"
               pattern="[0-9]*"
@@ -248,7 +250,7 @@ export default function Registration() {
             />
             {phoneNumberError && <div className="error">{phoneNumberError}</div>}
           </div>
-          <input type="Submit" value="Register Now" />
+              <InputComponent type="Submit" value="Register" />
           <div className="text">
             <h3>
               Already our Subscriber? <Link to="/Login">Login now</Link>

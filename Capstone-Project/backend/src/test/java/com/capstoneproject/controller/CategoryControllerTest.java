@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("rawtypes")
 public class CategoryControllerTest {
 
     @InjectMocks
@@ -41,8 +41,9 @@ public class CategoryControllerTest {
         assertEquals(2, categories.size());
 
         when(categoryService.getCategories()).thenReturn(categories);
-        ResponseEntity<List<CategoryDTO>> response = categoryController.getAllCategories();
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Response response = categoryController.getAllCategories();
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.CATEGORY_FETCH, response.getMessage());
         assertEquals(categories, response.getBody());
     }
 
@@ -52,22 +53,21 @@ public class CategoryControllerTest {
         CategoryDTO category = new CategoryDTO(categoryId, "Category Name",  "This is Description");
         when(categoryService.getCategoryById(categoryId)).thenReturn(category);
 
-        ResponseEntity<CategoryDTO> response = categoryController.getCategoryById(categoryId);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Response response = categoryController.getCategoryById(categoryId);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.CATEGORY_FETCH_BY_ID, response.getMessage());
         assertEquals(category, response.getBody());
     }
 
     @Test
     public void testAddCategory() {
-        CategoryDTO categoryDto = new CategoryDTO();
+        Long categoryId = 1L;
+        CategoryDTO categoryDto = new CategoryDTO(categoryId, "Category Name",  "This is Description");
 
-        ResponseEntity<Response> response = categoryController.addCategory(categoryDto);
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.CREATED.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.CATEGORY_ADD_SUCCESS, responseBody.getMessage());
+        Response response = categoryController.addCategory(categoryDto);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertNotNull(categoryDto);
+        assertEquals(SuccessMessages.CATEGORY_ADD_SUCCESS, response.getMessage());
 
         verify(categoryService, times(1)).addCategory(categoryDto);
     }
@@ -76,13 +76,9 @@ public class CategoryControllerTest {
     public void testDeleteCategory() {
         Long categoryId = 1L;
 
-        ResponseEntity<Response> response = categoryController.deleteCategory(categoryId);
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.NO_CONTENT.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.CATEGORY_DELETE_SUCCESS, responseBody.getMessage());
+        Response response = categoryController.deleteCategory(categoryId);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.CATEGORY_DELETE_SUCCESS, response.getMessage());
 
         verify(categoryService, times(1)).deleteCategory(categoryId);
     }
@@ -92,13 +88,9 @@ public class CategoryControllerTest {
         Long categoryId = 1L;
         CategoryDTO updatedCategoryDto = new CategoryDTO();
 
-        ResponseEntity<Response> response = categoryController.updateCategory(categoryId, updatedCategoryDto);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.CATEGORY_UPDATED_SUCCESS, responseBody.getMessage());
+        Response response = categoryController.updateCategory(categoryId, updatedCategoryDto);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.CATEGORY_UPDATED_SUCCESS, response.getMessage());
 
         verify(categoryService, times(1)).updateCategory(categoryId, updatedCategoryDto);
     }

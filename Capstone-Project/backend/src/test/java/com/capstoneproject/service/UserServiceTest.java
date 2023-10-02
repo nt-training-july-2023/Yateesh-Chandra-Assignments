@@ -2,6 +2,7 @@ package com.capstoneproject.service;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
+import com.capstoneproject.dto.UserListDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.exceptions.UnAuthorizedException;
@@ -16,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -146,4 +149,19 @@ class UserServiceTest {
         assertThrows(UnAuthorizedException.class, () -> userService.loginUser(loginDTO));
     }
 
+    @Test
+    void testGetUsers() {
+        List<User> users = new ArrayList<>();
+        users.add(new User(1L, "Yateesh", "yateesh.chandra@nucleusteq.com", "yateesh", "USER", "9876543201"));
+        users.add(new User(2L, "Chandra", "chandra.yateesh@nucleusteq.com", "chandra", "USER", "7932590431"));
+
+        when(userRepository.findAll()).thenReturn(users);
+
+        List<UserListDTO> userList = userService.getUsers();
+        assertNotNull(userList);
+        assertEquals("Yateesh", userList.get(0).getName());
+        assertEquals(1L, userList.get(0).getUserId());
+        assertEquals("Chandra", userList.get(1).getName());
+        assertEquals(2L, userList.get(1).getUserId());
+    }
 }

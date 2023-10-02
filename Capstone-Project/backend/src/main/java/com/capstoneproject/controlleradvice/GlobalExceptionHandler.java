@@ -21,6 +21,7 @@ import com.capstoneproject.response.Response;
  * This is the Controller Advice for handling Global exceptions.
  */
 @RestControllerAdvice
+@SuppressWarnings("rawtypes")
 public class GlobalExceptionHandler {
 
     /**

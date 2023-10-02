@@ -14,11 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.AllResultsDTO;
+import com.capstoneproject.response.Response;
 import com.capstoneproject.service.AllResultsService;
 
+@SuppressWarnings("rawtypes")
 class AllResultsControllerTest {
 
     @InjectMocks
@@ -41,9 +42,9 @@ class AllResultsControllerTest {
         allResultsDto.add(result2);
         when(allResultsService.getAllResults()).thenReturn(allResultsDto);
 
-        ResponseEntity<List<AllResultsDTO>> responseEntity = allResultsController.getAllResults();
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(allResultsDto, responseEntity.getBody());
+        Response response = allResultsController.getAllResults();
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(allResultsDto, response.getBody());
     }
 
     @Test
@@ -53,9 +54,9 @@ class AllResultsControllerTest {
         resultsList.add(new AllResultsDTO());
         when(allResultsService.getResultsByUserId(userId)).thenReturn(resultsList);
 
-        ResponseEntity<List<AllResultsDTO>> response = allResultsController.getResultsByUserId(userId);
+        Response response = allResultsController.getResultsByUserId(userId);
         verify(allResultsService, times(1)).getResultsByUserId(userId);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(resultsList, response.getBody());
     }
 }

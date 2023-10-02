@@ -218,7 +218,7 @@ label {
     font-family: Arial, Helvetica, sans-serif;
   }
   
-button {
+/* button {
     background-color: #007BFF;
     color: white;
     padding: 10px 20px;
@@ -226,7 +226,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-  }
+  } */
   
   .search-bar {
     display: flex;

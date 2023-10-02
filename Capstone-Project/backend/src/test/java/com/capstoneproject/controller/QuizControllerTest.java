@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class QuizControllerTest {
     @Mock
     private QuizService quizService;
@@ -29,6 +29,7 @@ public class QuizControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+
     @Test
     public void testGetAllQuiz() {
         List<QuizDTO> quizzes = new ArrayList<>();
@@ -36,9 +37,9 @@ public class QuizControllerTest {
         quizzes.add(new QuizDTO(2L, "Quiz2", "Description2", 10, 4, 2L));
         when(quizService.getQuizzes()).thenReturn(quizzes);
 
-        ResponseEntity<List<QuizDTO>> response = quizController.getAllQuiz();
+        Response response = quizController.getAllQuiz();
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         List<QuizDTO> responseQuizzes = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizzes);
@@ -52,9 +53,9 @@ public class QuizControllerTest {
         QuizDTO quizDTO = new QuizDTO(quizId, "Quiz1", "Description1", 5, 2, 1L);
         when(quizService.getQuizById(quizId)).thenReturn(quizDTO);
 
-        ResponseEntity<QuizDTO> response = quizController.getQuizById(quizId);
+        Response response = quizController.getQuizById(quizId);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         QuizDTO responseQuiz = (QuizDTO) response.getBody();
         assertNotNull(responseQuiz);
@@ -62,18 +63,17 @@ public class QuizControllerTest {
         assertEquals("Quiz1", responseQuiz.getQuizName());
     }
 
+
     @Test
     public void testAddQuiz() {
         QuizDTO quizDTO = new QuizDTO(1L, "New Quiz", "New Description", 5, 2, 1L);
         when(quizService.addQuiz(quizDTO)).thenReturn(quizDTO);
 
-        ResponseEntity<Response> response = quizController.addQuiz(quizDTO);
-        assertNotNull(response);
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        Response response = quizController.addQuiz(quizDTO);
 
-        Response resposeBody = response.getBody();
-        assertNotNull(resposeBody);
-        assertEquals(SuccessMessages.QUIZ_ADD_SUCCESS, resposeBody.getMessage());
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertNotNull(quizDTO);
+        assertEquals(SuccessMessages.QUIZ_ADD_SUCCESS, response.getMessage());
 
         verify(quizService, times(1)).addQuiz(quizDTO);
     }
@@ -81,14 +81,10 @@ public class QuizControllerTest {
     @Test
     public void testDeleteQuiz() {
         Long quizId = 1L;
-        ResponseEntity<Response> response = quizController.deleteQuiz(quizId);
+        Response response = quizController.deleteQuiz(quizId);
         assertNotNull(response);
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.NO_CONTENT.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.QUIZ_DELETE_SUCCESS, responseBody.getMessage());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUIZ_DELETE_SUCCESS, response.getMessage());
 
         verify(quizService, times(1)).deleteQuiz(quizId);
     }
@@ -99,14 +95,10 @@ public class QuizControllerTest {
         QuizDTO updatedQuizDTO = new QuizDTO(quizId, "Updated Quiz", "Updated Description", 10, 2, 1L);
         when(quizService.updateQuiz(quizId, updatedQuizDTO)).thenReturn(updatedQuizDTO);
 
-        ResponseEntity<Response> response = quizController.updateQuiz(quizId, updatedQuizDTO);
+        Response response = quizController.updateQuiz(quizId, updatedQuizDTO);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        Response body = response.getBody();
-        assertNotNull(body);
-        assertEquals(HttpStatus.OK.value(), body.getCode());
-        assertEquals(SuccessMessages.QUIZ_UPDATED_SUCCESS, body.getMessage());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUIZ_UPDATED_SUCCESS, response.getMessage());
     }
 
 
@@ -118,9 +110,9 @@ public class QuizControllerTest {
         quizList.add(new QuizDTO(2L, "Quiz 2", "Quiz 2 Description", 8, 3, 10L));
         when(quizService.getQuizByCategoryId(categoryId)).thenReturn(quizList);
 
-        ResponseEntity<List<QuizDTO>> response = quizController.getQuizByCategoryId(categoryId);
+        Response response = quizController.getQuizByCategoryId(categoryId);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         List<QuizDTO> responseQuizList = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizList);

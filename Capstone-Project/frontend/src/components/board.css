@@ -5,6 +5,10 @@
     z-index: 100;
   }
 
+  h1 {
+    font-family : "-moz-initial" ;
+  }
+  
   ul {
     list-style-type: none;
     margin: 0;

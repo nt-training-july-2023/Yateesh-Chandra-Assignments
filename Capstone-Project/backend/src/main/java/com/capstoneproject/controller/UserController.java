@@ -1,13 +1,15 @@
 package com.capstoneproject.controller;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
+import com.capstoneproject.dto.UserListDTO;
 import com.capstoneproject.response.LoginResponse;
 import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
@@ -46,15 +49,15 @@ public class UserController {
      * @param userDTO of UserDTO class.
      * @return the id after registering.
      */
+    @SuppressWarnings("rawtypes")
     @PostMapping(path = "/save")
-    public final ResponseEntity<Response> saveUser(
+    public final Response saveUser(
             @RequestBody @Valid final UserDTO userDTO) {
             userService.addUser(userDTO);
             logger.info(SuccessMessages.REGISTRATION_SUCCESS);
             Response response = new Response(HttpStatus.CREATED.value(),
                     SuccessMessages.REGISTRATION_SUCCESS);
-            return new ResponseEntity<Response>(response,
-                    HttpStatus.CREATED);
+            return response;
     }
 
     /**
@@ -63,13 +66,15 @@ public class UserController {
      * @param loginDTO of LoginDTO.
      * @return the Id if it exists.
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @PostMapping(path = "/login")
-    public final ResponseEntity<LoginResponse> loginUser(
+    public final Response loginUser(
             @RequestBody @Valid final LoginDTO loginDTO) {
             LoginResponse loginResponse = userService.loginUser(loginDTO);
             logger.info(SuccessMessages.LOGIN_SUCCESS);
-            return new ResponseEntity<LoginResponse>(loginResponse,
-                    HttpStatus.OK);
+            Response response = new Response(HttpStatus.OK.value(),
+                    SuccessMessages.LOGIN_SUCCESS, loginResponse);
+            return response;
     }
 
     /**
@@ -77,15 +82,28 @@ public class UserController {
      * @param userId - of Long type.
      * @return the no content status.
      */
+    @SuppressWarnings("rawtypes")
     @DeleteMapping(path = "/{userId}")
-    public final ResponseEntity<Response> deleteUser(
+    public final Response deleteUser(
             @PathVariable final Long userId) {
         userService.deleteUser(userId);
         logger.info(SuccessMessages.USER_DELETE_SUCCESS);
-        Response response = new Response(HttpStatus.NO_CONTENT.value(),
+        Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.USER_DELETE_SUCCESS);
-        return new ResponseEntity<Response>(response,
-                HttpStatus.NO_CONTENT);
+        return response;
     }
 
+    /**
+     * This is the controller method to get all users.
+     * @return the response.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @GetMapping
+    public final Response getUsers() {
+        List<UserListDTO> userDto = userService.getUsers();
+        logger.info(SuccessMessages.USER_FETCH);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.USER_FETCH, userDto);
+        return response;
+    }
 }

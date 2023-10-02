@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import UserServices from "../../services/UserServices";
 import SweetAlert from "../SweetAlerts/SweetAlert";
+import InputComponent from "../InputComponent";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ButtonComponent from "../ButtonComponent";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -146,7 +149,7 @@ function Login() {
       <form onSubmit={handleFormSubmit}>
         
         <div className="form-group">
-          <input
+          <InputComponent
             type="email"
             name="email"
             placeholder="Enter your Email"
@@ -158,22 +161,22 @@ function Login() {
 
         <div className="form-group">
         <div className="password-input-container">
-          <input
+          <InputComponent
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Enter your Password"
             value={password}
             onChange={handlePasswordChange}
           />
-          <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
-            {showPassword ? "Hide" : "Show"}
-          </button>
+          <ButtonComponent type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
+            {showPassword ? <FaEyeSlash/> : <FaEye/>}
+          </ButtonComponent>
           </div>
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
         <div className="button-container">
-            <input type="Submit" value="Login" />
-            <input type="button" value="Home" onClick={redirect}/>
+            <button type="Submit"> Login </button>
+            <button type="button" onClick={redirect}> Home </button>
         </div>
         <h3>
             New to our Platform? <Link to="/register">Register now</Link>

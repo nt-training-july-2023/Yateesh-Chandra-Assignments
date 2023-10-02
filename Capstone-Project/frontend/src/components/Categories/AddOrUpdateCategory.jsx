@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useNavigate, useParams } from "react-router-dom";
-import AdminNavBar from "../AdminNavBar";
-import NotFound from "../NotFound";
+import AdminNavBar from "../../components/AdminNavBar";
+import NotFound from "../../components/NotFound";
 import CategoryService from "../../services/CategoryService";
-import SweetAlert from "../SweetAlerts/SweetAlert";
+import SweetAlert from "../../components/SweetAlerts/SweetAlert";
+import InputComponent from "../../components/InputComponent";
 
 const AddOrUpdateCategory = () =>{
 
@@ -140,7 +141,7 @@ const AddOrUpdateCategory = () =>{
                     <form onSubmit={handleAddOrUpdateCategory}>
                         <div className="form-group">
                             <label>Category Title:</label>
-                            <input
+                            <InputComponent
                               type="text"
                               value={categoryName}
                               onChange={handleCategoryNameChange}

@@ -14,13 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.QuestionService;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 class QuestionControllerTest {
 
     @Mock
@@ -41,9 +41,9 @@ class QuestionControllerTest {
         questions.add(new QuestionDTO(2L, "Test Question 2", "A1", "B2", "C3", "D4", "OptionB", 5L));
         when(questionService.getQuestions()).thenReturn(questions);
 
-        ResponseEntity<List<QuestionDTO>> response = questionController.getQuestions();
+        Response response = questionController.getQuestions();
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
         assertNotNull(responseQuestions);
@@ -58,9 +58,9 @@ class QuestionControllerTest {
         QuestionDTO questionDTO = new QuestionDTO(questionId, "Question 1", "A", "B", "C", "D", "OptionB", 4L );
         when(questionService.getQuestionById(questionId)).thenReturn(questionDTO);
 
-        ResponseEntity<QuestionDTO> response = questionController.getQuestionById(questionId);
+        Response response = questionController.getQuestionById(questionId);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(questionDTO, response.getBody());
 
         QuestionDTO responseQuestion = (QuestionDTO) response.getBody();
@@ -73,13 +73,12 @@ class QuestionControllerTest {
     public void testAddQuestion() {
         QuestionDTO questionDto = new QuestionDTO(1L, "Question 1", "A", "B", "C", "D", "OptionB", 4L);
         when(questionService.addQuestion(questionDto)).thenReturn(questionDto);
-        ResponseEntity<Response> response = questionController.addQuestion(questionDto);
-        assertNotNull(response);
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(SuccessMessages.QUESTION_ADD_SUCCESS, responseBody.getMessage());
+        Response response = questionController.addQuestion(questionDto);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertNotNull(questionDto);
+        assertEquals(SuccessMessages.QUESTION_ADD_SUCCESS, response.getMessage());
 
         verify(questionService, times(1)).addQuestion(questionDto);
     }
@@ -87,14 +86,10 @@ class QuestionControllerTest {
     @Test
     public void testDeleteQuestion() {
         Long questionId = 3L;
-        ResponseEntity<Response> response = questionController.deleteQuestion(questionId);
+        Response response = questionController.deleteQuestion(questionId);
         assertNotNull(response);
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.NO_CONTENT.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.QUESTION_DELETE_SUCCESS, responseBody.getMessage());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_DELETE_SUCCESS, response.getMessage());
 
         verify(questionService, times(1)).deleteQuestion(questionId);
     }
@@ -105,14 +100,10 @@ class QuestionControllerTest {
         QuestionDTO updatedQuestionDTO = new QuestionDTO(questionId, "Updated Question", "A", "B", "C", "D", "OptionB", 4L);
         when(questionService.updateQuestion(questionId, updatedQuestionDTO)).thenReturn(updatedQuestionDTO);
 
-        ResponseEntity<Response> response = questionController.updateQuestion(questionId, updatedQuestionDTO);
+        Response response = questionController.updateQuestion(questionId, updatedQuestionDTO);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        Response responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(HttpStatus.OK.value(), responseBody.getCode());
-        assertEquals(SuccessMessages.QUESTION_UPDATED_SUCCESS, responseBody.getMessage());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_UPDATED_SUCCESS, response.getMessage());
 
         verify(questionService, times(1)).updateQuestion(questionId, updatedQuestionDTO);
     }
@@ -125,9 +116,9 @@ class QuestionControllerTest {
         questions.add(new QuestionDTO(2L, "Question 2", "A", "B", "C", "D", "OptionB", 5L));
         when(questionService.getQuestionByQuizId(questionId)).thenReturn(questions);
 
-        ResponseEntity<List<QuestionDTO>> response = questionController.getQuestionByQuizId(questionId);
+        Response response = questionController.getQuestionByQuizId(questionId);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
         assertNotNull(responseQuestions);

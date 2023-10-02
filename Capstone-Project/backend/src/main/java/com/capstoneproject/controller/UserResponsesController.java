@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +23,7 @@ import jakarta.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("response")
+@SuppressWarnings("rawtypes")
 public class UserResponsesController {
 
     /**
@@ -43,13 +43,13 @@ public class UserResponsesController {
      * @return Ok status.
      */
     @PostMapping("/add")
-    public final ResponseEntity<Response> addUserResponses(
+    public final Response addUserResponses(
             @RequestBody @Valid final UserResponsesDTO userResponse) {
         responseService.addUserResponses(userResponse);
         logger.info(SuccessMessages.RESPONSE_ADDED);
         Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.RESPONSE_ADDED);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return response;
     }
 
 }

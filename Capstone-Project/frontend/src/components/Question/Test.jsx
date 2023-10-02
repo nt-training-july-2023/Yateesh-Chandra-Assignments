@@ -220,6 +220,7 @@ const Test = () => {
                         text: "Your Responses are posted",
                         icon: "info",
                         showConfirmButton: true,
+                        allowOutsideClick: false,
                         backdrop: 
                         `
                             rgb(200, 200, 200, 0.9)

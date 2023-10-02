@@ -162,4 +162,9 @@ public final class SuccessMessages {
      */
     public static final String QUESTION_FOUND = "Question Found";
 
+    /**
+     * This is success message for User fetch.
+     */
+    public static final String USER_FETCH = "Users fetched successfully";
+
 }

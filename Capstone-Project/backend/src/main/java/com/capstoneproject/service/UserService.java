@@ -1,6 +1,8 @@
 package com.capstoneproject.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
+import com.capstoneproject.dto.UserListDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.exceptions.UnAuthorizedException;
@@ -28,7 +31,7 @@ public class UserService {
      * The repository variable for user related operations.
      */
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     /**
      * The Encoder variable to encode the password entered.
@@ -48,7 +51,7 @@ public class UserService {
      * @return the name of the user.
      */
     public final String addUser(final UserDTO userDTO) {
-        Optional<User> user = userRepo.findByEmail(userDTO.getEmail());
+        Optional<User> user = userRepository.findByEmail(userDTO.getEmail());
         if (user.isPresent()) {
             logger.error(ExceptionMessages.EMAIL_ALREADY_EXISTS);
             throw new AlreadyExistsException(
@@ -59,7 +62,7 @@ public class UserService {
                     userDTO.getEmail(),
                     this.passwordEncoder.encode(userDTO.getPassword()),
                     userDTO.getUserRole(), userDTO.getPhoneNumber());
-        userRepo.save(users);
+        userRepository.save(users);
         return users.getName();
     }
 
@@ -71,14 +74,14 @@ public class UserService {
      *         attempt.
      */
     public final LoginResponse loginUser(final LoginDTO loginDTO) {
-        Optional<User> user1 = userRepo.findByEmail(loginDTO.getEmail());
+        Optional<User> user1 = userRepository.findByEmail(loginDTO.getEmail());
         if (user1.isPresent()) {
             String password = loginDTO.getPassword();
             String encodedPassword = user1.get().getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password,
                     encodedPassword);
             if (isPwdRight) {
-                Optional<User> user = userRepo.findOneByEmailAndPassword(
+                Optional<User> user = userRepository.findOneByEmailAndPassword(
                         loginDTO.getEmail(), encodedPassword);
                 if (user.isPresent()) {
                     logger.info(SuccessMessages.LOGIN_SUCCESS);
@@ -108,10 +111,37 @@ public class UserService {
      * @param userId of Long type is taken as input.
      */
     public void deleteUser(final Long userId) {
-        userRepo.findById(userId).orElseThrow(
+        userRepository.findById(userId).orElseThrow(
                 () -> new ElementNotExistsException(
                         ExceptionMessages.USER_NOT_EXIST));
         logger.info(SuccessMessages.USER_DELETE_SUCCESS);
-        userRepo.deleteById(userId);
+        userRepository.deleteById(userId);
+    }
+
+    /**
+     * This is the Method to get all users.
+     * @return the users list.
+     */
+    public List<UserListDTO> getUsers() {
+        List<User> users = userRepository.findAll();
+        logger.info(SuccessMessages.USER_FETCH);
+        return users.stream().map(this::convertModelToDto)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This is the method to convert the model to DTO.
+     * @param user of User type.
+     * @return the DTO of the model.
+     */
+    private UserListDTO convertModelToDto(final User user) {
+        logger.info(SuccessMessages.MODEL_TO_DTO);
+        UserListDTO userListDto = new UserListDTO();
+        userListDto.setUserId(user.getUserId());
+        userListDto.setName(user.getName());
+        userListDto.setEmail(user.getEmail());
+        userListDto.setUserRole(user.getUserRole());
+        userListDto.setPhoneNumber(user.getPhoneNumber());
+        return userListDto;
     }
 }

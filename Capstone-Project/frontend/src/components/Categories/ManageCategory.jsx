@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Categories.css';
-import AdminNavBar from '../AdminNavBar';
+import AdminNavBar from '../../components/AdminNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
-import DeactivateBackButton from '../DeactivateBackButton';
-import NotFound from '../NotFound';
+import DeactivateBackButton from '../../components/DeactivateBackButton';
+import NotFound from '../../components/NotFound';
 import CategoryService from '../../services/CategoryService';
-import SweetAlert from '../SweetAlerts/SweetAlert';
+import SweetAlert from '../../components/SweetAlerts/SweetAlert';
+import InputComponent from '../../components/InputComponent';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -66,8 +67,9 @@ const ManageCategory = () => {
                                 </button>
                             )}
                             <div className='search-bar'>
-                                <input 
+                                <InputComponent
                                     type="text"
+                                    className='search-input'
                                     placeholder='Search Category'
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
