@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Categories.css';
-import AdminNavBar from '../../components/AdminNavBar';
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
 import DeactivateBackButton from '../../components/DeactivateBackButton';
-import NotFound from '../../components/NotFound';
+import NotFound from '../../pages/HomePage/NotFound';
 import CategoryService from '../../services/CategoryService';
 import SweetAlert from '../../components/SweetAlerts/SweetAlert';
 import InputComponent from '../../components/InputComponent';
@@ -21,17 +21,15 @@ const ManageCategory = () => {
 
     const getCategories = () => {
         CategoryService.getCategories()
-        .then((response) => setCategories(response.data))
+        .then((response) => setCategories(response.data.body))
         .catch((error) => console.log("Error fetching Categories", error));
     };
 
     const handleDeleteCategory = (categoryId) => {
         CategoryService.deleteCategory(categoryId)
         .then(() => {
-            console.log("Category deleted : ", categoryId);
             getCategories();
         })
-        .catch((error) => console.error("Error deleting category : ", error));
     };
 
     const handleEditClick = (categoryId) => {

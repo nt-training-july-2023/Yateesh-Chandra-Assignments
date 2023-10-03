@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import "../board.css";
-import AdminNavBar from '../AdminNavBar';
-import NotFound from '../NotFound';
+import '../DashBoard/board.css'
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
+import NotFound from '../HomePage/NotFound';
 import UserServices from '../../services/UserServices';
 
 function AdminDashBoard() {
@@ -15,13 +15,15 @@ function AdminDashBoard() {
 
   const fetchUsers = async () =>{
     await UserServices.getUsers()
-    .then((response) => setUsers(response.data))
+    .then((response) => setUsers(response.data.body))
     .catch((error) => console.log(error));
   }
 
   const filterUser = users.filter((users) => {
     return users.name.toLowerCase().includes(searchQuery.toLowerCase()) || users.email.toLowerCase().includes(searchQuery.toLowerCase());
   });
+
+  const userRoleFilteredUsers = filterUser.filter((user) => user.userRole === "USER");
 
   return (
     <div className="app">
@@ -42,7 +44,7 @@ function AdminDashBoard() {
 
         <div className="category-table-container">
             <table className="category-table">
-            {users.length !== 0 ? (
+            {userRoleFilteredUsers.length !== 0 ? (
                 <>
                 <thead>
                     <tr>
@@ -54,7 +56,7 @@ function AdminDashBoard() {
                 </thead>
                 
                 <tbody>
-                    {filterUser.reverse().map((row, index) => (
+                    {userRoleFilteredUsers.reverse().map((row, index) => (
                     <tr key={index}>
                         <td>{index+1}</td>
                         <td>{row.name}</td>
@@ -66,7 +68,7 @@ function AdminDashBoard() {
                 </>
             ) : (
                 <h1 style={{fontSize : "22px"}}>
-                    No User has taken test as of now.
+                    No Users registered as of now.
                 </h1>
             )}
             </table>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Quizzes.css";
-import AdminNavBar from "../AdminNavBar";
-import UserNavBar from "../UserNavBar";
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
+import UserNavBar from '../../components/NavBars/UserNavBar';
 import { FaBackward, FaExternalLinkAlt, FaPen, FaPlusCircle, FaTasks, FaTrash } from "react-icons/fa";
-import NotFound from "../NotFound";
 import QuizService from "../../services/QuizService";
-import SweetAlert from "../SweetAlerts/SweetAlert";
+import NotFound from '../../pages/HomePage/NotFound';
+import SweetAlert from '../../components/SweetAlerts/SweetAlert';
 
 const ManageQuiz = () => {
     const { categoryId } = useParams();
@@ -21,15 +21,11 @@ const ManageQuiz = () => {
     }, []);
 
     const fetchQuizzes = () => {
-        try {
         QuizService.getQuizByCategoryId(categoryId)
           .then((response) => {
               console.log('categoryId:', categoryId);
-              setQuizzes(response?.data);
+              setQuizzes(response?.data?.body);
           });
-        } catch (error) {
-            console.error("Error fetching quizzes : ", error);
-        }
     };
 
     const deleteButton = (quizId) => {

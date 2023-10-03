@@ -106,10 +106,10 @@ class SweetAlert{
         })
       }
 
-     alertError(){
+     alertError(message){
         Swal.fire({
             title : "Login Failed",
-            text : "Invalid Email or Password",
+            text : message,
             icon : "error"
         })
     }

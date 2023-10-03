@@ -1,8 +1,8 @@
 import React from 'react';
-import "../board.css";
-import UserNavBar from '../UserNavBar';
-import NotFound from '../NotFound';
-import DeactivateBackButton from '../DeactivateBackButton';
+import '../DashBoard/board.css'
+import UserNavBar from '../../components/NavBars/UserNavBar';
+import NotFound from '../HomePage/NotFound';
+import DeactivateBackButton from '../../components/DeactivateBackButton';
 import ManageCategory from '../Categories/ManageCategory';
 
 function UserDashBoard() {

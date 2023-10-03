@@ -1,11 +1,10 @@
 import { useNavigate, Link } from "react-router-dom";
 import "../LoginRegistration/LoginRegistration.css";
 import { useState } from "react";
-import successfulswal from "../image/successfulswal.png";
+import successfulswal from "../../assets/image/successfulswal.png"
 import UserServices from "../../services/UserServices";
-import SweetAlert from "../SweetAlerts/SweetAlert";
+import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import InputComponent from "../InputComponent";
 
 export default function Registration() {
     const [name, setName] = useState("");
@@ -93,7 +92,10 @@ export default function Registration() {
       if (!name) {
         setNameError("User Name is required");
         isValid = false;
-      } else {
+      } else if (name.startsWith(" ")){
+        setNameError("Name cannot start with spaces");
+        isValid = false;
+      } else{
         setNameError("");
       }
 
@@ -154,29 +156,27 @@ export default function Registration() {
           password,
           phoneNumber,
         };
-        const response = await UserServices.registerUser(data);
 
-        if (response?.status === 201) {
+        const response = await UserServices.registerUser(data);
           console.log("successful");
+          console.log(response);
           SweetAlert.registrationSuccessFireAlert(successfulswal);
           navigate("/login");
-        }
+
       } catch (error) {
         console.log(error);
         setEmailError("This email already exists");
-        SweetAlert.registrationFailureFireAlert(
-          "An account is registered previously under this Email Id. Either Login or register with other Email Id"
-        );
-        console.log("Oops.! The mail entered does not exist.!");
+        SweetAlert.registrationFailureFireAlert(error.response.data.message);
       }
     };
 
-    return (
+    return(
       <div className="registration-form">
         <h2>Signup</h2>
         <form onSubmit={handleFormSubmit}>
+          
           <div className="form-group">
-            <InputComponent
+            <input
               type="text"
               name="name"
               placeholder="Enter your Name"
@@ -185,9 +185,9 @@ export default function Registration() {
             />
             {nameError && <div className="error">{nameError}</div>}
           </div>
-
+          
           <div className="form-group">
-              <InputComponent
+            <input
               type="email"
               name="email"
               placeholder="Enter your Email"
@@ -196,51 +196,41 @@ export default function Registration() {
             />
             {emailError && <div className="error">{emailError}</div>}
           </div>
-
+  
           <div className="form-group">
             <div className="password-input-container">
-                <InputComponent
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Enter your Password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <button
-                type="button"
-                className="password-toggle-button"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? <FaEyeSlash/> : <FaEye/>}
-              </button>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your Password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
+              {showPassword ? <FaEyeSlash/> : <FaEye/>}
+            </button>
             </div>
             {passwordError && <div className="error">{passwordError}</div>}
           </div>
-
+  
           <div className="form-group">
-            <div className="password-input-container">
-                <InputComponent
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                placeholder="Enter Password to confirm"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
-              <button
-                type="button"
-                className="password-toggle-button"
-                onClick={toggleConfirmPasswordVisibility}
-              >
-                {showConfirmPassword ? <FaEyeSlash/> : <FaEye/>}
-              </button>
+          <div className="password-input-container">
+            <input
+              type={showConfirmPassword ? "text" :"password"}
+              name="confirmPassword"
+              placeholder="Enter Password to confirm"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
+            <button type = "button" className = "password-toggle-button" onClick={toggleConfirmPasswordVisibility}>
+              {showConfirmPassword ? <FaEyeSlash/> : <FaEye/>}
+            </button>
             </div>
-            {confirmPasswordError && (
-              <div className="error">{confirmPasswordError}</div>
-            )}
+            {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
           </div>
-
+  
           <div className="form-group">
-              <InputComponent
+            <input
               type="phone"
               name="phoneNumber"
               pattern="[0-9]*"
@@ -250,12 +240,12 @@ export default function Registration() {
             />
             {phoneNumberError && <div className="error">{phoneNumberError}</div>}
           </div>
-              <InputComponent type="Submit" value="Register" />
-          <div className="text">
-            <h3>
-              Already our Subscriber? <Link to="/Login">Login now</Link>
-            </h3>
-          </div>
+              <input type="Submit" value="Register Now" />
+              <div className="text">
+              <h3>
+                  Already our Subscriber? <Link to="/Login">Login now</Link> 
+              </h3>
+              </div>
         </form>
       </div>
     );

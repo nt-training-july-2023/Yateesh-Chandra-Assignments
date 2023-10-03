@@ -3,10 +3,10 @@ import "./LoginRegistration.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import UserServices from "../../services/UserServices";
-import SweetAlert from "../SweetAlerts/SweetAlert";
-import InputComponent from "../InputComponent";
+import SweetAlert from "../../components/SweetAlerts/SweetAlert";
+import InputComponent from "../../components/InputComponent";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import ButtonComponent from "../ButtonComponent";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -115,15 +115,12 @@ function Login() {
 
             console.log(response);
 
-            localStorage.setItem("role", response.data.userRole);
-            localStorage.setItem("id", response.data.userId)
-            localStorage.setItem("name", response.data.name);
-            localStorage.setItem("email", response.data.email);
+            localStorage.setItem("role", response.data.body.userRole);
+            localStorage.setItem("id", response.data.body.userId)
+            localStorage.setItem("name", response.data.body.name);
+            localStorage.setItem("email", response.data.body.email);
 
             const userRole = localStorage.getItem("role");
-
-            if(response?.status === 200){
-                
                 console.log("User Role", userRole);
                 if (userRole === "ADMIN") {
                     console.log(userRole);
@@ -134,14 +131,11 @@ function Login() {
                     navigate("/user");
                     console.log("You are navigated to User dashboard..!");
                 }
-              }
+
         } catch (err) {
-            if(err?.response?.data?.message === "Invalid Password" 
-            || err?.response?.data?.message === "Email does not exist.!" ){
-                SweetAlert.alertError()
+                SweetAlert.alertError(err?.response?.data?.message);
             }
         }
-      };
 
       return(
         <div className="registration-form">
@@ -168,15 +162,15 @@ function Login() {
             value={password}
             onChange={handlePasswordChange}
           />
-          <ButtonComponent type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
+          <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
             {showPassword ? <FaEyeSlash/> : <FaEye/>}
-          </ButtonComponent>
+          </button>
           </div>
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
         <div className="button-container">
-            <button type="Submit"> Login </button>
-            <button type="button" onClick={redirect}> Home </button>
+            <input type="Submit" value="Login" />
+            <input type="button" value = "Home" onClick={redirect} />
         </div>
         <h3>
             New to our Platform? <Link to="/register">Register now</Link>

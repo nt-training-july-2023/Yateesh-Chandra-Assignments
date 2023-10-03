@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useNavigate, useParams } from "react-router-dom";
-import AdminNavBar from "../../components/AdminNavBar";
-import NotFound from "../../components/NotFound";
+import AdminNavBar from "../../components/NavBars/AdminNavBar";
+import NotFound from "../../pages/HomePage/NotFound";
 import CategoryService from "../../services/CategoryService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 import InputComponent from "../../components/InputComponent";
@@ -23,7 +23,7 @@ const AddOrUpdateCategory = () =>{
     const fetchCategoryData = () => {
         CategoryService.getCategoryById(categoryId)
         .then((response) => {
-            const { categoryName, description } = response.data;
+            const { categoryName, description } = response.data.body;
             setCategoryName(categoryName);
             setDescription(description);
         })
@@ -63,8 +63,11 @@ const AddOrUpdateCategory = () =>{
         if (!categoryName) {
             setCategoryNameError("Category Title is Required");
             isValid = false;
+        } else if(categoryName.startsWith(" ")){
+            setCategoryNameError("Name should start with Spaces.");
+            isValid = false;
         } else {
-            setCategoryNameError("");
+            setCategoryNameError('');
         }
 
         if (!description) {
@@ -92,16 +95,14 @@ const AddOrUpdateCategory = () =>{
         try {
             if (isUpdating) {
                 try{
-                    const res = await CategoryService.updateCategory(categoryId, categoryData);
-                    if(res?.status === 200){
-                        SweetAlert.successAlert("Updated");
-                        console.log("Category updated successfully.");
-                        navigate("/manage-category");
-                    }
+                    await CategoryService.updateCategory(categoryId, categoryData);
+                    SweetAlert.successAlert("Updated");
+                    console.log("Category updated successfully.");
+                    navigate("/manage-category");
                 }
 
                 catch(error){
-                    if(error?.response?.data?.code === 302){
+                    if(error?.response?.data?.message === "Category already Exists"){
                         setCategoryNameError("Category already exists");
                         SweetAlert.alreadyExists("Category")
                     }
@@ -111,15 +112,13 @@ const AddOrUpdateCategory = () =>{
             } else {
 
                 try{
-                    const response = await CategoryService.addCategory(categoryData);
-                    if(response.status === 201){
-                        SweetAlert.successAlert("Added");
-                        console.log("Category added successfully.");
-                        navigate("/manage-category")
-                      }
+                    await CategoryService.addCategory(categoryData);
+                    SweetAlert.successAlert("Added");
+                    console.log("Category added successfully.");
+                    navigate("/manage-category")
               } catch(error) {
                     console.error(error)
-                    if(error?.response?.data?.code === 302){
+                    if(error?.response?.data?.message === "Category already Exists"){
                         setCategoryNameError("Category already exists")
                         SweetAlert.alreadyExists("Category");
                     }
@@ -162,7 +161,7 @@ const AddOrUpdateCategory = () =>{
 
                         <div className="form-group">
                             <div className="button-container-category">
-                                <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
+                                <button type = "Submit">{isUpdating ? 'Update' : 'Add'}</button>
                                 <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
                             </div>
                         </div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./ManageQuestion.css";
-import AdminNavBar from "../AdminNavBar";
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import { FaBackward, FaPlusCircle } from "react-icons/fa";
-import NotFound from "../NotFound";
+import NotFound from '../HomePage/NotFound';
 import QuestionService from "../../services/QuestionService";
-import SweetAlert from "../SweetAlerts/SweetAlert";
+import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -38,7 +38,7 @@ const ManageQuestion = () => {
     const fetchQuestions = () => {
         QuestionService.getQuestionsByQuizId(quizId)
         .then((response) => {
-            setQuestions(response.data);
+            setQuestions(response.data.body);
         })
         .catch((error) => {
             console.error("Error fetching Questions : ", error);

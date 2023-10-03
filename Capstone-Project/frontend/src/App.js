@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import AdminDashBoard from './components/DashBoard/AdminDashBoard';
-import HomePage from './components/HomePage';
-import Registration from './components/LoginRegistration/Registration';
-import Login from './components/LoginRegistration/Login';
-import UserDashBoard from './components/DashBoard/UserDashBoard';
-import ManageCategory from './components/Categories/ManageCategory';
-import AddOrUpdateCategory from './components/Categories/AddOrUpdateCategory';
-import ManageQuiz from './components/Quiz/ManageQuiz';
-import AddOrUpdateQuiz from './components/Quiz/AddOrUpdateQuiz';
-import ManageQuestion from './components/Question/ManageQuestion';
-import Profile from './components/Profile/Profile';
-import Test from './components/Question/Test';
+import AdminDashBoard from '../src/pages/DashBoard/AdminDashBoard';
+import HomePage from "../src/pages/HomePage/HomePage";
+import Registration from '../src/pages/LoginRegistration/Registration';
+import Login from '../src/pages/LoginRegistration/Login';
+import UserDashBoard from '../src/pages/DashBoard/UserDashBoard';
+import ManageCategory from '../src/pages/Categories/ManageCategory';
+import AddOrUpdateCategory from "../src/pages/Categories/AddOrUpdateCategory";
+import ManageQuiz from '../src/pages/Quiz/ManageQuiz';
+import AddOrUpdateQuiz from '../src/pages/Quiz/AddOrUpdateQuiz';
+import ManageQuestion from '../src/pages/Question/ManageQuestion';
+import Profile from '../src/pages/Profile/Profile';
+import Test from '../src/pages/Question/Test';
 
 function App() {
   return (

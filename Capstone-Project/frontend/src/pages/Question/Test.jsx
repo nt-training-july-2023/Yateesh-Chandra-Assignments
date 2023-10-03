@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './Test.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import clockswal from "../image/clockswal.png";
-import oopsswal from "../image/oopsswal.png";
-import instructionswal from "../image/instructionswal.png";
-import DeactivateBackButton from '../DeactivateBackButton';
-import NotFound from '../NotFound';
+import clockswal from "../../assets/image/clockswal.png";
+import oopsswal from "../../assets/image/oopsswal.png";
+import instructionswal from "../../assets/image/instructionswal.png";
+import DeactivateBackButton from '../../components/DeactivateBackButton';
+import NotFound from '../../pages/HomePage/NotFound';
+import SweetAlert from '../../components/SweetAlerts/SweetAlert';
 import QuestionService from '../../services/QuestionService';
 import ResponseService from '../../services/ResponseService';
-import SweetAlert from '../SweetAlerts/SweetAlert';
 import { format } from 'date-fns';
-import TimerNavBar from '../TimerNavBar';
+import TimerNavBar from '../../components/NavBars/TimerNavBar';
 
 const Test = () => {
 
@@ -70,7 +70,7 @@ const Test = () => {
     const fetchQuestions = () => {
         QuestionService.getQuestionsByQuizId(quizId)
             .then((response) => {
-                if (response.data.length === 0) {
+                if (response.data.body.length === 0) {
                     Swal.fire({
                         title: "No Questions available",
                         text: "Kindly take another Quiz",
@@ -81,7 +81,7 @@ const Test = () => {
                         navigate(`/manage-quiz/${categoryId}`);
                     })
                 } else {
-                    setQuestions(response.data);
+                    setQuestions(response.data.body);
                     setLoading(false);
                 }
             })
@@ -317,7 +317,9 @@ const Test = () => {
     return (
         <div>
             <DeactivateBackButton />
+            {(questions.length>0 &&
             <TimerNavBar timerValue={formatTime(timer)} className={timer < 30 ? "timer-out" : "timer"} />
+            )}
             {(userRole === "USER" ? (
                 <div className="quiz-container">
                     {loading ? (

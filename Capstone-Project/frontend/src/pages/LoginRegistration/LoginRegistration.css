@@ -64,14 +64,14 @@
     top: 51%;
     right: 10px;
     transform: translateY(-52%) ;
-    background-color : #eaf5f4;
+    background-color : #e1f5f4;
     color : rgb(1, 0, 10);
     border : None;
-    border-radius: 3px;
+    border-radius: 2px;
     transition: all 0.5s;
   }
-
-  .button-container button[type="Submit"] {
+  
+  input[type="Submit"] {
     width: 45%;
     padding: 10px;
     margin-left: 10px;
@@ -84,7 +84,7 @@
     margin-bottom: 10px;
   }
 
-  .button-container button[type="button"] {
+  input[type="button"] {
     width: 45%;
     padding: 10px;
     margin-right: 10px;

@@ -200,3 +200,10 @@
   background-color: #007BFF;
   color: white;
 }
+
+.no-data-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}

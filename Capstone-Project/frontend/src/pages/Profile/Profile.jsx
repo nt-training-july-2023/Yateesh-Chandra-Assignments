@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "../AdminNavBar";
-import UserNavBar from "../UserNavBar";
-import NotFound from "../NotFound";
-import DeactivateBackButton from "../DeactivateBackButton";
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
+import UserNavBar from '../../components/NavBars/UserNavBar';
+import NotFound from '../HomePage/NotFound';
+import DeactivateBackButton from '../../components/DeactivateBackButton';
 import ResultService from "../../services/ResultService";
 
 const Profile = () => {
 
     const userId = localStorage.getItem("id");
-    const userName = localStorage.getItem("name");
     const userRole = localStorage.getItem("role");
     const [searchQuery, setSearchQuery] = useState('');
     const [allResults, setAllResults] = useState([]);
@@ -26,25 +25,17 @@ const Profile = () => {
     }, []);
 
     const fetchResults = async () => {
-        try {
-          const response = await ResultService.getResults();
-          const results = response?.data;
-          results.sort(sortByTimeStamp);
-          setAllResults(results);
-        } catch (error) {
-          console.error("Error Fetching Results : ", error);
-        }
+        const response = await ResultService.getResults();
+        const results = response?.data?.body;
+        results.sort(sortByTimeStamp);
+        setAllResults(results);
       };
 
     const fetchResultsByUser = async() => {
-        try{
-            ResultService.getResultByUserId(userId)
-            .then((response) => {
-                setAllResults(response?.data);
-            });
-        } catch(error) {
-            console.error("Error Fetching Results : ", error);
-        }
+        ResultService.getResultByUserId(userId)
+        .then((response) => {
+            setAllResults(response?.data?.body);
+        });
     }
 
     const sortByTimeStamp = (a, b) => {

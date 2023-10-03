@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AdminNavBar from "../AdminNavBar";
+import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import {useLocation} from 'react-router-dom'
-import NotFound from "../NotFound";
+import NotFound from "../../pages/HomePage/NotFound";
 import QuizService from "../../services/QuizService";
-import SweetAlert from "../SweetAlerts/SweetAlert";
+import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 
 const AddOrUpdateQuiz = () => {
     const { quizId } = useParams();
@@ -30,7 +30,7 @@ const AddOrUpdateQuiz = () => {
     const fetchQuizData = () => {
         QuizService.getQuizById(quizId)
         .then((response) => {
-            const { quizName, quizDescription, numOfQuestions, timeInMin} = response.data;
+            const { quizName, quizDescription, numOfQuestions, timeInMin} = response.data.body;
             setQuizName(quizName);
             setQuizDescription(quizDescription);
             setNumOfQuestions(numOfQuestions);
@@ -89,7 +89,10 @@ const AddOrUpdateQuiz = () => {
         if (!quizName) {
             setQuizNameError("Quiz Name is required");
             isValid = false;
-        } else {
+        } else if(quizName.startsWith("")){
+            setQuizNameError("Name cannot start with spaces");
+            isValid = false;
+        } else{
             setQuizNameError("");
         }
 
@@ -146,18 +149,13 @@ const AddOrUpdateQuiz = () => {
             if (isUpdating) {
             
                 try{
-                    const res = await QuizService.updateQuiz(quizId, quizData);
-                    
-                    if(res?.status === 200){
-                        SweetAlert.successAlert("Updated");
-                        navigate(`/manage-quiz/${categoryId}`);
-                        console.log("Quiz Updated Successfully");
-                        fetchQuizData();
-                    }
-
+                    await QuizService.updateQuiz(quizId, quizData);
+                    SweetAlert.successAlert("Updated");
+                    navigate(`/manage-quiz/${categoryId}`);
+                    fetchQuizData();
                 } catch(error) {
                         
-                    if(error?.response?.data?.code === 302){
+                    if(error?.response?.data?.message === "Quiz already Exists"){
                         setQuizNameError("Quiz already exists");
                         SweetAlert.alreadyExists("Quiz");
                 
@@ -169,17 +167,13 @@ const AddOrUpdateQuiz = () => {
             } else {
             
                 try{
-                    const response = await QuizService.addQuiz(quizData);            
-                
-                    if(response?.status === 201){
-                        SweetAlert.successAlert("Added");
-                        navigate(`/manage-quiz/${categoryId}`);
-                        console.log("New Quiz is added successfully.", quizData);
-                    }
+                    await QuizService.addQuiz(quizData);            
+                    SweetAlert.successAlert("Added");
+                    navigate(`/manage-quiz/${categoryId}`);
 
                 } catch(error) {
                     console.log(error);
-                    if(error?.response?.data?.code === 302 ){
+                    if(error?.response?.data?.message === "Quiz already Exists" ){
                         setQuizNameError("Quiz already exists");
                         SweetAlert.alreadyExists("Quiz");
                     } 
@@ -189,7 +183,6 @@ const AddOrUpdateQuiz = () => {
                     }
                 }
             }
-
         } 
         
         catch (error) {
