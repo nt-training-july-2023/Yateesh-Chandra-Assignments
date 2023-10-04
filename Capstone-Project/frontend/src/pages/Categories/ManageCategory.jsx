@@ -7,7 +7,9 @@ import DeactivateBackButton from '../../components/DeactivateBackButton';
 import NotFound from '../../pages/HomePage/NotFound';
 import CategoryService from '../../services/CategoryService';
 import SweetAlert from '../../components/SweetAlerts/SweetAlert';
-import InputComponent from '../../components/InputComponent';
+import IconButton from '../../components/IconButton';
+import IconLeftButton from '../../components/IconLeftButton';
+import Header1 from '../../components/Header1';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -57,15 +59,13 @@ const ManageCategory = () => {
                 <>
                     {userRole === "ADMIN" && <AdminNavBar/>}
                     <div className="manage-category-container">
-                        <h1>{filterCategory.length > 0 ? userRole === "ADMIN" && ("Category List") : "No Category"}</h1>
+                        <Header1 text = {filterCategory.length > 0 ? userRole === "ADMIN" && ("Category List") : "No Category"} className = "arial"/>
                         <div className='button-search-container'>
                             {userRole === "ADMIN" && (
-                                <button className="blue-button" onClick={() => navigate('/add-category')}>
-                                    Add Category <FaPlusCircle className="small-icon" />
-                                </button>
+                                <IconButton className="blue-button button" onClick={() => navigate('/add-category')} text="Add " icon={<FaPlusCircle/>} />
                             )}
                             <div className='search-bar'>
-                                <InputComponent
+                                <input
                                     type="text"
                                     className='search-input'
                                     placeholder='Search Category'
@@ -90,13 +90,21 @@ const ManageCategory = () => {
                                                 <td>{category.categoryName}</td>
                                                 <td>{category.description}</td>                        
                                                 <td>
+                                                    <div className='button-container-category'>
                                                     {userRole === "ADMIN" && (    
-                                                        <button className="blue-button" onClick={() => handleEditClick(category.categoryId)}><FaPen className="small-icon" /> Update</button>
+                                                        <IconLeftButton text = "Update" className="blue-button button-category" onClick={() => handleEditClick(category.categoryId)} icon = {<FaPen className="very-small-icon" />}/>
                                                     )}    
                                                     {userRole === "ADMIN" && (    
-                                                        <button className="red-button" onClick={() => handleDeleteClick(category.categoryId)}><FaTrash className="small-icon"/> Delete</button>
+                                                        <IconLeftButton text = "Delete" className="red-button button-category" onClick={() => handleDeleteClick(category.categoryId)} icon = {<FaTrash className="very-small-icon" />}/>
                                                     )}    
-                                                    <button className="green-button" onClick={() => handleOpenButton(category.categoryId, category.categoryName)}><FaExternalLinkAlt className="small-icon"/> {userRole === "ADMIN" ? ("Open") : "View Quiz"}</button>
+                                                       <IconLeftButton
+                                                        text={userRole === "ADMIN" ? "Open" : "View Quiz"}
+                                                        className={userRole === "ADMIN" ? "green-button button-category" : "green-button button-wide"}
+                                                        onClick={() => handleOpenButton(category.categoryId, category.categoryName)}
+                                                        icon={<FaExternalLinkAlt className="very-small-icon" />}
+                                                        />
+
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}

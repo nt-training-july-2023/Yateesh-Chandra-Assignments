@@ -7,6 +7,7 @@ import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 import InputComponent from "../../components/InputComponent";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ButtonComponent from "../../components/ButtonComponent";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -143,7 +144,8 @@ function Login() {
       <form onSubmit={handleFormSubmit}>
         
         <div className="form-group">
-          <InputComponent
+            <InputComponent
+            className = "reg-input-fields"
             type="email"
             name="email"
             placeholder="Enter your Email"
@@ -156,21 +158,20 @@ function Login() {
         <div className="form-group">
         <div className="password-input-container">
           <InputComponent
+            className = "reg-input-fields"
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Enter your Password"
             value={password}
             onChange={handlePasswordChange}
           />
-          <button type = "button" className="password-toggle-button" onClick={togglePasswordVisibility}>
-            {showPassword ? <FaEyeSlash/> : <FaEye/>}
-          </button>
+          <ButtonComponent type = "button" className = "password-toggle-button" onClick={togglePasswordVisibility} text = {showPassword ? <FaEyeSlash/> : <FaEye/>} />
           </div>
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
         <div className="button-container">
-            <input type="Submit" value="Login" />
-            <input type="button" value = "Home" onClick={redirect} />
+            <InputComponent type="Submit" className="button-submit-login" value = "Login" />
+            <InputComponent type="button" className="button-button-login" value = "Home" onClick={redirect} />
         </div>
         <h3>
             New to our Platform? <Link to="/register">Register now</Link>

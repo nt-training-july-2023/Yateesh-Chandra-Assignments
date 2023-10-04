@@ -4,6 +4,7 @@ import UserNavBar from '../../components/NavBars/UserNavBar';
 import NotFound from '../HomePage/NotFound';
 import DeactivateBackButton from '../../components/DeactivateBackButton';
 import ResultService from "../../services/ResultService";
+import Header1 from "../../components/Header1";
 
 const Profile = () => {
 
@@ -11,6 +12,7 @@ const Profile = () => {
     const userRole = localStorage.getItem("role");
     const [searchQuery, setSearchQuery] = useState('');
     const [allResults, setAllResults] = useState([]);
+    const userName = localStorage.getItem("name");
     
     useEffect(() => {
         if(userRole === "ADMIN"){
@@ -46,6 +48,9 @@ const Profile = () => {
         return results.userName.toLowerCase().includes(searchQuery.toLowerCase()) || results.email.toLowerCase().includes(searchQuery.toLowerCase());
     }).sort(sortByTimeStamp);
 
+    const search = (e) => {
+        setSearchQuery(e.target.value)
+    }
     return(
         <div>
             <DeactivateBackButton/>
@@ -61,16 +66,17 @@ const Profile = () => {
             )
             )} 
             <div>
-                <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px" }}>Hello</h1>
+                <Header1 className = "h1-profile arial" text={userRole === "ADMIN" ? "The Users' Activity of Assessments is viewed here:" : `Dear ${userName}, The Report of your Assessments can be viewed here..!`}/>
             </div>
             {(userRole === "ADMIN" && (
                 <div>
                     <div className="admin-search-bar">
                         <input
                         type="text"
+                        className="search-input-over"
                         placeholder="Search Results By Name or Email"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={search}
                         />
                     </div>
                     
@@ -92,24 +98,24 @@ const Profile = () => {
                             </thead>
                             
                             <tbody>
-                                {filterResults.reverse().map((row, index) => (
+                                {filterResults.map((row, index) => (
                                 <tr key={index}>
                                     <td>{index+1}</td>
                                     <td>{row.userName}</td>
                                     <td>{row.email}</td>
                                     <td>{row.categoryName}</td>
                                     <td>{row.quizName}</td>
-                                    <td style={{textAlign : "center"}}>{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
-                                    <td style={{textAlign : "center"}}>{row.marksScored}/{row.totalMarks}</td>
+                                    <td className="td-center">{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
+                                    <td className="td-center">{row.marksScored}/{row.totalMarks}</td>
                                     <td>{row.timeStamp}</td>
                                     </tr>
                                 ))}
                             </tbody>
                             </>
                         ) : (
-                            <h1 style={{fontSize : "22px"}}>
-                                No User has taken test as of now.
-                            </h1>
+                            <div className="AppCenter">
+                            <Header1 className = "text-22" text = "No User has taken tests as of now"/>
+                            </div>
                         )}
                         </table>
                     </div>
@@ -138,17 +144,19 @@ const Profile = () => {
                                 <td>{index+1}</td>
                                 <td>{row.categoryName}</td>
                                 <td>{row.quizName}</td>
-                                <td style={{textAlign : "center"}}>{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
-                                <td style={{textAlign : "center"}}>{row.marksScored}/{row.totalMarks}</td>
+                                <td className="td-center">{row.numOfQuestionsAnswered}/{row.numOfQuestions}</td>
+                                <td className="td-center">{row.marksScored}/{row.totalMarks}</td>
                                 <td>{row.timeStamp}</td>
                                 </tr>
                             ))}
                         </tbody>
                         </>
                         ) : (
-                            <h1 style={{fontSize : "22px"}}>
-                                You have not taken any tests so far. Start assessing now.
-                            </h1>
+                            <div className="AppCenter">
+                                <Header1 className = "text-22" text = {`You have not taken any tests so far.`} />
+                                <Header1 className = "text-22" text = {`Start assessing now from Home .`} />
+                                
+                            </div>
                         )}
                     </table>
                 </div>

@@ -31,7 +31,7 @@
   color: #333;
 }
 
-.question-form button {
+.question-form .button-question {
   color: #fff6f6;
   padding: 8px 16px;
   border: none;
@@ -48,7 +48,11 @@
   position: relative;
 }
 
-.add-update input[type="text"], textarea {
+.button-container .right{
+  margin-right: 0;
+}
+
+.add-update .input-text {
   width: 50%; 
   padding: 10px;  
   border: 1px solid #4c518f;
@@ -56,7 +60,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.add-update textarea{
+.add-update .textarea-title{
   min-width: 50%; 
   padding: 10px;  
   border: 1px solid #4c518f;
@@ -64,7 +68,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.add-update select {
+.add-update .select {
   width: 53%;
   padding: 10px;
   border: 1px solid #4c518f;
@@ -103,11 +107,23 @@
   padding: 0;
   border: 5px;
   width: 100%;
+  display: list-item;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
 }
+
+/* .question-list li {
+  background-color: none;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: left;
+  transition: transform 0.3s;
+  width: calc(50% - 10px);
+} */
 
 .question-list li {
   background-color: none;
@@ -118,14 +134,23 @@
   text-align: left;
   transition: transform 0.3s;
   width: calc(50% - 10px);
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Move actions to the bottom */
 }
+
 
 @media (max-width: 600px) {
   .question-list li {
     width: 100%;
   }
 
-  .add-update input[type="text"], textarea {
+  .h1-profile{
+    font-size : 17px; 
+    margin-left : 20px;
+    margin-bottom : 5px;
+  }
+  .add-update .input-text {
     width: 70%; 
     padding: 10px;  
     border: 1px solid #4c518f;
@@ -133,15 +158,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .add-update textarea{
-    min-width: 50%; 
+  .add-update .textarea-title{
+    min-width: 70%; 
     padding: 10px;  
     border: 1px solid #4c518f;
     border-radius: 5px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .add-update select {
+  .add-update .select {
     width: 76%;
     padding: 10px;
     border: 1px solid #4c518f;
@@ -177,6 +202,25 @@
   color: #666;
 }
 
+
 .question-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  border: none;
   margin-top: 10px;
+  flex-direction: row;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.question-actions .item{
+  margin-right: 10px;
+}
+
+.button-questions{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

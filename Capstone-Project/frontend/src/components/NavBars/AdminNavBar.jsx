@@ -2,6 +2,7 @@ import React from 'react';
 import { FaCode, FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import IconButton from '../IconButton';
 
 function AdminNavBar() {
 
@@ -46,7 +47,7 @@ function AdminNavBar() {
                       <li><Link to="/manage-category" className={location.pathname === '/manage-category' || location.pathname === '/add-category' ? 'active' : ''}><FaCode/> Categories</Link></li>
                       <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}><FaListAlt/> User Activity</Link></li>
                       <li className='sign-out-button'>
-                          <button onClick={signOutSweetAlert}>Sign Out <FaPowerOff/></button>
+                          <IconButton className='sign-button' onClick={signOutSweetAlert} text="Sign Out " icon={<FaPowerOff/>} />
                       </li>
                   </ul>
               </nav>

@@ -5,6 +5,11 @@ import {useLocation} from 'react-router-dom'
 import NotFound from "../../pages/HomePage/NotFound";
 import QuizService from "../../services/QuizService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
+import LabelComponent from "../../components/LabelComponent";
+import InputComponent from "../../components/InputComponent";
+import TextAreaComponent from "../../components/TextAreaComponent";
+import Header1 from "../../components/Header1";
+import ButtonComponent from "../../components/ButtonComponent";
 
 const AddOrUpdateQuiz = () => {
     const { quizId } = useParams();
@@ -203,41 +208,43 @@ const AddOrUpdateQuiz = () => {
             <>
                 <AdminNavBar />
                 <div className="add-quiz-container">
-                    <h1>{isUpdating ? 'Update Quiz' : 'Add Quiz'}</h1>
+                    <Header1 className = "arial" text = {isUpdating ? 'Update Quiz' : 'Add Quiz'}/>
                     <form onSubmit={handleAddOrUpdateQuiz}>
                         <div className="form-group">
-                            <label>Quiz Name:</label>
-                            <input
+
+                            <LabelComponent className = "label" text = "Quiz Name:"/>
+                            <InputComponent
+                            className = "reg-input-fields"
                             type="text"
                             value={quizName}
                             onChange={handleQuizNameChange}
                             placeholder="Enter Quiz Name"
                             />
-
                             {quizNameError && <div className="error">{quizNameError}</div>}
 
-                            <label>Quiz Description:</label>
-                            <textarea
+                            <LabelComponent className = "label" text = "Quiz Description:"/>
+                            <TextAreaComponent
+                            className = "reg-input-fields"
                             value={quizDescription}
                             onChange={handleQuizDescriptionChange}
                             placeholder="Enter Quiz Description"
                             />
-
                             {quizDescriptionError && <div className="error">{quizDescriptionError}</div>}
 
-                            <label>Number of Questions:</label>
-                            <input
+                            <LabelComponent className = "label" text = "Number Of Questions:"/>
+                            <InputComponent
                             type="number"
+                            className = "reg-input-fields"
                             value={numOfQuestions}
                             onChange={handleQuizNumOfQuestions}
                             placeholder="Enter Number of Questions"
                             />
-
                             {numOfQuestionsError && <div className="error">{numOfQuestionsError}</div>}
 
-                            <label>Duration(in Minutes): </label>
-                            <input
+                            <LabelComponent className = "label" text = "Duration (in Minutes):"/>
+                            <InputComponent
                             type = "number"
+                            className = "reg-input-fields"
                             value = {timeInMin}
                             onChange = {handleQuizDuration}
                             place Holder = "Enter Duration"
@@ -249,8 +256,8 @@ const AddOrUpdateQuiz = () => {
                         
                         <div className="form-group">
                             <div className="button-container-category">
-                                <button type="submit">{isUpdating ? 'Update' : 'Add'}</button>
-                                <button type="button" className="red-button" onClick={cancelButton}>Cancel</button>
+                                <ButtonComponent className = "button blue-button" type="submit" text = {isUpdating ? 'Update' : 'Add'} />
+                                <ButtonComponent type="button" className="button red-button" onClick={cancelButton} text = "Cancel" />
                             </div>
                         </div>
                     </form>

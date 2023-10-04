@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./ManageQuestion.css";
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
-import { FaBackward, FaPlusCircle } from "react-icons/fa";
+import { FaBackward, FaPen, FaPlusCircle, FaTractor, FaTrash } from "react-icons/fa";
 import NotFound from '../HomePage/NotFound';
 import QuestionService from "../../services/QuestionService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
+import InputComponent from "../../components/InputComponent";
+import SelectComponent from "../../components/SelectComponent";
+import TextAreaComponent from "../../components/TextAreaComponent";
+import ButtonComponent from "../../components/ButtonComponent";
+import IconLeftButton from "../../components/IconLeftButton";
+import IconButton from "../../components/IconButton";
+import Header1 from "../../components/Header1";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -136,102 +143,77 @@ const ManageQuestion = () => {
             <>
             <AdminNavBar/>
             <div className="manage-questions-container">
-                <h1>{!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')}</h1>
+                <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')} className="arial"/>
                 {!isAddingQuestion && !isEditingQuestion ? (
                 <div className="button-container">
-                    <button className="red-button" onClick={backButton}>
-                        <FaBackward className="small-icon" /> Back
-                    </button>
-                   
-                    <button
-                    className="blue-button"
-                    onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) }
-                    >
-                       Add Question <FaPlusCircle className="small-icon" />
-                    </button>
+                    <IconLeftButton className = "red-button button" onClick = {backButton} text = "Back" icon = {<FaBackward className="small-icon" />}/>
+                    <IconButton className = "blue-button button right" onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) } text = "Add " icon = {<FaPlusCircle className="small-icon" />}/>
                 </div>
                 ) : (
                 <div className="add-update">
                     <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
-                    <textarea
-                    className="question-form-group"
+                    <TextAreaComponent
+                    className="question-form-group textarea-title"
                      name="questionTitle"
                      placeholder="Question title"
                      value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
                      onChange={handleInputChange}
                     />
 
-                    <input
+                    <InputComponent
                     type="text"
-                    className="question-form-group"
+                    className="question-form-group input-text"
                     name="option1"
                     placeholder="Option 1"
                     value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
                     onChange={handleInputChange}
                     />
 
-                    <input
+                    <InputComponent
                     type="text"
+                    className="question-form-group input-text"
                     name="option2"
-                    className="question-form-group"
                     placeholder="Option 2"
                     value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
                     onChange={handleInputChange}
                     />
 
-                    <input
+                    <InputComponent
                     type="text"
+                    className="question-form-group input-text"
                     name="option3"
-                    className="question-form-group"
                     placeholder="Option 3"
                     value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
                     onChange={handleInputChange}
                     />
 
-                    <input
+                    <InputComponent
                     type="text"
+                    className="question-form-group input-text"
                     name="option4"
-                    className="question-form-group"
                     placeholder="Option 4"
                     value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
                     onChange={handleInputChange}
                     />
                     
-                    <select
-                    name="correctOption"
-                    className="question-form-group"
-                    placeholder="Correct Option"
-                    value={isEditingQuestion ? editedQuestion.correctOption : newQuestion.correctOption}
-                    onChange={handleInputChange}
-                    >
-                        <option value="">Select Correct Option</option>
-                        {isEditingQuestion ? (
-                        <>
-                            <option value={editedQuestion.option1}>{editedQuestion.option1}</option>
-                            <option value={editedQuestion.option2}>{editedQuestion.option2}</option>
-                            <option value={editedQuestion.option3}>{editedQuestion.option3}</option>
-                            <option value={editedQuestion.option4}>{editedQuestion.option4}</option>
-                        </> 
-                        ) : (
-                        <>
-                            <option value={newQuestion.option1}>{newQuestion.option1}</option>
-                            <option value={newQuestion.option2}>{newQuestion.option2}</option>
-                            <option value={newQuestion.option3}>{newQuestion.option3}</option>
-                            <option value={newQuestion.option4}>{newQuestion.option4}</option>
-                        </>
-                        )}
-                    </select>
-                    <div>
+                    <SelectComponent
+                        isEditingQuestion={isEditingQuestion}
+                        editedQuestion={editedQuestion}
+                        newQuestion={newQuestion}
+                        handleInputChange={handleInputChange}
+                    />
+
+                    <div className="button-questions">
                     {isAddingQuestion ? (
-                        <button className="edit-button" onClick={handleAddQuestion}>Add</button>
+                        <ButtonComponent className="edit-button button-question button-big" onClick={handleAddQuestion} text = "Add" />
                     ) : (
-                        <button className="edit-button" onClick={handleEditQuestion}>Update</button>
+                        <ButtonComponent className="edit-button button-question button-big" onClick={handleEditQuestion} text = "Update"/>
                     )}
-                    <button className="delete-button" onClick={() => {
+                    <ButtonComponent className="delete-button button-question button-big" onClick={() => {
                         setIsAddingQuestion(false);
                         setIsEditingQuestion(false);
                         setEditedQuestion({});
-                    }}>Cancel</button>
+                    }} text = "Cancel" />
                 </div>
                 </div>
             </div>
@@ -251,8 +233,8 @@ const ManageQuestion = () => {
                                       <div>Correct : {question.correctOption}</div>
                               </div>
                               <div className="question-actions">
-                                  <button className="delete-button" onClick={() => handleDeleteButton(question.questionId)}> Delete </button>
-                                  <button className="edit-button" onClick={() => handleEditClick(question)}>Edit</button>
+                                    <IconButton className = "delete-button button-small item" onClick = {() => handleDeleteButton(question.questionId)} icon = {<FaTrash className="very-small-icon"/>} text = "Delete"/>
+                                    <IconButton className = "edit-button button-small" onClick={() => handleEditClick(question)} text = "Edit " icon = {<FaPen className="very-small-icon"/>}/>
                               </div>
                           </li>
                           ))}

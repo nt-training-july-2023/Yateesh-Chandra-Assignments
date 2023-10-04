@@ -2,6 +2,7 @@ import React from 'react';
 import { FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import IconButton from '../IconButton';
 
 function UserNavBar() {
 
@@ -42,10 +43,10 @@ function UserNavBar() {
             <header className="sticky">
                 <nav>
                     <ul>
-                        <li><Link to="/user" className={location.pathname === '/user' ? 'active' : ''}><FaHome/> Home</Link></li>
+                        <li><Link to="/user" className={location.pathname === '/manage-category' || location.pathname === '/user' ? 'active' : ''}><FaHome/> Home</Link></li>
                         <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}><FaListAlt/> Report</Link></li>
                         <div className='sign-out-button'>
-                            <button onClick={signOutSweetAlert}>Sign Out <FaPowerOff/></button>
+                        <IconButton className='sign-button' onClick={signOutSweetAlert} text="Sign Out " icon={<FaPowerOff/>} />
                         </div>
                     </ul>
                 </nav>

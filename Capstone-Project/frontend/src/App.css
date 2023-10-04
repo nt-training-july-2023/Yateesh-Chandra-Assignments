@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.AppCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-size: small;
+  height: 80%; 
+  margin: 0 auto;
+  margin-top: 15%;
+  background-color: rgb(242,242,242, 0.3);
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

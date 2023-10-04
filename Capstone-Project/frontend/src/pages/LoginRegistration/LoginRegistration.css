@@ -21,16 +21,13 @@
     margin-bottom: 25px;
     position: relative;
   }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="phone"], input[type = "number"], textarea {
+
+  .reg-input-fields{
     width: 90%;
     padding: 10px;
     border: 1px solid #4c518f;
     border-radius: 5px; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   }
 
   input[type="password"] {
@@ -50,7 +47,8 @@
   .button-container{
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-right: 35px;
   }
 
   .password-input-container{
@@ -60,21 +58,23 @@
   .password-toggle-button{
     cursor: pointer;
     position: absolute;
-    font-size: 13px;
     top: 51%;
     right: 10px;
     transform: translateY(-52%) ;
     background-color : #e1f5f4;
     color : rgb(1, 0, 10);
-    border : None;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: all 0.5s;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
   }
-  
-  input[type="Submit"] {
-    width: 45%;
+
+  .button-submit-login {
+    width: 140%;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 15px;
     background-color: #049445;
     color: #fff;
     border: none;
@@ -82,12 +82,34 @@
     cursor: pointer;
     font-size: 1rem;
     margin-bottom: 10px;
+
+    &:hover{
+      background-color: #063f1c;
+    }
   }
 
-  input[type="button"] {
-    width: 45%;
+  .button-submit-register {
+    width: 90%;
     padding: 10px;
+    margin-left: 10px;
     margin-right: 10px;
+    background-color: #049445;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 10px;
+
+    &:hover{
+      background-color: #063f1c;
+    }
+  }
+
+  .button-button-login {
+    width: 140%;
+    padding: 10px;
+    margin-right: 5px;
     background-color: #ce7b10;
     color: #fff;
     border: none;
@@ -95,16 +117,16 @@
     cursor: pointer;
     font-size: 1rem;
     margin-bottom: 10px;
-  }
-  
-  input[type="Submit"]:hover {
-    background-color: #063f1c;
+    
+    &:hover{
+      background-color: #8b4f09;
+    }
   }
 
   @media (max-width: 768px) {
-    input[type="button"],
-    input[type="Submit"]{
-    width: 40%;
+    .button-button-login,
+    .button-submit-login{
+    width: 140%;
     margin-right: 10; 
   }
 }
@@ -125,4 +147,10 @@
     .password-toggle-button{
       right: 1px;
     }
+
+    .button-button-login,
+    .button-submit-login{
+    width: 120%;
+    margin-right: 10; 
+  }
   }

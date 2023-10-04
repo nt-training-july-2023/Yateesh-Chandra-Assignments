@@ -8,7 +8,11 @@ const ButtonComponent = (props) => {
                 onClick={props.onClick}
                 type={props.type}
                 className={props.className}
-            />
+                value={props.value}
+                icon = {props.value}
+            >
+                {props.text}
+            </button>
         </div>
     );
 }

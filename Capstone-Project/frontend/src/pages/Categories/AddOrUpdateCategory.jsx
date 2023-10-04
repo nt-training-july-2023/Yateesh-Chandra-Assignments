@@ -6,6 +6,10 @@ import NotFound from "../../pages/HomePage/NotFound";
 import CategoryService from "../../services/CategoryService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 import InputComponent from "../../components/InputComponent";
+import LabelComponent from "../../components/LabelComponent";
+import TextAreaComponent from "../../components/TextAreaComponent";
+import Header1 from "../../components/Header1";
+import ButtonComponent from "../../components/ButtonComponent";
 
 const AddOrUpdateCategory = () =>{
 
@@ -136,10 +140,10 @@ const AddOrUpdateCategory = () =>{
             <>
                 <AdminNavBar/>
                 <div className="add-category-container">
-                    <h1>{isUpdating ? 'Update Category' : 'Add Category'}</h1>
+                    <Header1 className = "arial" text = {isUpdating ? 'Update Category' : 'Add Category'} />
                     <form onSubmit={handleAddOrUpdateCategory}>
-                        <div className="form-group">
-                            <label>Category Title:</label>
+                        <div className="form-group">                     
+                            <LabelComponent className = "label" text = "Category Title : "/>
                             <InputComponent
                               type="text"
                               value={categoryName}
@@ -150,8 +154,9 @@ const AddOrUpdateCategory = () =>{
                         </div>
                       
                         <div className="form-group">
-                            <label>Description:</label>
-                            <textarea
+                            <LabelComponent className = "label" text = "Description :"/>
+                            <TextAreaComponent
+                              className = "textarea"
                               value={description}
                               onChange={handleCategoryDescriptionChange}
                               placeholder="Enter Category Description"
@@ -161,8 +166,8 @@ const AddOrUpdateCategory = () =>{
 
                         <div className="form-group">
                             <div className="button-container-category">
-                                <button type = "Submit">{isUpdating ? 'Update' : 'Add'}</button>
-                                <button type = "button" className="red-button" onClick={()=> navigate("/manage-category")}>Cancel</button>
+                                <ButtonComponent className = "blue-button button" type = "Submit" text = {isUpdating ? 'Update' : 'Add'} />
+                                <ButtonComponent className = "red-button button" type = "button" text = "Cancel" onClick={()=> navigate("/manage-category")} />
                             </div>
                         </div>
                     </form>

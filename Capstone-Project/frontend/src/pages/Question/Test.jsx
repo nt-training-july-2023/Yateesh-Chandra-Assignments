@@ -12,6 +12,7 @@ import QuestionService from '../../services/QuestionService';
 import ResponseService from '../../services/ResponseService';
 import { format } from 'date-fns';
 import TimerNavBar from '../../components/NavBars/TimerNavBar';
+import ButtonComponent from "../../components/ButtonComponent";
 
 const Test = () => {
 
@@ -348,9 +349,7 @@ const Test = () => {
                             ))}
 
                             <div className="navigation-buttons">
-                                <button onClick={handleManualSubmit} className='next-button'>
-                                    Submit
-                                </button>
+                                <ButtonComponent onClick = {handleManualSubmit} className = "blue-button button" text = "Submit"/>
                             </div>
                         </div>
                     ) : (

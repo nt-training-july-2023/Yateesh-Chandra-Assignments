@@ -4,6 +4,7 @@ import UserNavBar from '../../components/NavBars/UserNavBar';
 import NotFound from '../HomePage/NotFound';
 import DeactivateBackButton from '../../components/DeactivateBackButton';
 import ManageCategory from '../Categories/ManageCategory';
+import Header1 from '../../components/Header1';
 
 function UserDashBoard() {
 
@@ -15,7 +16,7 @@ function UserDashBoard() {
     {userRole === "USER" ? <> 
     <UserNavBar/>
     <main>
-    <h1 style={{fontSize :"25px", textAlign : "left", marginLeft : "20px", marginBottom : "0px", fontFamily : "-moz-initial" }}>Welcome {userName}, You can click on the below categories and take test</h1>
+    <Header1 text = {`Welcome ${userName}, You can click on the below categories and take test`} className = "h1-profile arial" />
     </main>
     <ManageCategory/>
     </> : <NotFound/>

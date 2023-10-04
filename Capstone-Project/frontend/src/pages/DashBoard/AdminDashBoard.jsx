@@ -3,6 +3,7 @@ import '../DashBoard/board.css'
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import NotFound from '../HomePage/NotFound';
 import UserServices from '../../services/UserServices';
+import Header1 from '../../components/Header1';
 
 function AdminDashBoard() {
   const [users, setUsers] = useState([]);
@@ -30,11 +31,12 @@ function AdminDashBoard() {
      {userRole === 'ADMIN' ? <>
     <AdminNavBar/>
     <main>
-        <h1  style={{fontSize :"25px", textAlign : "left", marginLeft : "20px", marginBottom : "0px"}}>Welcome to the Admin Dashboard, Here are the Registered Users :</h1>
+        <Header1 text = "Welcome to the Admin Dashboard, Here are the Registered Users :" className = "h1-profile arial"/>
     </main>
     <div>
         <div className="admin-search-bar">
             <input
+            className='search-input-over'
             type="text"
             placeholder="Search Users By Name or Email"
             value={searchQuery}
@@ -67,9 +69,7 @@ function AdminDashBoard() {
                 </tbody>
                 </>
             ) : (
-                <h1 style={{fontSize : "22px"}}>
-                    No Users registered as of now.
-                </h1>
+                <Header1 className='text-22 arial' text = "No Users registered as of now." />
             )}
             </table>
         </div>
