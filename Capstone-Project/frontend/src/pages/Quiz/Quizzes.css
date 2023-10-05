@@ -180,22 +180,29 @@
 .edit-button {
   background-color: green;
   color: white;
-}
-
-.edit-button:hover {
-  background-color: rgb(3, 82, 3);
+  transition: 0.2s ease-in-out;
+  &:hover{
+    background-color: rgb(3, 82, 3);
+  }
 }
 
 .delete-button {
   background-color: red;
   color: white;
-}
+  transition: 0.2s ease-in-out;
 
-.delete-button:hover {
-  background-color: rgb(121, 0, 0);
+  &:hover{
+    background-color: rgb(121, 0, 0);
+  }
 }
 
 .open-button {
   background-color: #007BFF;
   color: white;
+  transition: 0.2s ease-in-out;
+
+  &:hover{
+    background-color: blue;
+  }
+
 }

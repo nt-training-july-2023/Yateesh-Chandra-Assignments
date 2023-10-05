@@ -9,7 +9,7 @@ function TimerNavBar({timerValue, className}) {
           <header>
               <nav>
                   <ul>
-                      <li style={{float : "right"}}>
+                      <li className='timer-sticky'>
                       <Link className = {`app ${className}`}><FaStopwatch/> Time Left : {timerValue}</Link>
                       </li>
                   </ul>

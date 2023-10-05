@@ -57,8 +57,9 @@
 
   .sign-out-button {
     float: right; 
-    margin-top: 5px;
+    margin-top: 1px;
     margin-right: 5px;
+    margin-bottom: 1px;
   }
   
   .sign-out-button .sign-button {
@@ -69,10 +70,15 @@
     border-radius: 5px; 
     cursor: pointer; 
     font-size: 16px; 
+    transition: 0.1s ease-in-out;
   }
   
   .sign-out-button .sign-button:hover {
-    background-color: #e62c00;
+    background-color: #c52906;
+  }
+
+  .timer-sticky{
+    float: right;
   }
 
   @media (max-width : 578px) {
@@ -86,3 +92,48 @@
       font-size: 18px;
     }
   }
+
+.navbar-link {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link .text {
+  display: none;
+  margin-left: 10px;
+}
+
+@media (min-width: 535px) {
+  .navbar-link .text {
+    display: inline;
+  }
+}
+
+  .info-icon {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .info-tooltip {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  
+  .info-icon:hover .info-tooltip {
+    opacity: 1;
+  }
+  
+
+.proper-profile{
+  display: flex;
+  justify-content: space-between;
+}

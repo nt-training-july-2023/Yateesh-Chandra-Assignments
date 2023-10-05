@@ -1,52 +1,53 @@
 import React from 'react';
 import { FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import IconButton from '../IconButton';
+import SweetAlert from '../SweetAlerts/SweetAlert';
+import SignOutIcon from '../SignOutIcon';
 
 function UserNavBar() {
 
     const location = useLocation();
     const navigate = useNavigate();
-    
-    const handleSignOut = () => {
-        localStorage.clear();
-        navigate("/login");
-    }
 
-    const signOutSweetAlert = () => {
-        Swal.fire({
-            title : "Are you Sure you want to Sign out?",
-            showConfirmButton : true,
-            confirmButtonText : "Sign out",
-            showCancelButton : true,
-            cancelButtonText : "No",
-            icon : "warning"
-        }).then((result) => {
-            if(result.isConfirmed){
-                handleSignOut();
-                Swal.fire({
-                    title : "Logged out successfully",
-                    position : 'bottom-right',
-                    timer : 1500,
-                    timerProgressBar : true,
-                    background : `rgb(255, 252, 167)`,
-                    showConfirmButton : false,
-                    icon : 'success'
-                });
-            } 
-        })
-    };
+    const logOut = () =>{
+        SweetAlert.signOutSweetAlert(
+            () => {localStorage.clear();
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1500);
+            }
+        , "Signing out");
+    }
 
     return (
         <div className="app">
             <header className="sticky">
                 <nav>
                     <ul>
-                        <li><Link to="/user" className={location.pathname === '/manage-category' || location.pathname === '/user' ? 'active' : ''}><FaHome/> Home</Link></li>
-                        <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}><FaListAlt/> Report</Link></li>
+                        <li>
+                            <Link to="/user" className={location.pathname === '/user' || location.pathname.startsWith('/manage') ? 'active' : ''}>
+                                <div className='navbar-link'>
+                                    <FaHome/> 
+                                    <span className='text'>
+                                        Home
+                                    </span>
+                                </div>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>
+                                <div className='navbar-link'>
+                                    <FaListAlt/> 
+                                    <span className='text'>
+                                        Report
+                                    </span>
+                                </div>
+                            </Link>
+                        </li>
+
                         <div className='sign-out-button'>
-                        <IconButton className='sign-button' onClick={signOutSweetAlert} text="Sign Out " icon={<FaPowerOff/>} />
+                        <SignOutIcon className = "sign-button" onClick = {logOut} text = "Sign Out" icon={<FaPowerOff className='icon'/>}/>
                         </div>
                     </ul>
                 </nav>

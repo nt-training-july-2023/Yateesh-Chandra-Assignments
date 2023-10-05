@@ -31,9 +31,6 @@ const AddOrUpdateCategory = () =>{
             setCategoryName(categoryName);
             setDescription(description);
         })
-        .catch((error) => {
-            console.error("Error fetching category data: ", error);
-        });
     };
 
     useEffect(() => {
@@ -96,41 +93,32 @@ const AddOrUpdateCategory = () =>{
             description,
         };
       
-        try {
-            if (isUpdating) {
-                try{
-                    await CategoryService.updateCategory(categoryId, categoryData);
-                    SweetAlert.successAlert("Updated");
-                    console.log("Category updated successfully.");
-                    navigate("/manage-category");
-                }
+        if (isUpdating) {
+            try{
+                await CategoryService.updateCategory(categoryId, categoryData);
+                SweetAlert.successAlert("Updated");
+                navigate("/manage-category");
+            }
 
-                catch(error){
-                    if(error?.response?.data?.message === "Category already Exists"){
-                        setCategoryNameError("Category already exists");
-                        SweetAlert.alreadyExists("Category")
-                    }
-                    console.log(error);  
-                }
-
-            } else {
-
-                try{
-                    await CategoryService.addCategory(categoryData);
-                    SweetAlert.successAlert("Added");
-                    console.log("Category added successfully.");
-                    navigate("/manage-category")
-              } catch(error) {
-                    console.error(error)
-                    if(error?.response?.data?.message === "Category already Exists"){
-                        setCategoryNameError("Category already exists")
-                        SweetAlert.alreadyExists("Category");
-                    }
+            catch(error){
+                if(error?.response?.data?.message === "Category already Exists"){
+                    setCategoryNameError("Category already exists");
+                    SweetAlert.alreadyExists("Category")
                 }
             }
 
-        } catch (error) {
-            console.error("Error:", error);
+        } else {
+
+            try{
+                await CategoryService.addCategory(categoryData);
+                SweetAlert.successAlert("Added");
+                navigate("/manage-category")
+            } catch(error) {
+                if(error?.response?.data?.message === "Category already Exists"){
+                    setCategoryNameError("Category already exists")
+                    SweetAlert.alreadyExists("Category");
+                }
+            }
         }
     };
     

@@ -18,6 +18,8 @@ body {
   right: 0;
   color: #fd0808;
   z-index: 1;
+  opacity: 0;
+  animation: dotBlink 1s infinite;
 }
 
 
@@ -88,3 +90,7 @@ body {
   .list-ordering ol li{
     margin-bottom: 10px;
   }
+
+.no-select {
+  user-select: none;
+}

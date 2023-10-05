@@ -24,7 +24,7 @@ const ManageCategory = () => {
     const getCategories = () => {
         CategoryService.getCategories()
         .then((response) => setCategories(response.data.body))
-        .catch((error) => console.log("Error fetching Categories", error));
+
     };
 
     const handleDeleteCategory = (categoryId) => {
@@ -62,7 +62,7 @@ const ManageCategory = () => {
                         <Header1 text = {filterCategory.length > 0 ? userRole === "ADMIN" && ("Category List") : "No Category"} className = "arial"/>
                         <div className='button-search-container'>
                             {userRole === "ADMIN" && (
-                                <IconButton className="blue-button button" onClick={() => navigate('/add-category')} text="Add " icon={<FaPlusCircle/>} />
+                                <IconButton className="add-category-button " onClick={() => navigate('/add-category')} text="Add Category " icon={<FaPlusCircle/>} />
                             )}
                             <div className='search-bar'>
                                 <input
@@ -90,7 +90,7 @@ const ManageCategory = () => {
                                                 <td>{category.categoryName}</td>
                                                 <td>{category.description}</td>                        
                                                 <td>
-                                                    <div className='button-container-category'>
+                                                    <div className='button-container-manage-category'>
                                                     {userRole === "ADMIN" && (    
                                                         <IconLeftButton text = "Update" className="blue-button button-category" onClick={() => handleEditClick(category.categoryId)} icon = {<FaPen className="very-small-icon" />}/>
                                                     )}    

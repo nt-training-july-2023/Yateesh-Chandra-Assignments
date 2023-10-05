@@ -114,17 +114,6 @@
   justify-content: space-between;
 }
 
-/* .question-list li {
-  background-color: none;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: left;
-  transition: transform 0.3s;
-  width: calc(50% - 10px);
-} */
-
 .question-list li {
   background-color: none;
   border: 1px solid #000000;
@@ -135,8 +124,8 @@
   transition: transform 0.3s;
   width: calc(50% - 10px);
   display: flex;
-  flex-direction: column; /* Stack content vertically */
-  justify-content: space-between; /* Move actions to the bottom */
+  flex-direction: column; 
+  justify-content: space-between;
 }
 
 

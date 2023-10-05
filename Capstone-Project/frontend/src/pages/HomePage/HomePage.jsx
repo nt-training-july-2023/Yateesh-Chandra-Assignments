@@ -8,9 +8,9 @@ function HomePage(){
     const handleButton = () => {
         navigate("/login");
     }
+
     return(
         <div className="get-started">
-
             <header className="header">
                 <h1>Welcome to the Assessment Platform</h1>
                 <p>Get started to begin your learning journey!</p>
@@ -34,14 +34,14 @@ function HomePage(){
 
                 <section className="cta">
                     <h2>What are you yet waiting for?</h2>
+                    
                     <ButtonComponent
-                      className = "get-started-button"
-                      onClick = {handleButton}
-                      text = "Get Started"
+                    className = "get-started-button"
+                    onClick = {handleButton}
+                    text = "Get Started"
                     />
                 </section>
             </main>
-
         </div>
   );
 }

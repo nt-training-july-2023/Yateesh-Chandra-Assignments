@@ -1,57 +1,68 @@
 import React from 'react';
 import { FaCode, FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import IconButton from '../IconButton';
+import SweetAlert from '../SweetAlerts/SweetAlert';
+import SignOutIcon from '../SignOutIcon';
 
 function AdminNavBar() {
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const handleSignOut = () => {
-        localStorage.clear();
-        navigate("/login");
+    
+    const logOut = () =>{
+        SweetAlert.signOutSweetAlert(
+            () => {localStorage.clear();
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1500);
+            }
+        , "Signing out");
     }
-
-    const signOutSweetAlert = () => {
-        Swal.fire({
-            title : "Are you Sure you want to Sign out?",
-            showConfirmButton : true,
-            confirmButtonText : "Sign out",
-            showCancelButton : true,
-            cancelButtonText : "No",
-            icon : "warning"
-        }).then((result) => {
-            if(result.isConfirmed){
-                handleSignOut();
-                Swal.fire({
-                    title : "Logged out successfully",
-                    position : 'bottom-right',
-                    timer : 1500,
-                    timerProgressBar : true,
-                    background : `rgb(255, 252, 167)`,
-                    icon : 'success',
-                    showConfirmButton : false
-                });
-            } 
-        })
-    };
 
     return (
         <div className="app">
-          <header className="sticky">
-              <nav>
-                  <ul>
-                      <li><Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}><FaHome/> Home</Link></li>
-                      <li><Link to="/manage-category" className={location.pathname === '/manage-category' || location.pathname === '/add-category' ? 'active' : ''}><FaCode/> Categories</Link></li>
-                      <li><Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}><FaListAlt/> User Activity</Link></li>
-                      <li className='sign-out-button'>
-                          <IconButton className='sign-button' onClick={signOutSweetAlert} text="Sign Out " icon={<FaPowerOff/>} />
-                      </li>
-                  </ul>
-              </nav>
-          </header>
+            <header className="sticky">
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/admin" className={location.pathname === '/admin' ? 'active' : '' }>
+                                <div className='navbar-link'>
+                                    <FaHome />  
+                                    <span className='text'>
+                                        Home    
+                                    </span>
+                                </div>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/manage-category" className={location.pathname.startsWith('/add') || location.pathname.startsWith('/manage') ? 'active' : ''}>
+                                <div className='navbar-link'>
+                                    <FaCode/>
+                                    <span className='text'>
+                                        Categories
+                                    </span>
+                                </div>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>
+                                <div className='navbar-link'>
+                                    <FaListAlt/> 
+                                    <span className='text'>
+                                        User Activity
+                                    </span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li className='sign-out-button'>
+                            <SignOutIcon className = "sign-button" onClick = {logOut} text = "Sign Out" icon={<FaPowerOff className='icon'/>}/>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
       </div>
     );
 }

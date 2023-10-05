@@ -38,8 +38,6 @@ const ManageQuestion = () => {
 
     useEffect(() => {
         fetchQuestions();
-        console.log("Number of Questions passed : ", numOfQuestions);
-        console.log("Questions.length : ", questions.length);
     }, []);
 
     const fetchQuestions = () => {
@@ -47,13 +45,9 @@ const ManageQuestion = () => {
         .then((response) => {
             setQuestions(response.data.body);
         })
-        .catch((error) => {
-            console.error("Error fetching Questions : ", error);
-        });
     };
 
     const backButton = () => {
-        console.log("Category Id while back button : ", categoryId);
         navigate(`/manage-quiz/${categoryId}`);
     }
 
@@ -86,16 +80,13 @@ const ManageQuestion = () => {
                 correctOption: "",
                 quizId,
             });
-            console.log("Question added successfully");
             setIsAddingQuestion(false);
         })
         .catch((error) => {
-            console.log("Error adding question", error);
             if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
         });
-
     };
 
     const handleEditQuestion = () => {
@@ -109,10 +100,8 @@ const ManageQuestion = () => {
             SweetAlert.successAlert("Updated");
             fetchQuestions();
             setIsEditingQuestion(false);
-            console.log("Question updated successfully");
         })
         .catch((error) => {
-            console.error("Error updating question", error);
             if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
@@ -122,10 +111,8 @@ const ManageQuestion = () => {
     const handleDeleteQuestion = (questionId) => {
         QuestionService.deleteQuestion(questionId)
         .then(() => {
-            console.log("Question deleted: ", questionId);
             fetchQuestions();
         })
-        .catch((error) => console.error("Error deleting Questions : ", error.response));
     };
 
     const handleDeleteButton = (questionId) => {
@@ -141,108 +128,115 @@ const ManageQuestion = () => {
         <div className="App">
             {userRole === "ADMIN" ? (
             <>
-            <AdminNavBar/>
-            <div className="manage-questions-container">
-                <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')} className="arial"/>
-                {!isAddingQuestion && !isEditingQuestion ? (
-                <div className="button-container">
-                    <IconLeftButton className = "red-button button" onClick = {backButton} text = "Back" icon = {<FaBackward className="small-icon" />}/>
-                    <IconButton className = "blue-button button right" onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) } text = "Add " icon = {<FaPlusCircle className="small-icon" />}/>
-                </div>
-                ) : (
-                <div className="add-update">
-                    <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
-                    <TextAreaComponent
-                    className="question-form-group textarea-title"
-                     name="questionTitle"
-                     placeholder="Question title"
-                     value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
-                     onChange={handleInputChange}
-                    />
-
-                    <InputComponent
-                    type="text"
-                    className="question-form-group input-text"
-                    name="option1"
-                    placeholder="Option 1"
-                    value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
-                    onChange={handleInputChange}
-                    />
-
-                    <InputComponent
-                    type="text"
-                    className="question-form-group input-text"
-                    name="option2"
-                    placeholder="Option 2"
-                    value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
-                    onChange={handleInputChange}
-                    />
-
-                    <InputComponent
-                    type="text"
-                    className="question-form-group input-text"
-                    name="option3"
-                    placeholder="Option 3"
-                    value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
-                    onChange={handleInputChange}
-                    />
-
-                    <InputComponent
-                    type="text"
-                    className="question-form-group input-text"
-                    name="option4"
-                    placeholder="Option 4"
-                    value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
-                    onChange={handleInputChange}
-                    />
-                    
-                    <SelectComponent
-                        isEditingQuestion={isEditingQuestion}
-                        editedQuestion={editedQuestion}
-                        newQuestion={newQuestion}
-                        handleInputChange={handleInputChange}
-                    />
-
-                    <div className="button-questions">
-                    {isAddingQuestion ? (
-                        <ButtonComponent className="edit-button button-question button-big" onClick={handleAddQuestion} text = "Add" />
+                <AdminNavBar/>
+                <div className="manage-questions-container">
+                    <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')} className="arial"/>
+                    {!isAddingQuestion && !isEditingQuestion ? (
+                        <div className="button-container">
+                            <IconLeftButton className = "red-button button" onClick = {backButton} text = "Back" icon = {<FaBackward className="small-icon" />}/>
+                            <IconButton className = "blue-button button right" onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) } text = "Add " icon = {<FaPlusCircle className="small-icon" />}/>
+                        </div>
                     ) : (
-                        <ButtonComponent className="edit-button button-question button-big" onClick={handleEditQuestion} text = "Update"/>
+                        <div className="add-update">
+                            <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
+                            
+                                <TextAreaComponent
+                                className="question-form-group textarea-title"
+                                name="questionTitle"
+                                placeholder="Question title"
+                                value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
+                                onChange={handleInputChange}
+                                />
+
+                                <InputComponent
+                                type="text"
+                                className="question-form-group input-text"
+                                name="option1"
+                                placeholder="Option 1"
+                                value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
+                                onChange={handleInputChange}
+                                />
+
+                                <InputComponent
+                                type="text"
+                                className="question-form-group input-text"
+                                name="option2"
+                                placeholder="Option 2"
+                                value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
+                                onChange={handleInputChange}
+                                />
+
+                                <InputComponent
+                                type="text"
+                                className="question-form-group input-text"
+                                name="option3"
+                                placeholder="Option 3"
+                                value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
+                                onChange={handleInputChange}
+                                />
+
+                                <InputComponent
+                                type="text"
+                                className="question-form-group input-text"
+                                name="option4"
+                                placeholder="Option 4"
+                                value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
+                                onChange={handleInputChange}
+                                />
+                                
+                                <SelectComponent
+                                isEditingQuestion={isEditingQuestion}
+                                editedQuestion={editedQuestion}
+                                newQuestion={newQuestion}
+                                handleInputChange={handleInputChange}
+                                />
+
+                                <div className="button-questions">
+                                    {isAddingQuestion ? (
+                                        <ButtonComponent className="edit-button button-question button-big" onClick={handleAddQuestion} text = "Add" />
+                                    ) : (
+                                        <ButtonComponent className="edit-button button-question button-big" onClick={handleEditQuestion} text = "Update"/>
+                                    )}
+                                
+                                    <ButtonComponent className="delete-button button-question button-big" onClick={() => {
+                                    setIsAddingQuestion(false);
+                                    setIsEditingQuestion(false);
+                                    setEditedQuestion({});
+                                    }} text = "Cancel" 
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     )}
-                    <ButtonComponent className="delete-button button-question button-big" onClick={() => {
-                        setIsAddingQuestion(false);
-                        setIsEditingQuestion(false);
-                        setEditedQuestion({});
-                    }} text = "Cancel" />
+                    
+                    {isAddingQuestion || isEditingQuestion ? null : (
+                    <div className="question-list-container">
+                        <div className="question-list">
+                            <ul>
+                                
+                                {questions.map((question) => (
+                                <li key={question.questionId}>
+                                    <div className="question-title">{question.questionTitle}</div>
+                                    <div className="question-options">
+                                        <div>{question.option1}</div>
+                                        <div>{question.option2}</div>
+                                        <div>{question.option3}</div>
+                                        <div>{question.option4}</div>
+                                        <div>Correct : {question.correctOption}</div>
+                                    </div>
+                                    <div className="question-actions">
+                                        <IconButton className = "delete-button button-small item" onClick = {() => handleDeleteButton(question.questionId)} icon = {<FaTrash className="very-small-icon"/>} text = "Delete"/>
+                                        <IconButton className = "open-button button-small" onClick={() => handleEditClick(question)} text = "Edit " icon = {<FaPen className="very-small-icon"/>}/>
+                                    </div>
+                                </li>
+                                ))}
+
+                            </ul>
+                        </div>
+                    </div>
+                    )}
+                    
                 </div>
-                </div>
-            </div>
-          )}
-          {isAddingQuestion || isEditingQuestion ? null : (
-              <div className="question-list-container">
-                  <div className="question-list">
-                      <ul>
-                          {questions.map((question) => (
-                          <li key={question.questionId}>
-                              <div className="question-title">{question.questionTitle}</div>
-                              <div className="question-options">
-                                      <div>{question.option1}</div>
-                                      <div>{question.option2}</div>
-                                      <div>{question.option3}</div>
-                                      <div>{question.option4}</div>
-                                      <div>Correct : {question.correctOption}</div>
-                              </div>
-                              <div className="question-actions">
-                                    <IconButton className = "delete-button button-small item" onClick = {() => handleDeleteButton(question.questionId)} icon = {<FaTrash className="very-small-icon"/>} text = "Delete"/>
-                                    <IconButton className = "edit-button button-small" onClick={() => handleEditClick(question)} text = "Edit " icon = {<FaPen className="very-small-icon"/>}/>
-                              </div>
-                          </li>
-                          ))}
-                      </ul>
-                  </div>
-              </div>
-            )}
-            </div>
             </>
             ):(
                 <div>

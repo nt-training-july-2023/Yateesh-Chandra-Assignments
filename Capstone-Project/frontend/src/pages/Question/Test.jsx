@@ -28,6 +28,14 @@ const Test = () => {
     const totalMarks = questions.length * 2;
     const [autoSubmitted, setAutoSubmitted] = useState(false);
     const [instructionsConfirmed, setInstructionsConfirmed] = useState(false);
+    const [timer, setTimer] = useState(timeInMin * 60);
+    
+    const navigatetoProfile = () => {
+        setTimeout(() => {
+            navigate("/profile");
+        }, 1000);
+    }
+
     const [numOfQuestionsAnswered, setNumOfQuestionsAnswered] = useState(() => {
         const storedNumberOfAttempted = localStorage.getItem('numberOfAttempted');
         return storedNumberOfAttempted ? parseInt(storedNumberOfAttempted) : 0;
@@ -48,20 +56,6 @@ const Test = () => {
         return storedOptions ? JSON.parse(storedOptions) : [];
     });
 
-    const [timer, setTimer] = useState(() => {
-        const storedTimer = localStorage.getItem('timer');
-        if (storedTimer && startTime) {
-
-            const currentTime = new Date().getTime();
-            const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
-            const remainingTime = parseInt(storedTimer) - elapsedTimeInSeconds;
-            return remainingTime > 0 ? remainingTime : 0;
-
-        } else {
-            return timeInMin * 60;
-        }
-    });
-
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
         const seconds = timeInSeconds % 60;
@@ -70,26 +64,24 @@ const Test = () => {
 
     const fetchQuestions = () => {
         QuestionService.getQuestionsByQuizId(quizId)
-            .then((response) => {
-                if (response.data.body.length === 0) {
-                    Swal.fire({
-                        title: "No Questions available",
-                        text: "Kindly take another Quiz",
-                        imageUrl: oopsswal,
-                        imageHeight: 100,
-                        imageWidth: 150,
-                    }).then(() => {
-                        navigate(`/manage-quiz/${categoryId}`);
-                    })
-                } else {
-                    setQuestions(response.data.body);
-                    setLoading(false);
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching questions:', error);
-            });
+        .then((response) => {
+            if (response.data.body.length === 0) {
+                Swal.fire({
+                    title: "No Questions available",
+                    text: "Kindly take another Quiz",
+                    imageUrl: oopsswal,
+                    imageHeight: 100,
+                    imageWidth: 150,
+                }).then(() => {
+                    navigate(`/manage-quiz/${categoryId}`);
+                })
+            } else {
+                setQuestions(response.data.body);
+                setLoading(false);
+            }
+        })
     };
+
 
     useEffect(() => {
         if (userRole === "USER") {
@@ -120,6 +112,7 @@ const Test = () => {
                 score += 2;
             }
         }
+
         setMarksScored(score);
 
         localStorage.setItem('numberOfAttempted', answeredQuestions.toString());
@@ -129,7 +122,6 @@ const Test = () => {
     const clearLocalStorage = () => {
         localStorage.removeItem('selectedOptions');
         localStorage.removeItem('startTime');
-        localStorage.removeItem('timer');
         localStorage.removeItem('instructionShown');
         localStorage.removeItem("pageRefreshed");
         localStorage.removeItem('numberOfAttempted');
@@ -137,9 +129,7 @@ const Test = () => {
     }
 
     const handleAddResponses = async () => {
-
         const formattedTime = format(new Date(startTime), 'dd-MM-yyyy HH:mm:ss');
-
         const data = {
             userId,
             quizId,
@@ -150,29 +140,23 @@ const Test = () => {
             marksScored,
             timeStamp: formattedTime
         };
-
-        try {
-            await ResponseService.postResponse(data);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
+        await ResponseService.postResponse(data);
     };
 
     const handleSubmit = () => {
         handleAddResponses();
         Swal.fire({
             title: "Time up",
-            text: "Don't worry, The quiz is submitted",
+            text: "The quiz is submitted",
             imageUrl: clockswal,
+            allowOutsideClick : false,
+            showConfirmButton : true,
             imageHeight: 150,
             imageWidth: 150,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                SweetAlert.quizSubmitted();
+        }).then(() => {
+                navigatetoProfile();
                 clearLocalStorage();
-            }
-            navigate("/profile");
+                SweetAlert.redirecting(() => {navigate("/profile")});
         })
     };
 
@@ -193,13 +177,21 @@ const Test = () => {
                     allowOutsideClick: false,
                     showConfirmButton: true,
                     confirmButtonText: "Start",
+                    confirmButtonColor : "green",
+                    showCancelButton : true,
+                    cancelButtonText: "Cancel",
+                    cancelButtonColor : "red",
+                    customClass : {
+                        confirmButton : "custom-swal-button",
+                        cancelButton : "custom-swal-button"
+                    },
                     html: `
                         <ol>
                         <li>Each Question carries Two Marks.</li><br>
-                        <li>This is a Timed Test. Look at the timer.</li><br>
+                        <li>This is a Timed Test. Hence Have a look at the timer.</li><br>
                         <li>Questions are of "Choose the Correct Answer" type.</li><br>
                         <li>There is no negative marking.</li><br>
-                        <p style="text-align : left; margin-top : 10px;"><strong>NOTE: IF YOU RELOAD, IT AUTOMATICALLY GETS SUBMITTED.</strong>
+                        <b><li><p style="text-align : left; margin-top : 2px;"><strong>NOTE: If you reload, It automatically submits the Test.</strong></b>
                         </ol>
                     `,
                 }).then((response) => {
@@ -210,29 +202,38 @@ const Test = () => {
 
                         localStorage.setItem("instructionShown", "true");
                         localStorage.setItem("startTime", currentTime.toString());
+                    } else{
+                        clearLocalStorage();
+                        navigate(`/manage-quiz/${categoryId}`)
                     }
                 });
+
             } else {
 
                 const pageRefreshed = localStorage.getItem("pageRefreshed");
                 if (pageRefreshed) {
                     Swal.fire({
                         title: "Page Reloaded",
-                        text: "Your Responses are posted",
+                        text: "Your answers have been automatically submitted upon page reload",
                         icon: "info",
                         showConfirmButton: true,
+                        confirmButtonColor : "green",
                         allowOutsideClick: false,
                         backdrop: 
                         `
-                            rgb(200, 200, 200, 0.9)
+                            rgb(200, 200, 200, 1)
                         `,
                         confirmButtonText: "Ok",
+                        customClass:{
+                            confirmButton : "custom-swal-button"
+                        }
 
                     }).then((result) => {
                         if (result.isConfirmed) {
                             handleAddResponses();
                             clearLocalStorage();
-                            navigate("/profile");
+                            navigatetoProfile();
+                            SweetAlert.redirecting(()=> {navigate("/profile")});
                         }
                     });
                 }
@@ -253,9 +254,6 @@ const Test = () => {
 
                     setTimer(remainingTime);
 
-                    localStorage.setItem('timer', remainingTime.toString());
-                    localStorage.setItem('startTime', startTime.toString());
-
                     if (remainingTime <= 0 && !autoSubmitted) {
                         setAutoSubmitted(true);
                         handleSubmit();
@@ -271,7 +269,6 @@ const Test = () => {
             }
 
             interval = setInterval(startTimer, 1000);
-
             return () => {
                 clearInterval(interval);
             };
@@ -297,9 +294,9 @@ const Test = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     handleAddResponses();
-                    SweetAlert.manualQuizSubmitted();
                     clearLocalStorage();
-                    navigate("/profile");
+                    navigatetoProfile();
+                    SweetAlert.redirecting(() => {navigate("/profile")});
                 }
             });
         }
@@ -316,10 +313,10 @@ const Test = () => {
     }, []);
 
     return (
-        <div>
+        <div className='no-select'>
             <DeactivateBackButton />
             {(questions.length>0 &&
-            <TimerNavBar timerValue={formatTime(timer)} className={timer < 30 ? "timer-out" : "timer"} />
+            <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
             )}
             {(userRole === "USER" ? (
                 <div className="quiz-container">

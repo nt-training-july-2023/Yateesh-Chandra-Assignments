@@ -10,6 +10,43 @@ class SweetAlert{
         })
     }
 
+    loginSuccessSwal(tag) {
+        Swal.fire({
+          position: 'center',
+          allowOutsideClick : false,
+          html : `<div class="animation">${tag}<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.!</span></div>`,
+          showConfirmButton: false,
+          background: "rgb(240, 240, 240)",
+          timer: 1800,
+          backdrop: `rgb(240, 240, 200, 1)`,
+          width : 500,
+          timerProgressBar: true,
+          customClass:{
+            timerProgressBar : "custom-swal-timer",
+          }
+        });
+      };
+      
+      signOutSweetAlert(method, tag){
+        Swal.fire({
+            title : "Are you Sure you want to Sign out?",
+            showConfirmButton : true,
+            confirmButtonText : "Sign out",
+            showCancelButton : true,
+            cancelButtonText : "Stay In",
+            customClass:{
+                cancelButton : "custom-swal-button",
+                cancelButton : "custom-swal-button",
+            },
+            icon : "warning"
+        }).then((result) => {
+            if(result.isConfirmed){
+                method();
+                this.loginSuccessSwal(tag);
+            } 
+        })
+    };
+
     successAlert(tag){
         Swal.fire({
             title : tag + " Successfully",
@@ -42,7 +79,11 @@ class SweetAlert{
             showCancelButton : true,
             cancelButtonText : "No",
             showConfirmButton : true,
-            confirmButtonText : "Delete"
+            confirmButtonText : "Delete",
+            customClass:{
+                confirmButton : "custom-swal-button",
+                cancelButton : "custom-swal-button"
+            }
         }).then((result) => {
             if(result.isConfirmed){
                 aFunction(id);
@@ -69,18 +110,7 @@ class SweetAlert{
     quizSubmitted(){
         Swal.fire({
             title : "Quiz submitted",
-            text : "redirecting to Profile",
-            timer : 1500,
-            timerProgressBar : true,
-            showConfirmButton : false,
-            backdrop: `rgba(80,108,62,0.7)`
-        })
-    }
-
-    manualQuizSubmitted(){
-        Swal.fire({
-            title : "Quiz submitted",
-            text : "redirecting to User",
+            text : "redirecting to Report",
             timer : 1500,
             timerProgressBar : true,
             showConfirmButton : false,
@@ -111,6 +141,18 @@ class SweetAlert{
             title : "Login Failed",
             text : message,
             icon : "error"
+        })
+    }
+
+    redirecting(navigate){
+        Swal.fire({
+            html : `<div class="animation">Redirecting to Report<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span></div>`,
+            showConfirmButton: false,
+            timer : 2000,
+            showConfirmButton : false,
+            backdrop: `rgb(240, 240, 200, 1)`,
+        }).then(() => {
+            navigate();  
         })
     }
 }

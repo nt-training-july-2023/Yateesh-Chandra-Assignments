@@ -28,7 +28,6 @@ const AddOrUpdateQuiz = () => {
     const [timeInMinError, setTimeInMinError] = useState("");
 
     const cancelButton = () => {
-        console.log("categoryId during Cancel : ", categoryId);
         navigate(`/manage-quiz/${categoryId}`);
     };
 
@@ -41,9 +40,6 @@ const AddOrUpdateQuiz = () => {
             setNumOfQuestions(numOfQuestions);
             setTimeInMin(timeInMin);
         })
-        .catch((error) => {
-            console.error("Error fetching Quiz Data: ", error);
-        });
     };
 
     const handleQuizNameChange = (e) => {
@@ -79,13 +75,10 @@ const AddOrUpdateQuiz = () => {
     const handleQuizDuration = (e) => {
         const validTimeInMin = parseInt(e.target.value, 10);
         setTimeInMin(validTimeInMin);
-        if (isNaN(validTimeInMin)) {
-            setTimeInMinError("Enter a valid number for Duration of Minutes");
-        } else if(validTimeInMin < 0){
-            setTimeInMinError("Duration of minutes can not be negative");
-        }
-        else {
-            setNumOfQuestionsError("");
+        if (isNaN(validTimeInMin) || validTimeInMin <= 0) {
+            setTimeInMinError("Enter valid Duration in Minutes");
+        } else {
+            setTimeInMinError("");
         }
     };
 
@@ -94,7 +87,7 @@ const AddOrUpdateQuiz = () => {
         if (!quizName) {
             setQuizNameError("Quiz Name is required");
             isValid = false;
-        } else if(quizName.startsWith("")){
+        } else if(quizName.startsWith(" ")){
             setQuizNameError("Name cannot start with spaces");
             isValid = false;
         } else{
@@ -109,7 +102,8 @@ const AddOrUpdateQuiz = () => {
         }
 
         if(!numOfQuestions){
-            setNumOfQuestionsError("Enter Number greater than 0");
+            setNumOfQuestionsError("Enter Number");
+            isValid = false;
         }
         else if (isNaN(numOfQuestions) || numOfQuestions <= 0) {
             setNumOfQuestionsError("Enter a valid number of Questions");
@@ -119,13 +113,11 @@ const AddOrUpdateQuiz = () => {
         }
 
         if(!timeInMin){
-            setTimeInMinError("Enter Number greater than 0");
-        }
-        else if (isNaN(timeInMin)){
-            setTimeInMinError("Enter a valid number for Duration of Minutes");
+            setTimeInMinError("Enter Number");
             isValid = false;
-        } else if (timeInMin < 0){
-            setTimeInMinError("Duration of minutes cannot be negative")
+        }
+        else if (isNaN(numOfQuestions) || timeInMin <= 0){
+            setTimeInMinError("Enter a valid number for Duration of Minutes");
             isValid = false;
         } else {
             setTimeInMinError("");
@@ -149,51 +141,41 @@ const AddOrUpdateQuiz = () => {
             categoryId,
         };
 
-        try {
+        if (isUpdating) {
+            try{
+                await QuizService.updateQuiz(quizId, quizData);
+                SweetAlert.successAlert("Updated");
+                navigate(`/manage-quiz/${categoryId}`);
+                fetchQuizData();
+            } catch(error) {  
+                if(error?.response?.data?.message === "Quiz already Exists"){
+                    setQuizNameError("Quiz already exists");
+                    SweetAlert.alreadyExists("Quiz");
             
-            if (isUpdating) {
-            
-                try{
-                    await QuizService.updateQuiz(quizId, quizData);
-                    SweetAlert.successAlert("Updated");
-                    navigate(`/manage-quiz/${categoryId}`);
-                    fetchQuizData();
-                } catch(error) {
-                        
-                    if(error?.response?.data?.message === "Quiz already Exists"){
-                        setQuizNameError("Quiz already exists");
-                        SweetAlert.alreadyExists("Quiz");
-                
-                    } else if(error?.response?.data?.message === "Number cannot be 0 or less"){
-                        SweetAlert.incorrectValues();
-                    }
-                }
-
-            } else {
-            
-                try{
-                    await QuizService.addQuiz(quizData);            
-                    SweetAlert.successAlert("Added");
-                    navigate(`/manage-quiz/${categoryId}`);
-
-                } catch(error) {
-                    console.log(error);
-                    if(error?.response?.data?.message === "Quiz already Exists" ){
-                        setQuizNameError("Quiz already exists");
-                        SweetAlert.alreadyExists("Quiz");
-                    } 
-                    
-                    else if(error?.response?.data?.message === "Number cannot be 0 or less"){
-                        SweetAlert.incorrectValues();
-                    }
+                } else if(error?.response?.data?.message === "Number cannot be 0 or less"){
+                    SweetAlert.incorrectValues();
+                } else {
+                    console.error(error);
                 }
             }
-        } 
-        
-        catch (error) {
-            console.error("Update", error);
+        } else {
+            try{
+                await QuizService.addQuiz(quizData);            
+                SweetAlert.successAlert("Added");
+                navigate(`/manage-quiz/${categoryId}`);
+            } catch(error) {
+                if(error?.response?.data?.message === "Quiz already Exists" ){
+                    setQuizNameError("Quiz already exists");
+                    SweetAlert.alreadyExists("Quiz");
+                } 
+                else if(error?.response?.data?.message === "Number cannot be 0 or less"){
+                    SweetAlert.incorrectValues();
+                }
+                else{
+                    console.error(error);
+                }
+            }
         }
-
     };
 
     useEffect(() => {
@@ -247,9 +229,8 @@ const AddOrUpdateQuiz = () => {
                             className = "reg-input-fields"
                             value = {timeInMin}
                             onChange = {handleQuizDuration}
-                            place Holder = "Enter Duration"
+                            placeholder = "Enter Duration"
                             />
-                            
                             {timeInMinError && <div className="error">{timeInMinError}</div>}
 
                         </div>

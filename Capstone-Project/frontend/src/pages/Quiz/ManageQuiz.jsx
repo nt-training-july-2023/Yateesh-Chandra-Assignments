@@ -26,7 +26,6 @@ const ManageQuiz = () => {
     const fetchQuizzes = () => {
         QuizService.getQuizByCategoryId(categoryId)
           .then((response) => {
-              console.log('categoryId:', categoryId);
               setQuizzes(response?.data?.body);
           });
     };
@@ -38,10 +37,8 @@ const ManageQuiz = () => {
     const handleDeleteQuiz = (quizId) => {
         QuizService.deleteQuiz(quizId)
         .then(() => {
-            console.log("Quiz deleted : ", quizId);
             fetchQuizzes();
         })
-        .catch((error) => console.log("Error deleting Quiz", error));
     };
 
     const handleEditClick = (quizId) => {
@@ -49,7 +46,6 @@ const ManageQuiz = () => {
     };
 
     const handleAddClick = (categoryId) => {
-        console.log('categoryId before passing : ', categoryId);
         navigate('/add-quiz', { state: { categoryId: categoryId.toString() } });
     };
 
@@ -83,19 +79,28 @@ const ManageQuiz = () => {
                 ))}
 
                 <div className="manage-quiz-container">
+                    
                     <div className="quiz-list-container">
-                    <Header1 className="arial" text={quizzes.length === 0 ? `No Quiz Available in "${categoryName}"` : `Quizzes Available in "${categoryName}"`}
-/>
+                        <Header1
+                        className="arial"
+                        text={quizzes.length === 0 ? `No Quiz Available in "${categoryName}"` : `Quizzes Available in "${categoryName}"`}
+                        />
+
                         <div className="button-search-container">
                             <div className="left-buttons">
-                            <IconLeftButton className='red-button button-big' onClick={backButtonClick} icon={<FaBackward className="small-icon" />} text="Back" />
-                                {userRole === "ADMIN" && (
-                                <IconButton
-                                className="blue-button button-big"
-                                onClick={() => handleAddClick(categoryId)}
-                                icon = {<FaPlusCircle className="small-icon" />}
-                                text= "Add Quiz"
+                                <IconLeftButton 
+                                className='red-button button-big' 
+                                onClick={backButtonClick} icon={<FaBackward className="small-icon" />} 
+                                text="Back" 
                                 />
+                                
+                                {userRole === "ADMIN" && (
+                                    <IconButton
+                                    className="blue-button button-big"
+                                    onClick={() => handleAddClick(categoryId)}
+                                    icon = {<FaPlusCircle className="small-icon" />}
+                                    text= "Add Quiz"
+                                    />
                                 )}
                             </div>
 
@@ -108,6 +113,7 @@ const ManageQuiz = () => {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                             </div>
+
                         </div>
             
                         <div className="quiz-list-scroll-container">
@@ -119,19 +125,44 @@ const ManageQuiz = () => {
                                     {userRole === "ADMIN" && (<p>Max No of Questions : <b>{quiz.numOfQuestions}</b></p>)}
                                     <p>Duration : <b>{quiz.timeInMin} min</b></p>
                                     <div className="open-quiz-button">
+
                                         {userRole === "ADMIN" && (
-                                        <IconLeftButton className = "edit-button button-small" onClick = {() => handleEditClick(quiz.quizId)} icon={<FaPen className="very-small-icon" /> } text = "Edit"/>
+                                            <IconLeftButton
+                                            className = "edit-button button-small"
+                                            onClick = {() => handleEditClick(quiz.quizId)}
+                                            icon={<FaPen className="very-small-icon" /> } 
+                                            text = "Edit"
+                                            />
                                         )}
+
                                         {userRole === "ADMIN" &&(
-                                        <IconLeftButton className = "delete-button button-small" onClick = {() => deleteButton(quiz.quizId)} icon={<FaTrash className="very-small-icon" /> } text = "Delete"/>
+                                            <IconLeftButton
+                                            className = "delete-button button-small" 
+                                            onClick = {() => deleteButton(quiz.quizId)} 
+                                            icon={<FaTrash className="very-small-icon" /> } 
+                                            text = "Delete"
+                                            />
                                         )}
+
                                         {userRole === "ADMIN" && (
-                                        <IconLeftButton className = "open-button button-small" onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions, quizName : quiz.quizName}})} icon={<FaExternalLinkAlt className="very-small-icon" /> } text = "Open"/>
+                                            <IconLeftButton 
+                                            className = "open-button button-small"
+                                            onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions, quizName : quiz.quizName}})} 
+                                            icon={<FaExternalLinkAlt className="very-small-icon" /> } 
+                                            text = "Open"
+                                            />
                                         )}
+
                                     </div>
+
                                     <div className="user-open-quiz-button">
                                         {userRole === "USER" && (
-                                        <IconLeftButton className = "open-button button-wide" onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)} icon={<FaTasks className="very-small-icon" /> } text = "Take Quiz"/>
+                                            <IconLeftButton
+                                            className = "open-button button-wide"
+                                            onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)}
+                                            icon={<FaTasks className="very-small-icon" /> }
+                                            text = "Take Quiz"
+                                            />
                                         )}
                                     </div>
                                 </div>
