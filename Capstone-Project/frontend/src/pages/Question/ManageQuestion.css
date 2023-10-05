@@ -11,7 +11,7 @@
 
 .manage-questions-container h1 {
   color: #333;
-  font-size: 28px;
+  font-size: 25px;
   margin-top: 0px;
 }
 
@@ -25,10 +25,6 @@
   padding: 10px;
   background-color: none;
   border-radius: 5px;
-}
-
-.question-form h2 {
-  color: #333;
 }
 
 .question-form .button-question {

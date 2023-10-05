@@ -5,11 +5,11 @@ import {useLocation} from 'react-router-dom'
 import NotFound from "../../pages/HomePage/NotFound";
 import QuizService from "../../services/QuizService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
-import LabelComponent from "../../components/LabelComponent";
-import InputComponent from "../../components/InputComponent";
-import TextAreaComponent from "../../components/TextAreaComponent";
-import Header1 from "../../components/Header1";
-import ButtonComponent from "../../components/ButtonComponent";
+import LabelComponent from "../../components/FormElements/LabelComponent";
+import InputComponent from "../../components/FormElements/InputComponent";
+import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
+import Header1 from "../../components/HeaderComponents/Header1";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 
 const AddOrUpdateQuiz = () => {
     const { quizId } = useParams();

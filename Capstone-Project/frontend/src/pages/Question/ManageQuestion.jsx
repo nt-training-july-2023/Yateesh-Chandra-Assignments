@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./ManageQuestion.css";
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
-import { FaBackward, FaPen, FaPlusCircle, FaTractor, FaTrash } from "react-icons/fa";
+import { FaBackward, FaPen, FaPlusCircle, FaTrash } from "react-icons/fa";
 import NotFound from '../HomePage/NotFound';
 import QuestionService from "../../services/QuestionService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
-import InputComponent from "../../components/InputComponent";
-import SelectComponent from "../../components/SelectComponent";
-import TextAreaComponent from "../../components/TextAreaComponent";
-import ButtonComponent from "../../components/ButtonComponent";
-import IconLeftButton from "../../components/IconLeftButton";
-import IconButton from "../../components/IconButton";
-import Header1 from "../../components/Header1";
+import InputComponent from "../../components/FormElements/InputComponent";
+import SelectComponent from "../../components/FormElements/SelectComponent";
+import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
+import IconButton from "../../components/ButtonComponents/IconButton";
+import Header1 from "../../components/HeaderComponents/Header1";
+import Header2 from "../../components/HeaderComponents/Header2";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -133,10 +133,27 @@ const ManageQuestion = () => {
                     <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')} className="arial"/>
                     {!isAddingQuestion && !isEditingQuestion ? (
                         <div className="button-container">
-                            <IconLeftButton className = "red-button button" onClick = {backButton} text = "Back" icon = {<FaBackward className="small-icon" />}/>
-                            <IconButton className = "blue-button button right" onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) } text = "Add " icon = {<FaPlusCircle className="small-icon" />}/>
+
+                            <IconButton 
+                            className = "red-button button" 
+                            onClick = {backButton} 
+                            text = "Back" 
+                            icon = {<FaBackward className="small-icon" />}
+                            iconLeft={true}
+                            />
+
+                            <IconButton 
+                            className = "blue-button button right" 
+                            onClick={questions.length < numOfQuestions ? (() => setIsAddingQuestion(true)) : (() => SweetAlert.limitReached()) } 
+                            text = "Add " 
+                            icon = {<FaPlusCircle className="small-icon" />}
+                            iconLeft={false}
+                            />
+
                         </div>
+
                     ) : (
+
                         <div className="add-update">
                             <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
                             
@@ -225,8 +242,23 @@ const ManageQuestion = () => {
                                         <div>Correct : {question.correctOption}</div>
                                     </div>
                                     <div className="question-actions">
-                                        <IconButton className = "delete-button button-small item" onClick = {() => handleDeleteButton(question.questionId)} icon = {<FaTrash className="very-small-icon"/>} text = "Delete"/>
-                                        <IconButton className = "open-button button-small" onClick={() => handleEditClick(question)} text = "Edit " icon = {<FaPen className="very-small-icon"/>}/>
+
+                                        <IconButton
+                                        className = "delete-button button-small item"
+                                        onClick = {() => handleDeleteButton(question.questionId)}
+                                        icon = {<FaTrash className="very-small-icon"/>}
+                                        text = "Delete"
+                                        iconLeft={false}
+                                        />
+
+                                        <IconButton
+                                        className = "open-button button-small"
+                                        onClick={() => handleEditClick(question)}
+                                        text = "Edit "
+                                        icon = {<FaPen className="very-small-icon"/>}
+                                        iconLeft={false}
+                                        />
+
                                     </div>
                                 </li>
                                 ))}

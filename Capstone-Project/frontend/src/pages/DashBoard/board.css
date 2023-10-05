@@ -1,3 +1,7 @@
+body {
+  background: linear-gradient(90deg, rgba(156,255,251,1) 0%, rgba(238,255,167,1) 35%, rgba(150,255,158,1) 100%);
+}
+
 .sticky {
     position: sticky;
     top: 0;
@@ -37,10 +41,6 @@
   li a.active {
     color: white;
     background-color: #6345e7;
-  }
-  
-  body {
-    background: linear-gradient(90deg, rgba(156,255,251,1) 0%, rgba(238,255,167,1) 35%, rgba(150,255,158,1) 100%);;
   }
 
   .h1-profile{

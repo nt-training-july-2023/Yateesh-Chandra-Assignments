@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import UserServices from "../../services/UserServices";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
-import InputComponent from "../../components/InputComponent";
+import InputComponent from "../../components/FormElements/InputComponent";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import ButtonComponent from "../../components/ButtonComponent";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
+import Header2 from "../../components/HeaderComponents/Header2";
+import Header3 from "../../components/HeaderComponents/Header3";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -113,8 +115,8 @@ function Login() {
 
     return(
         <div className="registration-form">
-            <h2>Login</h2>
-            
+            <Header2 className = "h2-heading" text = "Login" />
+
             <form onSubmit={handleFormSubmit}>
         
                 <div className="form-group">
@@ -157,9 +159,7 @@ function Login() {
                     <InputComponent type="button" className="button-button-login" value = "Home" onClick={redirect} />
                 </div>
 
-                <h3>
-                    New to our Platform? <Link to="/register">Register now</Link>
-                </h3>
+                <Header3 className = "h3-heading" text = "New to our Platform? " to = "/register" link = "Register Now"/>
             </form>
         </div>
     );

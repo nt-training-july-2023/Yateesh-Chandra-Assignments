@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCode, FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SweetAlert from '../SweetAlerts/SweetAlert';
-import SignOutIcon from '../SignOutIcon';
+import SignOutIcon from '../ButtonComponents/SignOutIcon';
 
 function AdminNavBar() {
 

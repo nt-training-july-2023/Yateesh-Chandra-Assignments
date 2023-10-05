@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import UserNavBar from '../../components/NavBars/UserNavBar';
 import NotFound from '../HomePage/NotFound';
-import DeactivateBackButton from '../../components/DeactivateBackButton';
+import DeactivateBackButton from '../../components/ButtonComponents/DeactivateBackButton';
 import ResultService from "../../services/ResultService";
-import Header1 from "../../components/Header1";
+import Header1 from "../../components/HeaderComponents/Header1";
 import { FaInfoCircle } from "react-icons/fa";
 
 const Profile = () => {

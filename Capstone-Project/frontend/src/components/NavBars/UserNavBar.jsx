@@ -2,7 +2,7 @@ import React from 'react';
 import { FaHome, FaListAlt, FaPowerOff } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SweetAlert from '../SweetAlerts/SweetAlert';
-import SignOutIcon from '../SignOutIcon';
+import SignOutIcon from '../ButtonComponents/SignOutIcon';
 
 function UserNavBar() {
 
@@ -47,7 +47,7 @@ function UserNavBar() {
                         </li>
 
                         <div className='sign-out-button'>
-                        <SignOutIcon className = "sign-button" onClick = {logOut} text = "Sign Out" icon={<FaPowerOff className='icon'/>}/>
+                            <SignOutIcon className = "sign-button" onClick = {logOut} text = "Sign Out" icon={<FaPowerOff className='icon'/>}/>
                         </div>
                     </ul>
                 </nav>

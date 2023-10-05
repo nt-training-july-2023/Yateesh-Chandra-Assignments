@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './Categories.css';
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import { FaExternalLinkAlt, FaPen, FaPlusCircle, FaTrash } from 'react-icons/fa';
-import DeactivateBackButton from '../../components/DeactivateBackButton';
+import DeactivateBackButton from '../../components/ButtonComponents/DeactivateBackButton';
 import NotFound from '../../pages/HomePage/NotFound';
 import CategoryService from '../../services/CategoryService';
 import SweetAlert from '../../components/SweetAlerts/SweetAlert';
-import IconButton from '../../components/IconButton';
-import IconLeftButton from '../../components/IconLeftButton';
-import Header1 from '../../components/Header1';
+import IconButton from '../../components/ButtonComponents/IconButton';
+import Header1 from '../../components/HeaderComponents/Header1';
 
 const ManageCategory = () => {
     const [categories, setCategories] = useState([]);
@@ -62,7 +61,13 @@ const ManageCategory = () => {
                         <Header1 text = {filterCategory.length > 0 ? userRole === "ADMIN" && ("Category List") : "No Category"} className = "arial"/>
                         <div className='button-search-container'>
                             {userRole === "ADMIN" && (
-                                <IconButton className="add-category-button " onClick={() => navigate('/add-category')} text="Add Category " icon={<FaPlusCircle/>} />
+                                <IconButton
+                                className="add-category-button"
+                                onClick={() => navigate('/add-category')}
+                                text="Add Category"
+                                icon={<FaPlusCircle />}
+                                iconLeft={false}
+                                />
                             )}
                             <div className='search-bar'>
                                 <input
@@ -92,18 +97,30 @@ const ManageCategory = () => {
                                                 <td>
                                                     <div className='button-container-manage-category'>
                                                     {userRole === "ADMIN" && (    
-                                                        <IconLeftButton text = "Update" className="blue-button button-category" onClick={() => handleEditClick(category.categoryId)} icon = {<FaPen className="very-small-icon" />}/>
+                                                        <IconButton 
+                                                        text = "Update" 
+                                                        className="blue-button button-category" 
+                                                        onClick={() => handleEditClick(category.categoryId)} 
+                                                        icon = {<FaPen className="very-small-icon" />}
+                                                        iconLeft = {true}
+                                                        />
                                                     )}    
                                                     {userRole === "ADMIN" && (    
-                                                        <IconLeftButton text = "Delete" className="red-button button-category" onClick={() => handleDeleteClick(category.categoryId)} icon = {<FaTrash className="very-small-icon" />}/>
+                                                        <IconButton
+                                                        text = "Delete"
+                                                        className="red-button button-category"
+                                                        onClick={() => handleDeleteClick(category.categoryId)}
+                                                        icon = {<FaTrash className="very-small-icon" />}
+                                                        iconLeft = {true}
+                                                        />
                                                     )}    
-                                                       <IconLeftButton
+                                                        <IconButton
                                                         text={userRole === "ADMIN" ? "Open" : "View Quiz"}
                                                         className={userRole === "ADMIN" ? "green-button button-category" : "green-button button-wide"}
                                                         onClick={() => handleOpenButton(category.categoryId, category.categoryName)}
                                                         icon={<FaExternalLinkAlt className="very-small-icon" />}
+                                                        iconLeft={true}
                                                         />
-
                                                     </div>
                                                 </td>
                                             </tr>

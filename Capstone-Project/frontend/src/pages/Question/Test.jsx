@@ -5,14 +5,14 @@ import Swal from 'sweetalert2';
 import clockswal from "../../assets/image/clockswal.png";
 import oopsswal from "../../assets/image/oopsswal.png";
 import instructionswal from "../../assets/image/instructionswal.png";
-import DeactivateBackButton from '../../components/DeactivateBackButton';
+import DeactivateBackButton from '../../components/ButtonComponents/DeactivateBackButton';
 import NotFound from '../../pages/HomePage/NotFound';
 import SweetAlert from '../../components/SweetAlerts/SweetAlert';
 import QuestionService from '../../services/QuestionService';
 import ResponseService from '../../services/ResponseService';
 import { format } from 'date-fns';
 import TimerNavBar from '../../components/NavBars/TimerNavBar';
-import ButtonComponent from "../../components/ButtonComponent";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 
 const Test = () => {
 

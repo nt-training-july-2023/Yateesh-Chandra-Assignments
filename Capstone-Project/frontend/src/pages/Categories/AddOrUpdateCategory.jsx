@@ -5,11 +5,11 @@ import AdminNavBar from "../../components/NavBars/AdminNavBar";
 import NotFound from "../../pages/HomePage/NotFound";
 import CategoryService from "../../services/CategoryService";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
-import InputComponent from "../../components/InputComponent";
-import LabelComponent from "../../components/LabelComponent";
-import TextAreaComponent from "../../components/TextAreaComponent";
-import Header1 from "../../components/Header1";
-import ButtonComponent from "../../components/ButtonComponent";
+import InputComponent from "../../components/FormElements/InputComponent";
+import LabelComponent from "../../components/FormElements/LabelComponent";
+import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
+import Header1 from "../../components/HeaderComponents/Header1";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 
 const AddOrUpdateCategory = () =>{
 

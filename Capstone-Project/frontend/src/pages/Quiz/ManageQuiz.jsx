@@ -7,9 +7,9 @@ import { FaBackward, FaExternalLinkAlt, FaPen, FaPlusCircle, FaTasks, FaTrash } 
 import QuizService from "../../services/QuizService";
 import NotFound from '../../pages/HomePage/NotFound';
 import SweetAlert from '../../components/SweetAlerts/SweetAlert';
-import Header1 from "../../components/Header1";
-import IconButton from "../../components/IconButton";
-import IconLeftButton from "../../components/IconLeftButton";
+import Header1 from "../../components/HeaderComponents/Header1";
+import IconButton from "../../components/ButtonComponents/IconButton";
+import Header2 from "../../components/HeaderComponents/Header2";
 
 const ManageQuiz = () => {
     const { categoryId } = useParams();
@@ -88,10 +88,11 @@ const ManageQuiz = () => {
 
                         <div className="button-search-container">
                             <div className="left-buttons">
-                                <IconLeftButton 
+                                <IconButton 
                                 className='red-button button-big' 
                                 onClick={backButtonClick} icon={<FaBackward className="small-icon" />} 
                                 text="Back" 
+                                iconLeft={true}
                                 />
                                 
                                 {userRole === "ADMIN" && (
@@ -100,6 +101,7 @@ const ManageQuiz = () => {
                                     onClick={() => handleAddClick(categoryId)}
                                     icon = {<FaPlusCircle className="small-icon" />}
                                     text= "Add Quiz"
+                                    iconLeft={false}
                                     />
                                 )}
                             </div>
@@ -120,36 +122,39 @@ const ManageQuiz = () => {
                             <div className="quiz-grid">
                                 {filterQuiz.map((quiz) => (
                                 <div className="quiz-card" key={quiz.quizId}>
-                                    <h2>{quiz.quizName}</h2>
+                                    <Header2 className = "quiz-h2" text = {quiz.quizName} />
                                     <p>{quiz.quizDescription}</p>
                                     {userRole === "ADMIN" && (<p>Max No of Questions : <b>{quiz.numOfQuestions}</b></p>)}
                                     <p>Duration : <b>{quiz.timeInMin} min</b></p>
                                     <div className="open-quiz-button">
 
                                         {userRole === "ADMIN" && (
-                                            <IconLeftButton
+                                            <IconButton
                                             className = "edit-button button-small"
                                             onClick = {() => handleEditClick(quiz.quizId)}
                                             icon={<FaPen className="very-small-icon" /> } 
                                             text = "Edit"
+                                            iconLeft={true}
                                             />
                                         )}
 
                                         {userRole === "ADMIN" &&(
-                                            <IconLeftButton
+                                            <IconButton
                                             className = "delete-button button-small" 
                                             onClick = {() => deleteButton(quiz.quizId)} 
                                             icon={<FaTrash className="very-small-icon" /> } 
                                             text = "Delete"
+                                            iconLeft={true}
                                             />
                                         )}
 
                                         {userRole === "ADMIN" && (
-                                            <IconLeftButton 
+                                            <IconButton 
                                             className = "open-button button-small"
                                             onClick={() => navigate(`/manage-question/${quiz.quizId}`, {state : {categoryId : categoryId.toString(), numOfQuestions: quiz.numOfQuestions, quizName : quiz.quizName}})} 
                                             icon={<FaExternalLinkAlt className="very-small-icon" /> } 
                                             text = "Open"
+                                            iconLeft={true}
                                             />
                                         )}
 
@@ -157,11 +162,12 @@ const ManageQuiz = () => {
 
                                     <div className="user-open-quiz-button">
                                         {userRole === "USER" && (
-                                            <IconLeftButton
+                                            <IconButton
                                             className = "open-button button-wide"
                                             onClick={() => handleTakeQuizClick(quiz.quizId, quiz.timeInMin, quiz.quizName, categoryId)}
                                             icon={<FaTasks className="very-small-icon" /> }
                                             text = "Take Quiz"
+                                            iconLeft={true}
                                             />
                                         )}
                                     </div>

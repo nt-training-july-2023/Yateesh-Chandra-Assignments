@@ -5,8 +5,10 @@ import successfulswal from "../../assets/image/successfulswal.png"
 import UserServices from "../../services/UserServices";
 import SweetAlert from "../../components/SweetAlerts/SweetAlert";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import ButtonComponent from "../../components/ButtonComponent";
-import InputComponent from "../../components/InputComponent";
+import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
+import InputComponent from "../../components/FormElements/InputComponent";
+import Header2 from "../../components/HeaderComponents/Header2";
+import Header3 from "../../components/HeaderComponents/Header3";
 
 export default function Registration() {
     const [name, setName] = useState("");
@@ -166,7 +168,7 @@ export default function Registration() {
 
     return(
         <div className="registration-form">
-            <h2>Signup</h2>
+            <Header2 className = "h2-heading" text = "Signup"/>
             <form onSubmit={handleFormSubmit}>
                 <div className="form-group">
                     <InputComponent
@@ -253,12 +255,9 @@ export default function Registration() {
                 value = "Register"
                 className = "button-submit-register" 
                 />
-
-                <div className="text">
-                    <h3>
-                        Already our Subscriber? <Link to="/Login">Login now</Link> 
-                    </h3>
-                </div>
+            
+                <Header3 className = "h3-heading text" text = "Already our Subscriber? " to = "/login" link = "Login Now"/>
+            
             </form>
         </div>
     );

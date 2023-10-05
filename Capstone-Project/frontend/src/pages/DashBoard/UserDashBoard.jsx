@@ -2,9 +2,9 @@ import React from 'react';
 import '../DashBoard/board.css'
 import UserNavBar from '../../components/NavBars/UserNavBar';
 import NotFound from '../HomePage/NotFound';
-import DeactivateBackButton from '../../components/DeactivateBackButton';
+import DeactivateBackButton from '../../components/ButtonComponents/DeactivateBackButton';
 import ManageCategory from '../Categories/ManageCategory';
-import Header1 from '../../components/Header1';
+import Header1 from '../../components/HeaderComponents/Header1';
 
 function UserDashBoard() {
 

@@ -3,7 +3,8 @@ import '../DashBoard/board.css'
 import AdminNavBar from '../../components/NavBars/AdminNavBar';
 import NotFound from '../HomePage/NotFound';
 import UserServices from '../../services/UserServices';
-import Header1 from '../../components/Header1';
+import Header1 from '../../components/HeaderComponents/Header1';
+import DeactivateBackButton from '../../components/ButtonComponents/DeactivateBackButton';
 
 function AdminDashBoard() {
     const [users, setUsers] = useState([]);
@@ -27,6 +28,7 @@ function AdminDashBoard() {
 
     return (
         <div className="app">
+        <DeactivateBackButton/>
         {userRole === 'ADMIN' ? 
         <>
             <AdminNavBar/>

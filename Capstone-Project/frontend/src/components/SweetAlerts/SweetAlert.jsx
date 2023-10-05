@@ -13,17 +13,17 @@ class SweetAlert{
     loginSuccessSwal(tag) {
         Swal.fire({
           position: 'center',
-          allowOutsideClick : false,
-          html : `<div class="animation">${tag}<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.!</span></div>`,
+          allowOutsideClick: false,
+          html: `<div class="animation">${tag}<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.!</span></div>`,
           showConfirmButton: false,
           background: "rgb(240, 240, 240)",
           timer: 1800,
-          backdrop: `rgb(240, 240, 200, 1)`,
-          width : 500,
+          width: 500,
           timerProgressBar: true,
-          customClass:{
-            timerProgressBar : "custom-swal-timer",
-          }
+          backdrop: `linear-gradient(90deg, rgba(156,255,251,1) 0%, rgba(238,255,167,1) 35%, rgba(150,255,158,1) 100%)`,
+          customClass: {
+            timerProgressBar: "custom-swal-timer",
+          },
         });
       };
       
@@ -150,9 +150,9 @@ class SweetAlert{
             showConfirmButton: false,
             timer : 2000,
             showConfirmButton : false,
-            backdrop: `rgb(240, 240, 200, 1)`,
+            backdrop: `linear-gradient(90deg, rgba(156,255,251,1) 0%, rgba(238,255,167,1) 35%, rgba(150,255,158,1) 100%)`,
         }).then(() => {
-            navigate();  
+            navigate();
         })
     }
 }

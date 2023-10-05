@@ -1,10 +1,10 @@
 import React from "react";
 
-const IconButton = ({ text, icon, onClick, className }) => {
+const IconButton = ({ text, icon, onClick, className, iconLeft }) => {
   return (
     <div>
       <button className={className} onClick={onClick}>
-        {text} {icon && icon}
+        {iconLeft && icon} {text} {!iconLeft && icon}
       </button>
     </div>
   );
