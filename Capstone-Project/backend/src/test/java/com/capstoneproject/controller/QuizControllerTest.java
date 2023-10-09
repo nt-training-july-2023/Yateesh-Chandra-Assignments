@@ -29,7 +29,6 @@ public class QuizControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     public void testGetAllQuiz() {
         List<QuizDTO> quizzes = new ArrayList<>();

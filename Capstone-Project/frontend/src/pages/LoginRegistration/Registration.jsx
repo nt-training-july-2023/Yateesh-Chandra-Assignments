@@ -51,8 +51,8 @@ export default function Registration() {
         setPassword(e.target.value);
         if (!password) {
             setPasswordError("Password is required ");
-        } else if (password.length < 5) {
-            setPasswordError("Password must be at least 6 characters");
+        } else if (password.length < 7) {
+            setPasswordError("Password must be at least 8 characters");
         } else {
             setPasswordError("");
         }
@@ -161,8 +161,15 @@ export default function Registration() {
             navigate("/login");
 
         } catch (error) {
-            setEmailError("This email already exists");
-            SweetAlert.registrationFailureFireAlert(error.response.data.message);
+            if(error.response.data.password === "Password must contain at least one uppercase letter and one digit"){
+                SweetAlert.registrationFailureFireAlert(error.response.data.password);
+                setPasswordError("Password must contain atleast one uppercase and number");
+            }
+
+            if(error.response.data.message === "Email already Exists"){
+                SweetAlert.registrationFailureFireAlert(error.response.data.message);
+                setEmailError(error.response.data.message);
+            }
         }
     };
 

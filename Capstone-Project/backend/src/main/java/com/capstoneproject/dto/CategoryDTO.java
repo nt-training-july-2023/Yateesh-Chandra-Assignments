@@ -5,9 +5,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,17 +19,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDTO {
+
   /**
    * This is category Id field for Category class.
    */
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long categoryId;
+
   /**
    * This is Category Title Name field.
    */
   @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
   private String categoryName;
+
   /**
    * This is Category Description.
    */

@@ -127,5 +127,4 @@ public class UserResponses {
         this.marksScored = marksScore;
         this.timeStamp = timestamp;
     }
-
 }

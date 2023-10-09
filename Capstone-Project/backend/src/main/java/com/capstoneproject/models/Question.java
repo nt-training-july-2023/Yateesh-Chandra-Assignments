@@ -21,6 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "question")
 public class Question {
+
     /**
      * This is the Question Id Column, Primary key.
      */
@@ -28,31 +29,37 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
     private Long questionId;
+
     /**
      * This is the Question Title Column.
      */
     @Column(name = "question_title", nullable = false)
     private String questionTitle;
+
     /**
      * This is the Option 1 Column.
      */
     @Column(nullable = false)
     private String option1;
+
     /**
      * This is the Option 2 Column.
      */
     @Column(nullable = false)
     private String option2;
+
     /**
      * This is the Option 3 Column.
      */
     @Column(nullable = false)
     private String option3;
+
     /**
      * This is the Option 4 Column.
      */
     @Column(nullable = false)
     private String option4;
+
     /**
      * This Column contains the correct option.
      */
@@ -105,5 +112,4 @@ public class Question {
         this.option4 = opt4;
         this.correctOption = correctOpt;
     }
-
 }

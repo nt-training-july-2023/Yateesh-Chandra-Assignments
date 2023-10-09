@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 public class SecurityConfig {
+
     /**
      * This method contains the Bean that stored BCryptPasswordEncoder.
      *

@@ -34,8 +34,8 @@ public final class ValidationMessages {
     /**
      * Message shown when password is not valid.
      */
-    public static final String PASSWORD_PATTERN = "Password should be atleast"
-            + " 6 characters";
+    public static final String PASSWORD_PATTERN = "Password must contain"
+            + " at least one uppercase letter and one digit";
 
     /**
      * Message shown when Phone number is not valid.
@@ -151,5 +151,11 @@ public final class ValidationMessages {
      */
     public static final String NUM_OF_QUE_ANSWERED_NOTNULL = "Total number of"
             + " Questions Required";
+
+    /**
+     * Message shown when password length should be 8 characters.
+     */
+    public static final String PASSWORD_LENGTH = "Password should be atleast"
+            + " 8 characters";
 
 }

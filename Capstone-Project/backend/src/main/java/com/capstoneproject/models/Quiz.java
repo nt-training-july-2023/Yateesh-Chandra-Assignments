@@ -34,6 +34,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "quiz")
 public class Quiz {
+
     /**
      * This is the quiz ID column, Primary key.
      */
@@ -87,6 +88,7 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<UserResponses> userResponses = new ArrayList<>();
+
     /**
      * List the questions.
      *@return the list of questions.
@@ -154,5 +156,4 @@ public class Quiz {
         this.numOfQuestions = numOfQue;
         this.timeInMin = timeInmin;
     }
-
 }

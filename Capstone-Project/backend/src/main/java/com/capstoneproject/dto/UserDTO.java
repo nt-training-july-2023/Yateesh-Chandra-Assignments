@@ -5,9 +5,6 @@ package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -28,13 +25,11 @@ public class UserDTO {
     /**
      * This ID_MIN_LENGTH contains the minimum value to be the value in column.
      */
-    private static final int MIN_LENGTH = 6;
+    private static final int MIN_LENGTH = 8;
 
     /**
-     * This is the Id field to be entered by new User.
+     * This is the User Id field.
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     /**
@@ -55,7 +50,9 @@ public class UserDTO {
      * This is the password field to be entered by new User.
      */
     @NotBlank(message = ValidationMessages.PASSWORD_NOT_NULL)
-    @Size(min = MIN_LENGTH, message = ValidationMessages.PASSWORD_PATTERN)
+    @Size(min = MIN_LENGTH, message = ValidationMessages.PASSWORD_LENGTH)
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).+$",
+    message = ValidationMessages.PASSWORD_PATTERN)
     private String password;
 
     /**
@@ -69,5 +66,4 @@ public class UserDTO {
     @NotBlank(message = ValidationMessages.PHONE_NULL)
     @Pattern(regexp = "\\d{10}", message = ValidationMessages.PHONE_PATTERN)
     private String phoneNumber;
-
 }

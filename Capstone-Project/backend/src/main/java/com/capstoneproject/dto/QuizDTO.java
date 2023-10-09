@@ -5,7 +5,7 @@ import com.capstoneproject.response.ValidationMessages;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,13 +27,13 @@ public class QuizDTO {
     /**
      * This is quizName variable.
      */
-    @NotEmpty(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
+    @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
     private String quizName;
 
     /**
      * This is Quiz Description variable.
      */
-    @NotEmpty(message = ValidationMessages.QUIZ_DESC_NOTBLANK)
+    @NotBlank(message = ValidationMessages.QUIZ_DESC_NOTBLANK)
     private String quizDescription;
 
     /**
@@ -41,10 +41,10 @@ public class QuizDTO {
      */
     @NotNull(message = ValidationMessages.QUESTIONS_NOTNULL)
     private int numOfQuestions;
+
     /**
      * This field contains time in Minutes.
      */
-
     @NotNull(message = ValidationMessages.TIME_NOTNULL)
     private int timeInMin;
 

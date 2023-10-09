@@ -30,6 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "category")
 public class Category {
+
     /**
      * This is the Category ID column that is the primary key.
      */
@@ -37,11 +38,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long categoryId;
+
     /**
      * This is the category name Column.
      */
     @Column(name = "category_name", nullable = false, unique = true)
     private String categoryName;
+
     /**
      * This is the Category Description Column.
      */
@@ -67,6 +70,7 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Quiz> quiz = new ArrayList<>();
+
     /**
      * Quiz.
      * @return the list.
@@ -82,5 +86,4 @@ public class Category {
     public void setQuiz(final List<Quiz> quizz) {
         this.quiz = new ArrayList<>(quizz);
     }
-
 }

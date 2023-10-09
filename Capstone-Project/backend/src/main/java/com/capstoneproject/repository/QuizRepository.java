@@ -14,6 +14,7 @@ import com.capstoneproject.models.Quiz;
  */
 @EnableJpaRepositories
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
+
     /**
      * Find Category by Id.
      * @param categoryId The category to search for.

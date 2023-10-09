@@ -1,6 +1,6 @@
 package com.capstoneproject.service;
 
-import static org.junit.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -68,7 +68,6 @@ class CategoryServiceTest {
         verify(categoryRepository, never()).save(any(Category.class));
     }
 
-
     @Test
     public void testDeleteCategory() {
         Long categoryIdToDelete = 1L;
@@ -109,6 +108,19 @@ class CategoryServiceTest {
         CategoryDTO updatedCategoryDTO = new CategoryDTO(categoryId, "UpdatedCategory", "Updated Description");
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> categoryService.updateCategory(categoryId, updatedCategoryDTO));
+        verify(categoryRepository, never()).save(any(Category.class));
+    }
+
+    @Test
+    public void testUpdateCategoryNameExistsForDifferentCategory() {
+        Long categoryId = 2L;
+        CategoryDTO updatedCategory = new CategoryDTO(categoryId, "Existing Category", "Updated Description");
+        Category existingCategory = new Category(categoryId, "Another Category", "Description");
+
+        when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(existingCategory));
+        when(categoryRepository.getCategoryByName(updatedCategory.getCategoryName())).thenReturn(Optional.of(new Category(3L, "Existing Category", "Some Other Description")));
+
+        assertThrows(AlreadyExistsException.class, () -> categoryService.updateCategory(categoryId, updatedCategory));
         verify(categoryRepository, never()).save(any(Category.class));
     }
 

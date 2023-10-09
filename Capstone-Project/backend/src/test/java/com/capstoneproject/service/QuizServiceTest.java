@@ -20,6 +20,7 @@ import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
+import com.capstoneproject.response.ExceptionMessages;
 
 public class QuizServiceTest {
 
@@ -191,17 +192,34 @@ public class QuizServiceTest {
 
         assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, quizDTO));
     }
-
     @Test
-    void updateQuiz_InvalidNumOfQuestionsOrTimeInMin_ShouldThrowValidationException() {
+    void updateQuiz_InvalidNumOfQuestions_ShouldThrowValidationException() {
         Long quizId = 1L;
         Long categoryId = 2L;
-        QuizDTO quizDTO = new QuizDTO(quizId, "Updated Quiz", "Updated Description", -5, 0, categoryId);
+        QuizDTO quizDTO = new QuizDTO(quizId, "Updated Quiz", "Updated Description", -5, 7, categoryId);
 
-        when(quizRepository.findById(quizId)).thenReturn(Optional.of(new Quiz()));
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of( new Quiz(quizId, "Original Quiz", "Original Description", -5, 7)));
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(new Category(categoryId, "CategoryName", "Category Description")));
 
-        assertThrows(ValidationException.class, () -> quizService.updateQuiz(quizId, quizDTO));
+        ValidationException exception = assertThrows(
+            ValidationException.class, () -> quizService.updateQuiz(quizId, quizDTO));
+
+        assertEquals(ExceptionMessages.INVALID_NUMBER, exception.getMessage());
+    }
+
+    @Test
+    void updateQuiz_InvalidTimeInMin_ShouldThrowValidationException() {
+        Long quizId = 1L;
+        Long categoryId = 2L;
+        QuizDTO quizDTO = new QuizDTO(quizId, "Updated Quiz", "Updated Description", 5, -4, categoryId);
+
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of( new Quiz(quizId, "Original Quiz", "Original Description", 5, -4)));
+        when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(new Category(categoryId, "CategoryName", "Category Description")));
+
+        ValidationException exception = assertThrows(
+            ValidationException.class, () -> quizService.updateQuiz(quizId, quizDTO));
+
+        assertEquals(ExceptionMessages.INVALID_NUMBER, exception.getMessage());
     }
 
     @Test
@@ -213,6 +231,26 @@ public class QuizServiceTest {
         when(quizRepository.findById(quizId)).thenReturn(Optional.empty());
 
         assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, quizDTO));
+    }
+
+    @Test
+    void testUpdateQuiz_QuizAlreadyExists() {
+        Long quizId = 1L;
+        Long categoryId = 5L;
+        QuizDTO quizDTO = new QuizDTO(quizId, "New Quiz", "New Description", 5, 2, categoryId);
+
+        when(categoryRepository.findById(quizDTO.getCategoryId())).thenReturn(Optional.of(new Category(categoryId, "CategoryName", "Category Description")));
+
+        Quiz existingQuiz = new Quiz(quizId, "Original Quiz", "Original Description", 5, 30);
+        existingQuiz.setQuizId(quizId);
+        existingQuiz.setQuizName("Sample Quiz");
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of(existingQuiz));
+        when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.of(new Quiz(2L, "Original Quiz", "Original Description", 5, 30)));
+
+        AlreadyExistsException exception = assertThrows(AlreadyExistsException.class,
+                () -> quizService.updateQuiz(quizId, quizDTO));
+
+        assertEquals(ExceptionMessages.QUIZ_ALREADY_EXISTS, exception.getMessage());
     }
 }
 

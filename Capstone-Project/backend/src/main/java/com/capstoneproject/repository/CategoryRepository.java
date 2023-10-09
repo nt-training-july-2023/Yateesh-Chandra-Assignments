@@ -13,6 +13,7 @@ import com.capstoneproject.models.Category;
  */
 @EnableJpaRepositories
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+
     /**
      * This gets the Category by Name.
      * @param categoryName .

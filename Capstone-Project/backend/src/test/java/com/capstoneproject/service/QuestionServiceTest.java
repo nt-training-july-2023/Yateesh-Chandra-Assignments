@@ -137,6 +137,50 @@ class QuestionServiceTest {
         assertEquals(quizId, addedQuestion.getQuizId());
     }
 
+    @Test
+    public void testUpdateQuestionWithLessThanFourOptions() {
+        Question existingQuestion = new Question();
+        existingQuestion.setQuestionId(1L);
+        existingQuestion.setQuestionTitle("Existing Question");
+        existingQuestion.setOption1("Option 1");
+        existingQuestion.setOption2("Option 2");
+        existingQuestion.setOption3("Option 3");
+        existingQuestion.setOption4("Option 4");
+        existingQuestion.setCorrectOption("Option 1");
+
+        when(questionRepository.findById(1L)).thenReturn(Optional.of(existingQuestion));
+
+        QuestionDTO updatedQuestionDTO = new QuestionDTO();
+        updatedQuestionDTO.setQuestionTitle("Updated Question");
+        updatedQuestionDTO.setOption1("Updated Option 1");
+        updatedQuestionDTO.setOption2("Updated Option 2");
+
+        assertThrows(AlreadyExistsException.class, () -> questionService.updateQuestion(1L, updatedQuestionDTO));
+    }
+
+    @Test
+    public void testUpdateQuestionWithNoMatchingCorrectOption() {
+        Question existingQuestion = new Question();
+        existingQuestion.setQuestionId(1L);
+        existingQuestion.setQuestionTitle("Existing Question");
+        existingQuestion.setOption1("Option 1");
+        existingQuestion.setOption2("Option 2");
+        existingQuestion.setOption3("Option 3");
+        existingQuestion.setOption4("Option 4");
+        existingQuestion.setCorrectOption("Option 1");
+
+        when(questionRepository.findById(1L)).thenReturn(Optional.of(existingQuestion));
+
+        QuestionDTO updatedQuestionDTO = new QuestionDTO();
+        updatedQuestionDTO.setQuestionTitle("Updated Question");
+        updatedQuestionDTO.setOption1("Updated Option 1");
+        updatedQuestionDTO.setOption2("Updated Option 2");
+        updatedQuestionDTO.setOption3("Updated Option 3");
+        updatedQuestionDTO.setOption4("Updated Option 4");
+        updatedQuestionDTO.setCorrectOption("Invalid Correct Option");
+
+        assertThrows(ConflictException.class, () -> questionService.updateQuestion(1L, updatedQuestionDTO));
+    }
 
     @Test
     void testAddQuestion_QuestionNotFound() {
@@ -148,6 +192,35 @@ class QuestionServiceTest {
             questionService.updateQuestion(questionId, questionDTO);
         });
         verify(questionRepository, never()).save(any());
+    }
+
+    @Test
+    public void testAddQuestionWithLessThanFourOptions_InvalidInput() {
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setQuizId(1L);
+        questionDTO.setQuestionTitle("Sample Question");
+        questionDTO.setOption1("Option 1");
+        questionDTO.setOption2("Option 2");
+
+        when(quizRepository.findById(1L)).thenReturn(Optional.of(new Quiz()));
+
+        assertThrows(AlreadyExistsException.class, () -> questionService.addQuestion(questionDTO));
+    }
+
+    @Test
+    public void testAddQuestionWithNoMatchingCorrectOption_InvalidInput() {
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setQuizId(1L);
+        questionDTO.setQuestionTitle("Sample Question");
+        questionDTO.setOption1("Option 1");
+        questionDTO.setOption2("Option 2");
+        questionDTO.setOption3("Option 3");
+        questionDTO.setOption4("Option 4");
+        questionDTO.setCorrectOption("Invalid Correct Option");
+
+        when(quizRepository.findById(1L)).thenReturn(Optional.of(new Quiz()));
+
+        assertThrows(ConflictException.class, () -> questionService.addQuestion(questionDTO));
     }
 
     @Test

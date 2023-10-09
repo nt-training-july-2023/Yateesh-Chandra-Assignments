@@ -1,6 +1,6 @@
 package com.capstoneproject.service;
 
-import static org.junit.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.capstoneproject.dto.UserResponsesDTO;
+import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
@@ -117,6 +118,102 @@ class UserResponsesServiceTest {
         when(userRepo.findById(1L)).thenReturn(Optional.of(new User()));
         when(quizRepo.findById(5L)).thenReturn(Optional.empty());
         assertThrows(ElementNotExistsException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
+    }
+
+    @Test
+    public void testAddUserResponsesWithMarksScoredGreaterThanTotalMarks() {
+        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+        userResponsesDto.setUserId(5L);
+        userResponsesDto.setQuizId(6L);
+        userResponsesDto.setCategoryId(7L);
+        userResponsesDto.setNumOfQuestions(10);
+        userResponsesDto.setNumOfQuestionsAnswered(8);
+        userResponsesDto.setTotalMarks(20);
+        userResponsesDto.setMarksScored(25);
+        
+        User user = new User(5L, "Yateesh");
+        Category category = new Category(7L, "Category Test", "This is test Description");
+        Quiz quiz = new Quiz(6L, "Quiz Test", "Test Quiz Description", 10, 5);
+        when(userRepo.findById(5L)).thenReturn(Optional.of(user));
+        when(quizRepo.findById(quiz.getQuizId())).thenReturn(Optional.of(quiz));
+        when(categoryRepo.findById(category.getCategoryId())).thenReturn(Optional.of(category));
+
+        assertThrows(ConflictException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
+    }
+
+    @Test
+    public void testAddUserResponsesWithNumOfQuestionsAnsweredGreaterThanNumOfQuestions() {
+        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+        userResponsesDto.setUserId(5L);
+        userResponsesDto.setQuizId(6L);
+        userResponsesDto.setCategoryId(7L);
+        userResponsesDto.setNumOfQuestions(10);
+        userResponsesDto.setNumOfQuestionsAnswered(12);
+        userResponsesDto.setTotalMarks(20);
+        userResponsesDto.setMarksScored(16);
+        
+        User user = new User(5L, "Yateesh");
+        Category category = new Category(7L, "Category Test", "This is test Description");
+        Quiz quiz = new Quiz(6L, "Quiz Test", "Test Quiz Description", 10, 5);
+        when(userRepo.findById(5L)).thenReturn(Optional.of(user));
+        when(quizRepo.findById(quiz.getQuizId())).thenReturn(Optional.of(quiz));
+        when(categoryRepo.findById(category.getCategoryId())).thenReturn(Optional.of(category));
+
+        assertThrows(ConflictException.class, () -> userResponsesService.addUserResponses(userResponsesDto));
+    }
+
+    @Test
+    public void testAddUserResponsesWithNullTimeStamp() {
+        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+        userResponsesDto.setUserId(5L);
+        userResponsesDto.setQuizId(6L);
+        userResponsesDto.setCategoryId(7L);
+        userResponsesDto.setNumOfQuestions(10);
+        userResponsesDto.setNumOfQuestionsAnswered(8);
+        userResponsesDto.setTotalMarks(20);
+        userResponsesDto.setMarksScored(16);
+        userResponsesDto.setTimeStamp(null); 
+
+        User user = new User(5L, "Yateesh");
+        Category category = new Category(7L, "Category Test", "This is test Description");
+        Quiz quiz = new Quiz(6L, "Quiz Test", "Test Quiz Description", 10, 5);
+        when(userRepo.findById(5L)).thenReturn(Optional.of(user));
+        when(quizRepo.findById(quiz.getQuizId())).thenReturn(Optional.of(quiz));
+        when(categoryRepo.findById(category.getCategoryId())).thenReturn(Optional.of(category));
+
+        UserResponsesDTO addedResponses = userResponsesService.addUserResponses(userResponsesDto);
+
+        assertEquals(10, addedResponses.getNumOfQuestions());
+        assertEquals(8, addedResponses.getNumOfQuestionsAnswered());
+        assertNull(addedResponses.getTimeStamp());
+    }
+
+    @Test
+    public void testAddUserResponsesWithNonNullTimeStamp() {
+        UserResponsesDTO userResponsesDto = new UserResponsesDTO();
+        userResponsesDto.setUserId(5L);
+        userResponsesDto.setQuizId(6L);
+        userResponsesDto.setCategoryId(7L);
+        userResponsesDto.setNumOfQuestions(10);
+        userResponsesDto.setNumOfQuestionsAnswered(8);
+        userResponsesDto.setTotalMarks(20);
+        userResponsesDto.setMarksScored(16);
+        userResponsesDto.setTimeStamp("2023-10-08T10:30:00");
+
+        
+        User user = new User(5L, "Yateesh");
+        Category category = new Category(7L, "Category Test", "This is test Description");
+        Quiz quiz = new Quiz(6L, "Quiz Test", "Test Quiz Description", 10, 5);
+        when(userRepo.findById(5L)).thenReturn(Optional.of(user));
+        when(quizRepo.findById(quiz.getQuizId())).thenReturn(Optional.of(quiz));
+        when(categoryRepo.findById(category.getCategoryId())).thenReturn(Optional.of(category));
+
+        UserResponsesDTO addedResponses = userResponsesService.addUserResponses(userResponsesDto);
+        
+        assertNotNull(addedResponses);
+        assertEquals(10, addedResponses.getNumOfQuestions());
+        assertEquals(8, addedResponses.getNumOfQuestionsAnswered());
+        assertNotNull(addedResponses.getTimeStamp()); 
     }
 
 }
