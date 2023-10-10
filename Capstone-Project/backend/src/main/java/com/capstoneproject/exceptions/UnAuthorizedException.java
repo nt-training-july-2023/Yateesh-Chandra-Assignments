@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This exception is about Authentication Exception.
+ * This exception is about Unauthorized Exception - 401.
  */
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
 public class UnAuthorizedException extends RuntimeException {

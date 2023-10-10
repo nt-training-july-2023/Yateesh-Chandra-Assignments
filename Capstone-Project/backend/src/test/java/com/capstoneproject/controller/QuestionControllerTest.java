@@ -76,7 +76,7 @@ class QuestionControllerTest {
 
         Response response = questionController.addQuestion(questionDto);
         assertNotNull(response);
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(questionDto);
         assertEquals(SuccessMessages.QUESTION_ADD_SUCCESS, response.getMessage());
 

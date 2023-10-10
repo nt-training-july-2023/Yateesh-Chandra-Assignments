@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This is ElementNotExist exception.
+ * This is Element Not Exist exception - 404.
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ElementNotExistsException extends RuntimeException {

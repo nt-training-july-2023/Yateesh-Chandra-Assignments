@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This is the AlreadyExistsException.
+ * This is the Already Exists Exception - 409.
  */
-@ResponseStatus(HttpStatus.FOUND)
+@ResponseStatus(HttpStatus.CONFLICT)
 public class AlreadyExistsException extends RuntimeException {
 
     /**

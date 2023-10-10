@@ -1,6 +1,6 @@
 package com.capstoneproject.controlleradvice;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -33,11 +33,11 @@ public class GlobalExceptionHandler {
     public final ResponseEntity<Response> handleAlreadyExistsException(
             final AlreadyExistsException exception) {
         String message = exception.getMessage();
-        HttpStatus code = HttpStatus.FOUND;
+        HttpStatus code = HttpStatus.CONFLICT;
         int statusCode = code.value();
         Response response = new Response(statusCode, message);
         return new ResponseEntity<Response>(response,
-                HttpStatus.FOUND);
+                HttpStatus.CONFLICT);
     }
 
     /**
@@ -112,11 +112,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final Map<String, Object> handleEmptyInput(final
             MethodArgumentNotValidException exception) {
-        Map<String, Object> errorMap = new HashMap<>();
+        Map<String, Object> errorMap = new LinkedHashMap<>();
+        errorMap.put("statusCode", HttpStatus.BAD_REQUEST.value());
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        errorMap.put("statusCode", HttpStatus.BAD_REQUEST.value());
         return errorMap;
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This exception is about Entity Not Found Exception.
+ * This exception is Conflict Exception - 409.
  */
 @ResponseStatus(HttpStatus.CONFLICT)
 public class ConflictException extends RuntimeException {

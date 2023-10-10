@@ -82,7 +82,7 @@ public class QuestionController {
             @RequestBody @Valid final QuestionDTO questionDto) {
         questionService.addQuestion(questionDto);
         logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
-        Response response = new Response(HttpStatus.CREATED.value(),
+        Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.QUESTION_ADD_SUCCESS);
         return response;
     }

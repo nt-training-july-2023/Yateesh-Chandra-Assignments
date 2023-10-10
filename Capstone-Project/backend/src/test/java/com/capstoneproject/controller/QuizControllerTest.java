@@ -70,7 +70,7 @@ public class QuizControllerTest {
 
         Response response = quizController.addQuiz(quizDTO);
 
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(quizDTO);
         assertEquals(SuccessMessages.QUIZ_ADD_SUCCESS, response.getMessage());
 

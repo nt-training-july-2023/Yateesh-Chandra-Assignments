@@ -80,7 +80,7 @@ public class QuizController {
             @RequestBody @Valid final QuizDTO quizDto) {
         quizService.addQuiz(quizDto);
         logger.info(SuccessMessages.QUIZ_ADD_SUCCESS);
-        Response response = new Response(HttpStatus.CREATED.value(),
+        Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.QUIZ_ADD_SUCCESS);
         return response;
     }

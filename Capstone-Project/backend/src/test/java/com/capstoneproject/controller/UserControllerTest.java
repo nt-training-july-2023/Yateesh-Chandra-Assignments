@@ -47,7 +47,7 @@ class UserControllerTest {
 
         Response response = userController.saveUser(userDTO);
         assertNotNull(response);
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.REGISTRATION_SUCCESS, response.getMessage());
         verify(userService, times(1)).addUser(userDTO);
     }

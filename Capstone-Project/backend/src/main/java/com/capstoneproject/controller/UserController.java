@@ -55,7 +55,7 @@ public class UserController {
             @RequestBody @Valid final UserDTO userDTO) {
             userService.addUser(userDTO);
             logger.info(SuccessMessages.REGISTRATION_SUCCESS);
-            Response response = new Response(HttpStatus.CREATED.value(),
+            Response response = new Response(HttpStatus.OK.value(),
                     SuccessMessages.REGISTRATION_SUCCESS);
             return response;
     }
