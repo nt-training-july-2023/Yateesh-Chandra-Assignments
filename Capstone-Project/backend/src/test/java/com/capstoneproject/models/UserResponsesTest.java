@@ -62,6 +62,7 @@ class UserResponsesTest {
         UserResponses userResponses = new UserResponses();
         userResponses.setUsers(user);
         assertEquals(user.getUserId(), userResponses.getUsers().getUserId());
+        assertEquals(user.getName(), userResponses.getUsers().getName());
     }
 
     @Test

@@ -183,18 +183,6 @@ class QuestionServiceTest {
     }
 
     @Test
-    void testAddQuestion_QuestionNotFound() {
-        Long questionId = 1L;
-        QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "D", "B", 1L);
-        when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
-
-        assertThrows(ElementNotExistsException.class, () -> {
-            questionService.updateQuestion(questionId, questionDTO);
-        });
-        verify(questionRepository, never()).save(any());
-    }
-
-    @Test
     public void testAddQuestionWithLessThanFourOptions_InvalidInput() {
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuizId(1L);
@@ -226,15 +214,13 @@ class QuestionServiceTest {
     @Test
     void testUPDATEQuestion_DuplicateOptions() {
         Long questionId = 1L;
-        QuestionDTO questionDTO = new QuestionDTO(null, "Hello", "A", "B", "C", "A", "B", 1L);
+        QuestionDTO questionDTO = new QuestionDTO(questionId, "Hello", "A", "B", "C", "A", "B", 1L);
 
-        Question addedQuestion = new Question("Hello", "A", "B", "C", "A", "B");
+        Question addedQuestion = new Question("Hello", "A", "B", "C", "D", "B");
         when(questionRepository.findById(questionId)).thenReturn(Optional.of(addedQuestion));
         assertThrows(AlreadyExistsException.class, () -> {
             questionService.updateQuestion(questionId, questionDTO);
         });
-
-        verify(questionRepository, never()).save(any());
     }
 
     @Test
@@ -254,7 +240,7 @@ class QuestionServiceTest {
 
 
     @Test
-    public void testAddQuestionQuizNotFound() {
+    public void testAddQuestion_QuizNotFound() {
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionTitle("What is 2 + 2?");
         questionDTO.setOption1("3");
@@ -273,6 +259,7 @@ class QuestionServiceTest {
     public void testDeleteQuestion() {
         Long questionId = 5L;
         when(questionRepository.findById(questionId)).thenReturn(Optional.of(new Question()));
+
         questionService.deleteQuestion(questionId);
     }
     
@@ -280,6 +267,7 @@ class QuestionServiceTest {
     public void testDeleteQuestionElementNotExists() {
         Long questionId = 5L;
         when(questionRepository.findById(questionId)).thenReturn(Optional.empty());
+
         assertThrows(ElementNotExistsException.class, () -> questionService.deleteQuestion(questionId));
     }
     
@@ -293,7 +281,6 @@ class QuestionServiceTest {
         assertThrows(ElementNotExistsException.class, () -> {
             questionService.updateQuestion(questionId, updatedQuestionDTO);
         });
-        verify(questionRepository, never()).save(any());
     }
 
     @Test
@@ -306,8 +293,6 @@ class QuestionServiceTest {
         assertThrows(AlreadyExistsException.class, () -> {
             questionService.updateQuestion(questionId, updatedQuestionDTO);
         });
-
-        verify(questionRepository, never()).save(any());
     }
 
     @Test

@@ -118,7 +118,6 @@ public class CategoryService {
         logger.info(SuccessMessages.CATEGORY_UPDATED_SUCCESS);
         Category newCategory = categoryRepository.save(existingCategory);
         CategoryDTO newCategoryDto = new CategoryDTO();
-        newCategoryDto.setCategoryId(newCategory.getCategoryId());
         newCategoryDto.setCategoryName(newCategory.getCategoryName());
         newCategoryDto.setDescription(newCategory.getDescription());
         return newCategoryDto;

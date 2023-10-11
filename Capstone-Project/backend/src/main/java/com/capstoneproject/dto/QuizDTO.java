@@ -27,7 +27,7 @@ public class QuizDTO {
     /**
      * This is quizName variable.
      */
-    @NotBlank(message = ValidationMessages.CATEGORY_NAME_NOTBLANK)
+    @NotBlank(message = ValidationMessages.QUIZ_NAME_NOTBLANK)
     private String quizName;
 
     /**

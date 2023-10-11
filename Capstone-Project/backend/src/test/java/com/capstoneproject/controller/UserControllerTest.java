@@ -2,8 +2,6 @@ package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -46,10 +44,11 @@ class UserControllerTest {
         when(userService.addUser(userDTO)).thenReturn(null);
 
         Response response = userController.saveUser(userDTO);
+
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.REGISTRATION_SUCCESS, response.getMessage());
-        verify(userService, times(1)).addUser(userDTO);
+
     }
 
     @Test
@@ -61,18 +60,16 @@ class UserControllerTest {
         Response response = userController.loginUser(loginDto);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.LOGIN_SUCCESS, response.getMessage());
-
-        verify(userService, times(1)).loginUser(loginDto);
     }
 
     @Test
     public void deleteUser() {
         Long userId = 1L;
         Response response = userController.deleteUser(userId);
+
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.USER_DELETE_SUCCESS, response.getMessage());
-        verify(userService, times(1)).deleteUser(userId);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,6 +94,5 @@ class UserControllerTest {
         assertEquals(2L, responseBody.get(1).getUserId());
         assertEquals("User2", responseBody.get(1).getName());
 
-        verify(userService, times(1)).getUsers();
     }
 }

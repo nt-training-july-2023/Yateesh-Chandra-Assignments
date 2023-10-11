@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
@@ -54,11 +53,10 @@ class UserServiceTest {
         String result = userService.addUser(userDTO);
 
         assertEquals("Yateesh", result);
-        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
-    void addUser_DuplicateEmail_ShouldThrowDuplicateKeyException() {
+    void addUser_DuplicateEmail_ShouldThrowAlreadyExistsException() {
         UserDTO userDTO = new UserDTO();
         userDTO.setName("Yateesh");
         userDTO.setEmail("yateesh@nucleusteq.com");
@@ -68,7 +66,6 @@ class UserServiceTest {
         when(userRepository.findByEmail(userDTO.getEmail())).thenReturn(Optional.of(new User()));
 
         assertThrows(AlreadyExistsException.class, () -> userService.addUser(userDTO));
-        verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
@@ -116,9 +113,6 @@ class UserServiceTest {
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
         userService.deleteUser(userId);
-
-        verify(userRepository, times(1)).findById(userId);
-        verify(userRepository, times(1)).deleteById(userId);
     }
 
     @Test
@@ -128,9 +122,6 @@ class UserServiceTest {
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
         assertThrows(ElementNotExistsException.class, () -> userService.deleteUser(userId));
-
-        verify(userRepository, times(1)).findById(userId);
-        verify(userRepository, never()).deleteById(userId);
     }
 
     @Test

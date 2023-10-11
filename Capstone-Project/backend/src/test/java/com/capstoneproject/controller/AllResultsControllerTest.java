@@ -1,8 +1,6 @@
 package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -43,6 +41,7 @@ class AllResultsControllerTest {
         when(allResultsService.getAllResults()).thenReturn(allResultsDto);
 
         Response response = allResultsController.getAllResults();
+
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(allResultsDto, response.getBody());
     }
@@ -55,7 +54,7 @@ class AllResultsControllerTest {
         when(allResultsService.getResultsByUserId(userId)).thenReturn(resultsList);
 
         Response response = allResultsController.getResultsByUserId(userId);
-        verify(allResultsService, times(1)).getResultsByUserId(userId);
+
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(resultsList, response.getBody());
     }

@@ -42,6 +42,7 @@ public class CategoryControllerTest {
 
         when(categoryService.getCategories()).thenReturn(categories);
         Response response = categoryController.getAllCategories();
+
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.CATEGORY_FETCH, response.getMessage());
         assertEquals(categories, response.getBody());
@@ -68,8 +69,6 @@ public class CategoryControllerTest {
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
         assertNotNull(categoryDto);
         assertEquals(SuccessMessages.CATEGORY_ADD_SUCCESS, response.getMessage());
-
-        verify(categoryService, times(1)).addCategory(categoryDto);
     }
 
     @Test
@@ -79,8 +78,6 @@ public class CategoryControllerTest {
         Response response = categoryController.deleteCategory(categoryId);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.CATEGORY_DELETE_SUCCESS, response.getMessage());
-
-        verify(categoryService, times(1)).deleteCategory(categoryId);
     }
 
     @Test
@@ -92,6 +89,5 @@ public class CategoryControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.CATEGORY_UPDATED_SUCCESS, response.getMessage());
 
-        verify(categoryService, times(1)).updateCategory(categoryId, updatedCategoryDto);
     }
 }

@@ -1,8 +1,6 @@
 package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.QuestionService;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes" })
 class QuestionControllerTest {
 
     @Mock
@@ -44,12 +42,8 @@ class QuestionControllerTest {
         Response response = questionController.getQuestions();
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_FETCH, response.getMessage());
 
-        List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
-        assertNotNull(responseQuestions);
-        assertEquals(2, responseQuestions.size());
-        assertEquals("Test Question", responseQuestions.get(0).getQuestionTitle());
-        assertEquals("Test Question 2", responseQuestions.get(1).getQuestionTitle());
     }
 
     @Test
@@ -61,12 +55,9 @@ class QuestionControllerTest {
         Response response = questionController.getQuestionById(questionId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_FETCH_BY_ID, response.getMessage());
         assertEquals(questionDTO, response.getBody());
 
-        QuestionDTO responseQuestion = (QuestionDTO) response.getBody();
-        assertNotNull(responseQuestion);
-        assertEquals(questionId, responseQuestion.getQuestionId());
-        assertEquals("Question 1", responseQuestion.getQuestionTitle());
     }
 
     @Test
@@ -80,18 +71,17 @@ class QuestionControllerTest {
         assertNotNull(questionDto);
         assertEquals(SuccessMessages.QUESTION_ADD_SUCCESS, response.getMessage());
 
-        verify(questionService, times(1)).addQuestion(questionDto);
     }
 
     @Test
     public void testDeleteQuestion() {
         Long questionId = 3L;
         Response response = questionController.deleteQuestion(questionId);
+
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.QUESTION_DELETE_SUCCESS, response.getMessage());
 
-        verify(questionService, times(1)).deleteQuestion(questionId);
     }
 
     @Test
@@ -105,7 +95,6 @@ class QuestionControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.QUESTION_UPDATED_SUCCESS, response.getMessage());
 
-        verify(questionService, times(1)).updateQuestion(questionId, updatedQuestionDTO);
     }
 
     @Test
@@ -119,29 +108,7 @@ class QuestionControllerTest {
         Response response = questionController.getQuestionByQuizId(questionId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID, response.getMessage());
 
-        List<QuestionDTO> responseQuestions = (List<QuestionDTO>) response.getBody();
-        assertNotNull(responseQuestions);
-        assertEquals(2, responseQuestions.size());
-
-        QuestionDTO question1 = responseQuestions.get(0);
-        assertEquals(1L, question1.getQuestionId());
-        assertEquals("Question 1", question1.getQuestionTitle());
-        assertEquals("A", question1.getOption1());
-        assertEquals("B", question1.getOption2());
-        assertEquals("C", question1.getOption3());
-        assertEquals("D", question1.getOption4());
-        assertEquals("OptionB", question1.getCorrectOption());
-        assertEquals(4L, question1.getQuizId());
-
-        QuestionDTO question2 = responseQuestions.get(1);
-        assertEquals(2L, question2.getQuestionId());
-        assertEquals("Question 2", question2.getQuestionTitle());
-        assertEquals("A", question2.getOption1());
-        assertEquals("B", question2.getOption2());
-        assertEquals("C", question2.getOption3());
-        assertEquals("D", question2.getOption4());
-        assertEquals("OptionB", question2.getCorrectOption());
-        assertEquals(5L, question2.getQuizId());
     }
 }

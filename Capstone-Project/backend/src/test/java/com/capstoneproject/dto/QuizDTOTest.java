@@ -22,6 +22,7 @@ class QuizDTOTest {
         assertNull(newQuizDto.getQuizName());
         assertNull(newQuizDto.getQuizDescription());
         assertEquals(0,newQuizDto.getNumOfQuestions());
+        assertEquals(0, newQuizDto.getTimeInMin());
         assertNull(null);
     }
 
@@ -40,6 +41,7 @@ class QuizDTOTest {
         quizDto.setQuizName("Updated Quiz");
         quizDto.setQuizDescription("Updated Description");
         quizDto.setNumOfQuestions(5);
+        quizDto.setTimeInMin(8);
         quizDto.setCategoryId(4L);
         
         assertEquals(3L, quizDto.getQuizId());
@@ -47,6 +49,7 @@ class QuizDTOTest {
         assertEquals("Updated Description", quizDto.getQuizDescription());
         assertEquals(5, quizDto.getNumOfQuestions());
         assertEquals(4L, quizDto.getCategoryId());
+        assertEquals(8, quizDto.getTimeInMin());
     }
 
 

@@ -40,7 +40,7 @@ class CategoryTest {
         String categoryName = "React";
         String description = "This is React";
         Category category = new Category(categoryId,categoryName,description);
-        
+
         assertEquals(categoryId, category.getCategoryId());
         assertEquals(categoryName, category.getCategoryName());
         assertEquals(description, category.getDescription());

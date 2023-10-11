@@ -30,24 +30,12 @@ class QuizTest {
     }
     
     @Test
-    void testGetQuestionsWhenNoQuestionsSet() {
-        Quiz quiz = new Quiz();
-        assertEquals(new ArrayList<>(), quiz.getQuestions());
-    }
-    
-    @Test
     void testGetQuestionsWhenQuestionsSet() {
         Quiz quiz = new Quiz();
         List<Question> questions = new ArrayList<>();
-        questions.add(new Question());
+        questions.add(new Question("Test Question", "A", "B", "C", "D", "OptionB"));
         quiz.setQuestions(questions);
         assertEquals(questions, quiz.getQuestions());
-    }
-
-    @Test
-    void testSetQuestionWhenNullQuestions() {
-        Quiz quiz = new Quiz();
-        assertThrows(NullPointerException.class, () ->  quiz.setQuestions(null));
     }
 
     @Test

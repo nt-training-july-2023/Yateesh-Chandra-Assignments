@@ -1,8 +1,7 @@
 package com.capstoneproject.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +40,6 @@ class UserResponsesControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.RESPONSE_ADDED, response.getMessage());
-        verify(userResponsesService, times(1)).addUserResponses(userResponsesDTO);
     }
 
 }

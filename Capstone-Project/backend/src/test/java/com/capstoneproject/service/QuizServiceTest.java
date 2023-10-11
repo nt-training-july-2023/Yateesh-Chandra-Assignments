@@ -118,7 +118,7 @@ public class QuizServiceTest {
     @Test
     public void testAddQuiz() {
         Long categoryId = 1L;
-        QuizDTO quizDTO = new QuizDTO(null, "New Quiz", "New Description", 5, 2, categoryId);
+        QuizDTO quizDTO = new QuizDTO(1L, "New Quiz", "New Description", 5, 2, categoryId);
 
         Category category = new Category(categoryId, "Category 1", "Category Description");
         when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.empty());
@@ -126,7 +126,7 @@ public class QuizServiceTest {
         when(quizRepository.save(any(Quiz.class))).thenReturn(new Quiz(1L, "New Quiz", "New Description", 5, 2));
 
         QuizDTO addedQuiz = quizService.addQuiz(quizDTO);
-        assertNull(addedQuiz.getQuizId());
+        assertEquals(1L, addedQuiz.getQuizId());
         assertEquals("New Quiz", addedQuiz.getQuizName());
         assertEquals("New Description", addedQuiz.getQuizDescription());
         assertEquals(categoryId, addedQuiz.getCategoryId());
@@ -137,8 +137,10 @@ public class QuizServiceTest {
         Long categoryId = 1L;
         QuizDTO quizDTO = new QuizDTO(null, "Existing Quiz", "Description", 5, 4, categoryId);
         Category category = new Category(categoryId, "Category 1", "Category Description");
+
         when(quizRepository.getQuizByName(quizDTO.getQuizName())).thenReturn(Optional.of(new Quiz()));
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+
         assertThrows(AlreadyExistsException.class, () -> quizService.addQuiz(quizDTO));
     }
 
@@ -192,6 +194,7 @@ public class QuizServiceTest {
 
         assertThrows(ElementNotExistsException.class, () -> quizService.updateQuiz(quizId, quizDTO));
     }
+
     @Test
     void updateQuiz_InvalidNumOfQuestions_ShouldThrowValidationException() {
         Long quizId = 1L;

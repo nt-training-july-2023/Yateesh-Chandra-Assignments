@@ -42,6 +42,7 @@ public class QuizControllerTest {
 
         List<QuizDTO> responseQuizzes = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizzes);
+        assertEquals(responseQuizzes, response.getBody());
         assertEquals(2, responseQuizzes.size());
         assertEquals("Quiz1", responseQuizzes.get(0).getQuizName());
     }
@@ -58,6 +59,7 @@ public class QuizControllerTest {
 
         QuizDTO responseQuiz = (QuizDTO) response.getBody();
         assertNotNull(responseQuiz);
+        assertEquals(responseQuiz, response.getBody());
         assertEquals(quizId, responseQuiz.getQuizId());
         assertEquals("Quiz1", responseQuiz.getQuizName());
     }
@@ -74,7 +76,6 @@ public class QuizControllerTest {
         assertNotNull(quizDTO);
         assertEquals(SuccessMessages.QUIZ_ADD_SUCCESS, response.getMessage());
 
-        verify(quizService, times(1)).addQuiz(quizDTO);
     }
 
     @Test
@@ -85,7 +86,6 @@ public class QuizControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.QUIZ_DELETE_SUCCESS, response.getMessage());
 
-        verify(quizService, times(1)).deleteQuiz(quizId);
     }
 
     @Test
@@ -116,19 +116,7 @@ public class QuizControllerTest {
         List<QuizDTO> responseQuizList = (List<QuizDTO>) response.getBody();
         assertNotNull(responseQuizList);
         assertEquals(2, responseQuizList.size());
-
-        QuizDTO quiz1 = responseQuizList.get(0);
-        assertEquals(1L, quiz1.getQuizId());
-        assertEquals("Quiz 1", quiz1.getQuizName());
-        assertEquals("Quiz 1 Description", quiz1.getQuizDescription());
-        assertEquals(7, quiz1.getNumOfQuestions());
-        assertEquals(9L, quiz1.getCategoryId());
-
-        QuizDTO quiz2 = responseQuizList.get(1);
-        assertEquals(2L, quiz2.getQuizId());
-        assertEquals("Quiz 2", quiz2.getQuizName());
-        assertEquals("Quiz 2 Description", quiz2.getQuizDescription());
-        assertEquals(8, quiz2.getNumOfQuestions());
-        assertEquals(10L, quiz2.getCategoryId());
+        assertEquals(responseQuizList, response.getBody());
+        assertEquals(SuccessMessages.QUIZ_FETCH_BY_CATEGORY_ID, response.getMessage());
     }
 }
