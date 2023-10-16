@@ -20,6 +20,7 @@ const AddOrUpdateCategory = () =>{
 
     const [categoryName, setCategoryName] = useState("");
     const [description, setDescription] = useState("");
+
     const [categoryNameError, setCategoryNameError] = useState("");
     const [categoryDescriptionError, setCategoryDescriptionError] = useState("");
 
@@ -124,7 +125,7 @@ const AddOrUpdateCategory = () =>{
     
     return (
         <div className="App">
-            {userRole === "ADMIN" || userRole === "USER" ? (
+            {userRole === "ADMIN" ? (
             <>
                 <AdminNavBar/>
                 <div className="add-category-container">

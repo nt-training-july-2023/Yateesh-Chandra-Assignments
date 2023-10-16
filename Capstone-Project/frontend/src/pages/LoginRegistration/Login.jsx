@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
@@ -48,7 +48,7 @@ function Login() {
     const handlePasswordChange = (e) =>{
         setPassword(e.target.value);
         if(!password){
-            setPasswordError("Enter the Password..!");
+            setPasswordError("");
         }
         else{
             setPasswordError("");

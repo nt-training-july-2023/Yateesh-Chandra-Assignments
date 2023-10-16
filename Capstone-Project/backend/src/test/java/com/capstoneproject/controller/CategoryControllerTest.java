@@ -66,7 +66,7 @@ public class CategoryControllerTest {
         CategoryDTO categoryDto = new CategoryDTO(categoryId, "Category Name",  "This is Description");
 
         Response response = categoryController.addCategory(categoryDto);
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(categoryDto);
         assertEquals(SuccessMessages.CATEGORY_ADD_SUCCESS, response.getMessage());
     }

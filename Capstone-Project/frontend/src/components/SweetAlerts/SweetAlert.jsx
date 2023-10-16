@@ -36,7 +36,6 @@ class SweetAlert{
             cancelButtonText : "Stay In",
             customClass:{
                 cancelButton : "custom-swal-button",
-                cancelButton : "custom-swal-button",
             },
             icon : "warning"
         }).then((result) => {
@@ -147,7 +146,6 @@ class SweetAlert{
     redirecting(navigate){
         Swal.fire({
             html : `<div class="animation">Redirecting to Report<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span></div>`,
-            showConfirmButton: false,
             timer : 2000,
             showConfirmButton : false,
             backdrop: `linear-gradient(90deg, rgba(156,255,251,1) 0%, rgba(238,255,167,1) 35%, rgba(150,255,158,1) 100%)`,

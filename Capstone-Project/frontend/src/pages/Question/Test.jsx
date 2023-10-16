@@ -51,10 +51,7 @@ const Test = () => {
         return storedStartTime ? parseInt(storedStartTime) : null;
     });
 
-    const [selectedOptions, setSelectedOptions] = useState(() => {
-        const storedOptions = localStorage.getItem('selectedOptions');
-        return storedOptions ? JSON.parse(storedOptions) : [];
-    });
+    const [selectedOptions, setSelectedOptions] = useState([])
 
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
@@ -120,7 +117,6 @@ const Test = () => {
     };
 
     const clearLocalStorage = () => {
-        localStorage.removeItem('selectedOptions');
         localStorage.removeItem('startTime');
         localStorage.removeItem('instructionShown');
         localStorage.removeItem("pageRefreshed");
@@ -316,7 +312,7 @@ const Test = () => {
         <div className='no-select'>
             <DeactivateBackButton />
             {(questions.length>0 &&
-            <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
+                <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
             )}
             {(userRole === "USER" ? (
                 <div className="quiz-container">

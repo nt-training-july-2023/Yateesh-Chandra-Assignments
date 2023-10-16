@@ -18,10 +18,12 @@ const AddOrUpdateQuiz = () => {
     const categoryId = location.state?.categoryId;
     const isUpdating = quizId !== undefined;
     const userRole = localStorage.getItem("role");
+
     const [quizName, setQuizName] = useState("");
     const [quizDescription, setQuizDescription] = useState("");
     const [numOfQuestions, setNumOfQuestions] = useState(0);
     const [timeInMin, setTimeInMin] = useState(0);
+
     const [quizNameError, setQuizNameError] = useState("");
     const [quizDescriptionError, setQuizDescriptionError] = useState("");
     const [numOfQuestionsError, setNumOfQuestionsError] = useState("");
@@ -116,7 +118,7 @@ const AddOrUpdateQuiz = () => {
             setTimeInMinError("Enter Number");
             isValid = false;
         }
-        else if (isNaN(numOfQuestions) || timeInMin <= 0){
+        else if (isNaN(timeInMin) || timeInMin <= 0){
             setTimeInMinError("Enter a valid number for Duration of Minutes");
             isValid = false;
         } else {
@@ -186,7 +188,7 @@ const AddOrUpdateQuiz = () => {
 
     return (
         <div className="App">
-            {userRole === "ADMIN" || userRole === "USER" ? (
+            {userRole === "ADMIN" ? (
             <>
                 <AdminNavBar />
                 <div className="add-quiz-container">

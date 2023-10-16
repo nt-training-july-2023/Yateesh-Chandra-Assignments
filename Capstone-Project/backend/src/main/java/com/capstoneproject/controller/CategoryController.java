@@ -82,7 +82,7 @@ public class CategoryController {
             @RequestBody @Valid final CategoryDTO categoryDto) {
         categoryService.addCategory(categoryDto);
         logger.info(SuccessMessages.CATEGORY_ADD_SUCCESS);
-        Response response = new Response(HttpStatus.CREATED.value(),
+        Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.CATEGORY_ADD_SUCCESS);
         return response;
     }

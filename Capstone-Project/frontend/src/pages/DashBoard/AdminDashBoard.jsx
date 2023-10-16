@@ -61,12 +61,12 @@ function AdminDashBoard() {
                             
                             <tbody>
                                 {userRoleFilteredUsers.reverse().map((row, index) => (
-                                <tr key={index}>
+                                <tr>
                                     <td>{index+1}</td>
                                     <td>{row.name}</td>
                                     <td>{row.email}</td>
                                     <td>{row.phoneNumber}</td>
-                                    </tr>
+                                </tr>
                                 ))}
                             </tbody>
                         </>

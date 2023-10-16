@@ -48,6 +48,10 @@ const Profile = () => {
         return results.userName.toLowerCase().includes(searchQuery.toLowerCase()) || results.email.toLowerCase().includes(searchQuery.toLowerCase());
     }).sort(sortByTimeStamp);
 
+    const allResultsSorted = [...allResults].sort((a, b) =>
+        new Date(b.timeStamp) - new Date(a.timeStamp)
+    );
+
     const search = (e) => {
         setSearchQuery(e.target.value)
     }
@@ -70,7 +74,7 @@ const Profile = () => {
                         
                         <div className="proper-profile">
                             <Header1 className = "h1-profile arial" text={userRole === "ADMIN" ? "The Users' Activity of Assessments is viewed here:" : `Dear ${userName}, The Report of your Assessments can be viewed here..!`}/>
-                            {userRole === "USER" && (<span className="info-icon"><FaInfoCircle className="large-icon"/><span className="info-tooltip">Due to slow network, the result may not be displayed immediately. You can refresh to update</span></span>)}
+                            {userRole === "USER" && (<span className="info-icon"><FaInfoCircle className="large-icon"/><span className="info-tooltip">Due to slow network, if the result is not displayed immediately, refresh to update</span></span>)}
                         </div>
 
                         {(userRole === "ADMIN" && (
@@ -103,8 +107,8 @@ const Profile = () => {
                                             </thead>
                                         
                                             <tbody>
-                                                {filterResults.map((row, index) => (
-                                                    <tr key={index}>
+                                                {filterResults.reverse().map((row, index) => (
+                                                    <tr>
                                                         <td>{index+1}</td>
                                                         <td>{row.userName}</td>
                                                         <td>{row.email}</td>
@@ -144,7 +148,7 @@ const Profile = () => {
                                         </thead>
                                         
                                         <tbody>
-                                            {allResults.reverse().map((row, index) => (
+                                            {allResultsSorted.reverse().map((row, index) => (
                                             <tr key={index}>
                                                 <td>{index+1}</td>
                                                 <td>{row.categoryName}</td>

@@ -12,7 +12,6 @@ import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
 import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 import IconButton from "../../components/ButtonComponents/IconButton";
 import Header1 from "../../components/HeaderComponents/Header1";
-import Header2 from "../../components/HeaderComponents/Header2";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -130,7 +129,7 @@ const ManageQuestion = () => {
             <>
                 <AdminNavBar/>
                 <div className="manage-questions-container">
-                    <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : (isAddingQuestion ? 'Add New Question' : 'Edit Question')} className="arial"/>
+                    <Header1 text = {!(isAddingQuestion || isEditingQuestion) ? (questions.length === 0 ? `No Questions Available - ${quizName}` :`Manage Questions - ${quizName} `) : ("")} className="arial"/>
                     {!isAddingQuestion && !isEditingQuestion ? (
                         <div className="button-container">
 
@@ -154,11 +153,11 @@ const ManageQuestion = () => {
 
                     ) : (
 
-                        <div className="add-update">
+                        <div className="add-question-container">
                             <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
-                            
+                                <Header1 text = {(isAddingQuestion ? 'Add Question' : 'Edit Question')} className = "arial" />
                                 <TextAreaComponent
-                                className="question-form-group textarea-title"
+                                className = "reg-input-fields-question"
                                 name="questionTitle"
                                 placeholder="Question title"
                                 value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
@@ -167,7 +166,7 @@ const ManageQuestion = () => {
 
                                 <InputComponent
                                 type="text"
-                                className="question-form-group input-text"
+                                className = "reg-input-fields-question"
                                 name="option1"
                                 placeholder="Option 1"
                                 value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
@@ -176,7 +175,7 @@ const ManageQuestion = () => {
 
                                 <InputComponent
                                 type="text"
-                                className="question-form-group input-text"
+                                className = "reg-input-fields-question"
                                 name="option2"
                                 placeholder="Option 2"
                                 value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
@@ -185,7 +184,7 @@ const ManageQuestion = () => {
 
                                 <InputComponent
                                 type="text"
-                                className="question-form-group input-text"
+                                className = "reg-input-fields-question"
                                 name="option3"
                                 placeholder="Option 3"
                                 value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
@@ -194,7 +193,7 @@ const ManageQuestion = () => {
 
                                 <InputComponent
                                 type="text"
-                                className="question-form-group input-text"
+                                className = "reg-input-fields-question"
                                 name="option4"
                                 placeholder="Option 4"
                                 value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
@@ -208,19 +207,21 @@ const ManageQuestion = () => {
                                 handleInputChange={handleInputChange}
                                 />
 
-                                <div className="button-questions">
+                                <div className="form-group">
+                                <div className="button-container-category">
                                     {isAddingQuestion ? (
-                                        <ButtonComponent className="edit-button button-question button-big" onClick={handleAddQuestion} text = "Add" />
+                                        <ButtonComponent className="button blue-button" onClick={handleAddQuestion} text = "Add" />
                                     ) : (
-                                        <ButtonComponent className="edit-button button-question button-big" onClick={handleEditQuestion} text = "Update"/>
+                                        <ButtonComponent className="button blue-button" onClick={handleEditQuestion} text = "Update"/>
                                     )}
                                 
-                                    <ButtonComponent className="delete-button button-question button-big" onClick={() => {
+                                    <ButtonComponent className="button red-button" onClick={() => {
                                     setIsAddingQuestion(false);
                                     setIsEditingQuestion(false);
                                     setEditedQuestion({});
                                     }} text = "Cancel" 
                                     />
+                                </div>
                                 </div>
                             </div>
                         </div>
