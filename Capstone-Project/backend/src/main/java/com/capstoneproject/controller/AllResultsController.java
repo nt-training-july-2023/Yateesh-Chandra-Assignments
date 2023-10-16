@@ -1,10 +1,11 @@
 package com.capstoneproject.controller;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.AllResultsDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.AllResultsService;
 
 /**
  * This is the controller class for the All Results.
  */
 @RestController
-@RequestMapping("/api/v1/allresult")
-@CrossOrigin(origins = "*")
+@RequestMapping("results")
+@CrossOrigin
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class AllResultsController {
 
     /**
@@ -29,40 +33,36 @@ public class AllResultsController {
     private AllResultsService allResultsService;
 
     /**
+     * Creating instance for the Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
+
+    /**
      * This is the Response Entity of All Results.
      * @return OK status.
      */
     @GetMapping
-    public final ResponseEntity<Object> getAllResults() {
+    public final Response getAllResults() {
         List<AllResultsDTO> allResultsDTO = allResultsService.getAllResults();
-        return ResponseEntity.ok(allResultsDTO);
-    }
-
-    /**
-     * This is the Response Entity for the Get Results by User and Quiz method.
-     * @param userId - Long type.
-     * @param quizName - String type.
-     * @return the OK status.
-     */
-    @GetMapping("/{userId}/{quizName}")
-    public final ResponseEntity<Object> getResultsByUserIdAndQuizName(
-            @PathVariable final Long userId,
-            @PathVariable final String quizName) {
-        Optional<AllResultsDTO> allResults = allResultsService
-                .getResultsByUserIdAndQuizName(userId, quizName);
-        return ResponseEntity.ok(allResults);
+        logger.info(SuccessMessages.RESULTS_FETCH);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.RESULTS_FETCH, allResultsDTO);
+        return response;
     }
 
     /**
      * This is the Response Entity.
-     * @param email - String.
+     * @param userId - String.
      * @return the Ok status.
      */
-    @GetMapping("/{emailId}")
-    public final ResponseEntity<Object> getResultsByEmail(
-            @PathVariable final String email) {
+    @GetMapping("/{userId}")
+    public final Response getResultsByUserId(
+            @PathVariable final Long userId) {
         List<AllResultsDTO> allResultsDto = allResultsService
-                .getResultsByEmail(email);
-        return ResponseEntity.ok(allResultsDto);
+                .getResultsByUserId(userId);
+        logger.info(SuccessMessages.RESULTS_FETCH_BY_ID + userId);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.RESULTS_FETCH_BY_ID, allResultsDto);
+        return response;
     }
 }

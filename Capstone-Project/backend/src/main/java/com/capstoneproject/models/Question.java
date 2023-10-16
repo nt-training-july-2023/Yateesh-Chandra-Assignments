@@ -1,6 +1,3 @@
-/**
- * This Package contains the Class for Question Entity.
- */
 package com.capstoneproject.models;
 
 import jakarta.persistence.Column;
@@ -24,6 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "question")
 public class Question {
+
     /**
      * This is the Question Id Column, Primary key.
      */
@@ -31,31 +29,37 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
     private Long questionId;
+
     /**
      * This is the Question Title Column.
      */
     @Column(name = "question_title", nullable = false)
     private String questionTitle;
+
     /**
      * This is the Option 1 Column.
      */
     @Column(nullable = false)
     private String option1;
+
     /**
      * This is the Option 2 Column.
      */
     @Column(nullable = false)
     private String option2;
+
     /**
      * This is the Option 3 Column.
      */
     @Column(nullable = false)
     private String option3;
+
     /**
      * This is the Option 4 Column.
      */
     @Column(nullable = false)
     private String option4;
+
     /**
      * This Column contains the correct option.
      */
@@ -73,39 +77,39 @@ public class Question {
      * This gets Quiz.
      * @return quiz.
      */
-    public final Quiz getQuiz() {
+    public Quiz getQuiz() {
         return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
-                quiz.getQuizDescription(), quiz.getNumOfQuestions());
+                quiz.getQuizDescription(), quiz.getNumOfQuestions(),
+                quiz.getTimeInMin());
     }
 
     /**
      * sets quiz.
-     * @param qui is passed.
+     * @param quizz is passed.
      */
-    public final void setQuiz(final Quiz qui) {
-        this.quiz = new Quiz(qui.getQuizId(), qui.getQuizName(),
-                qui.getQuizDescription(), qui.getNumOfQuestions());
+    public void setQuiz(final Quiz quizz) {
+        this.quiz = new Quiz(quizz.getQuizId(), quizz.getQuizName(),
+                quizz.getQuizDescription(), quizz.getNumOfQuestions(),
+                quizz.getTimeInMin());
     }
 
     /**
      * Question Constructor.
-     * @param questionTit title.
+     * @param title Question title.
      * @param opt1        opt1.
      * @param opt2        opt2.
      * @param opt3        opt3.
      * @param opt4        opt4.
      * @param correctOpt  option that is correct.
      */
-    public Question(final String questionTit, final String opt1,
+    public Question(final String title, final String opt1,
             final String opt2, final String opt3, final String opt4,
             final String correctOpt) {
-        this.questionTitle = questionTit;
+        this.questionTitle = title;
         this.option1 = opt1;
         this.option2 = opt2;
         this.option3 = opt3;
         this.option4 = opt4;
         this.correctOption = correctOpt;
-//        this.quiz = qui;
     }
-
 }

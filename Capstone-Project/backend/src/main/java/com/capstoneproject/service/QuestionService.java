@@ -1,18 +1,25 @@
 package com.capstoneproject.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.QuestionDTO;
+import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.Question;
 import com.capstoneproject.models.Quiz;
 import com.capstoneproject.repository.QuestionRepository;
 import com.capstoneproject.repository.QuizRepository;
+import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This class contains the Service for Question.
@@ -32,12 +39,18 @@ public class QuestionService {
     private QuizRepository quizRepository;
 
     /**
+     * Creating the Logger Instance.
+     */
+    private Logger logger = LoggerFactory.getLogger(QuestionService.class);
+
+    /**
      * Gets the List of All questions.
      *
      * @return List of Questions.
      */
-    public final List<QuestionDTO> getAllQuestions() {
+    public final List<QuestionDTO> getQuestions() {
         List<Question> question = questionRepository.findAll();
+        logger.info(SuccessMessages.QUESTION_FETCH);
         return question.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -48,6 +61,7 @@ public class QuestionService {
      * @return the Question DTO.
      */
     public final QuestionDTO convertModelToDTO(final Question question) {
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionId(question.getQuestionId());
         questionDTO.setQuestionTitle(question.getQuestionTitle());
@@ -69,7 +83,8 @@ public class QuestionService {
     public final QuestionDTO getQuestionById(final Long questionId) {
         Question existingQuestion = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ElementNotExistsException(
-                        "No Question with that Id"));
+                        ExceptionMessages.QUESTION_NOT_EXIST));
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_ID);
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionId(existingQuestion.getQuestionId());
         questionDTO.setQuestionTitle(existingQuestion.getQuestionTitle());
@@ -89,25 +104,45 @@ public class QuestionService {
      * @return the status of the question being added.
      */
     public final QuestionDTO addQuestion(final QuestionDTO questionDTO) {
-        if (questionDTO.getQuestionTitle().isEmpty()
-                || questionDTO.getQuizId() == 0) {
-            throw new NoInputException("No Inputs detected");
-        } else {
-            Question newQuestion = new Question();
-            newQuestion.setQuestionId(questionDTO.getQuestionId());
-            newQuestion.setQuestionTitle(questionDTO.getQuestionTitle());
-            newQuestion.setOption1(questionDTO.getOption1());
-            newQuestion.setOption2(questionDTO.getOption2());
-            newQuestion.setOption3(questionDTO.getOption3());
-            newQuestion.setOption4(questionDTO.getOption4());
-            newQuestion.setCorrectOption(questionDTO.getCorrectOption());
-            Quiz quiz = quizRepository.findById(questionDTO.getQuizId())
-                    .orElseThrow(() -> new ElementNotExistsException(
-                            "Quiz not found"));
-            newQuestion.setQuiz(quiz);
-            questionRepository.save(newQuestion);
-            return questionDTO;
+
+        Quiz quiz = quizRepository.findById(
+                questionDTO.getQuizId()).orElseThrow(
+                        () -> new ElementNotExistsException(
+                                ExceptionMessages.QUIZ_NOT_EXIST));
+
+        Set<String> optionList = new HashSet<>();
+        optionList.add(questionDTO.getOption1());
+        optionList.add(questionDTO.getOption2());
+        optionList.add(questionDTO.getOption3());
+        optionList.add(questionDTO.getOption4());
+        final int optionNumber = 4;
+        if (optionList.size() < optionNumber) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.OPTIONS_NOT_REPEATED);
         }
+        Question newQuestion = new Question();
+        newQuestion.setQuestionId(questionDTO.getQuestionId());
+        newQuestion.setQuestionTitle(questionDTO.getQuestionTitle());
+        newQuestion.setOption1(questionDTO.getOption1());
+        newQuestion.setOption2(questionDTO.getOption2());
+        newQuestion.setOption3(questionDTO.getOption3());
+        newQuestion.setOption4(questionDTO.getOption4());
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if (questionDTO.getCorrectOption().equals(option)) {
+                newQuestion.setCorrectOption(questionDTO.getCorrectOption());
+                matchFound = true;
+            }
+        }
+        if (!matchFound) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
+            throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
+        }
+        newQuestion.setQuiz(quiz);
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
+        questionRepository.save(newQuestion);
+        return questionDTO;
     }
 
     /**
@@ -120,21 +155,42 @@ public class QuestionService {
     public final QuestionDTO updateQuestion(final Long questionId,
             final QuestionDTO updatedQuestionDTO) {
         Question existingQuestion = questionRepository.findById(questionId)
-                .orElse(null);
-        if (existingQuestion != null) {
-            existingQuestion
+                .orElseThrow(() -> new ElementNotExistsException(
+                        ExceptionMessages.QUESTION_NOT_EXIST));
+        logger.info(SuccessMessages.QUESTION_FOUND);
+        existingQuestion
                     .setQuestionTitle(updatedQuestionDTO.getQuestionTitle());
-            existingQuestion.setOption1(updatedQuestionDTO.getOption1());
-            existingQuestion.setOption2(updatedQuestionDTO.getOption2());
-            existingQuestion.setOption3(updatedQuestionDTO.getOption3());
-            existingQuestion.setOption4(updatedQuestionDTO.getOption4());
-            existingQuestion
-                    .setCorrectOption(updatedQuestionDTO.getCorrectOption());
-            questionRepository.save(existingQuestion);
-            return updatedQuestionDTO;
-        } else {
-            throw new ElementNotExistsException("Question ID not found");
+        Set<String> optionList = new HashSet<>();
+        optionList.add(updatedQuestionDTO.getOption1());
+        optionList.add(updatedQuestionDTO.getOption2());
+        optionList.add(updatedQuestionDTO.getOption3());
+        optionList.add(updatedQuestionDTO.getOption4());
+        final int optionNumber = 4;
+        if (optionList.size() < optionNumber) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.OPTIONS_NOT_REPEATED);
         }
+        existingQuestion.setOption1(updatedQuestionDTO.getOption1());
+        existingQuestion.setOption2(updatedQuestionDTO.getOption2());
+        existingQuestion.setOption3(updatedQuestionDTO.getOption3());
+        existingQuestion.setOption4(updatedQuestionDTO.getOption4());
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if (updatedQuestionDTO.getCorrectOption().equals(
+                    option)) {
+                existingQuestion.setCorrectOption(
+                        updatedQuestionDTO.getCorrectOption());
+                matchFound = true;
+            }
+        }
+        if (!matchFound) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
+            throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
+        }
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        questionRepository.save(existingQuestion);
+        return updatedQuestionDTO;
     }
 
     /**
@@ -143,14 +199,11 @@ public class QuestionService {
      * @param questionId of Long type.
      */
     public final void deleteQuestion(final Long questionId) {
-        Question existingQuestion = questionRepository.findById(questionId)
-                .orElse(null);
-        if (existingQuestion == null) {
-            throw new ElementNotExistsException(
-                    "No Question was found with that ID");
-        } else {
-            questionRepository.deleteById(questionId);
-        }
+       questionRepository.findById(questionId)
+                .orElseThrow(() -> new ElementNotExistsException(
+                        ExceptionMessages.QUESTION_NOT_EXIST));
+       logger.info(SuccessMessages.QUESTION_DELETE_SUCCESS);
+       questionRepository.deleteById(questionId);
     }
 
     /**
@@ -159,14 +212,14 @@ public class QuestionService {
      * @return the List Of questions.
      */
     public final List<QuestionDTO> getQuestionByQuizId(final Long quizId) {
-        Quiz existingQuiz = quizRepository.findById(quizId).orElse(null);
-        if (existingQuiz == null) {
-            throw new ElementNotExistsException("Quiz not available");
-        } else {
-            List<Question> questions = questionRepository
+        quizRepository.findById(quizId).orElseThrow(
+                () -> new ElementNotExistsException(
+                        ExceptionMessages.QUIZ_NOT_EXIST));
+        logger.info(SuccessMessages.QUIZ_FOUND);
+        List<Question> questions = questionRepository
                     .getQuestionByQuizId(quizId);
-            return questions.stream().map(this::convertModelToDTO)
-                    .collect(Collectors.toList());
-        }
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID);
+        return questions.stream().map(this::convertModelToDTO)
+                .collect(Collectors.toList());
     }
 }

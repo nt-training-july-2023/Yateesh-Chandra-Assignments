@@ -1,15 +1,17 @@
 package com.capstoneproject.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.AllResultsDTO;
 import com.capstoneproject.models.AllResults;
 import com.capstoneproject.repository.AllResultsRepository;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This is the Service class for the All Results.
@@ -24,11 +26,17 @@ public class AllResultsService {
     private AllResultsRepository allResultsRepository;
 
     /**
+     * Creating the instance for the Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(AllResultsService.class);
+
+    /**
      * This is the getter method for All Results.
      * @return the list of All Results.
      */
     public final List<AllResultsDTO> getAllResults() {
         List<AllResults> allResults = allResultsRepository.findAll();
+        logger.info(SuccessMessages.RESULTS_FETCH);
         return allResults.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }
@@ -39,6 +47,7 @@ public class AllResultsService {
      * @return the converted DTO.
      */
     private AllResultsDTO convertModelToDTO(final AllResults allResults) {
+        logger.info(SuccessMessages.MODEL_TO_DTO);
         AllResultsDTO allResultsDto = new AllResultsDTO();
         allResultsDto.setResultId(allResults.getResultId());
         allResultsDto.setUserId(allResults.getUserId());
@@ -56,39 +65,14 @@ public class AllResultsService {
     }
 
     /**
-     * This method gets the Results by user Id and Quiz Name.
-     * @param userId - Long type.
-     * @param quizName - String type.
-     * @return the specific Result.
-     */
-    public final Optional<AllResultsDTO> getResultsByUserIdAndQuizName(
-            final Long userId, final String quizName) {
-        Optional<AllResults> allResults = allResultsRepository
-                .getResultsByUserIdAndQuizName(userId, quizName);
-        AllResults results = allResults.get();
-        AllResultsDTO resultsDto = new AllResultsDTO();
-        resultsDto.setResultId(results.getResultId());
-        resultsDto.setUserId(userId);
-        resultsDto.setUserName(results.getUserName());
-        resultsDto.setCategoryName(results.getCategoryName());
-        resultsDto.setQuizName(quizName);
-        resultsDto.setNumOfQuestions(results.getNumOfQuestions());
-        resultsDto
-              .setNumOfQuestionsAnswered(results.getNumOfQuestionsAnswered());
-        resultsDto.setTotalMarks(results.getTotalMarks());
-        resultsDto.setMarksScored(results.getMarksScored());
-        resultsDto.setTimeStamp(results.getTimeStamp());
-        return Optional.of(resultsDto);
-    }
-
-    /**
      * This method gets the Result by Email.
-     * @param email is passed.
+     * @param userId is passed.
      * @return the List of Results for that email.
      */
-    public final List<AllResultsDTO> getResultsByEmail(final String email) {
+    public final List<AllResultsDTO> getResultsByUserId(final Long userId) {
         List<AllResults> allResults = allResultsRepository
-                .getResultsByEmail(email);
+                .getResultsByUserId(userId);
+        logger.info(SuccessMessages.RESULTS_FETCH_BY_ID);
         return allResults.stream().map(this::convertModelToDTO)
                 .collect(Collectors.toList());
     }

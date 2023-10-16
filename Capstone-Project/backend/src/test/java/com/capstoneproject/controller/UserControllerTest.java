@@ -1,9 +1,11 @@
 package com.capstoneproject.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,16 +13,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.capstoneproject.dto.LoginDTO;
 import com.capstoneproject.dto.UserDTO;
-import com.capstoneproject.exceptions.AuthenticationException;
-import com.capstoneproject.exceptions.CustomException;
-import com.capstoneproject.exceptions.DuplicateKeyException;
-import com.capstoneproject.exceptions.ValidationException;
+import com.capstoneproject.dto.UserListDTO;
+import com.capstoneproject.response.LoginResponse;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.UserService;
 
+@SuppressWarnings("rawtypes")
 class UserControllerTest {
 
     
@@ -37,78 +39,60 @@ class UserControllerTest {
     
     @Test
     void testSaveUser() {
-        UserDTO userDto = new UserDTO();
-        userDto.setName("testUser");
-        when(userService.addUser(userDto)).thenReturn("123");
-        
-        String response = userController.saveUser(userDto);
-        verify(userService, times(1)).addUser(userDto);
-        assert response.equals("123");
-    }
 
-    @Test
-    public void testDuplicateKeyException() {
-        UserDTO userDto = new UserDTO();
-        userDto.setName("user");
-        when(userService.addUser(userDto)).thenThrow(new DuplicateKeyException("Email Already exists"));
-        
-        try {
-            userController.saveUser(userDto);
-        }
-        catch(DuplicateKeyException e) {
-            assertEquals("Email already exists", e.getMessage());
-        }
-        verify(userService, times(1)).addUser(userDto);
+        UserDTO userDTO = new UserDTO();
+        when(userService.addUser(userDTO)).thenReturn(null);
+
+        Response response = userController.saveUser(userDTO);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.REGISTRATION_SUCCESS, response.getMessage());
+
     }
 
     @Test
     public void testLoginUser() {
         LoginDTO loginDto = new LoginDTO();
-        loginDto.setEmail("test@gmail.com");
+        loginDto.setEmail("test@nucleusteq.com");
         when(userService.loginUser(loginDto)).thenReturn(new LoginResponse());
-        
-        ResponseEntity<?> response = userController.loginUser(loginDto);
-        verify(userService, times(1)).loginUser(loginDto);
-        assert response.getStatusCode()==HttpStatus.OK;
-    }
-    
-    @Test
-    void testSaveUserCustomException() {
-        UserDTO mockUserDTO = new UserDTO();
-        when(userService.addUser(mockUserDTO)).thenThrow(new CustomException("Custom Error"));
 
-        String response = userController.saveUser(mockUserDTO);
-        assertEquals("An Error occured..!", response);
+        Response response = userController.loginUser(loginDto);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.LOGIN_SUCCESS, response.getMessage());
     }
-    
-    
-    @Test
-    void testLoginUserAuthenticationException() {
-        LoginDTO mockLoginDTO = new LoginDTO();
-        when(userService.loginUser(mockLoginDTO)).thenThrow(new AuthenticationException("Authentication Error"));
 
-        ResponseEntity<?> response = userController.loginUser(mockLoginDTO);
-        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-        assertEquals("Authentication Error", response.getBody());
+    @Test
+    public void deleteUser() {
+        Long userId = 1L;
+        Response response = userController.deleteUser(userId);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.USER_DELETE_SUCCESS, response.getMessage());
     }
-    
-    @Test
-    void testLoginUserValidationException() {
-        LoginDTO mockLoginDTO = new LoginDTO();
-        when(userService.loginUser(mockLoginDTO)).thenThrow(new ValidationException("Validation Error"));
 
-        ResponseEntity<?> response = userController.loginUser(mockLoginDTO);
-        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-        assertEquals("Validation Error", response.getBody());
-    }
-    
+    @SuppressWarnings("unchecked")
     @Test
-    void testLoginUserCustomException() {
-        LoginDTO mockLoginDTO = new LoginDTO();
-        when(userService.loginUser(mockLoginDTO)).thenThrow(new CustomException("Custom Error"));
+    void testGetUsers() {
 
-        ResponseEntity<?> response = userController.loginUser(mockLoginDTO);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("An error occured while processing the request.", response.getBody());
+        List<UserListDTO> userListDTOs = new ArrayList<>();
+        userListDTOs.add(new UserListDTO(1L, "User1", "user1@nucleusteq.com", "USER", "9876543210"));
+        userListDTOs.add(new UserListDTO(2L, "User2", "user1@nucleusteq.com", "USER", "9876543201"));
+
+        when(userService.getUsers()).thenReturn(userListDTOs);
+
+        Response response = userController.getUsers();
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+
+        List<UserListDTO> responseBody = (List<UserListDTO>) response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(2, responseBody.size());
+        assertEquals(1L, responseBody.get(0).getUserId());
+        assertEquals("User1", responseBody.get(0).getName());
+        assertEquals(2L, responseBody.get(1).getUserId());
+        assertEquals("User2", responseBody.get(1).getName());
+
     }
 }

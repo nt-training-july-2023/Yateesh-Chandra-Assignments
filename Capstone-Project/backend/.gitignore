@@ -32,3 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 *.cmd
+
+backend-cs-cleanup.xml
+backend-cs-formatter.xml
+mvnw
+src
+doc
+.mvn/wrapper

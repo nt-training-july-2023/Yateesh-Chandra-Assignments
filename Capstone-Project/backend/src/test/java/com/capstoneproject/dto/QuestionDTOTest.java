@@ -48,6 +48,7 @@ class QuestionDTOTest {
         String option4 = "D4";
         String correctOption = "OptionC";
         Long quizId = 9L;
+
         questionDto.setQuizId(questionId);
         questionDto.setQuestionTitle(questionTitle);
         questionDto.setOption1(option1);
@@ -56,7 +57,7 @@ class QuestionDTOTest {
         questionDto.setOption4(option4);
         questionDto.setCorrectOption(correctOption);
         questionDto.setQuizId(quizId);
-        
+
         assertEquals(questionId, questionDto.getQuestionId());
         assertEquals(questionTitle, questionDto.getQuestionTitle());
         assertEquals(option1, questionDto.getOption1());

@@ -2,8 +2,10 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.CategoryDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.CategoryService;
+
+import jakarta.validation.Valid;
 
 /**
  * This class contains the controller.
  */
 @RestController
-@RequestMapping(path = "api/v1/category")
+@RequestMapping(path = "category")
 @CrossOrigin(origins = "*")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CategoryController {
+
     /**
      * The categoryService variable is used to operate on Category Service.
      */
@@ -31,13 +39,21 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
+     * Creating instance for the Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(AllResultsController.class);
+
+    /**
      * Gets all the categories.
      * @return the list of categories.
      */
     @GetMapping
-    public final ResponseEntity<Object> getAllCategories() {
-        List<CategoryDTO> categories = categoryService.getAllCategories();
-        return ResponseEntity.ok(categories);
+    public final Response getAllCategories() {
+        List<CategoryDTO> categories = categoryService.getCategories();
+        logger.info(SuccessMessages.CATEGORY_FETCH);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_FETCH, categories);
+        return response;
     }
 
     /**
@@ -46,11 +62,14 @@ public class CategoryController {
      * @return the category if exists.
      */
     @GetMapping("/{categoryId}")
-    public final ResponseEntity<Object> getCategoryById(
+    public final Response getCategoryById(
             @PathVariable final Long categoryId) {
         CategoryDTO newCategoryDto = categoryService
                 .getCategoryById(categoryId);
-        return ResponseEntity.ok(newCategoryDto);
+        logger.info(SuccessMessages.CATEGORY_FETCH_BY_ID);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_FETCH_BY_ID, newCategoryDto);
+        return response;
     }
 
     /**
@@ -59,10 +78,13 @@ public class CategoryController {
      * @return the success status when added.
      */
     @PostMapping
-    public final ResponseEntity<Object> addCategory(
-            @RequestBody final CategoryDTO categoryDto) {
-        CategoryDTO newCategory = categoryService.addCategory(categoryDto);
-        return ResponseEntity.ok(newCategory);
+    public final Response addCategory(
+            @RequestBody @Valid final CategoryDTO categoryDto) {
+        categoryService.addCategory(categoryDto);
+        logger.info(SuccessMessages.CATEGORY_ADD_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_ADD_SUCCESS);
+        return response;
     }
 
     /**
@@ -71,10 +93,13 @@ public class CategoryController {
      * @return deleted successfully if not found.
      */
     @DeleteMapping("/{categoryId}")
-    public final ResponseEntity<Object> deleteCategory(
+    public final Response deleteCategory(
             @PathVariable final Long categoryId) {
         categoryService.deleteCategory(categoryId);
-        return ResponseEntity.noContent().build();
+        logger.info(SuccessMessages.CATEGORY_DELETE_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_DELETE_SUCCESS);
+        return response;
     }
 
     /**
@@ -84,11 +109,14 @@ public class CategoryController {
      * @return the updated category status.
      */
     @PutMapping("/{categoryId}")
-    public final ResponseEntity<Object> updateCategory(
+    public final Response updateCategory(
             @PathVariable final Long categoryId,
-            @RequestBody final CategoryDTO updatedCategoryDto) {
-        CategoryDTO newCategory = categoryService.updateCategory(categoryId,
-                updatedCategoryDto);
-        return ResponseEntity.ok(newCategory);
+            @RequestBody @Valid final CategoryDTO updatedCategoryDto) {
+        categoryService.updateCategory(categoryId, updatedCategoryDto);
+        logger.info(SuccessMessages.CATEGORY_UPDATED_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.CATEGORY_UPDATED_SUCCESS);
+        return response;
     }
+
 }

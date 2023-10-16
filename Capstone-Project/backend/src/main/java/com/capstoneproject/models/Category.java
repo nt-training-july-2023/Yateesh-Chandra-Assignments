@@ -16,10 +16,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * This is Category Entity.
@@ -28,9 +28,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Table(name = "category")
 public class Category {
+
     /**
      * This is the Category ID column that is the primary key.
      */
@@ -38,29 +38,30 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long categoryId;
+
     /**
      * This is the category name Column.
      */
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false, unique = true)
     private String categoryName;
+
     /**
      * This is the Category Description Column.
      */
-    @Column(name = "category_description")
+    @Column(name = "category_description", nullable = false)
     private String description;
 
     /**
      * This is the constructor with 3 parameters.
-     * @param catId of Long type.
-     * @param catName of String Type.
-     * @param desc of String type.
+     * @param categoryid of Long type.
+     * @param categoryname of String Type.
+     * @param categoryDescription of String type.
      */
-    public Category(final Long catId, final String catName,
-            final String desc) {
-//        super();
-        this.categoryId = catId;
-        this.categoryName = catName;
-        this.description = desc;
+    public Category(final Long categoryid, final String categoryname,
+            final String categoryDescription) {
+        this.categoryId = categoryid;
+        this.categoryName = categoryname;
+        this.description = categoryDescription;
     }
 
     /**
@@ -69,20 +70,20 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Quiz> quiz = new ArrayList<>();
+
     /**
      * Quiz.
      * @return the list.
      */
-    public final List<Quiz> getQuiz() {
+    public List<Quiz> getQuiz() {
         return new ArrayList<>(quiz);
     }
 
     /**
      * Quiz Setter overriding.
-     * @param q is quiz.
+     * @param quizz is quiz.
      */
-    public final void setQuiz(final List<Quiz> q) {
-        this.quiz = new ArrayList<>(q);
+    public void setQuiz(final List<Quiz> quizz) {
+        this.quiz = new ArrayList<>(quizz);
     }
-
 }

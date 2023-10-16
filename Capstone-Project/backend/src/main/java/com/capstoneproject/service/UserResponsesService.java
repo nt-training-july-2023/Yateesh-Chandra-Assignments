@@ -2,13 +2,14 @@ package com.capstoneproject.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstoneproject.dto.UserResponsesDTO;
-import com.capstoneproject.exceptions.AlreadyExistsException;
+import com.capstoneproject.exceptions.ConflictException;
 import com.capstoneproject.exceptions.ElementNotExistsException;
-import com.capstoneproject.exceptions.NoInputException;
 import com.capstoneproject.models.AllResults;
 import com.capstoneproject.models.Category;
 import com.capstoneproject.models.Quiz;
@@ -19,6 +20,8 @@ import com.capstoneproject.repository.CategoryRepository;
 import com.capstoneproject.repository.QuizRepository;
 import com.capstoneproject.repository.UserRepository;
 import com.capstoneproject.repository.UserResponsesRepository;
+import com.capstoneproject.response.ExceptionMessages;
+import com.capstoneproject.response.SuccessMessages;
 
 /**
  * This is Service class for the UserResponses.
@@ -57,88 +60,84 @@ public class UserResponsesService {
     private QuizRepository quizRepository;
 
     /**
+     * Creating Instance for logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(
+            UserResponsesService.class);
+
+    /**
      * This method is used to add the User Responses.
      * @param responses of UserResponsesDTO is passed.
      * @return the added User Response.
      */
     public final UserResponsesDTO addUserResponses(
             final UserResponsesDTO responses) {
-        if (responses.getUserId() == null || responses.getCategoryId() == null
-                || responses.getQuizId() == null
-                || responses.getMarksScored() == 0
-                || responses.getTotalMarks() == 0
-                || responses.getNumOfQuestions() == 0
-                || responses.getNumOfQuestionsAnswered() == 0) {
-            throw new NoInputException("No Inputs Detected");
+        User user = userRepository.findById(responses.getUserId())
+                    .orElseThrow(() -> new ElementNotExistsException(
+                            ExceptionMessages.USER_NOT_EXIST
+                            + responses.getUserId()));
+        Quiz quiz = quizRepository.findById(responses.getQuizId())
+                    .orElseThrow(() -> new ElementNotExistsException(
+                            ExceptionMessages.QUIZ_NOT_EXIST
+                            + responses.getQuizId()));
+        logger.info(SuccessMessages.RESPONSE_ADDED);
+        AllResults results = new AllResults();
+        results.setUserId(responses.getUserId());
+        Optional<User> users = userRepository
+                .findById(responses.getUserId());
+        results.setEmail(users.get().getEmail());
+        results.setUserName(users.get().getName());
+        Optional<Category> category = categoryRepository
+                .findById(responses.getCategoryId());
+        results.setCategoryName(category.get().getCategoryName());
+        Optional<Quiz> quizz = quizRepository
+                .findById(responses.getQuizId());
+        results.setQuizName(quizz.get().getQuizName());
+        if (responses.getNumOfQuestionsAnswered()
+                <= responses.getNumOfQuestions()) {
+            results.setNumOfQuestions(responses.getNumOfQuestions());
+            results.setNumOfQuestionsAnswered(
+                    responses.getNumOfQuestionsAnswered());
         } else {
-            if (responsesRepository.findResponsesByUsersAndQuiz(
-                    responses.getUserId(), responses.getQuizId()) != null) {
-                throw new AlreadyExistsException("Already exists");
-            }
-            User user = userRepository.findById(responses.getUserId())
-                    .orElse(null);
-            if (user == null) {
-                throw new ElementNotExistsException("This element not exists");
-            } else {
-                Quiz quiz = quizRepository.findById(responses.getQuizId())
-                        .orElse(null);
-                if (quiz != null) {
-                    AllResults results = new AllResults();
-                    results.setUserId(responses.getUserId());
-                    Optional<User> users = userRepository
-                            .findById(responses.getUserId());
-                    results.setEmail(users.get().getEmail());
-                    results.setUserName(users.get().getName());
-                    Optional<Quiz> quizzes = quizRepository
-                            .findById(responses.getQuizId());
-                    Optional<Category> category = categoryRepository
-                            .findById(responses.getCategoryId());
-                    results.setCategoryName(category.get().getCategoryName());
-                    results.setQuizName(quizzes.get().getQuizName());
-                    results.setNumOfQuestions(responses.getNumOfQuestions());
-                    results.setNumOfQuestionsAnswered(
-                            responses.getNumOfQuestionsAnswered());
-                    results.setTotalMarks(responses.getTotalMarks());
-                    results.setMarksScored(responses.getMarksScored());
-                    results.setTimeStamp(responses.setTimeStampMethod());
-                    allResultsRepository.save(results);
+            throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
+        }
+        if (responses.getMarksScored() <= responses.getTotalMarks()) {
+            results.setTotalMarks(responses.getTotalMarks());
+            results.setMarksScored(responses.getMarksScored());
+        } else {
+            throw new ConflictException(ExceptionMessages.MARKS_CONFLICT);
+        }
+        if (responses.getTimeStamp() != null) {
+            results.setTimeStamp(responses.getTimeStamp());
+        } else {
+            results.setTimeStamp(responses.setTimeStamp());
+        }
+        allResultsRepository.save(results);
 
-                    UserResponses userResponses = new UserResponses();
-                    userResponses.setUsers(user);
-                    userResponses.setQuiz(quiz);
-                    userResponses
-                            .setNumOfQuestions(results.getNumOfQuestions());
-                    userResponses.setNumOfQuestionsAnswered(
-                            results.getNumOfQuestionsAnswered());
-                    userResponses.setTotalMarks(responses.getTotalMarks());
-                    userResponses.setMarksScored(responses.getMarksScored());
-                    userResponses.setTimeStamp(responses.setTimeStampMethod());
-                    responsesRepository.save(userResponses);
-                    return responses;
-                } else {
-                    throw new ElementNotExistsException(
-                            "No such element found");
-                }
-            }
+        UserResponses userResponses = new UserResponses();
+        userResponses.setUsers(user);
+        userResponses.setQuiz(quiz);
+        if (responses.getNumOfQuestionsAnswered()
+                <= responses.getNumOfQuestions()) {
+            userResponses
+            .setNumOfQuestions(responses.getNumOfQuestions());
+            userResponses.setNumOfQuestionsAnswered(
+                    responses.getNumOfQuestionsAnswered());
+        } else {
+            throw new ConflictException(ExceptionMessages.QUESTION_CONFLICT);
         }
-    }
-
-    /**
-     * This method is used to find the User Responses.
-     * @param userId UserId of Long Type.
-     * @param quizId from Quiz of Long type.
-     * @return true or false based on its existence in the repository.
-     */
-    public final boolean findUserResponsesByUserAndQuiz(final Long userId,
-            final Long quizId) {
-        if (userId == null || quizId == null) {
-            throw new NoInputException("No Input detected");
+        if (responses.getMarksScored() <= responses.getTotalMarks()) {
+            userResponses.setTotalMarks(responses.getTotalMarks());
+            userResponses.setMarksScored(responses.getMarksScored());
+        } else {
+            throw new ConflictException(ExceptionMessages.MARKS_CONFLICT);
         }
-        UserResponses userResponses = responsesRepository
-                .findResponsesByUsersAndQuiz(userId, quizId);
-        if (userResponses == null) {
-            return false;
+        if (responses.getTimeStamp() != null) {
+            userResponses.setTimeStamp(responses.getTimeStamp());
+        } else {
+            userResponses.setTimeStamp(responses.setTimeStamp());
         }
-        return true;
+        responsesRepository.save(userResponses);
+        return responses;
     }
 }

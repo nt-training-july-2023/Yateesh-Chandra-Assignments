@@ -14,7 +14,7 @@ class QuizTest {
         Long quizId = 3L;
         String quizName = "Test Quiz";
         String quizDescription = "Test Quiz Description";
-        int numOfQues = 10;
+        int numOfQues = 10; 
         
         Quiz quiz = new Quiz();
         quiz.setQuizId(quizId);
@@ -30,23 +30,25 @@ class QuizTest {
     }
     
     @Test
-    void testGetQuestionsWhenNoQuestionsSet() {
-        Quiz quiz = new Quiz();
-        assertEquals(new ArrayList<>(), quiz.getQuestions());
-    }
-    
-    @Test
     void testGetQuestionsWhenQuestionsSet() {
         Quiz quiz = new Quiz();
         List<Question> questions = new ArrayList<>();
-        questions.add(new Question());
+        questions.add(new Question("Test Question", "A", "B", "C", "D", "OptionB"));
         quiz.setQuestions(questions);
         assertEquals(questions, quiz.getQuestions());
     }
 
     @Test
-    void testSetQuestionWhenNullQuestions() {
+    void testGetAndSetUserResponses() {
         Quiz quiz = new Quiz();
-        assertThrows(NullPointerException.class, () ->  quiz.setQuestions(null));
+
+        List<UserResponses> userResponses = new ArrayList<>();
+        userResponses.add(new UserResponses(4L,5, 4, 20, 16, "2023-09-20"));
+        userResponses.add(new UserResponses(5L,5, 3, 20, 12, "2023-09-19"));
+        quiz.setUserResponses(userResponses);
+
+        List<UserResponses> list = quiz.getUserResponses();
+        assertNotSame(userResponses, list);
+        assertEquals(userResponses, list);
     }
 }

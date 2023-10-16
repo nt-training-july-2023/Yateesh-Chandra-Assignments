@@ -13,6 +13,7 @@ import com.capstoneproject.models.User;
  */
 @EnableJpaRepositories
 public interface UserRepository extends JpaRepository<User, Long> {
+
     /**
      * Find User Name by Email and Password.
      *

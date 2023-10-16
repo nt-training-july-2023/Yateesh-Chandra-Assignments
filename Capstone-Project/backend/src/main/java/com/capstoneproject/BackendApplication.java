@@ -9,18 +9,20 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
  */
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class BackendApplication {
+
     /**
      * Run method.
      * @param args String type arguments.
      */
-    public final void run(final String[] args) {
+    private void run(final String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
+
     /**
      * This is the main method for the Spring boot class.
      * @param args are the command line arguments.
      */
     public static void main(final String[] args) {
-        SpringApplication.run(BackendApplication.class, args);
+        new BackendApplication().run(args);
     }
 }

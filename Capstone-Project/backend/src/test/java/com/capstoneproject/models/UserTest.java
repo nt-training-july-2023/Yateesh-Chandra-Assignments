@@ -2,8 +2,12 @@ package com.capstoneproject.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 class UserTest {
 
@@ -38,23 +42,17 @@ class UserTest {
     }
 
     @Test
-    public void testEqualsAndHashCode() {
-        User user1 = new User(1L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com", "ramesh", "USER", "9876543210");
-        User user2 = new User(1L, "Mahesh Kumar", "mahesh.kumar@nucleusteq.com", "mahesh", "USER", "8919293940");
-        User user3 = new User(2L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com", "ramesh", "USER", "9876543210");
+    public void testUserResponsesGetterAndSetter() {
+        User user = new User();
 
-        assertNotEquals(user1, user2);
-        assertNotEquals(user1, user3);
-        
-        assertNotEquals(user1.hashCode(), user2.hashCode());
-        assertNotEquals(user1.hashCode(), user3.hashCode());
+        List<UserResponses> userResponses = new ArrayList<>();
+        userResponses.add(new UserResponses(4L,5, 4, 20, 16, "2023-09-20"));
+        userResponses.add(new UserResponses(5L,5, 3, 20, 12, "2023-09-19"));
+        user.setUserResponses(userResponses);
+
+        List<UserResponses> list = user.getUserResponses();
+        assertNotSame(userResponses, list);
+        assertEquals(userResponses, list);
     }
 
-    @Test
-    public void testToString() {
-        User user = new User(1L, "Ramesh Kumar", "ramesh.kumar@nucleusteq.com", "ramesh", "USER", "9876543210");
-        String expectedToString = String.format("User(userId=%d, name=%s, email=%s, password=%s, userRole=%s, phoneNumber=%s)",
-                user.getUserId(), user.getName(), user.getEmail(), user.getPassword(), user.getUserRole(), user.getPhoneNumber());
-        assertEquals(expectedToString, user.toString());
-    }
 }

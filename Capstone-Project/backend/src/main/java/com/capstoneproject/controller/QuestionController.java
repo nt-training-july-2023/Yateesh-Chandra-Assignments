@@ -2,8 +2,10 @@ package com.capstoneproject.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstoneproject.dto.QuestionDTO;
+import com.capstoneproject.response.Response;
+import com.capstoneproject.response.SuccessMessages;
 import com.capstoneproject.service.QuestionService;
+
+import jakarta.validation.Valid;
 
 /**
  * This class contains the Controller part for the Question.
  */
 @CrossOrigin
 @RestController
-@RequestMapping(path = "api/v1/question")
+@RequestMapping(path = "question")
 public class QuestionController {
     /**
      * questionService variable is used to operate on the Question Service.
@@ -31,13 +37,22 @@ public class QuestionController {
     private QuestionService questionService;
 
     /**
+     * Creating instance for the Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
+    /**
      * Gets all the questions.
      * @return the List of the questions.
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @GetMapping
-    public final ResponseEntity<Object> getAllQuestions() {
-        List<QuestionDTO> question = questionService.getAllQuestions();
-        return ResponseEntity.ok(question);
+    public final Response getQuestions() {
+        List<QuestionDTO> questions = questionService.getQuestions();
+        logger.info(SuccessMessages.QUESTION_FETCH);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_FETCH, questions);
+        return response;
     }
 
     /**
@@ -45,11 +60,15 @@ public class QuestionController {
      * @param questionId of Long type for input.
      * @return the Question associated with a specific ID.
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @GetMapping("/{questionId}")
-    public final ResponseEntity<Object> getQuestionById(
+    public final Response getQuestionById(
             @PathVariable final Long questionId) {
         QuestionDTO newQuestion = questionService.getQuestionById(questionId);
-        return ResponseEntity.ok(newQuestion);
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_ID);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_FETCH_BY_ID, newQuestion);
+        return response;
     }
 
     /**
@@ -57,11 +76,15 @@ public class QuestionController {
      * @param questionDto of Question type to be requested.
      * @return the success status when added.
      */
+    @SuppressWarnings("rawtypes")
     @PostMapping
-    public final ResponseEntity<Object> addQuestion(
-            @RequestBody final QuestionDTO questionDto) {
-        QuestionDTO newQuestion = questionService.addQuestion(questionDto);
-        return ResponseEntity.ok(newQuestion);
+    public final Response addQuestion(
+            @RequestBody @Valid final QuestionDTO questionDto) {
+        questionService.addQuestion(questionDto);
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_ADD_SUCCESS);
+        return response;
     }
 
     /**
@@ -69,11 +92,15 @@ public class QuestionController {
      * @param questionId - It is needed to delete the Question of that id.
      * @return the deleted successfully status.
      */
+    @SuppressWarnings("rawtypes")
     @DeleteMapping("/{questionId}")
-    public final ResponseEntity<Object> deleteQuestion(
+    public final Response deleteQuestion(
             @PathVariable final Long questionId) {
         questionService.deleteQuestion(questionId);
-        return ResponseEntity.noContent().build();
+        logger.info(SuccessMessages.QUESTION_DELETE_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_DELETE_SUCCESS);
+        return response;
     }
 
     /**
@@ -82,26 +109,34 @@ public class QuestionController {
      * @param updatedQuestionDto replace the content.
      * @return the success status after updating.
      */
+    @SuppressWarnings("rawtypes")
     @PutMapping("/{questionId}")
-    public final ResponseEntity<Object> updateQuestion(
+    public final Response updateQuestion(
             @PathVariable final Long questionId,
-            @RequestBody final QuestionDTO updatedQuestionDto) {
-        QuestionDTO newQuestion = questionService.updateQuestion(questionId,
+            @RequestBody @Valid final QuestionDTO updatedQuestionDto) {
+        questionService.updateQuestion(questionId,
                 updatedQuestionDto);
-        return ResponseEntity.ok(newQuestion);
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        return response;
     }
 
     /**
      * This is used to get Question by Quiz Id.
      * @param quizId of Quiz.
-     * @return the Response Ok.
+     * @return the Response OK.
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @GetMapping("/byQuiz/{quizId}")
-    public final ResponseEntity<Object> getQuestionByQuizId(
+    public final Response getQuestionByQuizId(
             @PathVariable final Long quizId) {
         List<QuestionDTO> questionDto = questionService
                 .getQuestionByQuizId(quizId);
-        return ResponseEntity.ok(questionDto);
+        logger.info(SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_FETCH_BY_QUIZ_ID, questionDto);
+        return response;
     }
 
 }
