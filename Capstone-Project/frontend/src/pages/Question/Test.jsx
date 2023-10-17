@@ -13,6 +13,7 @@ import ResponseService from '../../services/ResponseService';
 import { format } from 'date-fns';
 import TimerNavBar from '../../components/NavBars/TimerNavBar';
 import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Test = () => {
 
@@ -51,7 +52,51 @@ const Test = () => {
         return storedStartTime ? parseInt(storedStartTime) : null;
     });
 
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [showNavigation, setShowNavigation] = useState(false);
+
+    const [viewed, setViewed] = useState(Array(questions.length).fill(false));
+
+    const markQuestionAsVisited = (index) => {
+    const updatedViewed = [...viewed];
+    updatedViewed[index] = true;
+    setViewed(updatedViewed);
+    };
+
+    const questionStatus = questions.map((_, index) => {
+
+        const isCurrentQuestion = currentQuestionIndex === index;
+        const isAnswered = selectedOptions[index] !== undefined;
+        const isVisited = viewed[index] || isCurrentQuestion;
+
+        if (isCurrentQuestion) {
+            return 'current';
+        } else if (isVisited) {
+            return isAnswered ? 'answered' : 'visited';
+        } else {
+            return 'unvisited';
+        }
+        });
+
+    const navigateToQuestion = (questionIndex) => {
+        setCurrentQuestionIndex(questionIndex);
+        setShowNavigation(false);
+        markQuestionAsVisited(questionIndex);
+    };
+
+    const handleNextQuestion = () => {
+        if(currentQuestionIndex < questions.length - 1){
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            markQuestionAsVisited(currentQuestionIndex + 1);
+        }
+    };
+
+    const handlePreviousQuestion = () => {
+        if(currentQuestionIndex > 0){
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        }
+    }
 
     const formatTime = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds / 60);
@@ -90,31 +135,42 @@ const Test = () => {
     const handleOptionSelect = (option, questionIndex) => {
         const updatedSelectedOptions = [...selectedOptions];
         if (updatedSelectedOptions[questionIndex] === option) {
-            updatedSelectedOptions[questionIndex] = null;
+          updatedSelectedOptions[questionIndex] = null;
+          markQuestionAsVisited(questionIndex);
         } else {
-            updatedSelectedOptions[questionIndex] = option;
+          updatedSelectedOptions[questionIndex] = option;
         }
-
+      
         setSelectedOptions(updatedSelectedOptions);
-
+      
         const answeredQuestions = updatedSelectedOptions.filter(Boolean).length;
         setNumOfQuestionsAnswered(answeredQuestions);
+      
 
+        const updatedViewed = [...viewed];
+        if (updatedViewed[questionIndex] === true) {
+          updatedViewed[questionIndex] = 'visited';
+        } else {
+          updatedViewed[questionIndex] = updatedSelectedOptions[questionIndex] !== null;
+        }
+        setViewed(updatedViewed);
+      
         let score = 0;
         for (let i = 0; i < questions.length; i++) {
-            const correctOption = questions[i].correctOption;
-            const selectedOption = updatedSelectedOptions[i];
-
-            if (selectedOption === correctOption) {
-                score += 2;
-            }
+          const correctOption = questions[i].correctOption;
+          const selectedOption = updatedSelectedOptions[i];
+      
+          if (selectedOption === correctOption) {
+            score += 2;
+          }
         }
-
+      
         setMarksScored(score);
-
+      
         localStorage.setItem('numberOfAttempted', answeredQuestions.toString());
         localStorage.setItem('marksScored', score.toString());
-    };
+      };
+    
 
     const clearLocalStorage = () => {
         localStorage.removeItem('startTime');
@@ -311,38 +367,55 @@ const Test = () => {
     return (
         <div className='no-select'>
             <DeactivateBackButton />
-            {(questions.length>0 &&
-                <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
+            <div className="navigation-toggle" onClick={() => setShowNavigation(!showNavigation)}>
+                {showNavigation ? <FaTimes /> : <FaBars />}
+            </div>
+            {showNavigation && (
+                <div className="question-navigation">
+                    <div className='question-grid'>
+                        {questions.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`question-number ${questionStatus[index]}`}
+                                onClick={() => navigateToQuestion(index)}
+                            >
+                                {index + 1}
+                            </div>
+                        ))}
+                    </div>  
+                </div>
             )}
+            {(questions.length > 0 && (
+                <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
+                // 
+            ))}
             {(userRole === "USER" ? (
                 <div className="quiz-container">
                     {loading ? (
                         <div>Loading questions... No Questions as of now</div>
                     ) : questions.length > 0 ? (
                         <div className="question-container">
-                            {questions.map((question, index) => (
-                                <div key={index} className="question-content">
-                                    <p><b>{index + 1}. {question.questionTitle}</b></p>
-                                    <div className="options">
-                                        {Array.from({ length: 4 }, (_, optionIndex) => {
-                                            const optionKey = `option${optionIndex + 1}`;
-                                            const optionContent = question[optionKey];
-                                            return (
-                                                <div
-                                                    key={optionIndex}
-                                                    className={`option ${selectedOptions[index] === optionContent ? 'selected' : null}`}
-                                                    onClick={() => handleOptionSelect(optionContent, index)}
-                                                >
-                                                    {optionContent}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                            <div className="question-content">
+                                <p><b>{currentQuestionIndex + 1}. {questions[currentQuestionIndex].questionTitle}</b></p>
+                                <div className="options">
+                                    {Array.from({ length: 4 }, (_, optionIndex) => {
+                                        const optionKey = `option${optionIndex + 1}`;
+                                        const optionContent = questions[currentQuestionIndex][optionKey];
+                                        return (
+                                            <div
+                                                key={optionIndex}
+                                                className={`option ${selectedOptions[currentQuestionIndex] === optionContent ? 'selected' : null}`}
+                                                onClick={() => handleOptionSelect(optionContent, currentQuestionIndex)}
+                                            >
+                                                {optionContent}
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                            ))}
-
+                            </div>
                             <div className="navigation-buttons">
-                                <ButtonComponent onClick = {handleManualSubmit} className = "blue-button button" text = "Submit"/>
+                                <ButtonComponent onClick={handlePreviousQuestion} className = {currentQuestionIndex === 0 ? "button disabled" : "blue-button button"} text="Previous"/>
+                                <ButtonComponent onClick={currentQuestionIndex === questions.length - 1 ? handleManualSubmit : handleNextQuestion} className="blue-button button" text={currentQuestionIndex === questions.length - 1 ? "Submit" : "Next"} />
                             </div>
                         </div>
                     ) : (
@@ -350,7 +423,6 @@ const Test = () => {
                             No questions available.
                         </div>
                     )}
-
                 </div>
             ) : (
                 <>

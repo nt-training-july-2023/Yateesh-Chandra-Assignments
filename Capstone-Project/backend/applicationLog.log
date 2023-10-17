@@ -1,1032 +1,142 @@
-2023-10-14T08:35:58.678+05:30  WARN 6948 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8h33m41s233ms603µs200ns).
-2023-10-14T09:31:33.194+05:30  WARN 6948 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=55m38s129ms968µs900ns).
-2023-10-14T10:16:20.660+05:30  WARN 6948 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m15s849ms140µs200ns).
-2023-10-14T10:22:37.260+05:30  WARN 6948 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s520ms308µs900ns).
-2023-10-14T11:29:19.761+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-10-14T11:29:19.773+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-10-14T11:29:19.778+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-10-14T11:29:19.790+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:29:19.794+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-10-14T11:29:19.796+05:30  INFO 6948 --- [RMI TCP Connection(183)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-10-14T11:52:43.178+05:30  INFO 10232 --- [main] c.c.BackendApplicationTests              : Starting BackendApplicationTests using Java 20.0.2 with PID 10232 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-10-14T11:52:43.193+05:30  INFO 10232 --- [main] c.c.BackendApplicationTests              : No active profile set, falling back to 1 default profile: "default"
-2023-10-14T11:52:43.984+05:30  INFO 10232 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-10-14T11:52:44.078+05:30  INFO 10232 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 6 JPA repository interfaces.
-2023-10-14T11:52:44.582+05:30  INFO 10232 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-10-14T11:52:44.660+05:30  INFO 10232 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-10-14T11:52:44.660+05:30  INFO 10232 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-10-14T11:52:44.894+05:30  INFO 10232 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:52:45.067+05:30  INFO 10232 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-10-14T11:52:45.083+05:30  INFO 10232 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-10-14T11:52:45.349+05:30  INFO 10232 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@33fa6a8b
-2023-10-14T11:52:45.349+05:30  INFO 10232 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-10-14T11:52:45.885+05:30  INFO 10232 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:52:46.769+05:30  INFO 10232 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-10-14T11:52:46.910+05:30  INFO 10232 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:52:47.192+05:30  INFO 10232 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-10-14T11:52:47.891+05:30  WARN 10232 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-10-14T11:52:48.242+05:30  INFO 10232 --- [main] c.c.BackendApplicationTests              : Started BackendApplicationTests in 5.438 seconds (process running for 6.991)
-2023-10-14T11:52:48.747+05:30  INFO 10232 --- [main] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 10232 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-10-14T11:52:48.747+05:30  INFO 10232 --- [main] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-10-14T11:52:48.910+05:30  INFO 10232 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-10-14T11:52:48.926+05:30  INFO 10232 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 6 JPA repository interfaces.
-2023-10-14T11:52:49.114+05:30  INFO 10232 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-10-14T11:52:49.114+05:30  INFO 10232 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-10-14T11:52:49.114+05:30  INFO 10232 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-10-14T11:52:49.208+05:30  INFO 10232 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-10-14T11:52:49.208+05:30  INFO 10232 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 461 ms
-2023-10-14T11:52:49.286+05:30  INFO 10232 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-10-14T11:52:49.303+05:30  INFO 10232 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:52:49.303+05:30  INFO 10232 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-10-14T11:52:49.303+05:30  INFO 10232 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2023-10-14T11:52:49.333+05:30  INFO 10232 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@5eafd83a
-2023-10-14T11:52:49.333+05:30  INFO 10232 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2023-10-14T11:52:49.365+05:30  INFO 10232 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:52:49.498+05:30  INFO 10232 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-10-14T11:52:49.554+05:30  INFO 10232 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:52:49.691+05:30  WARN 10232 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-10-14T11:52:49.819+05:30  INFO 10232 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-10-14T11:52:49.819+05:30  INFO 10232 --- [main] com.capstoneproject.BackendApplication   : Started BackendApplication in 1.086 seconds (process running for 8.56)
-2023-10-14T11:52:50.342+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results By User Id1
-2023-10-14T11:52:50.358+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
-2023-10-14T11:52:50.438+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Category added Successfully
-2023-10-14T11:52:50.448+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T11:52:50.453+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Category updated Successfully
-2023-10-14T11:52:50.453+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Category deleted Successfully
-2023-10-14T11:52:50.453+05:30  INFO 10232 --- [main] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
-2023-10-14T11:52:50.548+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Question updated Successfully
-2023-10-14T11:52:50.548+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Question deleted Successfully
-2023-10-14T11:52:50.548+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T11:52:50.564+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Question fetched Successfully with Id
-2023-10-14T11:52:50.564+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Questions fetched Successfully
-2023-10-14T11:52:50.564+05:30  INFO 10232 --- [main] c.c.controller.QuestionController        : Question added Successfully
-2023-10-14T11:52:50.643+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quiz added Successfully
-2023-10-14T11:52:50.643+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quiz updated Successfully
-2023-10-14T11:52:50.659+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quizzes fetched Successfully
-2023-10-14T11:52:50.659+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
-2023-10-14T11:52:50.675+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quiz deleted Successfully
-2023-10-14T11:52:50.675+05:30  INFO 10232 --- [main] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T11:52:50.748+05:30  INFO 10232 --- [main] c.c.controller.UserController            : Users fetched successfully
-2023-10-14T11:52:50.752+05:30  INFO 10232 --- [main] c.c.controller.UserController            : User registered Successfully
-2023-10-14T11:52:50.756+05:30  INFO 10232 --- [main] c.c.controller.UserController            : Logged in Successfully
-2023-10-14T11:52:50.756+05:30  INFO 10232 --- [main] c.c.controller.UserController            : User deleted Successfully
-2023-10-14T11:52:50.803+05:30  INFO 10232 --- [main] c.c.controller.UserResponsesController   : Responses added Successfully
-2023-10-14T11:52:50.916+05:30  INFO 10232 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.capstoneproject.models.UserTest]: UserTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-10-14T11:52:50.946+05:30  INFO 10232 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.capstoneproject.BackendApplication for test class com.capstoneproject.models.UserTest
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Successfully fetched Results By User Id
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Successfully fetched Results of all Users
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T11:52:51.199+05:30  INFO 10232 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T11:52:51.295+05:30 ERROR 10232 --- [main] c.c.service.CategoryService              : Category already Exists
-2023-10-14T11:52:51.295+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T11:52:51.295+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:52:51.295+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:52:51.311+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Category Found
-2023-10-14T11:52:51.311+05:30 ERROR 10232 --- [main] c.c.service.CategoryService              : Category already Exists
-2023-10-14T11:52:51.311+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Category Found
-2023-10-14T11:52:51.311+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Category updated Successfully
-2023-10-14T11:52:51.328+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Category deleted Successfully
-2023-10-14T11:52:51.328+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Category added Successfully
-2023-10-14T11:52:51.343+05:30  INFO 10232 --- [main] c.c.service.CategoryService              : Categories fetched by Id Successfully
-2023-10-14T11:52:51.516+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question Found
-2023-10-14T11:52:51.516+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T11:52:51.537+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Quiz Found
-2023-10-14T11:52:51.537+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T11:52:51.537+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:52:51.537+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:52:51.548+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question Found
-2023-10-14T11:52:51.548+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T11:52:51.548+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question Found
-2023-10-14T11:52:51.548+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
-2023-10-14T11:52:51.548+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T11:52:51.564+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question deleted Successfully
-2023-10-14T11:52:51.581+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
-2023-10-14T11:52:51.581+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Questions fetched Successfully
-2023-10-14T11:52:51.581+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:52:51.581+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:52:51.581+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question Found
-2023-10-14T11:52:51.581+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
-2023-10-14T11:52:51.596+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question Found
-2023-10-14T11:52:51.596+05:30 ERROR 10232 --- [main] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T11:52:51.596+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question fetched Successfully with Id
-2023-10-14T11:52:51.612+05:30  INFO 10232 --- [main] c.c.service.QuestionService              : Question added Successfully
-2023-10-14T11:52:51.612+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz added Successfully
-2023-10-14T11:52:51.628+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T11:52:51.631+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully
-2023-10-14T11:52:51.631+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:52:51.631+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:52:51.643+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T11:52:51.643+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz updated Successfully
-2023-10-14T11:52:51.650+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
-2023-10-14T11:52:51.650+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz deleted Successfully
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T11:52:51.659+05:30 ERROR 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz already Exists
-2023-10-14T11:52:51.659+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T11:52:51.659+05:30 ERROR 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz already Exists
-2023-10-14T11:52:51.675+05:30  INFO 10232 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T11:52:51.846+05:30  INFO 10232 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:52:51.849+05:30  INFO 10232 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:52:51.852+05:30  INFO 10232 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:52:51.852+05:30  INFO 10232 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:52:51.867+05:30  INFO 10232 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:52:51.913+05:30 ERROR 10232 --- [main] c.capstoneproject.service.UserService    : Email does not exist.!
-2023-10-14T11:52:51.913+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : Users fetched successfully
-2023-10-14T11:52:51.913+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T11:52:51.913+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T11:52:51.929+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : User deleted Successfully
-2023-10-14T11:52:51.929+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : User registered Successfully
-2023-10-14T11:52:51.929+05:30 ERROR 10232 --- [main] c.capstoneproject.service.UserService    : Email already Exists
-2023-10-14T11:52:51.929+05:30  INFO 10232 --- [main] c.capstoneproject.service.UserService    : Logged in Successfully
-2023-10-14T11:52:51.944+05:30 ERROR 10232 --- [main] c.capstoneproject.service.UserService    : Invalid Password
-2023-10-14T11:52:51.961+05:30  INFO 10232 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:52:52.114+05:30  INFO 10232 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-10-14T11:52:52.114+05:30  INFO 10232 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-10-14T11:52:52.129+05:30  INFO 10232 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:52:52.145+05:30  INFO 10232 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
-2023-10-14T11:52:52.154+05:30  INFO 10232 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
-2023-10-14T11:54:30.233+05:30  INFO 11048 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 11048 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-10-14T11:54:30.235+05:30  INFO 11048 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-10-14T11:54:30.277+05:30  INFO 11048 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-14T11:54:30.277+05:30  INFO 11048 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-14T11:54:30.807+05:30  INFO 11048 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-10-14T11:54:30.855+05:30  INFO 11048 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 6 JPA repository interfaces.
-2023-10-14T11:54:31.327+05:30  INFO 11048 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-10-14T11:54:31.334+05:30  INFO 11048 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-10-14T11:54:31.335+05:30  INFO 11048 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-10-14T11:54:31.379+05:30  INFO 11048 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-10-14T11:54:31.379+05:30  INFO 11048 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1102 ms
-2023-10-14T11:54:31.490+05:30  INFO 11048 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-10-14T11:54:31.523+05:30  INFO 11048 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-10-14T11:54:31.525+05:30  INFO 11048 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-10-14T11:54:31.614+05:30  INFO 11048 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:54:31.706+05:30  INFO 11048 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-10-14T11:54:31.718+05:30  INFO 11048 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-10-14T11:54:31.837+05:30  INFO 11048 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@20492c54
-2023-10-14T11:54:31.839+05:30  INFO 11048 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-10-14T11:54:32.059+05:30  INFO 11048 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:54:32.590+05:30  INFO 11048 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-10-14T11:54:32.678+05:30  INFO 11048 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:54:32.835+05:30  INFO 11048 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-10-14T11:54:33.195+05:30  WARN 11048 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-10-14T11:54:33.395+05:30  INFO 11048 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-10-14T11:54:33.419+05:30  INFO 11048 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-10-14T11:54:33.428+05:30  INFO 11048 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 3.463 seconds (process running for 4.515)
-2023-10-14T11:54:55.816+05:30  INFO 11048 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-10-14T11:54:55.824+05:30  INFO 11048 --- [RMI TCP Connection(2)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-10-14T11:54:55.829+05:30  INFO 11048 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:54:55.831+05:30  INFO 11048 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-10-14T11:54:55.835+05:30  INFO 11048 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-10-14T11:55:26.680+05:30  INFO 12792 --- [restartedMain] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 12792 (D:\assignments\Assignments\Capstone-Project\backend\target\classes started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
-2023-10-14T11:55:26.682+05:30  INFO 12792 --- [restartedMain] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
-2023-10-14T11:55:26.725+05:30  INFO 12792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-14T11:55:26.725+05:30  INFO 12792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-14T11:55:27.161+05:30  INFO 12792 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-10-14T11:55:27.217+05:30  INFO 12792 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 6 JPA repository interfaces.
-2023-10-14T11:55:27.601+05:30  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2023-10-14T11:55:27.607+05:30  INFO 12792 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-10-14T11:55:27.607+05:30  INFO 12792 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-10-14T11:55:27.651+05:30  INFO 12792 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-10-14T11:55:27.651+05:30  INFO 12792 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 925 ms
-2023-10-14T11:55:27.752+05:30  INFO 12792 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-10-14T11:55:27.786+05:30  INFO 12792 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-10-14T11:55:27.788+05:30  INFO 12792 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-10-14T11:55:27.903+05:30  INFO 12792 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:55:27.994+05:30  INFO 12792 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-10-14T11:55:28.006+05:30  INFO 12792 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-10-14T11:55:28.127+05:30  INFO 12792 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1e5e27b
-2023-10-14T11:55:28.128+05:30  INFO 12792 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-10-14T11:55:28.341+05:30  INFO 12792 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-10-14T11:55:28.848+05:30  INFO 12792 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-10-14T11:55:28.932+05:30  INFO 12792 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T11:55:29.098+05:30  INFO 12792 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-10-14T11:55:29.454+05:30  WARN 12792 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-10-14T11:55:29.661+05:30  INFO 12792 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-10-14T11:55:29.688+05:30  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2023-10-14T11:55:29.697+05:30  INFO 12792 --- [restartedMain] com.capstoneproject.BackendApplication   : Started BackendApplication in 3.278 seconds (process running for 4.223)
-2023-10-14T11:57:44.127+05:30  INFO 12792 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-10-14T11:57:44.127+05:30  INFO 12792 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-10-14T11:57:44.127+05:30  INFO 12792 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2023-10-14T11:57:44.406+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.UserService    : User registered Successfully
-2023-10-14T11:57:44.625+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.UserController            : User registered Successfully
-2023-10-14T11:58:06.124+05:30 ERROR 12792 --- [http-nio-8082-exec-4] c.capstoneproject.service.UserService    : Invalid Password
-2023-10-14T11:58:06.124+05:30  WARN 12792 --- [http-nio-8082-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.UnAuthorizedException: Invalid Password]
-2023-10-14T11:58:20.208+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.UserService    : Logged in Successfully
-2023-10-14T11:58:20.208+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.UserController            : Logged in Successfully
-2023-10-14T11:58:21.780+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T11:58:21.781+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:21.781+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:21.781+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T11:58:40.614+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T11:58:40.622+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:40.623+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:58:40.623+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:42.340+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T11:58:42.340+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:42.340+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:42.340+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T11:58:43.461+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T11:58:43.464+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:43.464+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:58:43.465+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:45.022+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T11:58:45.022+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:45.022+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T11:58:45.022+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T11:58:46.092+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T11:58:46.094+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:46.094+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T11:58:46.094+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T11:58:48.406+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Quiz Found
-2023-10-14T11:58:48.415+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.416+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.417+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.417+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T11:58:48.417+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T11:59:46.793+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T11:59:46.828+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.UserResponsesController   : Responses added Successfully
-2023-10-14T11:59:47.809+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.AllResultsService            : Successfully fetched Results By User Id
-2023-10-14T11:59:47.810+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T11:59:47.810+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.AllResultsController      : Successfully fetched Results By User Id21
-2023-10-14T12:06:05.804+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:06:05.805+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:06:05.805+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:06:05.805+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:06:27.799+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.UserService    : Logged in Successfully
-2023-10-14T12:06:27.799+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.UserController            : Logged in Successfully
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Users fetched successfully
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:06:29.329+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.UserController            : Users fetched successfully
-2023-10-14T12:06:46.062+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:06:46.062+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:06:46.062+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:06:46.062+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Users fetched successfully
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T12:07:06.948+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.UserController            : Users fetched successfully
-2023-10-14T12:07:07.982+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:07:07.983+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:07:07.983+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:07:07.983+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:07:13.794+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Categories fetched by Id Successfully
-2023-10-14T12:07:13.796+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
-2023-10-14T12:07:22.556+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Category Found
-2023-10-14T12:07:22.556+05:30 ERROR 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Category already Exists
-2023-10-14T12:07:22.567+05:30  WARN 12792 --- [http-nio-8082-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Category already Exists]
-2023-10-14T12:07:35.467+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:07:35.467+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:07:35.467+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:07:35.467+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:08:06.588+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Category added Successfully
-2023-10-14T12:08:06.601+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Category added Successfully
-2023-10-14T12:08:06.620+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:08:06.620+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:06.620+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:06.620+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:06.620+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:08:14.403+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Categories fetched by Id Successfully
-2023-10-14T12:08:14.403+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
-2023-10-14T12:08:17.328+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:08:17.328+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:17.328+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:17.328+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:17.328+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:08:22.771+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Category deleted Successfully
-2023-10-14T12:08:22.830+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.AllResultsController      : Category deleted Successfully
-2023-10-14T12:08:22.834+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:08:22.835+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:22.835+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:08:22.835+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:08:35.268+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:08:35.270+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:08:35.270+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:08:35.270+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:08:38.774+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:08:38.776+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:08:38.777+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:08:38.777+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:09:21.816+05:30 ERROR 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Quiz already Exists
-2023-10-14T12:09:21.818+05:30  WARN 12792 --- [http-nio-8082-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Quiz already Exists]
-2023-10-14T12:09:45.047+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Quiz added Successfully
-2023-10-14T12:09:45.062+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.QuizController            : Quiz added Successfully
-2023-10-14T12:09:45.080+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:09:45.080+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:09:45.080+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:09:45.080+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:09:45.080+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:10:02.620+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Quiz deleted Successfully
-2023-10-14T12:10:02.635+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuizController            : Quiz deleted Successfully
-2023-10-14T12:10:02.638+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:10:02.644+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:10:02.644+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:10:02.644+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:10:04.856+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:10:04.859+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:12:28.321+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:12:28.321+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:28.321+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:12:28.321+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:31.098+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:12:31.098+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:31.099+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:31.099+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:12:33.718+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:12:33.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:33.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:37.243+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:12:37.243+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:37.243+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:37.243+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:12:41.603+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:12:41.605+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:41.605+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:12:41.605+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:43.309+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:12:43.309+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:43.309+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:12:43.309+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:12:44.751+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:12:44.753+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:12:44.753+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:13:48.956+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:13:48.956+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:13:48.956+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:13:48.956+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:13:51.314+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Categories fetched by Id Successfully
-2023-10-14T12:13:51.314+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
-2023-10-14T12:14:55.793+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Category Found
-2023-10-14T12:14:55.794+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Category updated Successfully
-2023-10-14T12:14:55.803+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Category updated Successfully
-2023-10-14T12:14:55.816+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T12:14:55.816+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:14:55.816+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T12:14:55.816+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T12:14:58.966+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:14:58.970+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:14:58.970+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:16:32.754+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Quiz added Successfully
-2023-10-14T12:16:32.771+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuizController            : Quiz added Successfully
-2023-10-14T12:16:32.783+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T12:16:32.785+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T12:16:32.785+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T12:16:32.785+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T12:16:37.641+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:16:37.644+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:16:37.644+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:17:43.917+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.QuestionService              : Question added Successfully
-2023-10-14T12:17:43.923+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuestionController        : Question added Successfully
-2023-10-14T12:17:43.932+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:17:43.933+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:17:43.934+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:17:43.934+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:17.293+05:30 ERROR 12792 --- [http-nio-8082-exec-9] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T12:18:17.295+05:30  WARN 12792 --- [http-nio-8082-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Options should not be repeated]
-2023-10-14T12:18:37.853+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.QuestionService              : Question added Successfully
-2023-10-14T12:18:37.865+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuestionController        : Question added Successfully
-2023-10-14T12:18:37.873+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:18:37.877+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:37.877+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:37.877+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:37.877+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:50.394+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Question Found
-2023-10-14T12:18:50.395+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Question updated Successfully
-2023-10-14T12:18:50.407+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.QuestionController        : Question updated Successfully
-2023-10-14T12:18:50.416+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:18:50.417+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:50.417+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:50.417+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:50.417+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:58.495+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Question Found
-2023-10-14T12:18:58.496+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Question updated Successfully
-2023-10-14T12:18:58.497+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.QuestionController        : Question updated Successfully
-2023-10-14T12:18:58.507+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Quiz Found
-2023-10-14T12:18:58.508+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T12:18:58.508+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:58.508+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T12:18:58.508+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T12:19:09.650+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Successfully fetched Results of all Users
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.651+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:09.652+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Successfully fetched Results of all Users
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.641+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T12:19:11.642+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
-2023-10-14T14:37:55.894+05:30  WARN 12792 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58m43s931ms964µs700ns).
-2023-10-14T15:22:12.421+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.UserService    : Logged in Successfully
-2023-10-14T15:22:12.424+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.UserController            : Logged in Successfully
-2023-10-14T15:22:14.087+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:22:14.087+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:22:14.087+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:22:14.087+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:23:11.603+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Users fetched successfully
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:23:11.604+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.UserController            : Users fetched successfully
-2023-10-14T15:24:06.223+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:24:06.223+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:24:06.223+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:24:06.223+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:24:15.913+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:24:15.928+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:24:15.928+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:24:15.928+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:24:24.528+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.540+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:24.544+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:24:29.837+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:24:29.843+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:24:29.843+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:24:29.843+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:24:31.610+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:24:31.619+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:25:34.901+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.UserResponsesService         : Responses added Successfully
-2023-10-14T15:25:34.967+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.UserResponsesController   : Responses added Successfully
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Successfully fetched Results By User Id
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:27:48.663+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.AllResultsController      : Successfully fetched Results By User Id4
-2023-10-14T15:28:31.743+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:28:31.743+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:28:31.743+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:28:31.743+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:28:52.429+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.UserService    : Logged in Successfully
-2023-10-14T15:28:52.429+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.UserController            : Logged in Successfully
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Users fetched successfully
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.007+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.011+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.UserService    : Converting Model to DTO
-2023-10-14T15:28:54.011+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.UserController            : Users fetched successfully
-2023-10-14T15:29:03.523+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:29:03.523+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:03.523+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:03.523+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Successfully fetched Results of all Users
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.473+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.478+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.479+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.482+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.483+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.484+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:29:05.488+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
-2023-10-14T15:29:15.043+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:29:15.043+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:15.043+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:15.043+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:29:25.060+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:29:25.060+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:25.060+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:25.060+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:29:39.673+05:30 ERROR 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Category already Exists
-2023-10-14T15:29:39.683+05:30  WARN 12792 --- [http-nio-8082-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Category already Exists]
-2023-10-14T15:29:53.330+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Category added Successfully
-2023-10-14T15:29:53.354+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.AllResultsController      : Category added Successfully
-2023-10-14T15:29:53.428+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:29:53.428+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:53.428+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:53.428+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:29:53.428+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:30:00.267+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Categories fetched by Id Successfully
-2023-10-14T15:30:00.267+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
-2023-10-14T15:30:05.663+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Category Found
-2023-10-14T15:30:05.673+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.CategoryService              : Category updated Successfully
-2023-10-14T15:30:05.689+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.AllResultsController      : Category updated Successfully
-2023-10-14T15:30:05.755+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:30:05.755+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:30:05.755+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:30:05.755+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:30:05.755+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:31:41.263+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.CategoryService              : Category deleted Successfully
-2023-10-14T15:31:41.284+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.AllResultsController      : Category deleted Successfully
-2023-10-14T15:31:41.306+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:31:41.306+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:31:41.306+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:31:41.306+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:31:45.348+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:31:45.353+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:31:45.353+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:31:45.356+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:32:39.138+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.capstoneproject.service.QuizService    : Quiz added Successfully
-2023-10-14T15:32:39.163+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.QuizController            : Quiz added Successfully
-2023-10-14T15:32:39.204+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:32:39.208+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:32:39.208+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:32:39.208+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:32:39.208+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:32:46.412+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:32:46.412+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:32:52.715+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:32:52.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:32:52.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:32:52.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:32:52.720+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:01.768+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:01.768+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:07.696+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T15:33:07.704+05:30 ERROR 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Quiz already Exists
-2023-10-14T15:33:07.708+05:30  WARN 12792 --- [http-nio-8082-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Quiz already Exists]
-2023-10-14T15:33:13.994+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:33:14.000+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:14.002+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:14.002+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:14.002+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:21.783+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:33:21.788+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:33:21.788+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:21.788+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:21.788+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:33:23.266+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:33:23.269+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:23.269+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:23.269+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:23.269+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:27.764+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:33:27.768+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:33:27.768+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:27.768+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:27.768+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:33:36.524+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:33:36.528+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:36.528+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:36.528+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:36.528+05:30  INFO 12792 --- [http-nio-8082-exec-6] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:38.414+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:38.414+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:41.348+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Quiz Found
-2023-10-14T15:33:41.351+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.capstoneproject.service.QuizService    : Quiz updated Successfully
-2023-10-14T15:33:41.365+05:30  INFO 12792 --- [http-nio-8082-exec-9] c.c.controller.QuizController            : Quiz updated Successfully
-2023-10-14T15:33:41.407+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:41.407+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
-2023-10-14T15:33:41.417+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:33:41.422+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:41.422+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:41.423+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:33:41.423+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:33:45.346+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:33:45.349+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:33:45.349+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:45.349+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:33:45.350+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:34:52.795+05:30 ERROR 12792 --- [http-nio-8082-exec-6] c.c.service.QuestionService              : Options should not be repeated
-2023-10-14T15:34:52.795+05:30  WARN 12792 --- [http-nio-8082-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.capstoneproject.exceptions.AlreadyExistsException: Options should not be repeated]
-2023-10-14T15:35:03.928+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.service.QuestionService              : Question added Successfully
-2023-10-14T15:35:03.935+05:30  INFO 12792 --- [http-nio-8082-exec-7] c.c.controller.QuestionController        : Question added Successfully
-2023-10-14T15:35:04.007+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:35:04.009+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:35:04.009+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:35:04.012+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:35:04.015+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:35:04.015+05:30  INFO 12792 --- [http-nio-8082-exec-8] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:35:14.738+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.service.QuestionService              : Question deleted Successfully
-2023-10-14T15:35:14.768+05:30  INFO 12792 --- [http-nio-8082-exec-10] c.c.controller.QuestionController        : Question deleted Successfully
-2023-10-14T15:35:14.793+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Quiz Found
-2023-10-14T15:35:14.797+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
-2023-10-14T15:35:14.797+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:35:14.797+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.service.QuestionService              : Converting Model to DTO
-2023-10-14T15:35:14.797+05:30  INFO 12792 --- [http-nio-8082-exec-1] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
-2023-10-14T15:35:19.321+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Category Found
-2023-10-14T15:35:19.324+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
-2023-10-14T15:35:19.324+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:35:19.324+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.capstoneproject.service.QuizService    : Converting Model to DTO
-2023-10-14T15:35:19.324+05:30  INFO 12792 --- [http-nio-8082-exec-2] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
-2023-10-14T15:35:20.643+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:35:20.643+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:35:20.643+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:35:20.643+05:30  INFO 12792 --- [http-nio-8082-exec-5] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Successfully fetched Results of all Users
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.527+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.531+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.service.AllResultsService            : Converting Model to DTO
-2023-10-14T15:35:23.532+05:30  INFO 12792 --- [http-nio-8082-exec-4] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
-2023-10-14T15:35:40.527+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Categories fetched Successfully
-2023-10-14T15:35:40.527+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:35:40.527+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.service.CategoryService              : Converting Model to DTO
-2023-10-14T15:35:40.527+05:30  INFO 12792 --- [http-nio-8082-exec-3] c.c.controller.AllResultsController      : Categories fetched Successfully
-2023-10-14T17:29:48.475+05:30  WARN 12792 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h46m21s673ms834µs500ns).
-2023-10-14T17:44:50.574+05:30  WARN 12792 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m31s975ms730µs800ns).
-2023-10-14T17:55:24.627+05:30  WARN 12792 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m33s969ms915µs500ns).
-2023-10-14T18:33:37.828+05:30  WARN 12792 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m13s138ms236µs600ns).
-2023-10-14T21:45:17.408+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2023-10-14T21:45:17.423+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-10-14T21:45:17.427+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-10-14T21:45:17.438+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-10-14T21:45:17.442+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-10-14T21:45:17.445+05:30  INFO 12792 --- [RMI TCP Connection(388)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-10-17T10:30:11.492+05:30  INFO 19832 --- [main] c.c.BackendApplicationTests              : Starting BackendApplicationTests using Java 20.0.2 with PID 19832 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
+2023-10-17T10:30:11.508+05:30  INFO 19832 --- [main] c.c.BackendApplicationTests              : No active profile set, falling back to 1 default profile: "default"
+2023-10-17T10:30:13.769+05:30  INFO 19832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-17T10:30:13.969+05:30  INFO 19832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 163 ms. Found 6 JPA repository interfaces.
+2023-10-17T10:30:15.128+05:30  INFO 19832 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-17T10:30:15.345+05:30  INFO 19832 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
+2023-10-17T10:30:15.356+05:30  INFO 19832 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-10-17T10:30:15.886+05:30  INFO 19832 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-17T10:30:16.296+05:30  INFO 19832 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-17T10:30:16.377+05:30  INFO 19832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-10-17T10:30:17.110+05:30  INFO 19832 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1447bef2
+2023-10-17T10:30:17.118+05:30  INFO 19832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-10-17T10:30:18.503+05:30  INFO 19832 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-17T10:30:20.718+05:30  INFO 19832 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-17T10:30:20.952+05:30  INFO 19832 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-17T10:30:21.583+05:30  INFO 19832 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-10-17T10:30:23.603+05:30  WARN 19832 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-17T10:30:25.196+05:30  INFO 19832 --- [main] c.c.BackendApplicationTests              : Started BackendApplicationTests in 15.007 seconds (process running for 20.657)
+2023-10-17T10:30:26.557+05:30  INFO 19832 --- [main] com.capstoneproject.BackendApplication   : Starting BackendApplication using Java 20.0.2 with PID 19832 (started by Yateesh Chandra in D:\assignments\Assignments\Capstone-Project\backend)
+2023-10-17T10:30:26.558+05:30  INFO 19832 --- [main] com.capstoneproject.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-10-17T10:30:26.944+05:30  INFO 19832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-17T10:30:26.981+05:30  INFO 19832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 6 JPA repository interfaces.
+2023-10-17T10:30:27.450+05:30  INFO 19832 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2023-10-17T10:30:27.475+05:30  INFO 19832 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-17T10:30:27.475+05:30  INFO 19832 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-10-17T10:30:27.661+05:30  INFO 19832 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-10-17T10:30:27.662+05:30  INFO 19832 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1096 ms
+2023-10-17T10:30:27.804+05:30  INFO 19832 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-17T10:30:27.825+05:30  INFO 19832 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-17T10:30:27.825+05:30  INFO 19832 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-17T10:30:27.827+05:30  INFO 19832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-10-17T10:30:27.909+05:30  INFO 19832 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@37ce5605
+2023-10-17T10:30:27.911+05:30  INFO 19832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-10-17T10:30:28.033+05:30  INFO 19832 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-17T10:30:28.302+05:30  INFO 19832 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-17T10:30:28.456+05:30  INFO 19832 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-17T10:30:28.761+05:30  WARN 19832 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-17T10:30:28.972+05:30  INFO 19832 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2023-10-17T10:30:28.981+05:30  INFO 19832 --- [main] com.capstoneproject.BackendApplication   : Started BackendApplication in 2.489 seconds (process running for 24.441)
+2023-10-17T10:30:29.948+05:30 ERROR 19832 --- [main] c.c.service.CategoryService              : Category already Exists
+2023-10-17T10:30:29.964+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Categories fetched Successfully
+2023-10-17T10:30:29.966+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Converting Model to DTO
+2023-10-17T10:30:29.966+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Converting Model to DTO
+2023-10-17T10:30:30.008+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Category Found
+2023-10-17T10:30:30.009+05:30 ERROR 19832 --- [main] c.c.service.CategoryService              : Category already Exists
+2023-10-17T10:30:30.031+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Category Found
+2023-10-17T10:30:30.032+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Category updated Successfully
+2023-10-17T10:30:30.045+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Category deleted Successfully
+2023-10-17T10:30:30.057+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Category added Successfully
+2023-10-17T10:30:30.082+05:30  INFO 19832 --- [main] c.c.service.CategoryService              : Categories fetched by Id Successfully
+2023-10-17T10:30:30.838+05:30  INFO 19832 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
+2023-10-17T10:30:30.849+05:30  INFO 19832 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
+2023-10-17T10:30:30.892+05:30  INFO 19832 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
+2023-10-17T10:30:30.910+05:30  INFO 19832 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
+2023-10-17T10:30:30.926+05:30  INFO 19832 --- [main] c.c.service.UserResponsesService         : Responses added Successfully
+2023-10-17T10:30:31.036+05:30 ERROR 19832 --- [main] c.capstoneproject.service.UserService    : Email does not exist.!
+2023-10-17T10:30:31.048+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : Users fetched successfully
+2023-10-17T10:30:31.050+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : Converting Model to DTO
+2023-10-17T10:30:31.051+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : Converting Model to DTO
+2023-10-17T10:30:31.070+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : User deleted Successfully
+2023-10-17T10:30:31.077+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : User registered Successfully
+2023-10-17T10:30:31.085+05:30 ERROR 19832 --- [main] c.capstoneproject.service.UserService    : Email already Exists
+2023-10-17T10:30:31.096+05:30  INFO 19832 --- [main] c.capstoneproject.service.UserService    : Logged in Successfully
+2023-10-17T10:30:31.106+05:30 ERROR 19832 --- [main] c.capstoneproject.service.UserService    : Invalid Password
+2023-10-17T10:30:31.114+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Successfully fetched Results By User Id
+2023-10-17T10:30:31.115+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
+2023-10-17T10:30:31.116+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
+2023-10-17T10:30:31.125+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Successfully fetched Results of all Users
+2023-10-17T10:30:31.126+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
+2023-10-17T10:30:31.126+05:30  INFO 19832 --- [main] c.c.service.AllResultsService            : Converting Model to DTO
+2023-10-17T10:30:31.266+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question Found
+2023-10-17T10:30:31.267+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Options should not be repeated
+2023-10-17T10:30:31.303+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Quiz Found
+2023-10-17T10:30:31.304+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Questions fetched Successfully By Quiz Id
+2023-10-17T10:30:31.305+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Converting Model to DTO
+2023-10-17T10:30:31.306+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Converting Model to DTO
+2023-10-17T10:30:31.313+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question Found
+2023-10-17T10:30:31.313+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Options should not be repeated
+2023-10-17T10:30:31.320+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question Found
+2023-10-17T10:30:31.320+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
+2023-10-17T10:30:31.329+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Options should not be repeated
+2023-10-17T10:30:31.334+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question deleted Successfully
+2023-10-17T10:30:31.361+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
+2023-10-17T10:30:31.367+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Questions fetched Successfully
+2023-10-17T10:30:31.368+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Converting Model to DTO
+2023-10-17T10:30:31.368+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Converting Model to DTO
+2023-10-17T10:30:31.378+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question Found
+2023-10-17T10:30:31.378+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Correct Option does not match any option
+2023-10-17T10:30:31.410+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question Found
+2023-10-17T10:30:31.411+05:30 ERROR 19832 --- [main] c.c.service.QuestionService              : Options should not be repeated
+2023-10-17T10:30:31.417+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question fetched Successfully with Id
+2023-10-17T10:30:31.428+05:30  INFO 19832 --- [main] c.c.service.QuestionService              : Question added Successfully
+2023-10-17T10:30:31.439+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz added Successfully
+2023-10-17T10:30:31.449+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-10-17T10:30:31.464+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully
+2023-10-17T10:30:31.465+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
+2023-10-17T10:30:31.466+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
+2023-10-17T10:30:31.487+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-10-17T10:30:31.489+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz updated Successfully
+2023-10-17T10:30:31.498+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz fetched Successfully with Quiz Id
+2023-10-17T10:30:31.505+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz deleted Successfully
+2023-10-17T10:30:31.519+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Category Found
+2023-10-17T10:30:31.520+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quizzes fetched Successfully By Category Id
+2023-10-17T10:30:31.520+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
+2023-10-17T10:30:31.521+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Converting Model to DTO
+2023-10-17T10:30:31.530+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-10-17T10:30:31.535+05:30 ERROR 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz already Exists
+2023-10-17T10:30:31.544+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-10-17T10:30:31.545+05:30 ERROR 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz already Exists
+2023-10-17T10:30:31.552+05:30  INFO 19832 --- [main] c.capstoneproject.service.QuizService    : Quiz Found
+2023-10-17T10:30:32.321+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Category added Successfully
+2023-10-17T10:30:32.341+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Categories fetched Successfully
+2023-10-17T10:30:32.350+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Category updated Successfully
+2023-10-17T10:30:32.359+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Category deleted Successfully
+2023-10-17T10:30:32.363+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Categories fetched by Id Successfully
+2023-10-17T10:30:32.469+05:30  INFO 19832 --- [main] c.c.controller.UserController            : Users fetched successfully
+2023-10-17T10:30:32.479+05:30  INFO 19832 --- [main] c.c.controller.UserController            : User registered Successfully
+2023-10-17T10:30:32.486+05:30  INFO 19832 --- [main] c.c.controller.UserController            : Logged in Successfully
+2023-10-17T10:30:32.492+05:30  INFO 19832 --- [main] c.c.controller.UserController            : User deleted Successfully
+2023-10-17T10:30:32.607+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quiz added Successfully
+2023-10-17T10:30:32.615+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quiz updated Successfully
+2023-10-17T10:30:32.624+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quizzes fetched Successfully
+2023-10-17T10:30:32.629+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quiz fetched Successfully with Quiz Id
+2023-10-17T10:30:32.634+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quiz deleted Successfully
+2023-10-17T10:30:32.643+05:30  INFO 19832 --- [main] c.c.controller.QuizController            : Quizzes fetched Successfully By Category Id
+2023-10-17T10:30:32.753+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results By User Id1
+2023-10-17T10:30:32.758+05:30  INFO 19832 --- [main] c.c.controller.AllResultsController      : Successfully fetched Results of all Users
+2023-10-17T10:30:32.836+05:30  INFO 19832 --- [main] c.c.controller.UserResponsesController   : Responses added Successfully
+2023-10-17T10:30:32.957+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Question updated Successfully
+2023-10-17T10:30:32.963+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Question deleted Successfully
+2023-10-17T10:30:32.970+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Questions fetched Successfully By Quiz Id
+2023-10-17T10:30:32.980+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Question fetched Successfully with Id
+2023-10-17T10:30:32.989+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Questions fetched Successfully
+2023-10-17T10:30:32.995+05:30  INFO 19832 --- [main] c.c.controller.QuestionController        : Question added Successfully
+2023-10-17T10:30:33.123+05:30  INFO 19832 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.capstoneproject.models.UserTest]: UserTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-17T10:30:33.193+05:30  INFO 19832 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.capstoneproject.BackendApplication for test class com.capstoneproject.models.UserTest
+2023-10-17T10:30:33.273+05:30  INFO 19832 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-17T10:30:34.440+05:30  INFO 19832 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-10-17T10:30:34.489+05:30  INFO 19832 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-10-17T10:30:34.710+05:30  INFO 19832 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-17T10:30:34.724+05:30  INFO 19832 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-10-17T10:30:34.760+05:30  INFO 19832 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
