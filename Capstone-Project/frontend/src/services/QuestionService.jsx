@@ -17,7 +17,11 @@ class QuestionService{
     }
 
     addQuestion(Question){
-        return axios.post(QUESTION_URL, Question);
+        return axios.post(QUESTION_URL + '/mcq', Question);
+    }
+
+    addAssertQuestion(Question){
+        return axios.post(QUESTION_URL + '/assert', Question);
     }
 
     deleteQuestion(questionId){
@@ -25,7 +29,11 @@ class QuestionService{
     }
 
     updateQuestion(questionId, body){
-        return axios.put(QUESTION_URL + '/' + questionId, body);
+        return axios.put(QUESTION_URL + '/mcq/' + questionId, body);
+    }
+
+    updateAssertQuestion(questionId, body){
+        return axios.put(QUESTION_URL + '/assert/' + questionId, body);
     }
 
 }

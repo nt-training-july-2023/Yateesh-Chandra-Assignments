@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capstoneproject.dto.AssertionQuestionDTO;
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
@@ -28,8 +29,10 @@ import jakarta.validation.Valid;
  */
 @CrossOrigin
 @RestController
+@SuppressWarnings({ "rawtypes", "unchecked" })
 @RequestMapping(path = "question")
 public class QuestionController {
+
     /**
      * questionService variable is used to operate on the Question Service.
      */
@@ -45,7 +48,6 @@ public class QuestionController {
      * Gets all the questions.
      * @return the List of the questions.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @GetMapping
     public final Response getQuestions() {
         List<QuestionDTO> questions = questionService.getQuestions();
@@ -60,7 +62,6 @@ public class QuestionController {
      * @param questionId of Long type for input.
      * @return the Question associated with a specific ID.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @GetMapping("/{questionId}")
     public final Response getQuestionById(
             @PathVariable final Long questionId) {
@@ -76,11 +77,20 @@ public class QuestionController {
      * @param questionDto of Question type to be requested.
      * @return the success status when added.
      */
-    @SuppressWarnings("rawtypes")
-    @PostMapping
+    @PostMapping("/mcq")
     public final Response addQuestion(
             @RequestBody @Valid final QuestionDTO questionDto) {
         questionService.addQuestion(questionDto);
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_ADD_SUCCESS);
+        return response;
+    }
+
+    @PostMapping("/assert")
+    public final Response addAssertQuestion(
+            @RequestBody @Valid final AssertionQuestionDTO questionDto) {
+        questionService.addAssertionQuestion(questionDto);
         logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
         Response response = new Response(HttpStatus.OK.value(),
                 SuccessMessages.QUESTION_ADD_SUCCESS);
@@ -92,7 +102,6 @@ public class QuestionController {
      * @param questionId - It is needed to delete the Question of that id.
      * @return the deleted successfully status.
      */
-    @SuppressWarnings("rawtypes")
     @DeleteMapping("/{questionId}")
     public final Response deleteQuestion(
             @PathVariable final Long questionId) {
@@ -109,8 +118,19 @@ public class QuestionController {
      * @param updatedQuestionDto replace the content.
      * @return the success status after updating.
      */
-    @SuppressWarnings("rawtypes")
-    @PutMapping("/{questionId}")
+    @PutMapping("/assert/{questionId}")
+    public final Response updateAssertQuestion(
+            @PathVariable final Long questionId,
+            @RequestBody @Valid final AssertionQuestionDTO updatedQuestionDto) {
+        questionService.updateAssertQuestion(questionId,
+                updatedQuestionDto);
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        Response response = new Response(HttpStatus.OK.value(),
+                SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        return response;
+    }
+
+    @PutMapping("/mcq/{questionId}")
     public final Response updateQuestion(
             @PathVariable final Long questionId,
             @RequestBody @Valid final QuestionDTO updatedQuestionDto) {
@@ -127,7 +147,6 @@ public class QuestionController {
      * @param quizId of Quiz.
      * @return the Response OK.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @GetMapping("/byQuiz/{quizId}")
     public final Response getQuestionByQuizId(
             @PathVariable final Long quizId) {

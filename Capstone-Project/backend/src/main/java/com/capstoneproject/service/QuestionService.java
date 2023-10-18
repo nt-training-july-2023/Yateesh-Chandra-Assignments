@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capstoneproject.dto.AssertionQuestionDTO;
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ConflictException;
@@ -33,7 +34,7 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     /**
-     * quizRepository is autowired.
+     * quizRepository is injected.
      */
     @Autowired
     private QuizRepository quizRepository;
@@ -146,6 +147,50 @@ public class QuestionService {
     }
 
     /**
+     * This is used for adding Assertion type Questions.
+     * @param assertQuestionDTO of Assertion Question DTO.
+     * @return assertion Question DTO.
+     */
+    public final AssertionQuestionDTO addAssertionQuestion(final 
+            AssertionQuestionDTO assertQuestionDTO) {
+
+        Quiz quiz = quizRepository.findById(
+                assertQuestionDTO.getQuizId()).orElseThrow(
+                        () -> new ElementNotExistsException(
+                                ExceptionMessages.QUIZ_NOT_EXIST));
+
+        Set<String> optionList = new HashSet<>();
+        optionList.add(assertQuestionDTO.getOption1());
+        optionList.add(assertQuestionDTO.getOption2());
+        final int optionNumber = 2;
+        if (optionList.size() < optionNumber) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.OPTIONS_NOT_REPEATED);
+        }
+        Question newQuestion = new Question();
+        newQuestion.setQuestionId(assertQuestionDTO.getQuestionId());
+        newQuestion.setQuestionTitle(assertQuestionDTO.getQuestionTitle());
+        newQuestion.setOption1(assertQuestionDTO.getOption1());
+        newQuestion.setOption2(assertQuestionDTO.getOption2());
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if (assertQuestionDTO.getCorrectOption().equals(option)) {
+                newQuestion.setCorrectOption(assertQuestionDTO.getCorrectOption());
+                matchFound = true;
+            }
+        }
+        if (!matchFound) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
+            throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
+        }
+        newQuestion.setQuiz(quiz);
+        logger.info(SuccessMessages.QUESTION_ADD_SUCCESS);
+        questionRepository.save(newQuestion);
+        return assertQuestionDTO;
+    }
+
+    /**
      * updates the question.
      *
      * @param questionId      of Long type.
@@ -191,6 +236,44 @@ public class QuestionService {
         logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
         questionRepository.save(existingQuestion);
         return updatedQuestionDTO;
+    }
+
+    public final AssertionQuestionDTO updateAssertQuestion(final Long questionId,
+            final AssertionQuestionDTO updatedAssertQuestionDTO) {
+        Question existingQuestion = questionRepository.findById(questionId)
+                .orElseThrow(() -> new ElementNotExistsException(
+                        ExceptionMessages.QUESTION_NOT_EXIST));
+        logger.info(SuccessMessages.QUESTION_FOUND);
+        existingQuestion
+                    .setQuestionTitle(updatedAssertQuestionDTO.getQuestionTitle());
+        Set<String> optionList = new HashSet<>();
+        optionList.add(updatedAssertQuestionDTO.getOption1());
+        optionList.add(updatedAssertQuestionDTO.getOption2());
+        final int optionNumber = 2;
+        if (optionList.size() < optionNumber) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_REPEATED);
+            throw new AlreadyExistsException(
+                    ExceptionMessages.OPTIONS_NOT_REPEATED);
+        }
+        existingQuestion.setOption1(updatedAssertQuestionDTO.getOption1());
+        existingQuestion.setOption2(updatedAssertQuestionDTO.getOption2());
+
+        boolean matchFound = false;
+        for (String option : optionList) {
+            if (updatedAssertQuestionDTO.getCorrectOption().equals(
+                    option)) {
+                existingQuestion.setCorrectOption(
+                        updatedAssertQuestionDTO.getCorrectOption());
+                matchFound = true;
+            }
+        }
+        if (!matchFound) {
+            logger.error(ExceptionMessages.OPTIONS_NOT_MATCHED);
+            throw new ConflictException(ExceptionMessages.OPTIONS_NOT_MATCHED);
+        }
+        logger.info(SuccessMessages.QUESTION_UPDATED_SUCCESS);
+        questionRepository.save(existingQuestion);
+        return updatedAssertQuestionDTO;
     }
 
     /**

@@ -1,8 +1,8 @@
 .manage-questions-container {
   max-width: 900px;
-  max-height: 500px;
+  max-height: 00px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 0px;
   padding: 20px;
   background-color: none;
   border-radius: 10px;
@@ -101,6 +101,30 @@
   justify-content: space-between;
 }
 
+.question-type-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.button-box{
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 120px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.question-selected{
+  background-color: rgb(2, 250, 2);
+
+}
+
+.question-unselected{
+  background-color: rgb(255, 255, 255);
+}
 
 @media (max-width: 600px) {
   .question-list li {

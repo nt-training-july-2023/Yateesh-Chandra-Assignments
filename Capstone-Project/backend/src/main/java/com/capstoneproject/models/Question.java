@@ -51,13 +51,13 @@ public class Question {
     /**
      * This is the Option 3 Column.
      */
-    @Column(nullable = false)
+    @Column
     private String option3;
 
     /**
      * This is the Option 4 Column.
      */
-    @Column(nullable = false)
+    @Column
     private String option4;
 
     /**
@@ -102,7 +102,7 @@ public class Question {
      * @param opt4        opt4.
      * @param correctOpt  option that is correct.
      */
-    public Question(final String title, final String opt1,
+    public Question(final String title, final String type, final String opt1,
             final String opt2, final String opt3, final String opt4,
             final String correctOpt) {
         this.questionTitle = title;
@@ -112,4 +112,5 @@ public class Question {
         this.option4 = opt4;
         this.correctOption = correctOpt;
     }
+
 }

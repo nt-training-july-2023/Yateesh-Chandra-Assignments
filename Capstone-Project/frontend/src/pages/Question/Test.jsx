@@ -88,7 +88,7 @@ const Test = () => {
     const handleNextQuestion = () => {
         if(currentQuestionIndex < questions.length - 1){
             setCurrentQuestionIndex(currentQuestionIndex + 1);
-            markQuestionAsVisited(currentQuestionIndex + 1);
+            markQuestionAsVisited(currentQuestionIndex);
         }
     };
 
@@ -141,6 +141,7 @@ const Test = () => {
           updatedSelectedOptions[questionIndex] = option;
         }
       
+
         setSelectedOptions(updatedSelectedOptions);
       
         const answeredQuestions = updatedSelectedOptions.filter(Boolean).length;
