@@ -30,7 +30,9 @@ const Test = () => {
     const [autoSubmitted, setAutoSubmitted] = useState(false);
     const [instructionsConfirmed, setInstructionsConfirmed] = useState(false);
     const [timer, setTimer] = useState(timeInMin * 60);
-    
+    const [pageVisible, setPageVisible] = useState(true);
+
+
     const navigatetoProfile = () => {
         setTimeout(() => {
             navigate("/profile");
@@ -244,7 +246,7 @@ const Test = () => {
                         <li>This is a Timed Test. Hence Have a look at the timer.</li><br>
                         <li>Questions are of "Choose the Correct Answer" type.</li><br>
                         <li>There is no negative marking.</li><br>
-                        <b><li><p style="text-align : left; margin-top : 2px;"><strong>NOTE: If you reload, It automatically submits the Test.</strong></b>
+                        <b><li><p style="text-align : left; margin-top : 2px;"><strong>NOTE: If you reload or Shift to other tab, Test gets submitted.</strong></b>
                         </ol>
                     `,
                 }).then((response) => {
@@ -327,6 +329,45 @@ const Test = () => {
             };
         }
     }, [instructionsConfirmed, autoSubmitted, handleSubmit, timeInMin, userRole, startTime]);
+
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+          if (document.visibilityState === 'hidden') {
+            if (!autoSubmitted) {
+              setAutoSubmitted(true);
+              Swal.fire({
+                title: "Suspicious Activity",
+                text: "Your answers have been automatically submitted",
+                icon: "info",
+                showConfirmButton: true,
+                confirmButtonColor : "green",
+                allowOutsideClick: false,
+                backdrop: 
+                `
+                    rgb(200, 200, 200, 1)
+                `,
+                confirmButtonText: "Ok",
+                customClass:{
+                    confirmButton : "custom-swal-button"
+                }
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    handleAddResponses();
+                    clearLocalStorage();
+                    navigatetoProfile();
+                    SweetAlert.redirecting(()=> {navigate("/profile")});
+                }
+            });
+            }
+          }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+      }, [autoSubmitted, handleSubmit]);
+      
 
     const handleManualSubmit = () => {
         if (numOfQuestionsAnswered === 0) {
