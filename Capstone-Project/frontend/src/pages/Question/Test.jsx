@@ -429,7 +429,6 @@ const Test = () => {
             )}
             {(questions.length > 0 && (
                 <TimerNavBar timerValue={formatTime(timer)} className={timer < (timeInMin * 10) ? "timer-out" : "timer"} />
-                // 
             ))}
             {(userRole === "USER" ? (
                 <div className="quiz-container">
