@@ -52,7 +52,7 @@
 }
 
 .question-list-container {
-  max-height: 350px;
+  max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 20px;
@@ -115,6 +115,7 @@
   border-radius: 5px;
   width: 120px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
 }
 
 .question-selected{
@@ -125,6 +126,12 @@
 .question-unselected{
   background-color: rgb(255, 255, 255);
 }
+
+.disable-button-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 
 @media (max-width: 600px) {
   .question-list li {

@@ -102,7 +102,7 @@ public class Question {
      * @param opt4        opt4.
      * @param correctOpt  option that is correct.
      */
-    public Question(final String title, final String type, final String opt1,
+    public Question(final String title, final String opt1,
             final String opt2, final String opt3, final String opt4,
             final String correctOpt) {
         this.questionTitle = title;

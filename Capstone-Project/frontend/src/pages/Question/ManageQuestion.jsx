@@ -12,6 +12,7 @@ import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
 import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 import IconButton from "../../components/ButtonComponents/IconButton";
 import Header1 from "../../components/HeaderComponents/Header1";
+import DisableButtonComponent from "../../components/ButtonComponents/DisableButtonComponent";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
@@ -36,14 +37,6 @@ const ManageQuestion = () => {
         quizId,
     });
 
-    const [newAssertQuestion, setNewAssertQuestion] = useState({
-        questionTitle: "",
-        option1: "",
-        option2: "",
-        correctOption: "",
-        quizId,
-    });
-
     const handleSelectMCQ = () => {
         setQuestionType("MCQ");
       };
@@ -52,7 +45,6 @@ const ManageQuestion = () => {
         setQuestionType("ASSERT");
     };
       
-
     useEffect(() => {
         fetchQuestions();
     }, []);
@@ -107,16 +99,16 @@ const ManageQuestion = () => {
     };
 
     const handleAddAssertQuestion = () => {
-        if(!newAssertQuestion.questionTitle || !newAssertQuestion.option1 || !newAssertQuestion.option2 || !newAssertQuestion.correctOption) {
+        if(!newQuestion.questionTitle || !newQuestion.option1 || !newQuestion.option2 || !newQuestion.correctOption) {
                 SweetAlert.missingField();
                 return;
         }
 
-        QuestionService.addAssertQuestion(newAssertQuestion)
+        QuestionService.addAssertQuestion(newQuestion)
         .then(() => {
             SweetAlert.successAlert("Added");
             fetchQuestions();
-            setNewAssertQuestion({
+            setNewQuestion({
                 questionTitle: "",
                 option1: "",
                 option2: "",
@@ -141,6 +133,7 @@ const ManageQuestion = () => {
         }
         QuestionService.updateQuestion(editedQuestion.questionId, editedQuestion)
         .then(() => {
+            
             SweetAlert.successAlert("Updated");
             fetchQuestions();
             setIsEditingQuestion(false);
@@ -153,18 +146,19 @@ const ManageQuestion = () => {
     };
 
     const handleEditAssertQuestion = () => {
-        if(!editedQuestion.questionTitle || !editedQuestion.option1 || !editedQuestion.option2 || !editedQuestion.option3
-            || !editedQuestion.option4 || !editedQuestion.correctOption){
+        if(!editedQuestion.questionTitle || !editedQuestion.option1 || !editedQuestion.option2 || !editedQuestion.correctOption){
                 SweetAlert.missingField();
                 return;
         }
-        QuestionService.updateQuestion(editedQuestion.questionId, editedQuestion)
+
+        QuestionService.updateAssertQuestion(editedQuestion.questionId, editedQuestion)
         .then(() => {
             SweetAlert.successAlert("Updated");
             fetchQuestions();
             setIsEditingQuestion(false);
         })
         .catch((error) => {
+            console.log(error);
             if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
@@ -185,6 +179,20 @@ const ManageQuestion = () => {
     const handleEditClick = (question) => {
         setEditedQuestion({ ...question });
         setIsEditingQuestion(true);
+
+
+        const numOptions = [
+            question.option1,
+            question.option2,
+            question.option3,
+            question.option4
+        ].filter(option => option).length;
+
+        if (numOptions === 2) {
+            setQuestionType("ASSERT");
+        } else if (numOptions === 4) {
+            setQuestionType("MCQ");
+        }
     };
 
     return (
@@ -221,17 +229,36 @@ const ManageQuestion = () => {
                             <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
                                 <Header1 text = {(isAddingQuestion ? 'Add Question' : 'Edit Question')} className = "arial" />
                                 <div className="question-type-buttons">
-                                    <ButtonComponent
+                                    <DisableButtonComponent
                                         onClick={handleSelectMCQ}
-                                        className={questionType === "MCQ" ? "button-box question-selected" : "button-box question-unselected"}
+                                        className={
+                                            questionType === "MCQ" 
+                                                ? "button-box question-selected" 
+                                                : `button-box question-unselected ${
+                                                    isEditingQuestion && questionType === "ASSERT"
+                                                        ? "disable-button-disabled"
+                                                        : ""
+                                            }`
+                                        }
                                         text = "MCQ"
+                                        disabled={isEditingQuestion && questionType === "ASSERT"}
                                     />
 
-                                    <ButtonComponent
-                                    onClick={handleSelectAssertion}
-                                    className={questionType === "ASSERT" ? "button-box question-selected" : "button-box question-unselected"}
-                                    text = "ASSERT"
+                                    <DisableButtonComponent
+                                        onClick={handleSelectAssertion}
+                                        className={
+                                            questionType === "ASSERT"
+                                                ? "button-box question-selected"
+                                                : `button-box question-unselected ${
+                                                    isEditingQuestion && questionType === "MCQ"
+                                                        ? "disable-button-disabled"
+                                                        : ""
+                                                }`
+                                        }
+                                        text="ASSERT"
+                                        disabled={isEditingQuestion && questionType === "MCQ"}
                                     />
+
                                 </div>
                                 {questionType === "MCQ" && (
                                     <div>
@@ -284,6 +311,7 @@ const ManageQuestion = () => {
                                         editedQuestion={editedQuestion}
                                         newQuestion={newQuestion}
                                         handleInputChange={handleInputChange}
+                                        questiontype={questionType}
                                         />
 
                                         <div className="form-group">
@@ -310,7 +338,7 @@ const ManageQuestion = () => {
                                         className = "reg-input-fields-question"
                                         name="questionTitle"
                                         placeholder="Question title"
-                                        value={isEditingQuestion ? editedQuestion.questionTitle : newAssertQuestion.questionTitle}
+                                        value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
                                         onChange={handleInputChange}
                                         />
 
@@ -337,6 +365,7 @@ const ManageQuestion = () => {
                                         editedQuestion={editedQuestion}
                                         newQuestion={newQuestion}
                                         handleInputChange={handleInputChange}
+                                        questiontype={questionType}
                                         />
 
                                         <div className="form-group">

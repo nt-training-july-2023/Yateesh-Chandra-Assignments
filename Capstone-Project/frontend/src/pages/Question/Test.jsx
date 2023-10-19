@@ -30,8 +30,6 @@ const Test = () => {
     const [autoSubmitted, setAutoSubmitted] = useState(false);
     const [instructionsConfirmed, setInstructionsConfirmed] = useState(false);
     const [timer, setTimer] = useState(timeInMin * 60);
-    const [pageVisible, setPageVisible] = useState(true);
-
 
     const navigatetoProfile = () => {
         setTimeout(() => {
@@ -439,9 +437,10 @@ const Test = () => {
                             <div className="question-content">
                                 <p><b>{currentQuestionIndex + 1}. {questions[currentQuestionIndex].questionTitle}</b></p>
                                 <div className="options">
-                                    {Array.from({ length: 4 }, (_, optionIndex) => {
-                                        const optionKey = `option${optionIndex + 1}`;
-                                        const optionContent = questions[currentQuestionIndex][optionKey];
+                                {Array.from({ length: 4 }, (_, optionIndex) => {
+                                    const optionKey = `option${optionIndex + 1}`;
+                                    const optionContent = questions[currentQuestionIndex][optionKey];
+                                    if (optionContent) {
                                         return (
                                             <div
                                                 key={optionIndex}
@@ -451,7 +450,11 @@ const Test = () => {
                                                 {optionContent}
                                             </div>
                                         );
-                                    })}
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+
                                 </div>
                             </div>
                             <div className="navigation-buttons">
