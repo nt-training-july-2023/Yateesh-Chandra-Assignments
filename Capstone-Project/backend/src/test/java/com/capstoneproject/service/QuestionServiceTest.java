@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.capstoneproject.dto.AssertionQuestionDTO;
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.exceptions.AlreadyExistsException;
 import com.capstoneproject.exceptions.ConflictException;
@@ -138,6 +139,23 @@ class QuestionServiceTest {
     }
 
     @Test
+    public void testAddAssertQuestion() {
+        Long quizId = 1L;
+        AssertionQuestionDTO questionDto = new AssertionQuestionDTO(null, "Test Question", "A", "B", "B", quizId);
+
+        Quiz quiz = new Quiz(quizId, "Quiz 1", "Quiz 1 Description", 7, 2);
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
+        when(questionRepository.save(any(Question.class))).thenReturn(new Question("Test Question", "A", "B", "C", "D", "B"));
+
+        AssertionQuestionDTO addedQuestion = questionService.addAssertionQuestion(questionDto);
+        assertNull(addedQuestion.getQuestionId());
+        assertEquals("Test Question", addedQuestion.getQuestionTitle());
+        assertEquals("A", addedQuestion.getOption1());
+        assertEquals("B", addedQuestion.getOption2());
+        assertEquals(quizId, addedQuestion.getQuizId());
+    }
+
+    @Test
     public void testUpdateQuestionWithLessThanFourOptions() {
         Question existingQuestion = new Question();
         existingQuestion.setQuestionId(1L);
@@ -180,6 +198,86 @@ class QuestionServiceTest {
         updatedQuestionDTO.setCorrectOption("Invalid Correct Option");
 
         assertThrows(ConflictException.class, () -> questionService.updateQuestion(1L, updatedQuestionDTO));
+    }
+
+
+    @Test
+    public void testAddAssertQuestionWithUnmatchingCorrectOption_InvalidInput() {
+        AssertionQuestionDTO questionDTO = new AssertionQuestionDTO();
+        questionDTO.setQuizId(1L);
+        questionDTO.setQuestionTitle("Sample Question");
+        questionDTO.setOption1("Option 1");
+        questionDTO.setOption2("Option 2");
+        questionDTO.setCorrectOption("Invalid Correct Option");
+
+        when(quizRepository.findById(1L)).thenReturn(Optional.of(new Quiz()));
+
+        assertThrows(ConflictException.class, () -> questionService.addAssertionQuestion(questionDTO));
+    }
+
+    @Test
+    void testUPDATEAssertionQuestion_DuplicateOptions() {
+        Long questionId = 1L;
+        AssertionQuestionDTO questionDTO = new AssertionQuestionDTO(questionId, "Hello", "A", "A", "A", 1L);
+
+        Question addedQuestion = new Question("Hello", "A", "B", "C", "D", "B");
+        when(questionRepository.findById(questionId)).thenReturn(Optional.of(addedQuestion));
+        assertThrows(AlreadyExistsException.class, () -> {
+            questionService.updateAssertQuestion(questionId, questionDTO);
+        });
+    }
+
+    @Test
+    void testUPDATEAssertQuestion_CorrectOptionMismatch() {
+
+        Long questionId = 1L;
+        AssertionQuestionDTO questionDTO = new AssertionQuestionDTO(null, "Hello", "A", "B", "optB", 1L);
+        Question addedQuestion = new Question("Hello", "A", "B", "C", "D", "optB");
+        when(questionRepository.findById(questionId)).thenReturn(Optional.of(addedQuestion));
+
+        assertThrows(ConflictException.class, () -> {
+            questionService.updateAssertQuestion(questionId, questionDTO);
+        });
+
+        verify(questionRepository, never()).save(any());
+    }
+
+
+    @Test
+    public void testAddAssertionQuestion_QuizNotFound() {
+        AssertionQuestionDTO questionDTO = new AssertionQuestionDTO();
+        questionDTO.setQuestionTitle("What is 2 + 2?");
+        questionDTO.setOption1("3");
+        questionDTO.setOption2("4");
+        questionDTO.setCorrectOption("4");
+        questionDTO.setQuizId(7L);
+
+        when(quizRepository.findById(questionDTO.getQuizId())).thenReturn(Optional.empty());
+
+        assertThrows(ElementNotExistsException.class, () -> questionService.addAssertionQuestion(questionDTO));
+    }
+
+
+    @Test
+    public void testUpdateAssertQuestionWithNoMatchingCorrectOption() {
+        Question existingQuestion = new Question();
+        existingQuestion.setQuestionId(1L);
+        existingQuestion.setQuestionTitle("Existing Question");
+        existingQuestion.setOption1("Option 1");
+        existingQuestion.setOption2("Option 2");
+        existingQuestion.setOption3("Option 3");
+        existingQuestion.setOption4("Option 4");
+        existingQuestion.setCorrectOption("Option 1");
+
+        when(questionRepository.findById(1L)).thenReturn(Optional.of(existingQuestion));
+
+        AssertionQuestionDTO updatedQuestionDTO = new AssertionQuestionDTO();
+        updatedQuestionDTO.setQuestionTitle("Updated Question");
+        updatedQuestionDTO.setOption1("Updated Option 1");
+        updatedQuestionDTO.setOption2("Updated Option 2");
+        updatedQuestionDTO.setCorrectOption("Invalid Correct Option");
+
+        assertThrows(ConflictException.class, () -> questionService.updateAssertQuestion(1L, updatedQuestionDTO));
     }
 
     @Test

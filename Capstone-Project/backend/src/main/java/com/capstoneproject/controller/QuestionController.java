@@ -87,6 +87,11 @@ public class QuestionController {
         return response;
     }
 
+    /**
+     * adds the Assert Question.
+     * @param questionDto of Question Type.
+     * @return the Response.
+     */
     @PostMapping("/assert")
     public final Response addAssertQuestion(
             @RequestBody @Valid final AssertionQuestionDTO questionDto) {
@@ -114,7 +119,7 @@ public class QuestionController {
 
     /**
      * updates the question.
-     * @param questionId         is required to update its content.
+     * @param questionId is required to update its content.
      * @param updatedQuestionDto replace the content.
      * @return the success status after updating.
      */
@@ -130,6 +135,12 @@ public class QuestionController {
         return response;
     }
 
+    /**
+     * updating the assertion type question.
+     * @param questionId of Long type.
+     * @param updatedQuestionDto QuestionDTO type.
+     * @return Response.
+     */
     @PutMapping("/mcq/{questionId}")
     public final Response updateQuestion(
             @PathVariable final Long questionId,

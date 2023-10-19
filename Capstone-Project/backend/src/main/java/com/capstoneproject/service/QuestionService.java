@@ -151,7 +151,7 @@ public class QuestionService {
      * @param assertQuestionDTO of Assertion Question DTO.
      * @return assertion Question DTO.
      */
-    public final AssertionQuestionDTO addAssertionQuestion(final 
+    public final AssertionQuestionDTO addAssertionQuestion(final
             AssertionQuestionDTO assertQuestionDTO) {
 
         Quiz quiz = quizRepository.findById(
@@ -176,7 +176,8 @@ public class QuestionService {
         boolean matchFound = false;
         for (String option : optionList) {
             if (assertQuestionDTO.getCorrectOption().equals(option)) {
-                newQuestion.setCorrectOption(assertQuestionDTO.getCorrectOption());
+                newQuestion.setCorrectOption(
+                        assertQuestionDTO.getCorrectOption());
                 matchFound = true;
             }
         }
@@ -238,14 +239,22 @@ public class QuestionService {
         return updatedQuestionDTO;
     }
 
-    public final AssertionQuestionDTO updateAssertQuestion(final Long questionId,
+    /**
+     * This method updates the Assertion Question.
+     * @param questionId of Long type.
+     * @param updatedAssertQuestionDTO AssertionQuestionDTO type.
+     * @return Assertion Question DTO.
+     */
+    public final AssertionQuestionDTO updateAssertQuestion(
+            final Long questionId,
             final AssertionQuestionDTO updatedAssertQuestionDTO) {
         Question existingQuestion = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ElementNotExistsException(
                         ExceptionMessages.QUESTION_NOT_EXIST));
         logger.info(SuccessMessages.QUESTION_FOUND);
         existingQuestion
-                    .setQuestionTitle(updatedAssertQuestionDTO.getQuestionTitle());
+                    .setQuestionTitle(
+                            updatedAssertQuestionDTO.getQuestionTitle());
         Set<String> optionList = new HashSet<>();
         optionList.add(updatedAssertQuestionDTO.getOption1());
         optionList.add(updatedAssertQuestionDTO.getOption2());
