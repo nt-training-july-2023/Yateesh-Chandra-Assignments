@@ -1,6 +1,7 @@
 package com.capstoneproject.dto;
 
 import com.capstoneproject.response.ValidationMessages;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionDTO {
 
     /**

@@ -94,3 +94,78 @@ body {
 .no-select {
   user-select: none;
 }
+
+.question-navigation {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: rgba(213, 227, 228, 0.795);
+  z-index: 2;
+}
+
+.question-number {
+  padding: 5px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10%;
+}
+
+.question-number.unvisited {
+  background-color: none;
+}
+
+.question-number.answered {
+  background-color: green;
+  color: #fff;
+}
+
+.question-number.visited {
+  background-color: red;
+  color: #fff;
+}
+
+.question-number.current {
+  background-color: blue;
+  color: #fff;
+}
+
+.navigation-toggle {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  cursor: pointer;
+  z-index: 3;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.navigation-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.disabled{
+  background-color: rgb(81, 96, 240);
+  cursor: not-allowed;
+  color: black; 
+}

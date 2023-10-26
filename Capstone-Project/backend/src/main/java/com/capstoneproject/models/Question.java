@@ -51,13 +51,13 @@ public class Question {
     /**
      * This is the Option 3 Column.
      */
-    @Column(nullable = false)
+    @Column
     private String option3;
 
     /**
      * This is the Option 4 Column.
      */
-    @Column(nullable = false)
+    @Column
     private String option4;
 
     /**
@@ -112,4 +112,5 @@ public class Question {
         this.option4 = opt4;
         this.correctOption = correctOpt;
     }
+
 }

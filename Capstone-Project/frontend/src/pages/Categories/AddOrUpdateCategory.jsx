@@ -109,7 +109,6 @@ const AddOrUpdateCategory = () =>{
             }
 
         } else {
-
             try{
                 await CategoryService.addCategory(categoryData);
                 SweetAlert.successAlert("Added");

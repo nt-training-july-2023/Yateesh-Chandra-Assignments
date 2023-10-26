@@ -12,9 +12,11 @@ import TextAreaComponent from "../../components/FormElements/TextAreaComponent";
 import ButtonComponent from "../../components/ButtonComponents/ButtonComponent";
 import IconButton from "../../components/ButtonComponents/IconButton";
 import Header1 from "../../components/HeaderComponents/Header1";
+import DisableButtonComponent from "../../components/ButtonComponents/DisableButtonComponent";
 
 const ManageQuestion = () => {
     const [questions, setQuestions] = useState([]);
+    const [questionType, setQuestionType] = useState("MCQ");
     const location = useLocation();
     const userRole = localStorage.getItem("role");
     const categoryId = location.state?.categoryId;
@@ -35,6 +37,14 @@ const ManageQuestion = () => {
         quizId,
     });
 
+    const handleSelectMCQ = () => {
+        setQuestionType("MCQ");
+      };
+      
+    const handleSelectAssertion = () => {
+        setQuestionType("ASSERT");
+    };
+      
     useEffect(() => {
         fetchQuestions();
     }, []);
@@ -88,6 +98,33 @@ const ManageQuestion = () => {
         });
     };
 
+    const handleAddAssertQuestion = () => {
+        if(!newQuestion.questionTitle || !newQuestion.option1 || !newQuestion.option2 || !newQuestion.correctOption) {
+                SweetAlert.missingField();
+                return;
+        }
+
+        QuestionService.addAssertQuestion(newQuestion)
+        .then(() => {
+            SweetAlert.successAlert("Added");
+            fetchQuestions();
+            setNewQuestion({
+                questionTitle: "",
+                option1: "",
+                option2: "",
+                correctOption: "",
+                quizId,
+            });
+            setIsAddingQuestion(false);
+        })
+        .catch((error) => {
+            console.log(error);
+            if(error?.response?.data?.message === "Options should not be repeated"){
+                SweetAlert.duplicateOptions();
+            }
+        });
+    };
+
     const handleEditQuestion = () => {
         if(!editedQuestion.questionTitle || !editedQuestion.option1 || !editedQuestion.option2 || !editedQuestion.option3
             || !editedQuestion.option4 || !editedQuestion.correctOption){
@@ -96,11 +133,32 @@ const ManageQuestion = () => {
         }
         QuestionService.updateQuestion(editedQuestion.questionId, editedQuestion)
         .then(() => {
+            
             SweetAlert.successAlert("Updated");
             fetchQuestions();
             setIsEditingQuestion(false);
         })
         .catch((error) => {
+            if(error?.response?.data?.message === "Options should not be repeated"){
+                SweetAlert.duplicateOptions();
+            }
+        });
+    };
+
+    const handleEditAssertQuestion = () => {
+        if(!editedQuestion.questionTitle || !editedQuestion.option1 || !editedQuestion.option2 || !editedQuestion.correctOption){
+                SweetAlert.missingField();
+                return;
+        }
+
+        QuestionService.updateAssertQuestion(editedQuestion.questionId, editedQuestion)
+        .then(() => {
+            SweetAlert.successAlert("Updated");
+            fetchQuestions();
+            setIsEditingQuestion(false);
+        })
+        .catch((error) => {
+            console.log(error);
             if(error?.response?.data?.message === "Options should not be repeated"){
                 SweetAlert.duplicateOptions();
             }
@@ -121,6 +179,20 @@ const ManageQuestion = () => {
     const handleEditClick = (question) => {
         setEditedQuestion({ ...question });
         setIsEditingQuestion(true);
+
+
+        const numOptions = [
+            question.option1,
+            question.option2,
+            question.option3,
+            question.option4
+        ].filter(option => option).length;
+
+        if (numOptions === 2) {
+            setQuestionType("ASSERT");
+        } else if (numOptions === 4) {
+            setQuestionType("MCQ");
+        }
     };
 
     return (
@@ -156,73 +228,164 @@ const ManageQuestion = () => {
                         <div className="add-question-container">
                             <div className={`question-form ${isAddingQuestion || isEditingQuestion ? 'active' : ''}`}>
                                 <Header1 text = {(isAddingQuestion ? 'Add Question' : 'Edit Question')} className = "arial" />
-                                <TextAreaComponent
-                                className = "reg-input-fields-question"
-                                name="questionTitle"
-                                placeholder="Question title"
-                                value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
-                                onChange={handleInputChange}
-                                />
-
-                                <InputComponent
-                                type="text"
-                                className = "reg-input-fields-question"
-                                name="option1"
-                                placeholder="Option 1"
-                                value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
-                                onChange={handleInputChange}
-                                />
-
-                                <InputComponent
-                                type="text"
-                                className = "reg-input-fields-question"
-                                name="option2"
-                                placeholder="Option 2"
-                                value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
-                                onChange={handleInputChange}
-                                />
-
-                                <InputComponent
-                                type="text"
-                                className = "reg-input-fields-question"
-                                name="option3"
-                                placeholder="Option 3"
-                                value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
-                                onChange={handleInputChange}
-                                />
-
-                                <InputComponent
-                                type="text"
-                                className = "reg-input-fields-question"
-                                name="option4"
-                                placeholder="Option 4"
-                                value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
-                                onChange={handleInputChange}
-                                />
-                                
-                                <SelectComponent
-                                isEditingQuestion={isEditingQuestion}
-                                editedQuestion={editedQuestion}
-                                newQuestion={newQuestion}
-                                handleInputChange={handleInputChange}
-                                />
-
-                                <div className="form-group">
-                                <div className="button-container-category">
-                                    {isAddingQuestion ? (
-                                        <ButtonComponent className="button blue-button" onClick={handleAddQuestion} text = "Add" />
-                                    ) : (
-                                        <ButtonComponent className="button blue-button" onClick={handleEditQuestion} text = "Update"/>
-                                    )}
-                                
-                                    <ButtonComponent className="button red-button" onClick={() => {
-                                    setIsAddingQuestion(false);
-                                    setIsEditingQuestion(false);
-                                    setEditedQuestion({});
-                                    }} text = "Cancel" 
+                                <div className="question-type-buttons">
+                                    <DisableButtonComponent
+                                        onClick={handleSelectMCQ}
+                                        className={
+                                            questionType === "MCQ" 
+                                                ? "button-box question-selected" 
+                                                : `button-box question-unselected ${
+                                                    isEditingQuestion && questionType === "ASSERT"
+                                                        ? "disable-button-disabled"
+                                                        : ""
+                                            }`
+                                        }
+                                        text = "MCQ"
+                                        disabled={isEditingQuestion && questionType === "ASSERT"}
                                     />
+
+                                    <DisableButtonComponent
+                                        onClick={handleSelectAssertion}
+                                        className={
+                                            questionType === "ASSERT"
+                                                ? "button-box question-selected"
+                                                : `button-box question-unselected ${
+                                                    isEditingQuestion && questionType === "MCQ"
+                                                        ? "disable-button-disabled"
+                                                        : ""
+                                                }`
+                                        }
+                                        text="ASSERT"
+                                        disabled={isEditingQuestion && questionType === "MCQ"}
+                                    />
+
                                 </div>
-                                </div>
+                                {questionType === "MCQ" && (
+                                    <div>
+                                        <TextAreaComponent
+                                        className = "reg-input-fields-question"
+                                        name="questionTitle"
+                                        placeholder="Question title"
+                                        value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option1"
+                                        placeholder="Option 1"
+                                        value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option2"
+                                        placeholder="Option 2"
+                                        value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option3"
+                                        placeholder="Option 3"
+                                        value={isEditingQuestion ? editedQuestion.option3 : newQuestion.option3}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option4"
+                                        placeholder="Option 4"
+                                        value={isEditingQuestion ? editedQuestion.option4 : newQuestion.option4}
+                                        onChange={handleInputChange}
+                                        />
+                                        
+                                        <SelectComponent
+                                        isEditingQuestion={isEditingQuestion}
+                                        editedQuestion={editedQuestion}
+                                        newQuestion={newQuestion}
+                                        handleInputChange={handleInputChange}
+                                        questiontype={questionType}
+                                        />
+
+                                        <div className="form-group">
+                                            <div className="button-container-category">
+                                                {isAddingQuestion ? (
+                                                    <ButtonComponent className="button blue-button" onClick={handleAddQuestion} text = "Add" />
+                                                ) : (
+                                                    <ButtonComponent className="button blue-button" onClick={handleEditQuestion} text = "Update"/>
+                                                )}
+                                            
+                                                <ButtonComponent className="button red-button" onClick={() => {
+                                                setIsAddingQuestion(false);
+                                                setIsEditingQuestion(false);
+                                                setEditedQuestion({});
+                                                }} text = "Cancel" 
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                {questionType === "ASSERT" && (
+                                    <div>
+                                        <TextAreaComponent
+                                        className = "reg-input-fields-question"
+                                        name="questionTitle"
+                                        placeholder="Question title"
+                                        value={isEditingQuestion ? editedQuestion.questionTitle : newQuestion.questionTitle}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option1"
+                                        placeholder="Option 1"
+                                        value={isEditingQuestion ? editedQuestion.option1 : newQuestion.option1}
+                                        onChange={handleInputChange}
+                                        />
+
+                                        <InputComponent
+                                        type="text"
+                                        className = "reg-input-fields-question"
+                                        name="option2"
+                                        placeholder="Option 2"
+                                        value={isEditingQuestion ? editedQuestion.option2 : newQuestion.option2}
+                                        onChange={handleInputChange}
+                                        />          
+                                                                      
+                                        <SelectComponent
+                                        isEditingQuestion={isEditingQuestion}
+                                        editedQuestion={editedQuestion}
+                                        newQuestion={newQuestion}
+                                        handleInputChange={handleInputChange}
+                                        questiontype={questionType}
+                                        />
+
+                                        <div className="form-group">
+                                            <div className="button-container-category">
+                                                {isAddingQuestion ? (
+                                                    <ButtonComponent className="button blue-button" onClick={handleAddAssertQuestion} text = "Add" />
+                                                ) : (
+                                                    <ButtonComponent className="button blue-button" onClick={handleEditAssertQuestion} text = "Update"/>
+                                                )}
+                                            
+                                                <ButtonComponent className="button red-button" onClick={() => {
+                                                setIsAddingQuestion(false);
+                                                setIsEditingQuestion(false);
+                                                setEditedQuestion({});
+                                                }} text = "Cancel" 
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

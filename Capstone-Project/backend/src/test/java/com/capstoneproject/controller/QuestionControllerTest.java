@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
+import com.capstoneproject.dto.AssertionQuestionDTO;
 import com.capstoneproject.dto.QuestionDTO;
 import com.capstoneproject.response.Response;
 import com.capstoneproject.response.SuccessMessages;
@@ -74,6 +75,19 @@ class QuestionControllerTest {
     }
 
     @Test
+    public void testAddAssertQuestion() {
+        AssertionQuestionDTO questionDto = new AssertionQuestionDTO(1L, "Question 1", "A", "B", "B", 4L);
+        when(questionService.addAssertionQuestion(questionDto)).thenReturn(questionDto);
+
+        Response response = questionController.addAssertQuestion(questionDto);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertNotNull(questionDto);
+        assertEquals(SuccessMessages.QUESTION_ADD_SUCCESS, response.getMessage());
+
+    }
+
+    @Test
     public void testDeleteQuestion() {
         Long questionId = 3L;
         Response response = questionController.deleteQuestion(questionId);
@@ -91,6 +105,19 @@ class QuestionControllerTest {
         when(questionService.updateQuestion(questionId, updatedQuestionDTO)).thenReturn(updatedQuestionDTO);
 
         Response response = questionController.updateQuestion(questionId, updatedQuestionDTO);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(SuccessMessages.QUESTION_UPDATED_SUCCESS, response.getMessage());
+
+    }
+
+    @Test
+    public void testUpdateAssertionQuestion() {
+        Long questionId = 8L;
+        AssertionQuestionDTO updatedQuestionDTO = new AssertionQuestionDTO(questionId, "Updated Question", "A", "B", "B", 4L);
+        when(questionService.updateAssertQuestion(questionId, updatedQuestionDTO)).thenReturn(updatedQuestionDTO);
+
+        Response response = questionController.updateAssertQuestion(questionId, updatedQuestionDTO);
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(SuccessMessages.QUESTION_UPDATED_SUCCESS, response.getMessage());
